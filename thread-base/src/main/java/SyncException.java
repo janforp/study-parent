@@ -10,20 +10,21 @@ public class SyncException {
 		while(true){
 			try {
 				i++;
-				Thread.sleep(100);
+				Thread.sleep(200);
 				System.out.println(Thread.currentThread().getName() + " , i = " + i);
-				if(i == 20){
-					//Integer.parseInt("a");
+				if(i == 10){
+					Integer.parseInt("a");
 					throw new RuntimeException();
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				System.out.println("****");
+				continue;
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
-		
 		final SyncException se = new SyncException();
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -33,6 +34,4 @@ public class SyncException {
 		},"t1");
 		t1.start();
 	}
-	
-	
 }

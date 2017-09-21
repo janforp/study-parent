@@ -9,10 +9,12 @@ public class SyncDubbo1 {
 		System.out.println("method1..");
 		method2();
 	}
+
 	private synchronized void method2(){
 		System.out.println("method2..");
 		method3();
 	}
+
 	private synchronized void method3(){
 		System.out.println("method3..");
 	}
