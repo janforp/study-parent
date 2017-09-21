@@ -14,7 +14,7 @@ public class SyncException {
 				System.out.println(Thread.currentThread().getName() + " , i = " + i);
 				if(i == 10){
 					Integer.parseInt("a");
-					throw new RuntimeException();
+//					throw new RuntimeException();
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
