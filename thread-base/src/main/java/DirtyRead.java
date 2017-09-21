@@ -16,7 +16,6 @@ public class DirtyRead {
 			e.printStackTrace();
 		}
 		this.password = password;
-		
 		System.out.println("setValue最终结果：username = " + username + " , password = " + password);
 	}
 
@@ -27,14 +26,8 @@ public class DirtyRead {
 	
 	
 	public static void main(String[] args) throws Exception{
-		
 		final DirtyRead dr = new DirtyRead();
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				dr.setValue("z3", "456");		
-			}
-		});
+		Thread t1 = new Thread(() -> dr.setValue("z3", "456"));
 		t1.start();
 		Thread.sleep(1000);
 		dr.getValue();
