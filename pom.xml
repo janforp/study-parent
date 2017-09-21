@@ -6,7 +6,10 @@
 	<groupId>com.janita.study</groupId>
 	<artifactId>study-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <modules>
+        <module>thread-base</module>
+    </modules>
+    <packaging>pom</packaging>
 
 	<name>study-parent</name>
 	<description>Demo project for Spring Boot</description>
