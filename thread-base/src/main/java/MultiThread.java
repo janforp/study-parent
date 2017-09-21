@@ -4,8 +4,6 @@
  */
 public class MultiThread {
 
-    private int num = 0;
-
     /** static */
     /**
      * 关键字synchronized取得的锁都是对象锁，而不是把一段代码（方法）当做锁，
@@ -17,6 +15,7 @@ public class MultiThread {
      */
     private synchronized void printNum(String tag){
         try {
+            int num;
             if(tag.equals("a")){
                 num = 100;
                 System.out.println("tag a, set num over!");
