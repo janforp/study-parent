@@ -11,6 +11,7 @@ public class ChangeLock {
 		synchronized (lock) {
 			try {
 				System.out.println("当前线程 : "  + Thread.currentThread().getName() + "开始");
+				//修改了，锁就变了
 				lock = "change lock";
 				Thread.sleep(2000);
 				System.out.println("当前线程 : "  + Thread.currentThread().getName() + "结束");
