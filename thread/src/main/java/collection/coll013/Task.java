@@ -19,7 +19,7 @@ public class Task implements Comparable<Task>{
 	
 	@Override
 	public int compareTo(Task task) {
-		return this.id > task.id ? 1 : (this.id < task.id ? -1 : 0);  
+		return this.id - task.id;
 	}
 	
 	public String toString(){

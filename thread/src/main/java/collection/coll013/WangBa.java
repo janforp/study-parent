@@ -8,9 +8,9 @@ public class WangBa implements Runnable {
     
     public boolean yinye =true;  
       
-    public void shangji(String name,String id,int money){  
+    public void shangji(String name,String id,int money){
         Wangmin man = new Wangmin(name, id, 1000 * money + System.currentTimeMillis());  
-        System.out.println("网名"+man.getName()+" 身份证"+man.getId()+"交钱"+money+"块,开始上机...");  
+        System.out.println("网名 ： "+man.getName()+" 身份证 ："+man.getId()+"交钱"+money+"块,开始上机...");
         this.queue.add(man);  
     }  
       
