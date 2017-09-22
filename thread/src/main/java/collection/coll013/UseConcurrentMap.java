@@ -3,7 +3,10 @@ package collection.coll013;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UseConcurrentMap {
+/**
+ * 一个 ConcurrentHashMap 有多个 Segment， 每个段相当于一个 HashTable，有自己的锁，这样锁的粒度小了，并发就高了
+ */
+public class  UseConcurrentMap {
 
 	public static void main(String[] args) {
 		ConcurrentHashMap<String, Object> chm = new ConcurrentHashMap<String, Object>();
@@ -17,8 +20,5 @@ public class UseConcurrentMap {
 		for(Map.Entry<String, Object> me : chm.entrySet()){
 			System.out.println("key:" + me.getKey() + ",value:" + me.getValue());
 		}
-		
-		
-		
 	}
 }
