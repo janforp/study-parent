@@ -2,15 +2,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * volatile关键字不具备synchronized关键字的原子性（同步）
+ * 只具备可见性
  * @author alienware
  *
  */
 public class VolatileNoAtomic extends Thread{
-	//private static volatile int count;
+//	private static volatile int count;
 	private static AtomicInteger count = new AtomicInteger(0);
 	private static void addCount(){
 		for (int i = 0; i < 1000; i++) {
-			//count++ ;
+//			count++ ;
 			count.incrementAndGet();
 		}
 		System.out.println(count);

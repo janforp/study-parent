@@ -8,7 +8,7 @@ public class AtomicUse {
 	
 	//多个addAndGet在一个方法内是非原子性的，需要加synchronized进行修饰，保证4个addAndGet整体原子性
 	/**synchronized*/
-	public synchronized int multiAdd(){
+	private synchronized int multiAdd(){
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -23,7 +23,7 @@ public class AtomicUse {
 
 	public static void main(String[] args) {
 		final AtomicUse au = new AtomicUse();
-		List<Thread> ts = new ArrayList<Thread>();
+		List<Thread> ts = new ArrayList<>();
 		for (int i = 0; i < 100; i++) {
 			ts.add(new Thread(() -> System.out.println(au.multiAdd())));
 		}
