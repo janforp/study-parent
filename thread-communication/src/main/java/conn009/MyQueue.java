@@ -84,39 +84,24 @@ public class MyQueue {
 		
 		System.out.println("当前容器的长度:" + mq.getSize());
 		
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				mq.put("f");
-				mq.put("g");
-			}
-		},"t1");
-		
+		Thread t1 = new Thread(() -> {
+            mq.put("f");
+            mq.put("g");
+        },"t1");
 		t1.start();
 		
-		
-		Thread t2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Object o1 = mq.take();
-				System.out.println("移除的元素为:" + o1);
-				Object o2 = mq.take();
-				System.out.println("移除的元素为:" + o2);
-			}
-		},"t2");
-		
-		
+		Thread t2 = new Thread(() -> {
+            Object o1 = mq.take();
+            System.out.println("移除的元素为:" + o1);
+            Object o2 = mq.take();
+            System.out.println("移除的元素为:" + o2);
+        },"t2");
+
 		try {
 			TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
 		t2.start();
-		
-		
 	}
-	
-	
-	
 }
