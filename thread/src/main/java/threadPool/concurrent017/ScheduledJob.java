@@ -18,8 +18,11 @@ public class ScheduledJob {
     
     	Temp command = new Temp();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        
-        ScheduledFuture<?> scheduleTask = scheduler.scheduleWithFixedDelay(command, 5, 1, TimeUnit.SECONDS);
-    
+
+        /**
+         * 5s之后开始执行，之后每隔3s执行一次
+         */
+        ScheduledFuture<?> scheduleTask = scheduler.scheduleWithFixedDelay(command, 5, 3, TimeUnit.SECONDS);
+
     }
 }

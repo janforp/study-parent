@@ -7,12 +7,7 @@ import java.util.concurrent.Executors;
 public class UseExecutors {
 
 	public static void main(String[] args) {
-		
-		ExecutorService pool = Executors.newScheduledThreadPool(10);
-		
+		ExecutorService pool = Executors.newScheduledThreadPool(2);
 		//cache fixed single
-		
-		
-		
 	}
 }
