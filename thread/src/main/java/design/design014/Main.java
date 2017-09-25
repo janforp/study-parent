@@ -11,6 +11,5 @@ public class Main {
 		
 		String result = data.getRequest();
 		System.out.println(result);
-		
 	}
 }

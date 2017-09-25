@@ -31,6 +31,4 @@ public class FutureData implements Data{
 		//装载好直接获取数据即可
 		return this.realData.getRequest();
 	}
-
-
 }

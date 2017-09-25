@@ -11,8 +11,6 @@ public class FutureClient {
             RealData realData = new RealData(queryStr);
             futureData.setRealData(realData);
         }).start();
-		
 		return futureData;
 	}
-	
 }
