@@ -24,7 +24,7 @@ public class Provider implements Runnable{
 	public void run() {
 		while(isRunning){
 			try {
-				//随机休眠0 - 1000 毫秒 表示获取数据(产生数据的耗时) 
+				//随机休眠0 - 1000 毫秒 表示获取数据(产生数据的耗时)
 				Thread.sleep(r.nextInt(1000));
 				//获取的数据进行累计...
 				int id = count.incrementAndGet();

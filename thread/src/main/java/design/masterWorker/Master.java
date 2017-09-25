@@ -1,4 +1,4 @@
-package design.design015;
+package design.masterWorker;
 
 import java.util.HashMap;
 import java.util.Map;

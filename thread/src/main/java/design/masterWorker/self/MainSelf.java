@@ -1,4 +1,5 @@
-package design.design015.self;
+package design.masterWorker.self;
+
 
 import java.util.Random;
 
@@ -9,6 +10,9 @@ import java.util.Random;
 public class MainSelf {
 
     public static void main(String[] args) {
+
+        System.out.println("\n***** : " + Runtime.getRuntime().availableProcessors());
+
         MasterSelf master = new MasterSelf(new WorkerSelf(), 30);
 
         Random r = new Random();
