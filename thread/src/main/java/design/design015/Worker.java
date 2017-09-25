@@ -8,11 +8,11 @@ public class Worker implements Runnable {
 	private ConcurrentLinkedQueue<Task> workQueue;
 	private ConcurrentHashMap<String, Object> resultMap;
 	
-	public void setWorkQueue(ConcurrentLinkedQueue<Task> workQueue) {
+	void setWorkQueue(ConcurrentLinkedQueue<Task> workQueue) {
 		this.workQueue = workQueue;
 	}
 
-	public void setResultMap(ConcurrentHashMap<String, Object> resultMap) {
+	void setResultMap(ConcurrentHashMap<String, Object> resultMap) {
 		this.resultMap = resultMap;
 	}
 	
@@ -37,7 +37,4 @@ public class Worker implements Runnable {
 		}
 		return output;
 	}
-
-
-
 }
