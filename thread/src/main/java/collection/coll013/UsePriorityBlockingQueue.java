@@ -3,7 +3,11 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 public class UsePriorityBlockingQueue {
 
-	
+	/**
+	 * 在 take 的时候才会排序
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception{
 		
 		

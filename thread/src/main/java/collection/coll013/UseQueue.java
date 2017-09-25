@@ -55,28 +55,18 @@ public class UseQueue {
 //		}
 
 		
-//		final SynchronousQueue<String> q = new SynchronousQueue<String>();
-//		Thread t1 = new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				try {
-//					System.out.println(q.take());
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		t1.start();
-//		Thread t2 = new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				q.add("asdasd");
-//			}
-//		});
-//		t2.start();
+		final SynchronousQueue<String> q = new SynchronousQueue<>();
+		Thread t1 = new Thread(() -> {
+            try {
+                System.out.println(q.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+		t1.start();
+		Thread t2 = new Thread(() -> q.add("asdasd"));
+		t2.start();
 	}
 
 
-	SynchronousQueue<String> synchronousQueue = new SynchronousQueue<>();
 }
