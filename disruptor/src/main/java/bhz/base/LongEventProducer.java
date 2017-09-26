@@ -42,9 +42,4 @@ public class LongEventProducer {
 			ringBuffer.publish(sequence);
 		}
 	}
-	
-	
-	
-	
-	
 }
