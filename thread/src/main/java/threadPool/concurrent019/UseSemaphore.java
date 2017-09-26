@@ -9,7 +9,11 @@ public class UseSemaphore {
     public static void main(String[] args) {  
         // 线程池  
         ExecutorService exec = Executors.newCachedThreadPool();  
-        // 只能5个线程同时访问  
+        // 只能5个线程同时访问
+        /**
+         * 限流
+         * 即某个地方的代码只能同时有5个线程并发
+         */
         final Semaphore semaphore = new Semaphore(5);
         // 模拟20个客户端访问  
         for (int index = 0; index < 20; index++) {  
