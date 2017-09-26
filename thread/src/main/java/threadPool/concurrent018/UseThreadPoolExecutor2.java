@@ -26,15 +26,16 @@ public class UseThreadPoolExecutor2 implements Runnable{
 	public static void main(String[] args) throws Exception{
 		//System.out.println(Runtime.getRuntime().availableProcessors());
 		BlockingQueue<Runnable> queue = 
-				//new LinkedBlockingQueue<Runnable>();
-				new ArrayBlockingQueue<Runnable>(10);
+//				new LinkedBlockingQueue<>(); //无届队列
+				new ArrayBlockingQueue<>(10);	//有界
 		ExecutorService executor  = new ThreadPoolExecutor(
 					5, 		//core
-					10, 	//max
+					10, 	//max 当使用无界队列的时候，该参数没有意义
 					120L, 	//2fenzhong
 					TimeUnit.SECONDS,
 					queue);
-		
+
+
 		for(int i = 0 ; i < 20; i++){
 			executor.execute(new UseThreadPoolExecutor2());
 		}
@@ -42,6 +43,4 @@ public class UseThreadPoolExecutor2 implements Runnable{
 		System.out.println("queue size:" + queue.size());		//10
 		Thread.sleep(2000);
 	}
-
-
 }

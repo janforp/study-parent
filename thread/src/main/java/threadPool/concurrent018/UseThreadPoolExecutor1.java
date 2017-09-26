@@ -28,8 +28,8 @@ public class UseThreadPoolExecutor1 {
 				TimeUnit.SECONDS, 
 				new ArrayBlockingQueue<>(3)			//指定一种队列 （有界队列）
 				//new LinkedBlockingQueue<Runnable>()
-//				, new MyRejected()
-				//, new DiscardOldestPolicy()
+				, new MyRejected()
+//				, new DiscardOldestPolicy()
 				);
 
 		MyTask mt1 = new MyTask(1, "任务1");
@@ -38,15 +38,17 @@ public class UseThreadPoolExecutor1 {
 		MyTask mt4 = new MyTask(4, "任务4");
 		MyTask mt5 = new MyTask(5, "任务5");
 		MyTask mt6 = new MyTask(6, "任务6");
-		
+		MyTask mt7 = new MyTask(7, "任务7");
+
+
 		pool.execute(mt1);
 		pool.execute(mt2);
 		pool.execute(mt3);
 		pool.execute(mt4);
 		pool.execute(mt5);
 		pool.execute(mt6);
-		
+		pool.execute(mt7);
+
 		pool.shutdown();
-		
 	}
 }
