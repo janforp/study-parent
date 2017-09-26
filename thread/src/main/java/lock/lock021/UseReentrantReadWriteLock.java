@@ -5,12 +5,17 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 public class UseReentrantReadWriteLock {
-
+	/**
+	 * 读多写少的时候用
+	 * 读读共享
+	 * 读写互斥
+	 * 写写互斥
+	 */
 	private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
 	private ReadLock readLock = rwLock.readLock();
 	private WriteLock writeLock = rwLock.writeLock();
 	
-	public void read(){
+	private void read(){
 		try {
 			readLock.lock();
 			System.out.println("当前线程:" + Thread.currentThread().getName() + "进入...");
@@ -23,7 +28,7 @@ public class UseReentrantReadWriteLock {
 		}
 	}
 	
-	public void write(){
+	private void write(){
 		try {
 			writeLock.lock();
 			System.out.println("当前线程:" + Thread.currentThread().getName() + "进入...");
@@ -37,49 +42,16 @@ public class UseReentrantReadWriteLock {
 	}
 	
 	public static void main(String[] args) {
-		
 		final UseReentrantReadWriteLock urrw = new UseReentrantReadWriteLock();
-		
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				urrw.read();
-			}
-		}, "t1");
-		Thread t2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				urrw.read();
-			}
-		}, "t2");
-		Thread t3 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				urrw.write();
-			}
-		}, "t3");
-		Thread t4 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				urrw.write();
-			}
-		}, "t4");		
-		
+		Thread t1 = new Thread(urrw::read, "t1");
+		Thread t2 = new Thread(urrw::read, "t2");
+		Thread t3 = new Thread(urrw::write, "t3");
+		Thread t4 = new Thread(urrw::write, "t4");
 //		t1.start();
 //		t2.start();
-		
-//		t1.start(); // R 
+//		t1.start(); // R
 //		t3.start(); // W
-		
 		t3.start();
 		t4.start();
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }
