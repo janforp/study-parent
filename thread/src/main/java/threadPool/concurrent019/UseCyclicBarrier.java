@@ -4,7 +4,12 @@ import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;  
 import java.util.concurrent.CyclicBarrier;  
 import java.util.concurrent.ExecutorService;  
-import java.util.concurrent.Executors; 
+import java.util.concurrent.Executors;
+
+/**
+ * 多个线程都阻塞，只要都调用了 await 则都往下执行，诊断的是多个线程
+ * 而 countdownLatch 诊断是一个线程，其他线程都好了，该阻塞的线程会往下执行
+ */
 public class UseCyclicBarrier {
 
 	static class Runner implements Runnable {
