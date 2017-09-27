@@ -43,8 +43,8 @@ public class LongEventMain {
 		//Disruptor 的事件发布过程是一个两阶段提交的过程：
 		//发布事件 存放数据的地方
 		RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
-		LongEventProducer producer = new LongEventProducer(ringBuffer);
-		//LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
+//		LongEventProducer producer = new LongEventProducer(ringBuffer);
+		LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
 		ByteBuffer byteBuffer = ByteBuffer.allocate(8);
 		for(long i = 0; i < 100; i++){
 			//byteBuffer 有8个位置，但是我们只用来 第 0 个位置，后面的位置没用
