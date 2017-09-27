@@ -19,4 +19,4 @@ public class Handler1 implements EventHandler<Trade>,WorkHandler<Trade> {
     	event.setName("h1");
     	Thread.sleep(1000);
     }  
-}  
+}

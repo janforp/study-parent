@@ -10,21 +10,19 @@ import com.lmax.disruptor.dsl.Disruptor;
 
 public class TradePublisher implements Runnable {  
 	
-    Disruptor<Trade> disruptor;  
-    private CountDownLatch latch;  
-    
-    private static int LOOP=10;//模拟百万次交易的发生  
-  
-    public TradePublisher(CountDownLatch latch,Disruptor<Trade> disruptor) {  
+    private Disruptor<Trade> disruptor;
+    private CountDownLatch latch;
+
+    TradePublisher(CountDownLatch latch, Disruptor<Trade> disruptor) {
         this.disruptor=disruptor;  
         this.latch=latch;  
     }  
   
     @Override  
     public void run() {  
-    	TradeEventTranslator tradeTransloator = new TradeEventTranslator();  
-        for(int i=0;i<LOOP;i++){  
-            disruptor.publishEvent(tradeTransloator);  
+    	TradeEventTranslator eventTranslator = new TradeEventTranslator();
+        for(int i = 0; i< 10; i++){
+            disruptor.publishEvent(eventTranslator);
         }  
         latch.countDown();  
     }  
@@ -40,9 +38,7 @@ class TradeEventTranslator implements EventTranslator<Trade>{
         this.generateTrade(event);  
     }  
     
-	private Trade generateTrade(Trade trade){  
-        trade.setPrice(random.nextDouble()*9999);  
-        return trade;  
-    }  
-	
-}  
+	private void generateTrade(Trade trade){
+        trade.setPrice(random.nextDouble()*9999);
+    }
+}
