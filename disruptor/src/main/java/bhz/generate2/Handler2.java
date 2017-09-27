@@ -12,5 +12,4 @@ public class Handler2 implements EventHandler<Trade> {
     	event.setPrice(17.0);
     	Thread.sleep(1000);
     }  
-      
-}  
+}

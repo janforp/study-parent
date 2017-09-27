@@ -5,12 +5,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import bhz.generate1.Trade;
-import bhz.generate1.TradeHandler;
 
 import com.lmax.disruptor.BusySpinWaitStrategy;
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.dsl.Disruptor;
-import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
 
 public class Main {  
@@ -20,12 +18,7 @@ public class Main {
         int bufferSize=1024;  
         ExecutorService executor=Executors.newFixedThreadPool(8);  
 
-        Disruptor<Trade> disruptor = new Disruptor<Trade>(new EventFactory<Trade>() {  
-            @Override  
-            public Trade newInstance() {  
-                return new Trade();  
-            }  
-        }, bufferSize, executor, ProducerType.SINGLE, new BusySpinWaitStrategy());  
+        Disruptor<Trade> disruptor = new Disruptor<>(Trade::new, bufferSize, executor, ProducerType.SINGLE, new BusySpinWaitStrategy());
         
         //菱形操作
         /**

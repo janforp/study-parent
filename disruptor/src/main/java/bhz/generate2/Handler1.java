@@ -1,6 +1,5 @@
 package bhz.generate2;
 
-import java.util.UUID;
 
 import bhz.generate1.Trade;
 
