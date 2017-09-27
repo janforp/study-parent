@@ -2,7 +2,7 @@ package bhz.generate1;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Trade {  
+public class Trade {
 	
 	private String id;//ID  
 	private String name;
@@ -33,6 +33,4 @@ public class Trade {
 	public void setCount(AtomicInteger count) {
 		this.count = count;
 	} 
-	  
-	  
-}  
+}

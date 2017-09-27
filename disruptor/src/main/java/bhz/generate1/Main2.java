@@ -15,21 +15,17 @@ public class Main2 {
         int BUFFER_SIZE=1024;  
         int THREAD_NUMBERS=4;  
         
-        EventFactory<Trade> eventFactory = new EventFactory<Trade>() {  
-            public Trade newInstance() {  
-                return new Trade();  
-            }  
-        };  
+        EventFactory<Trade> eventFactory = Trade::new;
         
-        RingBuffer<Trade> ringBuffer = RingBuffer.createSingleProducer(eventFactory, BUFFER_SIZE);  
+        RingBuffer<Trade> ringBuffer = RingBuffer.createSingleProducer(eventFactory, BUFFER_SIZE);
+        //当生产者快的时候使用
+        SequenceBarrier sequenceBarrier = ringBuffer.newBarrier();
           
-        SequenceBarrier sequenceBarrier = ringBuffer.newBarrier();  
-          
-        ExecutorService executor = Executors.newFixedThreadPool(THREAD_NUMBERS);  
+        ExecutorService executor = Executors.newFixedThreadPool(THREAD_NUMBERS);
           
         WorkHandler<Trade> handler = new TradeHandler();  
 
-        WorkerPool<Trade> workerPool = new WorkerPool<Trade>(ringBuffer, sequenceBarrier, new IgnoreExceptionHandler(), handler);  
+        WorkerPool<Trade> workerPool = new WorkerPool<>(ringBuffer, sequenceBarrier, new IgnoreExceptionHandler(), handler);
           
         workerPool.start(executor);  
           
@@ -44,4 +40,4 @@ public class Main2 {
         workerPool.halt();  
         executor.shutdown();  
     }  
-}  
+}

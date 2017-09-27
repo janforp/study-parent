@@ -13,9 +13,10 @@ public class TradeHandler implements EventHandler<Trade>, WorkHandler<Trade> {
     }  
   
     @Override  
-    public void onEvent(Trade event) throws Exception {  
+    public void onEvent(Trade event) throws Exception {
+        Thread.sleep(1000);
         //这里做具体的消费逻辑  
         event.setId(UUID.randomUUID().toString());//简单生成下ID  
-        System.out.println(event.getId());  
+        System.out.println("消费了一个数据，他的Id是 :"+event.getId());
     }  
 }  
