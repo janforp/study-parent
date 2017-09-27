@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 import bhz.generate1.Trade;
 
 import com.lmax.disruptor.BusySpinWaitStrategy;
-import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
@@ -20,8 +19,8 @@ public class Main {
         ExecutorService executor=Executors.newFixedThreadPool(8);
         Disruptor<Trade> disruptor = new Disruptor<>(Trade::new, bufferSize, executor, ProducerType.SINGLE, new BusySpinWaitStrategy());
         linXing(disruptor, new Handler1(),new Handler2(), new Handler3());
-//        shunXu(disruptor, new Handler1(),new Handler2(), new Handler3());
-//        liuBianXing(disruptor,new Handler1(),new Handler2(),new Handler3(),new Handler4(),new Handler5());
+        shunXu(disruptor, new Handler1(),new Handler2(), new Handler3());
+        liuBianXing(disruptor,new Handler1(),new Handler2(),new Handler3(),new Handler4(),new Handler5());
 
 
         disruptor.start();//启动
