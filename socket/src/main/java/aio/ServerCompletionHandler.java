@@ -43,9 +43,7 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
 			buf.put(response.getBytes());
 			buf.flip();
 			asc.write(buf).get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
+		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
 	}

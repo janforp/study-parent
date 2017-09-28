@@ -16,7 +16,7 @@ public class Server {
 		try {
 			server = new ServerSocket(PORT);
 			System.out.println("server start");
-			Socket socket = null;
+			Socket socket;
 			HandlerExecutorPool executorPool = new HandlerExecutorPool(50, 1000);
 			while(true){
 				socket = server.accept();

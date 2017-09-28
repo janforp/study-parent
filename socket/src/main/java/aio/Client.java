@@ -10,15 +10,15 @@ public class Client implements Runnable{
 
 	private AsynchronousSocketChannel asc ;
 	
-	public Client() throws Exception {
+	private Client() throws Exception {
 		asc = AsynchronousSocketChannel.open();
 	}
 	
-	public void connect(){
+	private void connect(){
 		asc.connect(new InetSocketAddress("127.0.0.1", 8765));
 	}
 	
-	public void write(String request){
+	private void write(String request){
 		try {
 			asc.write(ByteBuffer.wrap(request.getBytes())).get();
 			read();
@@ -35,11 +35,7 @@ public class Client implements Runnable{
 			byte[] respByte = new byte[buf.remaining()];
 			buf.get(respByte);
 			System.out.println(new String(respByte,"utf-8").trim());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
+		} catch (InterruptedException | ExecutionException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}
