@@ -10,7 +10,7 @@ public class ServerHandler implements Runnable{
 
 	private Socket socket ;
 	
-	public ServerHandler(Socket socket){
+	ServerHandler(Socket socket){
 		this.socket = socket;
 	}
 	
@@ -28,7 +28,6 @@ public class ServerHandler implements Runnable{
 				System.out.println("Server :" + body);
 				out.println("服务器端回送响的应数据.");
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,8 +54,5 @@ public class ServerHandler implements Runnable{
 			}
 			socket = null;
 		}
-		
-		
 	}
-
 }

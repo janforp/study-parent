@@ -24,7 +24,7 @@ public class Client {
 			
 			//向服务器端发送数据
 			out.println("接收到客户端的请求数据...");
-			out.println("接收到客户端的请求数据1111...");
+//			out.println("接收到客户端的请求数据1111...");
 			String response = in.readLine();
 			System.out.println("Client: " + response);
 			
@@ -52,7 +52,6 @@ public class Client {
 					e.printStackTrace();
 				}
 			}
-			socket = null;
 		}
 	}
 }
