@@ -1,34 +1,17 @@
 package bhz.multi;
 
-import java.nio.ByteBuffer;
-import java.util.UUID;
-
-import bhz.base.LongEvent;
-
-import com.lmax.disruptor.EventTranslatorOneArg;
 import com.lmax.disruptor.RingBuffer;
 
-/**
- * <B>系统名称：</B><BR>
- * <B>模块名称：</B><BR>
- * <B>中文类名：</B><BR>
- * <B>概要说明：</B><BR>
- * @author 北京尚学堂（alienware）
- * @since 2015年11月23日
- */
-public class Producer {
-
+class Producer {
 	private final RingBuffer<Order> ringBuffer;
-	
-	public Producer(RingBuffer<Order> ringBuffer){
+	Producer(RingBuffer<Order> ringBuffer){
 		this.ringBuffer = ringBuffer;
 	}
-	
 	/**
 	 * onData用来发布事件，每调用一次就发布一次事件
 	 * 它的参数会用过事件传递给消费者
 	 */
-	public void onData(String data){
+	void onData(String data){
 		//可以把ringBuffer看做一个事件队列，那么next就是得到下面一个事件槽
 		long sequence = ringBuffer.next();
 		try {
@@ -42,6 +25,4 @@ public class Producer {
 			ringBuffer.publish(sequence);
 		}
 	}
-	
-	
 }
