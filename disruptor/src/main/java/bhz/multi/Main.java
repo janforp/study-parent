@@ -15,7 +15,6 @@ import com.lmax.disruptor.dsl.ProducerType;
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
-
 		//创建ringBuffer
 		RingBuffer<Order> ringBuffer = RingBuffer.create(ProducerType.MULTI, Order::new, 1024 * 1024, new YieldingWaitStrategy());
 		SequenceBarrier barriers = ringBuffer.newBarrier();
