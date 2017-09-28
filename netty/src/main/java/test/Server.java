@@ -1,3 +1,5 @@
+package test;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -36,9 +38,5 @@ public class Server {
 		
 		bossGroup.shutdownGracefully();
 		workerGroup.shutdownGracefully();
-		 
-		
-		
 	}
-	
 }
