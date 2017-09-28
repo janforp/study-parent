@@ -18,8 +18,8 @@ public class Main {
         int bufferSize=1024;
         ExecutorService executor=Executors.newFixedThreadPool(8);
         Disruptor<Trade> disruptor = new Disruptor<>(Trade::new, bufferSize, executor, ProducerType.SINGLE, new BusySpinWaitStrategy());
-        linXing(disruptor, new Handler1(),new Handler2(), new Handler3());
-        shunXu(disruptor, new Handler1(),new Handler2(), new Handler3());
+//        linXing(disruptor, new Handler1(),new Handler2(), new Handler3());
+//        shunXu(disruptor, new Handler1(),new Handler2(), new Handler3());
         liuBianXing(disruptor,new Handler1(),new Handler2(),new Handler3(),new Handler4(),new Handler5());
 
 

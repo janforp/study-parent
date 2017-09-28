@@ -21,7 +21,7 @@ public class TradePublisher implements Runnable {
     @Override  
     public void run() {  
     	TradeEventTranslator eventTranslator = new TradeEventTranslator();
-        for(int i = 0; i< 10; i++){
+        for(int i = 0; i< 1; i++){
             disruptor.publishEvent(eventTranslator);
         }  
         latch.countDown();  
