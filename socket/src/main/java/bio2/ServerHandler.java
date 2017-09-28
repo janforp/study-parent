@@ -8,7 +8,7 @@ import java.net.Socket;
 public class ServerHandler implements Runnable {
 
 	private Socket socket;
-	public ServerHandler (Socket socket){
+	ServerHandler(Socket socket){
 		this.socket = socket;
 	}
 	
@@ -19,7 +19,7 @@ public class ServerHandler implements Runnable {
 		try {
 			in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			out = new PrintWriter(this.socket.getOutputStream(), true);
-			String body = null;
+			String body;
 			while(true){
 				body = in.readLine();
 				if(body == null) break;
@@ -52,8 +52,5 @@ public class ServerHandler implements Runnable {
 			}
 			socket = null;			
 		}
-		
-		
 	}
-
 }

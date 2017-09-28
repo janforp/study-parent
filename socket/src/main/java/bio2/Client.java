@@ -52,11 +52,6 @@ public class Client {
 					e3.printStackTrace();
 				}
 			}
-			socket = null;				
 		}
-		
-		
-		
 	}
-
 }

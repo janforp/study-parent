@@ -26,20 +26,6 @@ public class Server {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(in != null){
-				try {
-					in.close();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-			if(out != null){
-				try {
-					out.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
 			if(server != null){
 				try {
 					server.close();
@@ -47,12 +33,6 @@ public class Server {
 					e3.printStackTrace();
 				}
 			}
-			server = null;				
 		}
-		
-	
-	
 	}
-	
-	
 }

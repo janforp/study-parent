@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class HandlerExecutorPool {
 
 	private ExecutorService executor;
-	public HandlerExecutorPool(int maxPoolSize, int queueSize){
+	HandlerExecutorPool(int maxPoolSize, int queueSize){
 		this.executor = new ThreadPoolExecutor(
 				Runtime.getRuntime().availableProcessors(),
 				maxPoolSize, 
@@ -17,10 +17,7 @@ public class HandlerExecutorPool {
 				new ArrayBlockingQueue<>(queueSize));
 	}
 	
-	public void execute(Runnable task){
+	void execute(Runnable task){
 		this.executor.execute(task);
 	}
-	
-	
-	
 }
