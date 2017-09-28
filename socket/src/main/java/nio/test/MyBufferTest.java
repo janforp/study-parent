@@ -9,15 +9,12 @@ import java.nio.IntBuffer;
 public class MyBufferTest {
 
     public static void main(String[] args) {
-//        intBufferPos();
+        intBufferPos();
 
-//        intBufferWrap();
+        intBufferWrap();
 
         intBufferOther();
     }
-
-
-
     public static void intBufferPos() {
         IntBuffer buffer = IntBuffer.allocate(10);
         buffer.put(13);// position位置：0 - > 1
@@ -62,12 +59,10 @@ public class MyBufferTest {
         System.out.println(buf3);
 
         //设置buf1的位置属性
-        //buf1.position(0);
+        buf1.position(1);
         buf1.flip();
         System.out.println(buf1);
-
         System.out.println("可读数据为：" + buf1.remaining());
-
         int[] arr2 = new int[buf1.remaining()];
         //将缓冲区数据放入arr2数组中去
         buf1.get(arr2);
