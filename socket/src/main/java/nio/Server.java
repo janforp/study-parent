@@ -9,6 +9,9 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+/**
+ *  非阻塞：就是客户的在接收服务端发送的大数据的同时，还可以做其他的事情，而不是等待发送完毕才能继续往下走
+ */
 public class Server implements Runnable{
 	//1 多路复用器（管理所有的通道）
 	private Selector seletor;
