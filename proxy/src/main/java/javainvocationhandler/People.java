@@ -1,4 +1,4 @@
-package javaInvocationhandler;
+package javainvocationhandler;
 
 /**
  * 类说明：
