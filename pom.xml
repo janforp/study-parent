@@ -11,6 +11,7 @@
         <module>disruptor</module>
         <module>socket</module>
         <module>netty</module>
+        <module>proxy</module>
     </modules>
     <packaging>pom</packaging>
 
