@@ -12,6 +12,7 @@
         <module>socket</module>
         <module>netty</module>
         <module>proxy</module>
+        <module>geekbang-mq</module>
     </modules>
     <packaging>pom</packaging>
 
