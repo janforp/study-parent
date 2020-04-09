@@ -13,6 +13,7 @@
         <module>netty</module>
         <module>proxy</module>
         <module>geekbang-mq</module>
+        <module>mockito-test</module>
     </modules>
     <packaging>pom</packaging>
 
