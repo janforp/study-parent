@@ -16,7 +16,8 @@
         <module>mockito-test</module>
         <module>net-code</module>
         <module>servlet</module>
-    </modules>
+		<module>design-mode</module>
+	</modules>
     <packaging>pom</packaging>
 
 	<name>study-parent</name>
