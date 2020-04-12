@@ -13,6 +13,8 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.util.CharsetUtil;
 
+import java.net.URI;
+
 /**
  * 类说明：自定义处理器
  *
@@ -27,7 +29,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
      * will be renamed to messageReceived in netty 5, but netty 5 was dropped
      *
      * @param channelHandlerContext 处理器上下文
-     * @param httpObject ？
+     * @param httpObject 请求对象
      * @throws Exception ？
      */
     @Override
@@ -36,11 +38,17 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
         if (!instance) {
             return;
         }
+        HttpRequest httpRequest = (HttpRequest) httpObject;
+        System.out.println("请求方法名：" + httpRequest.method().name());
+        URI uri = new URI(httpRequest.uri());
+        if ("/favicon.ico".equals(uri.getPath())) {
+            System.out.println("请求 favicon.ico");
+            return;
+        }
         ByteBuf content = Unpooled.copiedBuffer("Hello World \n", CharsetUtil.UTF_8);
         FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "test/plain");
         response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
-
         channelHandlerContext.writeAndFlush(response);
     }
 }
