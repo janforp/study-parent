@@ -12,12 +12,12 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.InetSocketAddress;
 
 /**
- * 类说明：
+ * 类说明：open test.html in browser and click
  *
  * @author zhucj
  * @since 20200423
  */
-public class MyServer {
+public class MyWebSocketServer {
 
     public static void main(String[] args) throws InterruptedException {
         EventLoopGroup boss = new NioEventLoopGroup();
@@ -30,7 +30,7 @@ public class MyServer {
                     .handler(new LoggingHandler(LogLevel.INFO))//boss日志
                     .childHandler(new WebSocketChannelInitializer());
             ChannelFuture channelFuture = serverBootstrap
-                    .bind(new InetSocketAddress(8800))
+                    .bind(new InetSocketAddress(8899))
                     .sync();
             Channel channel = channelFuture.channel();
             channel.closeFuture().sync();
