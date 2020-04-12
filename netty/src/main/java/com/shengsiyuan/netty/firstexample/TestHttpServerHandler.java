@@ -34,6 +34,15 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
      */
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, HttpObject httpObject) throws Exception {
+        System.out.println(httpObject.getClass());
+        System.out.println(channelHandlerContext.channel().remoteAddress());
+        //zhuchenjiandeMacBook-Pro:study-parent janita$ lsof -i:8899
+        //COMMAND   PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+        //java    72847 janita   99u  IPv6 0x324a294a3b231069      0t0  TCP *:8899 (LISTEN)
+        //java    72847 janita  103u  IPv6 0x324a294a358603a9      0t0  TCP localhost:8899->localhost:64084 (ESTABLISHED)
+        //curl    72935 janita    3u  IPv4 0x324a294a3d226811      0t0  TCP localhost:64084->localhost:8899 (ESTABLISHED)
+        Thread.sleep(8000);
+
         boolean instance = httpObject instanceof HttpRequest;
         if (!instance) {
             return;
@@ -50,5 +59,40 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "test/plain");
         response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
         channelHandlerContext.writeAndFlush(response);
+
+        //主动关闭的话，浏览器的 keep-alive 就无效了
+        channelHandlerContext.channel().close();
+    }
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("1：handler added");
+        super.handlerAdded(ctx);
+    }
+
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("2：channel registered");
+        super.channelRegistered(ctx);
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("3：channel active");
+        super.channelActive(ctx);
+    }
+
+    //active 之后就去处理请求了
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("4：channel inactive");
+        super.channelInactive(ctx);
+    }
+
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("5：channel unregistered");
+        super.channelUnregistered(ctx);
     }
 }

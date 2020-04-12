@@ -24,6 +24,7 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
         //管道中有很多类似拦截器的东西，责任链模式？
         ChannelPipeline pipeline = socketChannel.pipeline();
         //codec:编码解码器，对请求和响应编解码
+        //HttpRequestDecoder, HttpResponseEncoder 合二为一的处理器，把http请求解码，把http响应编码
         pipeline.addLast("httpServerCodec", new HttpServerCodec());
         //自定义处理器
         pipeline.addLast("testHttpServerHandler", new TestHttpServerHandler());
