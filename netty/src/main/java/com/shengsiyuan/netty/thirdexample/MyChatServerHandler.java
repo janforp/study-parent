@@ -59,6 +59,8 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
         //发送（广播）消息给所有连接
         channelGroup.writeAndFlush("【服务器】- " + ", " + channel.remoteAddress() + "离开\n");
 
+        System.out.println("剩余的连接 = " + channelGroup.size());
+
         //移除该链接,但是该函数会自动调用，可以不主动调用
         channelGroup.remove(channel);
     }
@@ -76,7 +78,7 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }
