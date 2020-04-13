@@ -13,7 +13,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class TestServerHandler extends SimpleChannelInboundHandler<MyDataInfo.Person> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.Person msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.Person msg) {
+        //客户端跟服务端的连接
+        System.out.println("服务端接收到一个 Person 对象");
 
+        System.out.println(msg.getAddress());
+        System.out.println(msg.getName());
+        System.out.println(msg.getAge());
     }
 }
