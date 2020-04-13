@@ -1,0 +1,3 @@
+在当前模块打开众多输入：
+ protoc --java_out=src/main/java src/main/java/com/shengsiyuan/netty/protobuf/Student.proto
+ 即可通过.proto文件生成java类
