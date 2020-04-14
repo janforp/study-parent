@@ -6,7 +6,7 @@ option optimize_for = SPEED;
 option java_package = "com.shengsiyuan.netty.sixthexampleprotobufmanymessages";
 option java_outer_classname = "MmMyDataInfo";
 
-// protoc --java_out=src/main/java src/main/java/com/shengsiyuan/netty/sixthexampleprotobufmanymessages/Person.proto
+// protoc --java_out=src/main/java src/main/java/com/shengsiyuan/netty/sixthexampleprotobufmanymessages/ManyMessagesPerson.proto
 
 message Person {
 
