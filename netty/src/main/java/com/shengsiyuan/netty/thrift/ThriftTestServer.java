@@ -10,7 +10,7 @@ import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TTransportException;
 
 /**
- * 类说明：
+ * 类说明：可以使用 python 作为客户端调用该服务端，具体见 pythrift 项目
  *
  * @author zhucj
  * @since 20200423
