@@ -28,6 +28,7 @@ public class ThriftTestClient {
             //打开socket
             transport.open();
 
+            //rpc调用
             Person person = client.getPersonByUsername("张三");
 
             System.out.println(person.getUsername());
@@ -41,6 +42,7 @@ public class ThriftTestClient {
             person.setAge(30);
             person.setMarried(true);
 
+            //rpc调用
             client.savePerson(person);
 
         } catch (Exception ex) {
