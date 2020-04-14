@@ -22,7 +22,7 @@ public class ManyMessagesClient {
             bootstrap
                     .group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
-                    .handler(new TestClientInitializer());
+                    .handler(new ManyMessagesTestClientInitializer());
 
             ChannelFuture channelFuture = bootstrap.connect("localhost", 8899).sync();
             //链接对象

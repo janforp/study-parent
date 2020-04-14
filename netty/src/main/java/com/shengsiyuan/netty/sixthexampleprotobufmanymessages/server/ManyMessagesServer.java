@@ -1,6 +1,5 @@
-package com.shengsiyuan.netty.sixthexampleprotobufmanymessagesmanymessages.server;
+package com.shengsiyuan.netty.sixthexampleprotobufmanymessages.server;
 
-import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.server.TestServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -27,7 +26,7 @@ public class ManyMessagesServer {
                     .group(boss, worker)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))//boss日志
-                    .childHandler(new TestServerInitializer());
+                    .childHandler(new ManyMessageTestServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
             Channel channel = channelFuture.channel();
             channel.closeFuture().sync();

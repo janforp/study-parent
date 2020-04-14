@@ -1,6 +1,6 @@
 package com.shengsiyuan.netty.sixthexampleprotobufmanymessages.client;
 
-import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.MyDataInfo;
+import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.MmMyDataInfo;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -11,17 +11,17 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author zhucj
  * @since 20200423
  */
-public class TestClientHandler extends SimpleChannelInboundHandler<MyDataInfo.Person> {
+public class ManyMessagesTestClientHandler extends SimpleChannelInboundHandler<MmMyDataInfo.Person> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.Person msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MmMyDataInfo.Person msg) throws Exception {
 
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //客户端向服务端发送数据/请求
-        MyDataInfo.Person person = MyDataInfo.Person.newBuilder().setName("张三").setAge(20).setAddress("北京").build();
+        MmMyDataInfo.Person person = MmMyDataInfo.Person.newBuilder().setName("张三").setAge(20).setAddress("北京").build();
 
         Channel channel = ctx.channel();
 

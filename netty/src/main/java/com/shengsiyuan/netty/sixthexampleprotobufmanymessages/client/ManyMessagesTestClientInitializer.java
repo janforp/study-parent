@@ -1,6 +1,6 @@
-package com.shengsiyuan.netty.sixthexampleprotobufmanymessages.server;
+package com.shengsiyuan.netty.sixthexampleprotobufmanymessages.client;
 
-import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.MyDataInfo;
+import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.MmMyDataInfo;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -15,17 +15,18 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  * @author zhucj
  * @since 20200423
  */
-public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
+public class ManyMessagesTestClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel socketChannel) {
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
         pipeline.addLast(new ProtobufVarint32FrameDecoder());
-        //关键,被处理的类型
-        MyDataInfo.Person defaultInstance = MyDataInfo.Person.getDefaultInstance();
+        //关键
+        MmMyDataInfo.Person defaultInstance = MmMyDataInfo.Person.getDefaultInstance();
         pipeline.addLast(new ProtobufDecoder(defaultInstance));
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
-        pipeline.addLast(new TestServerHandler());
+
+        pipeline.addLast(new ManyMessagesTestClientHandler());
     }
 }
