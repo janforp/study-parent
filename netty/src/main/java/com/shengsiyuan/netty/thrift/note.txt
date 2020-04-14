@@ -1,0 +1,2 @@
+1.安装 thrift 编译器，通过 brew install thrift 安装即可
+2.引用 jar 包开发即可

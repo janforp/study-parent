@@ -2,6 +2,7 @@ package com.shengsiyuan.netty.thrift;
 
 import com.shengsiyuan.netty.thrift.gen.Person;
 import com.shengsiyuan.netty.thrift.gen.PersonService;
+import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TCompactProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
@@ -30,27 +31,31 @@ public class ThriftTestClient {
             //打开socket
             transport.open();
 
-            //rpc调用
-            Person person = client.getPersonByUsername("张三");
-
-            System.out.println(person.getUsername());
-            System.out.println(person.getAge());
-            System.out.println(person.isMarried());
-
-            System.out.println("------------");
-
-            person = new Person();
-            person.setUsername("李四");
-            person.setAge(30);
-            person.setMarried(true);
-
-            //rpc调用
-            client.savePerson(person);
+            doBusiness(client);
 
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         } finally {
             transport.close();
         }
+    }
+
+    private static void doBusiness(PersonService.Client client) throws TException {
+        //rpc调用
+        Person person = client.getPersonByUsername("张三");
+
+        System.out.println(person.getUsername());
+        System.out.println(person.getAge());
+        System.out.println(person.isMarried());
+
+        System.out.println("------------");
+
+        person = new Person();
+        person.setUsername("李四");
+        person.setAge(30);
+        person.setMarried(true);
+
+        //rpc调用
+        client.savePerson(person);
     }
 }
