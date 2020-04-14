@@ -22,7 +22,7 @@ public class ManyMessageTestServerInitializer extends ChannelInitializer<SocketC
         ChannelPipeline pipeline = socketChannel.pipeline();
         pipeline.addLast(new ProtobufVarint32FrameDecoder());
         //关键,被处理的类型
-        MmMyDataInfo.Person defaultInstance = MmMyDataInfo.Person.getDefaultInstance();
+        MmMyDataInfo.MyMessage defaultInstance = MmMyDataInfo.MyMessage.getDefaultInstance();
         pipeline.addLast(new ProtobufDecoder(defaultInstance));
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
