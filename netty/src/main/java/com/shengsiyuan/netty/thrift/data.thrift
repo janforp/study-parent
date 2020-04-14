@@ -1,5 +1,5 @@
 #生成java类的包
-namespace java thrift.generated
+namespace java com.shengsiyuan.netty.thrift.generated
 
 #文件包含， include "global.thrift"
 
@@ -11,7 +11,7 @@ typedef string String
 
 # const int DEFAULT = 0
 
-#thrift --gen java src/java/thrift/data.thrift
+#thrift --gen java src/main/java/com/shengsiyuan/netty/thrift/data.thrift
 
 struct Person {
 
