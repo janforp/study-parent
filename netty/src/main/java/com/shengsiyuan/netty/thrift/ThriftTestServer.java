@@ -18,19 +18,22 @@ import org.apache.thrift.transport.TTransportException;
 public class ThriftTestServer {
 
     public static void main(String[] args) throws TTransportException {
-
+        //socket连接
         TNonblockingServerSocket socket = new TNonblockingServerSocket(8899);
 
         THsHaServer.Args arg = new THsHaServer.Args(socket).minWorkerThreads(2).maxWorkerThreads(4);
 
-        PersonService.Processor<PersonServiceImpl> processor = new PersonService.Processor<>(new PersonServiceImpl());
-
+        //协议层
         arg.protocolFactory(new TCompactProtocol.Factory());
 
+        //传输层
         arg.transportFactory(new TFramedTransport.Factory());
 
+        //结合 spring 的时候，PersonServiceImpl 可以设置为单例，通过注入获取
+        PersonService.Processor<PersonServiceImpl> processor = new PersonService.Processor<>(new PersonServiceImpl());
         arg.processorFactory(new TProcessorFactory(processor));
 
+        //半同步半异步服务
         TServer server = new THsHaServer(arg);
 
         System.out.println("Thrift Server is Started");

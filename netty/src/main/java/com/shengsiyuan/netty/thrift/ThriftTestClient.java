@@ -18,8 +18,10 @@ public class ThriftTestClient {
 
     public static void main(String[] args) {
 
+        //与服务器保持一直
         TTransport transport = new TFramedTransport(new TSocket("localhost", 8899), 600);
 
+        //与服务器保持一直
         TProtocol protocol = new TCompactProtocol(transport);
 
         PersonService.Client client = new PersonService.Client(protocol);
