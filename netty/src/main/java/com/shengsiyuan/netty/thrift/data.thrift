@@ -1,5 +1,7 @@
 #生成java类的包
 namespace java com.shengsiyuan.netty.thrift.generated.gen
+namespace py com.shengsiyuan.netty.thrift.generated.gen
+
 
 #文件包含， include "global.thrift"
 
