@@ -1,6 +1,6 @@
-package com.shengsiyuan.netty.sixthexampleprotobuf.server;
+package com.shengsiyuan.netty.sixthexampleprotobufmanymessages.server;
 
-import com.shengsiyuan.netty.sixthexampleprotobuf.MyDataInfo;
+import com.shengsiyuan.netty.sixthexampleprotobufmanymessages.MyDataInfo;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
