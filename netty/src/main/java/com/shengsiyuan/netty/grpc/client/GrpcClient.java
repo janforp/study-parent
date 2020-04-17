@@ -25,12 +25,24 @@ import java.util.UUID;
 public class GrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
-        getRealNameByUsername();
-        //        getStudentsByAge();
-        //        getStudentWrapperByAges();
-        //        biTalk();
+        int caseInt = 1;
+        if (caseInt == 1) {
+            getRealNameByUsername();
+        }
+        if (caseInt == 2) {
+            getStudentsByAge();
+        }
+        if (caseInt == 3) {
+            getStudentWrapperByAges();
+        }
+        if (caseInt == 4) {
+            biTalk();
+        }
     }
 
+    /**
+     * rpc GetRealNameByUsername(MyRequest) returns (MyResponse) {}
+     */
     private static void getRealNameByUsername() {
         StudentServiceGrpc.StudentServiceBlockingStub blockingStub = getBlockingStub();
         MyResponse myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("张三").build());
@@ -43,6 +55,9 @@ public class GrpcClient {
         System.out.println(myResponse.getRealname());
     }
 
+    /**
+     * rpc GetStudentsByAge(StudentRequest) returns (stream StudentResponse) {}
+     */
     private static void getStudentsByAge() {
         StudentServiceGrpc.StudentServiceBlockingStub blockingStub = getBlockingStub();
         Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(20).build());
@@ -50,6 +65,9 @@ public class GrpcClient {
                 -> System.out.println(studentResponse.getName() + "，" + studentResponse.getAge() + "，" + studentResponse.getCity()));
     }
 
+    /**
+     * rpc GetStudentWrapperByAges(stream StudentRequest) returns (StudentResponseList) {}
+     */
     private static void getStudentWrapperByAges() throws InterruptedException {
         StudentServiceGrpc.StudentServiceStub stub = getAsyncStub();
         StreamObserver<StudentRequest> studentRequestStreamObserver
@@ -89,6 +107,9 @@ public class GrpcClient {
         return blockingStub;
     }
 
+    /**
+     * rpc BiTalk(stream StreamRequest) returns (stream StreamResponse) {}
+     */
     private static void biTalk() throws InterruptedException {
         StudentServiceGrpc.StudentServiceStub stub = getAsyncStub();
         StreamObserver<StreamRequest> requestStreamObserver = stub.biTalk(new StreamObserver<StreamResponse>() {
