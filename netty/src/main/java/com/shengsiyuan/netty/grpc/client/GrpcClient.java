@@ -25,7 +25,10 @@ import java.util.UUID;
 public class GrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
-        biTalk();
+        getRealNameByUsername();
+        //        getStudentsByAge();
+        //        getStudentWrapperByAges();
+        //        biTalk();
     }
 
     private static void getRealNameByUsername() {
