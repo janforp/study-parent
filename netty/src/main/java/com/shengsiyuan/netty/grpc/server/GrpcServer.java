@@ -25,7 +25,8 @@ public class GrpcServer {
 
     private void start() throws IOException {
         //可以把实现丢进spring
-        this.server = ServerBuilder.forPort(8899).addService(new StudentServiceImpl()).build();
+        StudentServiceImpl studentService = new StudentServiceImpl();
+        this.server = ServerBuilder.forPort(8899).addService(studentService).build();
         this.server.start();
         System.out.println("server started！");
 
