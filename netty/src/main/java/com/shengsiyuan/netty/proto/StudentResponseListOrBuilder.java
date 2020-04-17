@@ -3,8 +3,8 @@
 
 package com.shengsiyuan.netty.proto;
 
-public interface StuentResponseListOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StuentResponseList)
+public interface StudentResponseListOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StudentResponseList)
         com.google.protobuf.MessageOrBuilder {
 
   /**

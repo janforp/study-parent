@@ -4,8 +4,8 @@ import com.shengsiyuan.netty.proto.MyRequest;
 import com.shengsiyuan.netty.proto.MyResponse;
 import com.shengsiyuan.netty.proto.StudentRequest;
 import com.shengsiyuan.netty.proto.StudentResponse;
+import com.shengsiyuan.netty.proto.StudentResponseList;
 import com.shengsiyuan.netty.proto.StudentServiceGrpc;
-import com.shengsiyuan.netty.proto.StuentResponseList;
 import io.grpc.stub.StreamObserver;
 
 /**
@@ -43,7 +43,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
      * rpc GetStudentWrapperByAges(stream StudentRequest) returns (StuentResponseList) {}
      */
     @Override
-    public StreamObserver<StudentRequest> getStudentWrapperByAges(StreamObserver<StuentResponseList> responseObserver) {
+    public StreamObserver<StudentRequest> getStudentWrapperByAges(StreamObserver<StudentResponseList> responseObserver) {
         return new StreamObserver<StudentRequest>() {
             @Override
             public void onNext(StudentRequest value) {
@@ -59,7 +59,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
             public void onCompleted() {
                 StudentResponse response1 = StudentResponse.newBuilder().setName("张三").setAge(20).setCity("西安").build();
                 StudentResponse response2 = StudentResponse.newBuilder().setName("李四").setAge(30).setCity("广州").build();
-                StuentResponseList stuentResponseList = StuentResponseList.newBuilder().addStudentResponse(response1).addStudentResponse(response2).build();
+                StudentResponseList stuentResponseList = StudentResponseList.newBuilder().addStudentResponse(response1).addStudentResponse(response2).build();
                 responseObserver.onNext(stuentResponseList);
                 responseObserver.onCompleted();
             }

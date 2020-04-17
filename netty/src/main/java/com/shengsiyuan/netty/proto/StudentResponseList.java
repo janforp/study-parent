@@ -4,49 +4,49 @@
 package com.shengsiyuan.netty.proto;
 
 /**
- * Protobuf type {@code com.shengsiyuan.netty.proto.StuentResponseList}
+ * Protobuf type {@code com.shengsiyuan.netty.proto.StudentResponseList}
  */
-public final class StuentResponseList extends
+public final class StudentResponseList extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:com.shengsiyuan.netty.proto.StuentResponseList)
-        StuentResponseListOrBuilder {
+        // @@protoc_insertion_point(message_implements:com.shengsiyuan.netty.proto.StudentResponseList)
+        StudentResponseListOrBuilder {
 
   public static final int STUDENTRESPONSE_FIELD_NUMBER = 1;
 
   private static final long serialVersionUID = 0L;
 
-  // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.StuentResponseList)
-  private static final StuentResponseList DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.StudentResponseList)
+  private static final StudentResponseList DEFAULT_INSTANCE;
 
-  private static final com.google.protobuf.Parser<StuentResponseList>
-          PARSER = new com.google.protobuf.AbstractParser<StuentResponseList>() {
+  private static final com.google.protobuf.Parser<StudentResponseList>
+          PARSER = new com.google.protobuf.AbstractParser<StudentResponseList>() {
     @Override
-    public StuentResponseList parsePartialFrom(
+    public StudentResponseList parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-      return new StuentResponseList(input, extensionRegistry);
+      return new StudentResponseList(input, extensionRegistry);
     }
   };
 
   static {
-    DEFAULT_INSTANCE = new StuentResponseList();
+    DEFAULT_INSTANCE = new StudentResponseList();
   }
 
   private java.util.List<StudentResponse> studentResponse_;
 
   private byte memoizedIsInitialized = -1;
 
-  // Use StuentResponseList.newBuilder() to construct.
-  private StuentResponseList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use StudentResponseList.newBuilder() to construct.
+  private StudentResponseList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
 
-  private StuentResponseList() {
+  private StudentResponseList() {
     studentResponse_ = java.util.Collections.emptyList();
   }
 
-  private StuentResponseList(
+  private StudentResponseList(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -99,54 +99,54 @@ public final class StuentResponseList extends
 
   public static final com.google.protobuf.Descriptors.Descriptor
   getDescriptor() {
-    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor;
+    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponseList_descriptor;
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           java.nio.ByteBuffer data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           java.nio.ByteBuffer data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static StuentResponseList parseFrom(byte[] data)
+  public static StudentResponseList parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static StuentResponseList parseFrom(java.io.InputStream input)
+  public static StudentResponseList parseFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -154,13 +154,29 @@ public final class StuentResponseList extends
             .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static StuentResponseList parseDelimitedFrom(java.io.InputStream input)
+  public static StudentResponseList parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static StuentResponseList parseDelimitedFrom(
+  @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    if (getStudentResponseCount() > 0) {
+      hash = (37 * hash) + STUDENTRESPONSE_FIELD_NUMBER;
+      hash = (53 * hash) + getStudentResponseList().hashCode();
+    }
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
+  public static StudentResponseList parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -168,14 +184,14 @@ public final class StuentResponseList extends
             .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
   }
 
-  public static StuentResponseList parseFrom(
+  public static StudentResponseList parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -187,15 +203,15 @@ public final class StuentResponseList extends
     return DEFAULT_INSTANCE.toBuilder();
   }
 
-  public static Builder newBuilder(StuentResponseList prototype) {
+  public static Builder newBuilder(StudentResponseList prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
-  public static StuentResponseList getDefaultInstance() {
+  public static StudentResponseList getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  public static com.google.protobuf.Parser<StuentResponseList> parser() {
+  public static com.google.protobuf.Parser<StudentResponseList> parser() {
     return PARSER;
   }
 
@@ -203,7 +219,7 @@ public final class StuentResponseList extends
   @SuppressWarnings({ "unused" })
   protected Object newInstance(
           UnusedPrivateParameter unused) {
-    return new StuentResponseList();
+    return new StudentResponseList();
   }
 
   @Override
@@ -215,9 +231,9 @@ public final class StuentResponseList extends
   @Override
   protected FieldAccessorTable
   internalGetFieldAccessorTable() {
-    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StuentResponseList_fieldAccessorTable
+    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponseList_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    StuentResponseList.class, StuentResponseList.Builder.class);
+                    StudentResponseList.class, StudentResponseList.Builder.class);
   }
 
   /**
@@ -245,7 +261,7 @@ public final class StuentResponseList extends
 
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -256,7 +272,7 @@ public final class StuentResponseList extends
 
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -322,10 +338,10 @@ public final class StuentResponseList extends
     if (obj == this) {
       return true;
     }
-    if (!(obj instanceof StuentResponseList)) {
+    if (!(obj instanceof StudentResponseList)) {
       return super.equals(obj);
     }
-    StuentResponseList other = (StuentResponseList) obj;
+    StudentResponseList other = (StudentResponseList) obj;
 
     if (!getStudentResponseList()
             .equals(other.getStudentResponseList())) {
@@ -335,25 +351,7 @@ public final class StuentResponseList extends
   }
 
   @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    if (getStudentResponseCount() > 0) {
-      hash = (37 * hash) + STUDENTRESPONSE_FIELD_NUMBER;
-      hash = (53 * hash) + getStudentResponseList().hashCode();
-    }
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-  @Override
-  public Builder newBuilderForType() {
-    return newBuilder();
-  }
+  public Builder newBuilderForType() { return newBuilder(); }
 
   @Override
   public Builder toBuilder() {
@@ -369,22 +367,22 @@ public final class StuentResponseList extends
   }
 
   @Override
-  public com.google.protobuf.Parser<StuentResponseList> getParserForType() {
+  public com.google.protobuf.Parser<StudentResponseList> getParserForType() {
     return PARSER;
   }
 
   @Override
-  public StuentResponseList getDefaultInstanceForType() {
+  public StudentResponseList getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
   /**
-   * Protobuf type {@code com.shengsiyuan.netty.proto.StuentResponseList}
+   * Protobuf type {@code com.shengsiyuan.netty.proto.StudentResponseList}
    */
   public static final class Builder extends
           com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.shengsiyuan.netty.proto.StuentResponseList)
-          StuentResponseListOrBuilder {
+          // @@protoc_insertion_point(builder_implements:com.shengsiyuan.netty.proto.StudentResponseList)
+          StudentResponseListOrBuilder {
 
     private int bitField0_;
 
@@ -394,30 +392,10 @@ public final class StuentResponseList extends
     private com.google.protobuf.RepeatedFieldBuilderV3<
             StudentResponse, StudentResponse.Builder, StudentResponseOrBuilder> studentResponseBuilder_;
 
-    // Construct using com.shengsiyuan.netty.proto.StuentResponseList.newBuilder()
+    // Construct using com.shengsiyuan.netty.proto.StudentResponseList.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
-
-    private Builder(
-            BuilderParent parent) {
-      super(parent);
-      maybeForceBuilderInitialization();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-    getDescriptor() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor;
-    }
-
-    @Override
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StuentResponseList_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                      StuentResponseList.class, StuentResponseList.Builder.class);
-    }
-
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
@@ -437,20 +415,44 @@ public final class StuentResponseList extends
       return this;
     }
 
+    private Builder(
+            BuilderParent parent) {
+      super(parent);
+      maybeForceBuilderInitialization();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponseList_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponseList_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      StudentResponseList.class, StudentResponseList.Builder.class);
+    }
+
     @Override
     public com.google.protobuf.Descriptors.Descriptor
     getDescriptorForType() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor;
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponseList_descriptor;
     }
 
     @Override
-    public StuentResponseList getDefaultInstanceForType() {
-      return StuentResponseList.getDefaultInstance();
+    public Builder clone() {
+      return super.clone();
     }
 
     @Override
-    public StuentResponseList build() {
-      StuentResponseList result = buildPartial();
+    public StudentResponseList getDefaultInstanceForType() {
+      return StudentResponseList.getDefaultInstance();
+    }
+
+    @Override
+    public StudentResponseList build() {
+      StudentResponseList result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -458,8 +460,8 @@ public final class StuentResponseList extends
     }
 
     @Override
-    public StuentResponseList buildPartial() {
-      StuentResponseList result = new StuentResponseList(this);
+    public StudentResponseList buildPartial() {
+      StudentResponseList result = new StudentResponseList(this);
       int from_bitField0_ = bitField0_;
       if (studentResponseBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
@@ -472,11 +474,6 @@ public final class StuentResponseList extends
       }
       onBuilt();
       return result;
-    }
-
-    @Override
-    public Builder clone() {
-      return super.clone();
     }
 
     @Override
@@ -506,6 +503,11 @@ public final class StuentResponseList extends
     }
 
     @Override
+    public final boolean isInitialized() {
+      return true;
+    }
+
+    @Override
     public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             Object value) {
@@ -514,16 +516,16 @@ public final class StuentResponseList extends
 
     @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof StuentResponseList) {
-        return mergeFrom((StuentResponseList) other);
+      if (other instanceof StudentResponseList) {
+        return mergeFrom((StudentResponseList) other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(StuentResponseList other) {
-      if (other == StuentResponseList.getDefaultInstance()) {
+    public Builder mergeFrom(StudentResponseList other) {
+      if (other == StudentResponseList.getDefaultInstance()) {
         return this;
       }
       if (studentResponseBuilder_ == null) {
@@ -558,20 +560,15 @@ public final class StuentResponseList extends
     }
 
     @Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
-    @Override
     public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-      StuentResponseList parsedMessage = null;
+      StudentResponseList parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (StuentResponseList) e.getUnfinishedMessage();
+        parsedMessage = (StudentResponseList) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -590,7 +587,7 @@ public final class StuentResponseList extends
 
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -605,7 +602,7 @@ public final class StuentResponseList extends
 
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -620,7 +617,7 @@ public final class StuentResponseList extends
 
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -676,7 +673,7 @@ public final class StuentResponseList extends
 
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -774,10 +771,9 @@ public final class StuentResponseList extends
       }
       return this;
     }
-
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -792,10 +788,9 @@ public final class StuentResponseList extends
       }
       return this;
     }
-
     /**
      * <pre>
-     * 集合
+     *集合
      * </pre>
      *
      * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
@@ -915,11 +910,12 @@ public final class StuentResponseList extends
 
     @Override
     public final Builder mergeUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
     }
 
-    // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.StuentResponseList)
+
+    // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.StudentResponseList)
   }
 
 }

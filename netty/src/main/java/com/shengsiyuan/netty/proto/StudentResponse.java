@@ -110,15 +110,6 @@ public final class StudentResponse extends
     }
   }
 
-  /**
-   * <code>int32 age = 2;</code>
-   *
-   * @return The age.
-   */
-  public int getAge() {
-    return age_;
-  }
-
   public static final com.google.protobuf.Descriptors.Descriptor
   getDescriptor() {
     return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
@@ -174,24 +165,6 @@ public final class StudentResponse extends
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + AGE_FIELD_NUMBER;
-    hash = (53 * hash) + getAge();
-    hash = (37 * hash) + CITY_FIELD_NUMBER;
-    hash = (53 * hash) + getCity().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
   }
 
   public static StudentResponse parseDelimitedFrom(java.io.InputStream input)
@@ -297,7 +270,22 @@ public final class StudentResponse extends
   }
 
   /**
+   * <code>int32 age = 2;</code>
+   *
+   * @return The age.
+   */
+  public int getAge() {
+    return age_;
+  }
+
+  @Override
+  public Builder newBuilderForType() {
+    return newBuilder();
+  }
+
+  /**
    * <code>string city = 3;</code>
+   *
    * @return The city.
    */
   public String getCity() {
@@ -410,7 +398,22 @@ public final class StudentResponse extends
   }
 
   @Override
-  public Builder newBuilderForType() { return newBuilder(); }
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + AGE_FIELD_NUMBER;
+    hash = (53 * hash) + getAge();
+    hash = (37 * hash) + CITY_FIELD_NUMBER;
+    hash = (53 * hash) + getCity().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
 
   @Override
   public Builder toBuilder() {
@@ -447,12 +450,13 @@ public final class StudentResponse extends
 
     private int age_;
 
-    private Object city_ = "";
-
     // Construct using com.shengsiyuan.netty.proto.StudentResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
+
+    private Object city_ = "";
+
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
@@ -539,6 +543,16 @@ public final class StudentResponse extends
     }
 
     @Override
+    public Builder mergeFrom(com.google.protobuf.Message other) {
+      if (other instanceof StudentResponse) {
+        return mergeFrom((StudentResponse) other);
+      } else {
+        super.mergeFrom(other);
+        return this;
+      }
+    }
+
+    @Override
     public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return super.clearOneof(oneof);
@@ -552,25 +566,10 @@ public final class StudentResponse extends
     }
 
     @Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
-    @Override
     public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             Object value) {
       return super.addRepeatedField(field, value);
-    }
-
-    @Override
-    public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof StudentResponse) {
-        return mergeFrom((StudentResponse)other);
-      } else {
-        super.mergeFrom(other);
-        return this;
-      }
     }
 
     public Builder mergeFrom(StudentResponse other) {
@@ -591,6 +590,11 @@ public final class StudentResponse extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
+    }
+
+    @Override
+    public final boolean isInitialized() {
+      return true;
     }
 
     @Override
@@ -632,18 +636,6 @@ public final class StudentResponse extends
     /**
      * <code>string name = 1;</code>
      *
-     * @return This builder for chaining.
-     */
-    public Builder clearName() {
-
-      name_ = getDefaultInstance().getName();
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>string name = 1;</code>
-     *
      * @param value The name to set.
      * @return This builder for chaining.
      */
@@ -678,39 +670,6 @@ public final class StudentResponse extends
     }
 
     /**
-     * <code>int32 age = 2;</code>
-     *
-     * @return The age.
-     */
-    public int getAge() {
-      return age_;
-    }
-
-    /**
-     * <code>int32 age = 2;</code>
-     * @param value The age to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAge(int value) {
-
-      age_ = value;
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>int32 age = 2;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearAge() {
-
-      age_ = 0;
-      onChanged();
-      return this;
-    }
-
-    /**
      * <code>string name = 1;</code>
      *
      * @param value The bytes for name to set.
@@ -729,15 +688,55 @@ public final class StudentResponse extends
     }
 
     /**
-     * <code>string city = 3;</code>
+     * <code>int32 age = 2;</code>
      *
+     * @return The age.
+     */
+    public int getAge() {
+      return age_;
+    }
+    /**
+     * <code>int32 age = 2;</code>
+     * @param value The age to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAge(int value) {
+
+      age_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 age = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAge() {
+
+      age_ = 0;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string name = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+
+      name_ = getDefaultInstance().getName();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string city = 3;</code>
      * @return The city.
      */
     public String getCity() {
       Object ref = city_;
       if (!(ref instanceof String)) {
         com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
+            (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         city_ = s;
         return s;
@@ -774,17 +773,15 @@ public final class StudentResponse extends
       if (ref instanceof String) {
         com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
-                        (String) ref);
+                (String) ref);
         city_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-
     /**
      * <code>string city = 3;</code>
-     *
      * @return This builder for chaining.
      */
     public Builder clearCity() {
@@ -811,10 +808,9 @@ public final class StudentResponse extends
       onChanged();
       return this;
     }
-
     @Override
     public final Builder setUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFields(unknownFields);
     }
 

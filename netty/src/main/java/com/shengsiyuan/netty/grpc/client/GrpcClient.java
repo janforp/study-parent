@@ -4,8 +4,8 @@ import com.shengsiyuan.netty.proto.MyRequest;
 import com.shengsiyuan.netty.proto.MyResponse;
 import com.shengsiyuan.netty.proto.StudentRequest;
 import com.shengsiyuan.netty.proto.StudentResponse;
+import com.shengsiyuan.netty.proto.StudentResponseList;
 import com.shengsiyuan.netty.proto.StudentServiceGrpc;
-import com.shengsiyuan.netty.proto.StuentResponseList;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -46,9 +46,9 @@ public class GrpcClient {
         System.out.println("+++++++++++++++++++++++++++++++");
 
         //rpc GetStudentWrapperByAges(stream StudentRequest) returns (StuentResponseList) {}
-        StreamObserver<StuentResponseList> stuentResponseListStreamObserver = new StreamObserver<StuentResponseList>() {
+        StreamObserver<StudentResponseList> stuentResponseListStreamObserver = new StreamObserver<StudentResponseList>() {
             @Override
-            public void onNext(StuentResponseList value) {
+            public void onNext(StudentResponseList value) {
                 List<StudentResponse> responseList = value.getStudentResponseList();
                 responseList.forEach(studentResponse ->
                         System.out.println(studentResponse.getName()

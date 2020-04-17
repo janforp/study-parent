@@ -224,11 +224,9 @@ public final class StudentRequest extends
     memoizedIsInitialized = 1;
     return true;
   }
-
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-
   public static Builder newBuilder(StudentRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
@@ -328,14 +326,14 @@ public final class StudentRequest extends
 
     private int age_;
 
-    // Construct using com.shengsiyuan.netty.proto.StudentRequest.newBuilder()
-    private Builder() {
-      maybeForceBuilderInitialization();
-    }
-
     private Builder(
             BuilderParent parent) {
       super(parent);
+      maybeForceBuilderInitialization();
+    }
+
+    // Construct using com.shengsiyuan.netty.proto.StudentRequest.newBuilder()
+    private Builder() {
       maybeForceBuilderInitialization();
     }
 
@@ -441,11 +439,6 @@ public final class StudentRequest extends
       }
     }
 
-    @Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
     public Builder mergeFrom(StudentRequest other) {
       if (other == StudentRequest.getDefaultInstance()) {
         return this;
@@ -456,6 +449,11 @@ public final class StudentRequest extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
+    }
+
+    @Override
+    public final boolean isInitialized() {
+      return true;
     }
 
     @Override
