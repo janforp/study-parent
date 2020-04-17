@@ -16,7 +16,7 @@ service StudentService {
   //客户端向服务端发送一个流式对象，服务端返回list
   rpc GetStudentWrapperByAges(stream StudentRequest) returns (StudentResponseList) {}
 
-  //双向流
+  //双向流的数据传递
   rpc BiTalk(stream StreamRequest) returns (stream StreamResponse) {}
 }
 

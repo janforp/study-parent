@@ -2,6 +2,8 @@ package com.shengsiyuan.netty.grpc.client;
 
 import com.shengsiyuan.netty.proto.MyRequest;
 import com.shengsiyuan.netty.proto.MyResponse;
+import com.shengsiyuan.netty.proto.StreamRequest;
+import com.shengsiyuan.netty.proto.StreamResponse;
 import com.shengsiyuan.netty.proto.StudentRequest;
 import com.shengsiyuan.netty.proto.StudentResponse;
 import com.shengsiyuan.netty.proto.StudentResponseList;
@@ -12,6 +14,7 @@ import io.grpc.stub.StreamObserver;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 类说明：
@@ -35,15 +38,14 @@ public class GrpcClient {
         myResponse = blockingStub.getRealNameByUsername(request);
         System.out.println(myResponse.getRealname());
 
-        System.out.println("--------------------------");
+        System.out.println("------------ getRealNameByUsername --------------");
 
         //rpc GetStudentsByAge(StudentRequest) returns (stream StudentResponse) {}
         Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(20).build());
-        iterator.forEachRemaining(studentResponse -> {
-            System.out.println(studentResponse.getName() + "，" + studentResponse.getAge() + "，" + studentResponse.getCity());
-        });
+        iterator.forEachRemaining(studentResponse
+                -> System.out.println(studentResponse.getName() + "，" + studentResponse.getAge() + "，" + studentResponse.getCity()));
 
-        System.out.println("+++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++ getStudentsByAge ++++++++++++++++");
 
         //rpc GetStudentWrapperByAges(stream StudentRequest) returns (StuentResponseList) {}
         StreamObserver<StudentResponseList> stuentResponseListStreamObserver = new StreamObserver<StudentResponseList>() {
@@ -74,6 +76,31 @@ public class GrpcClient {
         studentRequestStreamObserver.onNext(StudentRequest.newBuilder().setAge(50).build());
         studentRequestStreamObserver.onCompleted();
         //由于是异步的，结果不会马上返回，如果不 sleep 客户端就会马上关闭，导致无法获取结果
+        Thread.sleep(3000);
+
+        System.out.println("************ BiTalk **************");
+
+        StreamObserver<StreamRequest> requestStreamObserver = stub.biTalk(new StreamObserver<StreamResponse>() {
+
+            @Override
+            public void onNext(StreamResponse value) {
+                System.out.println(value.getRespnseInfo());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                System.out.println(t.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("comlpeted");
+            }
+        });
+        for (int i = 0; i < 10; i++) {
+            requestStreamObserver.onNext(StreamRequest.newBuilder().setRequestInfo(UUID.randomUUID().toString()).build());
+            Thread.sleep(1000);
+        }
         Thread.sleep(3000);
     }
 }
