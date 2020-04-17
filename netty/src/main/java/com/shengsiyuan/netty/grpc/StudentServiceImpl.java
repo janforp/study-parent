@@ -2,6 +2,8 @@ package com.shengsiyuan.netty.grpc;
 
 import com.shengsiyuan.netty.proto.MyRequest;
 import com.shengsiyuan.netty.proto.MyResponse;
+import com.shengsiyuan.netty.proto.StudentRequest;
+import com.shengsiyuan.netty.proto.StudentResponse;
 import com.shengsiyuan.netty.proto.StudentServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
@@ -22,6 +24,17 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
         responseObserver.onNext(response);
 
         //告诉客户端，我处理完毕
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getStudentsByAge(StudentRequest request, StreamObserver<StudentResponse> responseObserver) {
+        System.out.println("收到请求，根据 age 查询学生, age = " + request.getAge());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("张三").setAge(20).setCity("北京").build());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("李四").setAge(30).setCity("天津").build());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("王五").setAge(40).setCity("成都").build());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("赵六").setAge(50).setCity("深圳").build());
+
         responseObserver.onCompleted();
     }
 }
