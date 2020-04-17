@@ -25,7 +25,7 @@ import java.util.UUID;
 public class GrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
-        int caseInt = 1;
+        int caseInt = Integer.valueOf(args[0]);
         if (caseInt == 1) {
             getRealNameByUsername();
         }
@@ -60,7 +60,10 @@ public class GrpcClient {
      */
     private static void getStudentsByAge() {
         StudentServiceGrpc.StudentServiceBlockingStub blockingStub = getBlockingStub();
+        //发生请求
         Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(20).build());
+
+        //处理响应
         iterator.forEachRemaining(studentResponse
                 -> System.out.println(studentResponse.getName() + "，" + studentResponse.getAge() + "，" + studentResponse.getCity()));
     }
@@ -70,11 +73,13 @@ public class GrpcClient {
      */
     private static void getStudentWrapperByAges() throws InterruptedException {
         StudentServiceGrpc.StudentServiceStub stub = getAsyncStub();
+
         StreamObserver<StudentRequest> studentRequestStreamObserver
                 = stub.getStudentWrapperByAges(new StreamObserver<StudentResponseList>() {
 
             @Override
             public void onNext(StudentResponseList value) {
+                //处理返回
                 List<StudentResponse> responseList = value.getStudentResponseList();
                 responseList.forEach(studentResponse ->
                         System.out.println(studentResponse.getName()
@@ -92,6 +97,8 @@ public class GrpcClient {
                 System.out.println("completed");
             }
         });
+
+        //发生请求
         studentRequestStreamObserver.onNext(StudentRequest.newBuilder().setAge(20).build());
         studentRequestStreamObserver.onNext(StudentRequest.newBuilder().setAge(30).build());
         studentRequestStreamObserver.onNext(StudentRequest.newBuilder().setAge(40).build());
@@ -116,6 +123,7 @@ public class GrpcClient {
 
             @Override
             public void onNext(StreamResponse value) {
+                //处理返回值
                 System.out.println(value.getRespnseInfo());
             }
 
@@ -130,6 +138,7 @@ public class GrpcClient {
             }
         });
         for (int i = 0; i < 10; i++) {
+            //发请求：请求 com.shengsiyuan.netty.grpc.StudentServiceImpl.biTalk
             requestStreamObserver.onNext(StreamRequest.newBuilder().setRequestInfo(UUID.randomUUID().toString()).build());
             Thread.sleep(1000);
         }
