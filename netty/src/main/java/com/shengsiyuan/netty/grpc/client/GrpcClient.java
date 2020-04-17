@@ -20,5 +20,29 @@ public class GrpcClient {
         MyRequest request = MyRequest.newBuilder().setUsername("zs").build();
         MyResponse myResponse = blockingStub.getRealNameByUsername(request);
         System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
+
+        myResponse = blockingStub.getRealNameByUsername(request);
+        System.out.println(myResponse.getRealname());
     }
 }

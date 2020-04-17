@@ -28,16 +28,26 @@ public class GrpcServer {
         this.server = ServerBuilder.forPort(8899).addService(new StudentServiceImpl()).build();
         this.server.start();
         System.out.println("server started！");
+
+        //添加 JVM 钩子
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("关闭JVM");
+            GrpcServer.this.stop();
+        }));
+
+        System.out.println("启动函数完成");
     }
 
     private void stop() {
         if (this.server != null) {
+            System.out.println("关闭 GRPC 服务端");
             this.server.shutdown();
         }
     }
 
     private void awaitTermination() throws InterruptedException {
         if (this.server != null) {
+            //wait()
             this.server.awaitTermination();
         }
     }
