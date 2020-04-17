@@ -4,49 +4,58 @@
 package com.shengsiyuan.netty.proto;
 
 /**
- * Protobuf type {@code com.shengsiyuan.netty.proto.MyRequest}
+ * Protobuf type {@code com.shengsiyuan.netty.proto.StudentResponse}
  */
-public final class MyRequest extends
+public final class StudentResponse extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:com.shengsiyuan.netty.proto.MyRequest)
-        MyRequestOrBuilder {
+        // @@protoc_insertion_point(message_implements:com.shengsiyuan.netty.proto.StudentResponse)
+        StudentResponseOrBuilder {
 
-  public static final int USERNAME_FIELD_NUMBER = 1;
+  public static final int NAME_FIELD_NUMBER = 1;
 
-  // Use MyRequest.newBuilder() to construct.
-  private MyRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-    super(builder);
-  }
+  public static final int AGE_FIELD_NUMBER = 2;
 
-  private MyRequest() {
-    username_ = "";
-  }
+  public static final int CITY_FIELD_NUMBER = 3;
 
   private static final long serialVersionUID = 0L;
 
-  // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.MyRequest)
-  private static final MyRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.StudentResponse)
+  private static final StudentResponse DEFAULT_INSTANCE;
 
-  private static final com.google.protobuf.Parser<MyRequest>
-          PARSER = new com.google.protobuf.AbstractParser<MyRequest>() {
+  private static final com.google.protobuf.Parser<StudentResponse>
+          PARSER = new com.google.protobuf.AbstractParser<StudentResponse>() {
     @Override
-    public MyRequest parsePartialFrom(
+    public StudentResponse parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-      return new MyRequest(input, extensionRegistry);
+      return new StudentResponse(input, extensionRegistry);
     }
   };
 
   static {
-    DEFAULT_INSTANCE = new MyRequest();
+    DEFAULT_INSTANCE = new StudentResponse();
   }
 
-  private volatile Object username_;
+  private volatile Object name_;
+
+  private int age_;
+
+  private volatile Object city_;
 
   private byte memoizedIsInitialized = -1;
 
-  private MyRequest(
+  // Use StudentResponse.newBuilder() to construct.
+  private StudentResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    super(builder);
+  }
+
+  private StudentResponse() {
+    name_ = "";
+    city_ = "";
+  }
+
+  private StudentResponse(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -67,7 +76,18 @@ public final class MyRequest extends
           case 10: {
             String s = input.readStringRequireUtf8();
 
-            username_ = s;
+            name_ = s;
+            break;
+          }
+          case 16: {
+
+            age_ = input.readInt32();
+            break;
+          }
+          case 26: {
+            String s = input.readStringRequireUtf8();
+
+            city_ = s;
             break;
           }
           default: {
@@ -92,68 +112,54 @@ public final class MyRequest extends
 
   public static final com.google.protobuf.Descriptors.Descriptor
   getDescriptor() {
-    return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyRequest_descriptor;
+    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           java.nio.ByteBuffer data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           java.nio.ByteBuffer data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static MyRequest parseFrom(byte[] data)
+  public static StudentResponse parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + USERNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getUsername().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-  public static MyRequest parseFrom(java.io.InputStream input)
+  public static StudentResponse parseFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -161,13 +167,13 @@ public final class MyRequest extends
             .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static MyRequest parseDelimitedFrom(java.io.InputStream input)
+  public static StudentResponse parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static MyRequest parseDelimitedFrom(
+  public static StudentResponse parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -175,14 +181,14 @@ public final class MyRequest extends
             .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input);
   }
 
-  public static MyRequest parseFrom(
+  public static StudentResponse parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -194,15 +200,15 @@ public final class MyRequest extends
     return DEFAULT_INSTANCE.toBuilder();
   }
 
-  public static Builder newBuilder(MyRequest prototype) {
+  public static Builder newBuilder(StudentResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
-  public static MyRequest getDefaultInstance() {
+  public static StudentResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  public static com.google.protobuf.Parser<MyRequest> parser() {
+  public static com.google.protobuf.Parser<StudentResponse> parser() {
     return PARSER;
   }
 
@@ -210,7 +216,7 @@ public final class MyRequest extends
   @SuppressWarnings({ "unused" })
   protected Object newInstance(
           UnusedPrivateParameter unused) {
-    return new MyRequest();
+    return new StudentResponse();
   }
 
   @Override
@@ -222,41 +228,88 @@ public final class MyRequest extends
   @Override
   protected FieldAccessorTable
   internalGetFieldAccessorTable() {
-    return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyRequest_fieldAccessorTable
+    return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    MyRequest.class, MyRequest.Builder.class);
+                    StudentResponse.class, StudentResponse.Builder.class);
   }
 
   /**
-   * <code>string username = 1;</code>
-   * @return The username.
+   * <code>string name = 1;</code>
+   *
+   * @return The name.
    */
-  public String getUsername() {
-    Object ref = username_;
+  public String getName() {
+    Object ref = name_;
     if (ref instanceof String) {
       return (String) ref;
     } else {
       com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
       String s = bs.toStringUtf8();
-      username_ = s;
+      name_ = s;
       return s;
     }
   }
 
   /**
-   * <code>string username = 1;</code>
+   * <code>string name = 1;</code>
    *
-   * @return The bytes for username.
+   * @return The bytes for name.
    */
   public com.google.protobuf.ByteString
-  getUsernameBytes() {
-    Object ref = username_;
+  getNameBytes() {
+    Object ref = name_;
     if (ref instanceof String) {
       com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                       (String) ref);
-      username_ = b;
+      name_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  /**
+   * <code>int32 age = 2;</code>
+   *
+   * @return The age.
+   */
+  public int getAge() {
+    return age_;
+  }
+
+  /**
+   * <code>string city = 3;</code>
+   *
+   * @return The city.
+   */
+  public String getCity() {
+    Object ref = city_;
+    if (ref instanceof String) {
+      return (String) ref;
+    } else {
+      com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+      String s = bs.toStringUtf8();
+      city_ = s;
+      return s;
+    }
+  }
+
+  /**
+   * <code>string city = 3;</code>
+   *
+   * @return The bytes for city.
+   */
+  public com.google.protobuf.ByteString
+  getCityBytes() {
+    Object ref = city_;
+    if (ref instanceof String) {
+      com.google.protobuf.ByteString b =
+              com.google.protobuf.ByteString.copyFromUtf8(
+                      (String) ref);
+      city_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -280,8 +333,14 @@ public final class MyRequest extends
   @Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
           throws java.io.IOException {
-    if (!getUsernameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+    if (!getNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+    }
+    if (age_ != 0) {
+      output.writeInt32(2, age_);
+    }
+    if (!getCityBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, city_);
     }
     unknownFields.writeTo(output);
   }
@@ -294,8 +353,15 @@ public final class MyRequest extends
     }
 
     size = 0;
-    if (!getUsernameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+    if (!getNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+    }
+    if (age_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, age_);
+    }
+    if (!getCityBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, city_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -307,21 +373,48 @@ public final class MyRequest extends
     if (obj == this) {
       return true;
     }
-    if (!(obj instanceof MyRequest)) {
+    if (!(obj instanceof StudentResponse)) {
       return super.equals(obj);
     }
-    MyRequest other = (MyRequest) obj;
+    StudentResponse other = (StudentResponse) obj;
 
-    if (!getUsername()
-            .equals(other.getUsername())) {
+    if (!getName()
+            .equals(other.getName())) {
+      return false;
+    }
+    if (getAge()
+            != other.getAge()) {
+      return false;
+    }
+    if (!getCity()
+            .equals(other.getCity())) {
       return false;
     }
     return unknownFields.equals(other.unknownFields);
   }
 
   @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + AGE_FIELD_NUMBER;
+    hash = (53 * hash) + getAge();
+    hash = (37 * hash) + CITY_FIELD_NUMBER;
+    hash = (53 * hash) + getCity().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
+  @Override
   public Builder newBuilderForType() {
-    return newBuilder(); }
+    return newBuilder();
+  }
 
   @Override
   public Builder toBuilder() {
@@ -337,26 +430,30 @@ public final class MyRequest extends
   }
 
   @Override
-  public com.google.protobuf.Parser<MyRequest> getParserForType() {
+  public com.google.protobuf.Parser<StudentResponse> getParserForType() {
     return PARSER;
   }
 
   @Override
-  public MyRequest getDefaultInstanceForType() {
+  public StudentResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
   /**
-   * Protobuf type {@code com.shengsiyuan.netty.proto.MyRequest}
+   * Protobuf type {@code com.shengsiyuan.netty.proto.StudentResponse}
    */
   public static final class Builder extends
           com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.shengsiyuan.netty.proto.MyRequest)
-          MyRequestOrBuilder {
+          // @@protoc_insertion_point(builder_implements:com.shengsiyuan.netty.proto.StudentResponse)
+          StudentResponseOrBuilder {
 
-    private Object username_ = "";
+    private Object name_ = "";
 
-    // Construct using com.shengsiyuan.netty.proto.MyRequest.newBuilder()
+    private int age_;
+
+    private Object city_ = "";
+
+    // Construct using com.shengsiyuan.netty.proto.StudentResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -369,7 +466,15 @@ public final class MyRequest extends
 
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyRequest_descriptor;
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      StudentResponse.class, StudentResponse.Builder.class);
     }
 
     private void maybeForceBuilderInitialization() {
@@ -381,27 +486,29 @@ public final class MyRequest extends
     @Override
     public Builder clear() {
       super.clear();
-      username_ = "";
+      name_ = "";
+
+      age_ = 0;
+
+      city_ = "";
 
       return this;
     }
 
     @Override
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyRequest_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                      MyRequest.class, MyRequest.Builder.class);
+    public com.google.protobuf.Descriptors.Descriptor
+    getDescriptorForType() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
     }
 
     @Override
-    public MyRequest getDefaultInstanceForType() {
-      return MyRequest.getDefaultInstance();
+    public StudentResponse getDefaultInstanceForType() {
+      return StudentResponse.getDefaultInstance();
     }
 
     @Override
-    public MyRequest build() {
-      MyRequest result = buildPartial();
+    public StudentResponse build() {
+      StudentResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -409,9 +516,11 @@ public final class MyRequest extends
     }
 
     @Override
-    public MyRequest buildPartial() {
-      MyRequest result = new MyRequest(this);
-      result.username_ = username_;
+    public StudentResponse buildPartial() {
+      StudentResponse result = new StudentResponse(this);
+      result.name_ = name_;
+      result.age_ = age_;
+      result.city_ = city_;
       onBuilt();
       return result;
     }
@@ -419,12 +528,6 @@ public final class MyRequest extends
     @Override
     public Builder clone() {
       return super.clone();
-    }
-
-    @Override
-    public com.google.protobuf.Descriptors.Descriptor
-    getDescriptorForType() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyRequest_descriptor;
     }
 
     @Override
@@ -462,25 +565,27 @@ public final class MyRequest extends
 
     @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof MyRequest) {
-        return mergeFrom((MyRequest) other);
+      if (other instanceof StudentResponse) {
+        return mergeFrom((StudentResponse) other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    @Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
-    public Builder mergeFrom(MyRequest other) {
-      if (other == MyRequest.getDefaultInstance()) {
+    public Builder mergeFrom(StudentResponse other) {
+      if (other == StudentResponse.getDefaultInstance()) {
         return this;
       }
-      if (!other.getUsername().isEmpty()) {
-        username_ = other.username_;
+      if (!other.getName().isEmpty()) {
+        name_ = other.name_;
+        onChanged();
+      }
+      if (other.getAge() != 0) {
+        setAge(other.getAge());
+      }
+      if (!other.getCity().isEmpty()) {
+        city_ = other.city_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -489,15 +594,20 @@ public final class MyRequest extends
     }
 
     @Override
+    public final boolean isInitialized() {
+      return true;
+    }
+
+    @Override
     public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-      MyRequest parsedMessage = null;
+      StudentResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (MyRequest) e.getUnfinishedMessage();
+        parsedMessage = (StudentResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -508,16 +618,17 @@ public final class MyRequest extends
     }
 
     /**
-     * <code>string username = 1;</code>
-     * @return The username.
+     * <code>string name = 1;</code>
+     *
+     * @return The name.
      */
-    public String getUsername() {
-      Object ref = username_;
+    public String getName() {
+      Object ref = name_;
       if (!(ref instanceof String)) {
         com.google.protobuf.ByteString bs =
                 (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
-        username_ = s;
+        name_ = s;
         return s;
       } else {
         return (String) ref;
@@ -525,35 +636,35 @@ public final class MyRequest extends
     }
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string name = 1;</code>
      *
-     * @param value The username to set.
+     * @param value The name to set.
      * @return This builder for chaining.
      */
-    public Builder setUsername(
+    public Builder setName(
             String value) {
       if (value == null) {
         throw new NullPointerException();
       }
 
-      username_ = value;
+      name_ = value;
       onChanged();
       return this;
     }
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string name = 1;</code>
      *
-     * @return The bytes for username.
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
-    getUsernameBytes() {
-      Object ref = username_;
+    getNameBytes() {
+      Object ref = name_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
                         (String) ref);
-        username_ = b;
+        name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -561,31 +672,149 @@ public final class MyRequest extends
     }
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string name = 1;</code>
      *
+     * @param value The bytes for name to set.
      * @return This builder for chaining.
      */
-    public Builder clearUsername() {
-
-      username_ = getDefaultInstance().getUsername();
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>string username = 1;</code>
-     *
-     * @param value The bytes for username to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUsernameBytes(
+    public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
       if (value == null) {
         throw new NullPointerException();
       }
       checkByteStringIsUtf8(value);
 
-      username_ = value;
+      name_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string name = 1;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+
+      name_ = getDefaultInstance().getName();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>int32 age = 2;</code>
+     *
+     * @return The age.
+     */
+    public int getAge() {
+      return age_;
+    }
+
+    /**
+     * <code>int32 age = 2;</code>
+     *
+     * @param value The age to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAge(int value) {
+
+      age_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>int32 age = 2;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearAge() {
+
+      age_ = 0;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
+     * @return The city.
+     */
+    public String getCity() {
+      Object ref = city_;
+      if (!(ref instanceof String)) {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        city_ = s;
+        return s;
+      } else {
+        return (String) ref;
+      }
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
+     * @param value The city to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCity(
+            String value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+
+      city_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
+     * @return The bytes for city.
+     */
+    public com.google.protobuf.ByteString
+    getCityBytes() {
+      Object ref = city_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (String) ref);
+        city_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
+     * @param value The bytes for city to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCityBytes(
+            com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+
+      city_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearCity() {
+
+      city_ = getDefaultInstance().getCity();
       onChanged();
       return this;
     }
@@ -602,7 +831,7 @@ public final class MyRequest extends
       return super.mergeUnknownFields(unknownFields);
     }
 
-    // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.MyRequest)
+    // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.StudentResponse)
   }
 
 }

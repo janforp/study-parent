@@ -13,6 +13,15 @@ public final class MyResponse extends
 
   public static final int REALNAME_FIELD_NUMBER = 2;
 
+  // Use MyResponse.newBuilder() to construct.
+  private MyResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    super(builder);
+  }
+
+  private MyResponse() {
+    realname_ = "";
+  }
+
   private static final long serialVersionUID = 0L;
 
   // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.MyResponse)
@@ -36,15 +45,6 @@ public final class MyResponse extends
   private volatile Object realname_;
 
   private byte memoizedIsInitialized = -1;
-
-  // Use MyResponse.newBuilder() to construct.
-  private MyResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-    super(builder);
-  }
-
-  private MyResponse() {
-    realname_ = "";
-  }
 
   private MyResponse(
           com.google.protobuf.CodedInputStream input,
@@ -133,6 +133,20 @@ public final class MyResponse extends
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
+  @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + REALNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getRealname().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
   public static MyResponse parseFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
@@ -215,7 +229,6 @@ public final class MyResponse extends
 
   /**
    * <code>string realname = 2;</code>
-   *
    * @return The realname.
    */
   public String getRealname() {
@@ -307,23 +320,8 @@ public final class MyResponse extends
   }
 
   @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + REALNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getRealname().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-  @Override
   public Builder newBuilderForType() {
-    return newBuilder();
-  }
+    return newBuilder(); }
 
   @Override
   public Builder toBuilder() {
@@ -374,20 +372,11 @@ public final class MyResponse extends
       return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyResponse_descriptor;
     }
 
-    @Override
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyResponse_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                      MyResponse.class, MyResponse.Builder.class);
-    }
-
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
       }
     }
-
     @Override
     public Builder clear() {
       super.clear();
@@ -397,9 +386,11 @@ public final class MyResponse extends
     }
 
     @Override
-    public com.google.protobuf.Descriptors.Descriptor
-    getDescriptorForType() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyResponse_descriptor;
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      MyResponse.class, MyResponse.Builder.class);
     }
 
     @Override
@@ -427,6 +418,12 @@ public final class MyResponse extends
     @Override
     public Builder clone() {
       return super.clone();
+    }
+
+    @Override
+    public com.google.protobuf.Descriptors.Descriptor
+    getDescriptorForType() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_MyResponse_descriptor;
     }
 
     @Override
@@ -472,6 +469,11 @@ public final class MyResponse extends
       }
     }
 
+    @Override
+    public final boolean isInitialized() {
+      return true;
+    }
+
     public Builder mergeFrom(MyResponse other) {
       if (other == MyResponse.getDefaultInstance()) {
         return this;
@@ -483,11 +485,6 @@ public final class MyResponse extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
-    }
-
-    @Override
-    public final boolean isInitialized() {
-      return true;
     }
 
     @Override
@@ -511,7 +508,6 @@ public final class MyResponse extends
 
     /**
      * <code>string realname = 2;</code>
-     *
      * @return The realname.
      */
     public String getRealname() {
@@ -566,6 +562,18 @@ public final class MyResponse extends
     /**
      * <code>string realname = 2;</code>
      *
+     * @return This builder for chaining.
+     */
+    public Builder clearRealname() {
+
+      realname_ = getDefaultInstance().getRealname();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string realname = 2;</code>
+     *
      * @param value The bytes for realname to set.
      * @return This builder for chaining.
      */
@@ -581,18 +589,6 @@ public final class MyResponse extends
       return this;
     }
 
-    /**
-     * <code>string realname = 2;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearRealname() {
-
-      realname_ = getDefaultInstance().getRealname();
-      onChanged();
-      return this;
-    }
-
     @Override
     public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -604,6 +600,7 @@ public final class MyResponse extends
             final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
     }
+
 
     // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.MyResponse)
   }
