@@ -23,11 +23,9 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
     @Override
     public void getRealNameByUsername(MyRequest request, StreamObserver<MyResponse> responseObserver) {
         System.out.println("收到请求，userName = " + request.getUsername());
-        MyResponse response = MyResponse.newBuilder().setRealname("张三").build();
-
+        MyResponse response = MyResponse.newBuilder().setRealname(request.getUsername() + " 的 realName = " + request.getUsername()).build();
         //执行逻辑
         responseObserver.onNext(response);
-
         //告诉客户端，我处理完毕
         responseObserver.onCompleted();
     }
@@ -36,10 +34,9 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
     public void getStudentsByAge(StudentRequest request, StreamObserver<StudentResponse> responseObserver) {
         System.out.println("收到请求，根据 age 查询学生, age = " + request.getAge());
         responseObserver.onNext(StudentResponse.newBuilder().setName("张三").setAge(20).setCity("北京").build());
-        responseObserver.onNext(StudentResponse.newBuilder().setName("李四").setAge(30).setCity("天津").build());
-        responseObserver.onNext(StudentResponse.newBuilder().setName("王五").setAge(40).setCity("成都").build());
-        responseObserver.onNext(StudentResponse.newBuilder().setName("赵六").setAge(50).setCity("深圳").build());
-
+        responseObserver.onNext(StudentResponse.newBuilder().setName("李四").setAge(20).setCity("天津").build());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("王五").setAge(20).setCity("成都").build());
+        responseObserver.onNext(StudentResponse.newBuilder().setName("赵六").setAge(20).setCity("深圳").build());
         responseObserver.onCompleted();
     }
 
