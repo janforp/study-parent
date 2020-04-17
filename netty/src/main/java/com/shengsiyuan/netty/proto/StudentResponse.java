@@ -13,6 +13,16 @@ public final class StudentResponse extends
 
   public static final int NAME_FIELD_NUMBER = 1;
 
+  // Use StudentResponse.newBuilder() to construct.
+  private StudentResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    super(builder);
+  }
+
+  private StudentResponse() {
+    name_ = "";
+    city_ = "";
+  }
+
   public static final int AGE_FIELD_NUMBER = 2;
 
   public static final int CITY_FIELD_NUMBER = 3;
@@ -44,16 +54,6 @@ public final class StudentResponse extends
   private volatile Object city_;
 
   private byte memoizedIsInitialized = -1;
-
-  // Use StudentResponse.newBuilder() to construct.
-  private StudentResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-    super(builder);
-  }
-
-  private StudentResponse() {
-    name_ = "";
-    city_ = "";
-  }
 
   private StudentResponse(
           com.google.protobuf.CodedInputStream input,
@@ -108,6 +108,15 @@ public final class StudentResponse extends
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
+  }
+
+  /**
+   * <code>int32 age = 2;</code>
+   *
+   * @return The age.
+   */
+  public int getAge() {
+    return age_;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -165,6 +174,24 @@ public final class StudentResponse extends
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input, extensionRegistry);
+  }
+
+  @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + AGE_FIELD_NUMBER;
+    hash = (53 * hash) + getAge();
+    hash = (37 * hash) + CITY_FIELD_NUMBER;
+    hash = (53 * hash) + getCity().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
   }
 
   public static StudentResponse parseDelimitedFrom(java.io.InputStream input)
@@ -235,7 +262,6 @@ public final class StudentResponse extends
 
   /**
    * <code>string name = 1;</code>
-   *
    * @return The name.
    */
   public String getName() {
@@ -271,17 +297,7 @@ public final class StudentResponse extends
   }
 
   /**
-   * <code>int32 age = 2;</code>
-   *
-   * @return The age.
-   */
-  public int getAge() {
-    return age_;
-  }
-
-  /**
    * <code>string city = 3;</code>
-   *
    * @return The city.
    */
   public String getCity() {
@@ -358,7 +374,7 @@ public final class StudentResponse extends
     }
     if (age_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(2, age_);
+        .computeInt32Size(2, age_);
     }
     if (!getCityBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, city_);
@@ -371,7 +387,7 @@ public final class StudentResponse extends
   @Override
   public boolean equals(final Object obj) {
     if (obj == this) {
-      return true;
+     return true;
     }
     if (!(obj instanceof StudentResponse)) {
       return super.equals(obj);
@@ -394,27 +410,7 @@ public final class StudentResponse extends
   }
 
   @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + AGE_FIELD_NUMBER;
-    hash = (53 * hash) + getAge();
-    hash = (37 * hash) + CITY_FIELD_NUMBER;
-    hash = (53 * hash) + getCity().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-  @Override
-  public Builder newBuilderForType() {
-    return newBuilder();
-  }
+  public Builder newBuilderForType() { return newBuilder(); }
 
   @Override
   public Builder toBuilder() {
@@ -457,26 +453,6 @@ public final class StudentResponse extends
     private Builder() {
       maybeForceBuilderInitialization();
     }
-
-    private Builder(
-            BuilderParent parent) {
-      super(parent);
-      maybeForceBuilderInitialization();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-    getDescriptor() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
-    }
-
-    @Override
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                      StudentResponse.class, StudentResponse.Builder.class);
-    }
-
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
@@ -495,10 +471,10 @@ public final class StudentResponse extends
       return this;
     }
 
-    @Override
-    public com.google.protobuf.Descriptors.Descriptor
-    getDescriptorForType() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
+    private Builder(
+            BuilderParent parent) {
+      super(parent);
+      maybeForceBuilderInitialization();
     }
 
     @Override
@@ -530,6 +506,25 @@ public final class StudentResponse extends
       return super.clone();
     }
 
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      StudentResponse.class, StudentResponse.Builder.class);
+    }
+
+    @Override
+    public com.google.protobuf.Descriptors.Descriptor
+    getDescriptorForType() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor;
+    }
+
     @Override
     public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
@@ -557,6 +552,11 @@ public final class StudentResponse extends
     }
 
     @Override
+    public final boolean isInitialized() {
+      return true;
+    }
+
+    @Override
     public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             Object value) {
@@ -566,7 +566,7 @@ public final class StudentResponse extends
     @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof StudentResponse) {
-        return mergeFrom((StudentResponse) other);
+        return mergeFrom((StudentResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
@@ -594,11 +594,6 @@ public final class StudentResponse extends
     }
 
     @Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
-    @Override
     public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -619,7 +614,6 @@ public final class StudentResponse extends
 
     /**
      * <code>string name = 1;</code>
-     *
      * @return The name.
      */
     public String getName() {
@@ -633,6 +627,18 @@ public final class StudentResponse extends
       } else {
         return (String) ref;
       }
+    }
+
+    /**
+     * <code>string name = 1;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+
+      name_ = getDefaultInstance().getName();
+      onChanged();
+      return this;
     }
 
     /**
@@ -672,36 +678,6 @@ public final class StudentResponse extends
     }
 
     /**
-     * <code>string name = 1;</code>
-     *
-     * @param value The bytes for name to set.
-     * @return This builder for chaining.
-     */
-    public Builder setNameBytes(
-            com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-
-      name_ = value;
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>string name = 1;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearName() {
-
-      name_ = getDefaultInstance().getName();
-      onChanged();
-      return this;
-    }
-
-    /**
      * <code>int32 age = 2;</code>
      *
      * @return The age.
@@ -712,7 +688,6 @@ public final class StudentResponse extends
 
     /**
      * <code>int32 age = 2;</code>
-     *
      * @param value The age to set.
      * @return This builder for chaining.
      */
@@ -731,6 +706,24 @@ public final class StudentResponse extends
     public Builder clearAge() {
 
       age_ = 0;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string name = 1;</code>
+     *
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+
+      name_ = value;
       onChanged();
       return this;
     }
@@ -792,6 +785,18 @@ public final class StudentResponse extends
     /**
      * <code>string city = 3;</code>
      *
+     * @return This builder for chaining.
+     */
+    public Builder clearCity() {
+
+      city_ = getDefaultInstance().getCity();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string city = 3;</code>
+     *
      * @param value The bytes for city to set.
      * @return This builder for chaining.
      */
@@ -807,18 +812,6 @@ public final class StudentResponse extends
       return this;
     }
 
-    /**
-     * <code>string city = 3;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearCity() {
-
-      city_ = getDefaultInstance().getCity();
-      onChanged();
-      return this;
-    }
-
     @Override
     public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -827,9 +820,10 @@ public final class StudentResponse extends
 
     @Override
     public final Builder mergeUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
     }
+
 
     // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.StudentResponse)
   }

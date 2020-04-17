@@ -133,20 +133,6 @@ public final class MyRequest extends
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + USERNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getUsername().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
   public static MyRequest parseFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
@@ -188,14 +174,6 @@ public final class MyRequest extends
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-  public static Builder newBuilder(MyRequest prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
   public static MyRequest getDefaultInstance() {
@@ -277,6 +255,14 @@ public final class MyRequest extends
     return true;
   }
 
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+
+  public static Builder newBuilder(MyRequest prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
+
   @Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
           throws java.io.IOException {
@@ -320,8 +306,23 @@ public final class MyRequest extends
   }
 
   @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getUsername().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
+  @Override
   public Builder newBuilderForType() {
-    return newBuilder(); }
+    return newBuilder();
+  }
 
   @Override
   public Builder toBuilder() {
@@ -356,14 +357,14 @@ public final class MyRequest extends
 
     private Object username_ = "";
 
-    // Construct using com.shengsiyuan.netty.proto.MyRequest.newBuilder()
-    private Builder() {
-      maybeForceBuilderInitialization();
-    }
-
     private Builder(
             BuilderParent parent) {
       super(parent);
+      maybeForceBuilderInitialization();
+    }
+
+    // Construct using com.shengsiyuan.netty.proto.MyRequest.newBuilder()
+    private Builder() {
       maybeForceBuilderInitialization();
     }
 
@@ -377,7 +378,6 @@ public final class MyRequest extends
               .alwaysUseFieldBuilders) {
       }
     }
-
     @Override
     public Builder clear() {
       super.clear();
@@ -463,16 +463,11 @@ public final class MyRequest extends
     @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof MyRequest) {
-        return mergeFrom((MyRequest) other);
+        return mergeFrom((MyRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
-    }
-
-    @Override
-    public final boolean isInitialized() {
-      return true;
     }
 
     public Builder mergeFrom(MyRequest other) {
@@ -486,6 +481,11 @@ public final class MyRequest extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
+    }
+
+    @Override
+    public final boolean isInitialized() {
+      return true;
     }
 
     @Override
@@ -563,18 +563,6 @@ public final class MyRequest extends
     /**
      * <code>string username = 1;</code>
      *
-     * @return This builder for chaining.
-     */
-    public Builder clearUsername() {
-
-      username_ = getDefaultInstance().getUsername();
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>string username = 1;</code>
-     *
      * @param value The bytes for username to set.
      * @return This builder for chaining.
      */
@@ -590,6 +578,18 @@ public final class MyRequest extends
       return this;
     }
 
+    /**
+     * <code>string username = 1;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearUsername() {
+
+      username_ = getDefaultInstance().getUsername();
+      onChanged();
+      return this;
+    }
+
     @Override
     public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -601,6 +601,7 @@ public final class MyRequest extends
             final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
     }
+
 
     // @@protoc_insertion_point(builder_scope:com.shengsiyuan.netty.proto.MyRequest)
   }

@@ -10,7 +10,11 @@ service StudentService {
 
   rpc GetRealNameByUsername(MyRequest) returns (MyResponse) {}
 
+  //  客户端向服务端发送一个消息，服务端返回客户端一个迭代器
   rpc GetStudentsByAge(StudentRequest) returns (stream StudentResponse) {}
+
+  //客户端向服务端发送一个流式对象，服务端返回list
+  rpc GetStudentWrapperByAges(stream StudentRequest) returns (StuentResponseList) {}
 }
 
 message MyRequest {
@@ -33,4 +37,10 @@ message StudentResponse {
   string name = 1;
   int32 age = 2;
   string city = 3;
+}
+
+message StuentResponseList {
+
+  //集合
+  repeated StudentResponse studentResponse = 1;
 }

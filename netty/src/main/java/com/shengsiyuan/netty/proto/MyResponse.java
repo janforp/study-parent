@@ -133,20 +133,6 @@ public final class MyResponse extends
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + REALNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getRealname().hashCode();
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
   public static MyResponse parseFrom(java.io.InputStream input)
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
@@ -188,14 +174,6 @@ public final class MyResponse extends
           throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
             .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-  public static Builder newBuilder(MyResponse prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
   public static MyResponse getDefaultInstance() {
@@ -277,6 +255,14 @@ public final class MyResponse extends
     return true;
   }
 
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+
+  public static Builder newBuilder(MyResponse prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
+
   @Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
           throws java.io.IOException {
@@ -320,8 +306,23 @@ public final class MyResponse extends
   }
 
   @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + REALNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getRealname().hashCode();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
+  @Override
   public Builder newBuilderForType() {
-    return newBuilder(); }
+    return newBuilder();
+  }
 
   @Override
   public Builder toBuilder() {
@@ -356,14 +357,14 @@ public final class MyResponse extends
 
     private Object realname_ = "";
 
-    // Construct using com.shengsiyuan.netty.proto.MyResponse.newBuilder()
-    private Builder() {
-      maybeForceBuilderInitialization();
-    }
-
     private Builder(
             BuilderParent parent) {
       super(parent);
+      maybeForceBuilderInitialization();
+    }
+
+    // Construct using com.shengsiyuan.netty.proto.MyResponse.newBuilder()
+    private Builder() {
       maybeForceBuilderInitialization();
     }
 
@@ -462,16 +463,11 @@ public final class MyResponse extends
     @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof MyResponse) {
-        return mergeFrom((MyResponse) other);
+        return mergeFrom((MyResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
-    }
-
-    @Override
-    public final boolean isInitialized() {
-      return true;
     }
 
     public Builder mergeFrom(MyResponse other) {
@@ -485,6 +481,11 @@ public final class MyResponse extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
+    }
+
+    @Override
+    public final boolean isInitialized() {
+      return true;
     }
 
     @Override
@@ -562,18 +563,6 @@ public final class MyResponse extends
     /**
      * <code>string realname = 2;</code>
      *
-     * @return This builder for chaining.
-     */
-    public Builder clearRealname() {
-
-      realname_ = getDefaultInstance().getRealname();
-      onChanged();
-      return this;
-    }
-
-    /**
-     * <code>string realname = 2;</code>
-     *
      * @param value The bytes for realname to set.
      * @return This builder for chaining.
      */
@@ -585,6 +574,18 @@ public final class MyResponse extends
       checkByteStringIsUtf8(value);
 
       realname_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string realname = 2;</code>
+     *
+     * @return This builder for chaining.
+     */
+    public Builder clearRealname() {
+
+      realname_ = getDefaultInstance().getRealname();
       onChanged();
       return this;
     }

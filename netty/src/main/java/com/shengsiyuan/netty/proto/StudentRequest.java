@@ -13,6 +13,14 @@ public final class StudentRequest extends
 
   public static final int AGE_FIELD_NUMBER = 1;
 
+  // Use StudentRequest.newBuilder() to construct.
+  private StudentRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    super(builder);
+  }
+
+  private StudentRequest() {
+  }
+
   private static final long serialVersionUID = 0L;
 
   // @@protoc_insertion_point(class_scope:com.shengsiyuan.netty.proto.StudentRequest)
@@ -36,14 +44,6 @@ public final class StudentRequest extends
   private int age_;
 
   private byte memoizedIsInitialized = -1;
-
-  // Use StudentRequest.newBuilder() to construct.
-  private StudentRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-    super(builder);
-  }
-
-  private StudentRequest() {
-  }
 
   private StudentRequest(
           com.google.protobuf.CodedInputStream input,
@@ -174,14 +174,6 @@ public final class StudentRequest extends
             .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-  public static Builder newBuilder(StudentRequest prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
-
   public static StudentRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
@@ -213,7 +205,6 @@ public final class StudentRequest extends
 
   /**
    * <code>int32 age = 1;</code>
-   *
    * @return The age.
    */
   public int getAge() {
@@ -232,6 +223,14 @@ public final class StudentRequest extends
 
     memoizedIsInitialized = 1;
     return true;
+  }
+
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+
+  public static Builder newBuilder(StudentRequest prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
   @Override
@@ -345,20 +344,11 @@ public final class StudentRequest extends
       return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentRequest_descriptor;
     }
 
-    @Override
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentRequest_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                      StudentRequest.class, StudentRequest.Builder.class);
-    }
-
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
       }
     }
-
     @Override
     public Builder clear() {
       super.clear();
@@ -368,9 +358,11 @@ public final class StudentRequest extends
     }
 
     @Override
-    public com.google.protobuf.Descriptors.Descriptor
-    getDescriptorForType() {
-      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentRequest_descriptor;
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentRequest_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      StudentRequest.class, StudentRequest.Builder.class);
     }
 
     @Override
@@ -398,6 +390,12 @@ public final class StudentRequest extends
     @Override
     public Builder clone() {
       return super.clone();
+    }
+
+    @Override
+    public com.google.protobuf.Descriptors.Descriptor
+    getDescriptorForType() {
+      return StudentProto.internal_static_com_shengsiyuan_netty_proto_StudentRequest_descriptor;
     }
 
     @Override
@@ -443,6 +441,11 @@ public final class StudentRequest extends
       }
     }
 
+    @Override
+    public final boolean isInitialized() {
+      return true;
+    }
+
     public Builder mergeFrom(StudentRequest other) {
       if (other == StudentRequest.getDefaultInstance()) {
         return this;
@@ -453,11 +456,6 @@ public final class StudentRequest extends
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
-    }
-
-    @Override
-    public final boolean isInitialized() {
-      return true;
     }
 
     @Override
@@ -478,19 +476,15 @@ public final class StudentRequest extends
       }
       return this;
     }
-
     /**
      * <code>int32 age = 1;</code>
-     *
      * @return The age.
      */
     public int getAge() {
       return age_;
     }
-
     /**
      * <code>int32 age = 1;</code>
-     *
      * @param value The age to set.
      * @return This builder for chaining.
      */
@@ -500,10 +494,8 @@ public final class StudentRequest extends
       onChanged();
       return this;
     }
-
     /**
      * <code>int32 age = 1;</code>
-     *
      * @return This builder for chaining.
      */
     public Builder clearAge() {

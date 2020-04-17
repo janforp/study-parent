@@ -24,7 +24,6 @@ public interface StudentResponseOrBuilder extends
 
   /**
    * <code>int32 age = 2;</code>
-   *
    * @return The age.
    */
   int getAge();
@@ -42,5 +41,5 @@ public interface StudentResponseOrBuilder extends
    * @return The bytes for city.
    */
   com.google.protobuf.ByteString
-  getCityBytes();
+      getCityBytes();
 }

@@ -32,6 +32,13 @@ public final class StudentProto {
   com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internal_static_com_shengsiyuan_netty_proto_StudentResponse_fieldAccessorTable;
 
+  static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor;
+
+  static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_com_shengsiyuan_netty_proto_StuentResponseList_fieldAccessorTable;
+
   private static com.google.protobuf.Descriptors.FileDescriptor
           descriptor;
 
@@ -41,15 +48,20 @@ public final class StudentProto {
                     "roto\"\035\n\tMyRequest\022\020\n\010username\030\001 \001(\t\"\036\n\nM" +
                     "yResponse\022\020\n\010realname\030\002 \001(\t\"\035\n\016StudentRe" +
                     "quest\022\013\n\003age\030\001 \001(\005\":\n\017StudentResponse\022\014\n" +
-                    "\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022\014\n\004city\030\003 \001(\t2\357" +
-                    "\001\n\016StudentService\022j\n\025GetRealNameByUserna" +
-                    "me\022&.com.shengsiyuan.netty.proto.MyReque" +
-                    "st\032'.com.shengsiyuan.netty.proto.MyRespo" +
-                    "nse\"\000\022q\n\020GetStudentsByAge\022+.com.shengsiy" +
-                    "uan.netty.proto.StudentRequest\032,.com.she" +
-                    "ngsiyuan.netty.proto.StudentResponse\"\0000\001" +
-                    "B-\n\033com.shengsiyuan.netty.protoB\014Student" +
-                    "ProtoP\001b\006proto3"
+                    "\004name\030\001 \001(\t\022\013\n\003age\030\002 \001(\005\022\014\n\004city\030\003 \001(\t\"[" +
+                    "\n\022StuentResponseList\022E\n\017studentResponse\030" +
+                    "\001 \003(\0132,.com.shengsiyuan.netty.proto.Stud" +
+                    "entResponse2\354\002\n\016StudentService\022j\n\025GetRea" +
+                    "lNameByUsername\022&.com.shengsiyuan.netty." +
+                    "proto.MyRequest\032'.com.shengsiyuan.netty." +
+                    "proto.MyResponse\"\000\022q\n\020GetStudentsByAge\022+" +
+                    ".com.shengsiyuan.netty.proto.StudentRequ" +
+                    "est\032,.com.shengsiyuan.netty.proto.Studen" +
+                    "tResponse\"\0000\001\022{\n\027GetStudentWrapperByAges" +
+                    "\022+.com.shengsiyuan.netty.proto.StudentRe" +
+                    "quest\032/.com.shengsiyuan.netty.proto.Stue" +
+                    "ntResponseList\"\000(\001B-\n\033com.shengsiyuan.ne" +
+                    "tty.protoB\014StudentProtoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
             .internalBuildGeneratedFileFrom(descriptorData,
@@ -79,6 +91,12 @@ public final class StudentProto {
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_com_shengsiyuan_netty_proto_StudentResponse_descriptor,
             new String[] { "Name", "Age", "City", });
+    internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+    internal_static_com_shengsiyuan_netty_proto_StuentResponseList_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_com_shengsiyuan_netty_proto_StuentResponseList_descriptor,
+            new String[] { "StudentResponse", });
   }
 
   private StudentProto() {
