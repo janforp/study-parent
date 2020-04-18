@@ -48,13 +48,13 @@ public class GrpcClient {
     private static void getRealNameByUsername() {
         final StudentServiceGrpc.StudentServiceBlockingStub blockingStub = GrpcHelper.getBlockingStub();
         MyResponse myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("张三").build());
-        System.out.println(myResponse.getRealname());
+        System.out.println(myResponse.getRealName());
 
         myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("李四").build());
-        System.out.println(myResponse.getRealname());
+        System.out.println(myResponse.getRealName());
 
         myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("王五").build());
-        System.out.println(myResponse.getRealname());
+        System.out.println(myResponse.getRealName());
     }
 
     /**
@@ -120,7 +120,7 @@ public class GrpcClient {
             @Override
             public void onNext(StreamResponse value) {
                 //处理返回值
-                System.out.println(value.getRespnseInfo());
+                System.out.println(value.getResponseInfo());
             }
 
             @Override

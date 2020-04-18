@@ -4,21 +4,18 @@
 package com.shengsiyuan.netty.proto;
 
 public interface MyResponseOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.MyResponse)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.MyResponse)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>string realname = 2;</code>
-     *
-     * @return The realname.
-     */
-    String getRealname();
-
-    /**
-     * <code>string realname = 2;</code>
-     *
-     * @return The bytes for realname.
-     */
-    com.google.protobuf.ByteString
-    getRealnameBytes();
+  /**
+   * <code>string realName = 2;</code>
+   * @return The realName.
+   */
+  String getRealName();
+  /**
+   * <code>string realName = 2;</code>
+   * @return The bytes for realName.
+   */
+  com.google.protobuf.ByteString
+      getRealNameBytes();
 }

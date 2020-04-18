@@ -4,23 +4,20 @@
 package com.shengsiyuan.netty.proto;
 
 public interface StudentResponseOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StudentResponse)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StudentResponse)
+    com.google.protobuf.MessageOrBuilder {
 
   /**
    * <code>string name = 1;</code>
-   *
    * @return The name.
    */
   String getName();
-
   /**
    * <code>string name = 1;</code>
-   *
    * @return The bytes for name.
    */
   com.google.protobuf.ByteString
-  getNameBytes();
+      getNameBytes();
 
   /**
    * <code>int32 age = 2;</code>

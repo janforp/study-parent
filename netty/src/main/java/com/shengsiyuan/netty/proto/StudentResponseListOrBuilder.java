@@ -4,54 +4,50 @@
 package com.shengsiyuan.netty.proto;
 
 public interface StudentResponseListOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StudentResponseList)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StudentResponseList)
+    com.google.protobuf.MessageOrBuilder {
 
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
    */
   java.util.List<StudentResponse>
-  getStudentResponseList();
-
+      getStudentResponseList();
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
    */
   StudentResponse getStudentResponse(int index);
-
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
    */
   int getStudentResponseCount();
-
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
    */
   java.util.List<? extends StudentResponseOrBuilder>
-  getStudentResponseOrBuilderList();
-
+      getStudentResponseOrBuilderList();
   /**
    * <pre>
-   * 集合
+   *集合
    * </pre>
    *
    * <code>repeated .com.shengsiyuan.netty.proto.StudentResponse studentResponse = 1;</code>
    */
   StudentResponseOrBuilder getStudentResponseOrBuilder(
-          int index);
+      int index);
 }

@@ -27,7 +27,7 @@ message MyRequest {
 
 message MyResponse {
 
-  string realname = 2;
+  string realName = 2;
 }
 
 message StudentRequest {
@@ -55,5 +55,5 @@ message StreamRequest {
 
 message StreamResponse {
 
-  string respnse_info = 1;
+  string response_info = 1;
 }

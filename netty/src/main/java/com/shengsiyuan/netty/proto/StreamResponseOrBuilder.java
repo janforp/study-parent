@@ -4,21 +4,18 @@
 package com.shengsiyuan.netty.proto;
 
 public interface StreamResponseOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StreamResponse)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:com.shengsiyuan.netty.proto.StreamResponse)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>string respnse_info = 1;</code>
-     *
-     * @return The respnseInfo.
-     */
-    String getRespnseInfo();
-
-    /**
-     * <code>string respnse_info = 1;</code>
-     *
-     * @return The bytes for respnseInfo.
-     */
-    com.google.protobuf.ByteString
-    getRespnseInfoBytes();
+  /**
+   * <code>string response_info = 1;</code>
+   * @return The responseInfo.
+   */
+  String getResponseInfo();
+  /**
+   * <code>string response_info = 1;</code>
+   * @return The bytes for responseInfo.
+   */
+  com.google.protobuf.ByteString
+      getResponseInfoBytes();
 }

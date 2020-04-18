@@ -23,7 +23,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
     @Override
     public void getRealNameByUsername(MyRequest request, StreamObserver<MyResponse> responseObserver) {
         System.out.println("收到请求，userName = " + request.getUsername());
-        MyResponse response = MyResponse.newBuilder().setRealname(request.getUsername() + " 的 realName = " + request.getUsername()).build();
+        MyResponse response = MyResponse.newBuilder().setRealName(request.getUsername() + " 的 realName = " + request.getUsername()).build();
         //执行逻辑
         responseObserver.onNext(response);
         //告诉客户端，我处理完毕
@@ -60,8 +60,8 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
             public void onCompleted() {
                 StudentResponse response1 = StudentResponse.newBuilder().setName("张三").setAge(20).setCity("西安").build();
                 StudentResponse response2 = StudentResponse.newBuilder().setName("李四").setAge(30).setCity("广州").build();
-                StudentResponseList stuentResponseList = StudentResponseList.newBuilder().addStudentResponse(response1).addStudentResponse(response2).build();
-                responseObserver.onNext(stuentResponseList);
+                StudentResponseList studentResponseList = StudentResponseList.newBuilder().addStudentResponse(response1).addStudentResponse(response2).build();
+                responseObserver.onNext(studentResponseList);
                 responseObserver.onCompleted();
             }
         };
@@ -76,7 +76,7 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
                 System.out.println("biTalk");
                 System.out.println(value.getRequestInfo());
                 System.out.println("biTalk");
-                responseObserver.onNext(StreamResponse.newBuilder().setRespnseInfo(UUID.randomUUID().toString()).build());
+                responseObserver.onNext(StreamResponse.newBuilder().setResponseInfo(UUID.randomUUID().toString()).build());
             }
 
             @Override
