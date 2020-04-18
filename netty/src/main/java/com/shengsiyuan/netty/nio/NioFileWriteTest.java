@@ -21,8 +21,8 @@ public class NioFileWriteTest {
         ByteBuffer byteBuffer = ByteBuffer.allocate(512);
 
         byte[] message = "hello world welcome,how are you".getBytes();
-        for (int i = 0; i < message.length; i++) {
-            byteBuffer.put(message[i]);
+        for (byte b : message) {
+            byteBuffer.put(b);
         }
 
         byteBuffer.flip();
