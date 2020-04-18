@@ -8,3 +8,4 @@
 *.iml
 /netty/.gradle/
 .gradle/
+/grpc_end/node_modules/
