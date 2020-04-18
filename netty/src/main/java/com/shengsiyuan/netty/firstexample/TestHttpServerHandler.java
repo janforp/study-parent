@@ -36,7 +36,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, HttpObject httpObject) throws Exception {
         System.out.println(httpObject.getClass());
         System.out.println(channelHandlerContext.channel().remoteAddress());
-        //zhuchenjiandeMacBook-Pro:study-parent janita$ lsof -i:8899
+        //zhuchenjiandeMacBook-Pro:sp janita$ lsof -i:8899
         //COMMAND   PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
         //java    72847 janita   99u  IPv6 0x324a294a3b231069      0t0  TCP *:8899 (LISTEN)
         //java    72847 janita  103u  IPv6 0x324a294a358603a9      0t0  TCP localhost:8899->localhost:64084 (ESTABLISHED)

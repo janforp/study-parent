@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.janita.study</groupId>
-	<artifactId>study-parent</artifactId>
+	<artifactId>sp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>thread</module>
@@ -20,7 +20,7 @@
 	</modules>
     <packaging>pom</packaging>
 
-	<name>study-parent</name>
+	<name>sp</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
