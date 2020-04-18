@@ -8,12 +8,14 @@ import java.nio.channels.FileChannel;
 
 /**
  * 类说明：DirectBufferTest
+ * 由c函数 malloc 分配内存
+ *
+ * 实现了 零拷贝
  *
  * @author zhucj
  * @since 20200423
  */
 public class DirectBufferTest {
-
 
     public static void main(String[] args) throws IOException {
         testTwo();
