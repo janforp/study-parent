@@ -6,3 +6,5 @@
 /disruptor/disruptor.iml
 */target
 *.iml
+/netty/.gradle/
+.gradle/
