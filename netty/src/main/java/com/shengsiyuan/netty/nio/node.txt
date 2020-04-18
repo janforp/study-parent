@@ -1,0 +1,4 @@
+java.io中最核心的概念是 Stream,面向流编程，java中，一个Stream中要么是输入流，要么是输出流，不可能同时兼得
+
+java.nio中有三个核心概念：Selector，Channel,Buffer。zai java.nio中我们是面向块（block）或者缓冲区编程的。
+buffer本身就是一块内存，底层实现是一个数组，数据的读写都是通过buffer实现的
