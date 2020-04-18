@@ -1,5 +1,6 @@
 package com.shengsiyuan.netty.grpc.client;
 
+import com.shengsiyuan.netty.grpc.helper.GrpcHelper;
 import com.shengsiyuan.netty.proto.MyRequest;
 import com.shengsiyuan.netty.proto.MyResponse;
 import com.shengsiyuan.netty.proto.StreamRequest;
@@ -15,6 +16,7 @@ import io.grpc.stub.StreamObserver;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.HashMap;
 
 /**
  * 类说明：
@@ -24,18 +26,18 @@ import java.util.UUID;
  */
 public class GrpcClient {
 
-    public static void main(String[] args) throws InterruptedException {
-        int caseInt = Integer.valueOf(args[0]);
-        if (caseInt == 1) {
+    public static void main(final String[] args) throws InterruptedException {
+        final int caseInt = Integer.parseInt(args[0]);
+        if (1 == caseInt) {
             getRealNameByUsername();
         }
-        if (caseInt == 2) {
+        if (2 == caseInt) {
             getStudentsByAge();
         }
-        if (caseInt == 3) {
+        if (3 == caseInt) {
             getStudentWrapperByAges();
         }
-        if (caseInt == 4) {
+        if (4 == caseInt) {
             biTalk();
         }
     }
@@ -44,7 +46,7 @@ public class GrpcClient {
      * rpc GetRealNameByUsername(MyRequest) returns (MyResponse) {}
      */
     private static void getRealNameByUsername() {
-        StudentServiceGrpc.StudentServiceBlockingStub blockingStub = getBlockingStub();
+        final StudentServiceGrpc.StudentServiceBlockingStub blockingStub = GrpcHelper.getBlockingStub();
         MyResponse myResponse = blockingStub.getRealNameByUsername(MyRequest.newBuilder().setUsername("张三").build());
         System.out.println(myResponse.getRealname());
 
@@ -59,9 +61,9 @@ public class GrpcClient {
      * rpc GetStudentsByAge(StudentRequest) returns (stream StudentResponse) {}
      */
     private static void getStudentsByAge() {
-        StudentServiceGrpc.StudentServiceBlockingStub blockingStub = getBlockingStub();
+        final StudentServiceGrpc.StudentServiceBlockingStub blockingStub = GrpcHelper.getBlockingStub();
         //发生请求
-        Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(20).build());
+        final Iterator<StudentResponse> iterator = blockingStub.getStudentsByAge(StudentRequest.newBuilder().setAge(20).build());
 
         //处理响应
         iterator.forEachRemaining(studentResponse
@@ -72,7 +74,7 @@ public class GrpcClient {
      * rpc GetStudentWrapperByAges(stream StudentRequest) returns (StudentResponseList) {}
      */
     private static void getStudentWrapperByAges() throws InterruptedException {
-        StudentServiceGrpc.StudentServiceStub stub = getAsyncStub();
+        StudentServiceGrpc.StudentServiceStub stub = GrpcHelper.getAsyncStub();
 
         StreamObserver<StudentRequest> studentRequestStreamObserver
                 = stub.getStudentWrapperByAges(new StreamObserver<StudentResponseList>() {
@@ -108,17 +110,11 @@ public class GrpcClient {
         Thread.sleep(3000);
     }
 
-    private static StudentServiceGrpc.StudentServiceBlockingStub getBlockingStub() {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8899).usePlaintext().build();
-        StudentServiceGrpc.StudentServiceBlockingStub blockingStub = StudentServiceGrpc.newBlockingStub(managedChannel);
-        return blockingStub;
-    }
-
     /**
      * rpc BiTalk(stream StreamRequest) returns (stream StreamResponse) {}
      */
     private static void biTalk() throws InterruptedException {
-        StudentServiceGrpc.StudentServiceStub stub = getAsyncStub();
+        StudentServiceGrpc.StudentServiceStub stub = GrpcHelper.getAsyncStub();
         StreamObserver<StreamRequest> requestStreamObserver = stub.biTalk(new StreamObserver<StreamResponse>() {
 
             @Override
@@ -143,11 +139,5 @@ public class GrpcClient {
             Thread.sleep(1000);
         }
         Thread.sleep(3000);
-    }
-
-    private static StudentServiceGrpc.StudentServiceStub getAsyncStub() {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8899).usePlaintext().build();
-        StudentServiceGrpc.StudentServiceStub stub = StudentServiceGrpc.newStub(managedChannel);
-        return stub;
     }
 }
