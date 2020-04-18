@@ -24,7 +24,7 @@ import java.util.HashMap;
  * @author zhucj
  * @since 20200423
  */
-public class GrpcClient {
+public class JavaGRpcClient {
 
     public static void main(final String[] args) throws InterruptedException {
         final int caseInt = Integer.parseInt(args[0]);

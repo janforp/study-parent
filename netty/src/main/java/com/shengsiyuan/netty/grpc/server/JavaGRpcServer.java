@@ -12,12 +12,12 @@ import java.io.IOException;
  * @author zhucj
  * @since 20200423
  */
-public class GRpcServer {
+public class JavaGRpcServer {
 
     private Server server;
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        GRpcServer server = new GRpcServer();
+        JavaGRpcServer server = new JavaGRpcServer();
         server.start();
         //不加这段就会直接结束
         server.awaitTermination();
@@ -33,7 +33,7 @@ public class GRpcServer {
         //添加 JVM 钩子
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("关闭JVM");
-            GRpcServer.this.stop();
+            JavaGRpcServer.this.stop();
         }));
 
         System.out.println("启动函数完成");
