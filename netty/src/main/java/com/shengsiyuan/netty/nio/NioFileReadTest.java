@@ -14,7 +14,7 @@ import java.nio.channels.FileChannel;
 public class NioFileReadTest {
 
     public static void main(String[] args) throws IOException {
-        FileInputStream inputStream = new FileInputStream("/Users/janita/code/studyCode/sp/netty/src/main/java/com/shengsiyuan/netty/nio/NioTest2.txt");
+        FileInputStream inputStream = new FileInputStream("/Users/janita/code/studyCode/sp/netty/src/main/java/com/shengsiyuan/netty/nio/files/NioTest2.txt");
         FileChannel channel = inputStream.getChannel();
 
         //512字节
