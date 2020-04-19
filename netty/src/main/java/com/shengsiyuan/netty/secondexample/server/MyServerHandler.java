@@ -1,4 +1,4 @@
-package com.shengsiyuan.netty.secondexample;
+package com.shengsiyuan.netty.secondexample.server;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
