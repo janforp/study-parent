@@ -3,11 +3,13 @@ package com.shengsiyuan.netty.nio.selector.chat;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.nio.channels.SelectableChannel;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -43,7 +45,7 @@ public class NioChatServer {
                 int select = selector.select();
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
                 selectionKeys.forEach(selectionKey -> {
-                    final SocketChannel client;
+                    SocketChannel client;
                     try {
                         //如果是客户端向服务端连接的事件，则需要服务端接受连接，并且把通道对象注册到选择器
                         if (selectionKey.isAcceptable()) {
@@ -59,14 +61,26 @@ public class NioChatServer {
                         }
 
                         //有数据发送到服务端的事件
-                        if (selectionKey.isReadable()) {
-                            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+                        else if (selectionKey.isReadable()) {
+                            //因为只有该类型的channel注册了读取事件
+                            client = (SocketChannel) selectionKey.channel();
+                            ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                            //把客户端发来的数据读取到buffer中
+                            int count = client.read(readBuffer);
+                            if (count > 0) {
+                                readBuffer.flip();
+                                Charset utf8Charset = StandardCharsets.UTF_8;
+                                char[] chars = utf8Charset.decode(readBuffer).array();
+                                String receivedMessage = String.valueOf(chars);
+                                System.out.println(client + " : ");
+                                System.out.println(receivedMessage);
+                            }
+
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 });
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
