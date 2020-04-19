@@ -56,7 +56,7 @@ public class SelectorTest {
         System.out.println("获得客户端连接：" + socketChannel);
     }
 
-    private static void doRead(Selector selector, SelectionKey selectionKey, Iterator<SelectionKey> iterator) throws IOException {
+    private static void doRead(SelectionKey selectionKey, Iterator<SelectionKey> iterator) throws IOException {
         SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
         int bytesRead = 0;
         while (true) {
@@ -88,7 +88,7 @@ public class SelectorTest {
                 if (selectionKey.isAcceptable()) {
                     doAccept(selector, selectionKey, iterator);
                 } else if (selectionKey.isReadable()) {
-                    doRead(selector, selectionKey, iterator);
+                    doRead(selectionKey, iterator);
                 }
             }
         }
