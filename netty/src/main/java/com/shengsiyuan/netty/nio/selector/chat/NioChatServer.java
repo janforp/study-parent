@@ -17,13 +17,28 @@ import java.util.UUID;
 
 /**
  * 类说明：NioChatServer
+ * 通过 nc localhost 8899 当作客户端返回服务端即可测试
  *
  * @author zhucj
  * @since 20200423
  */
 public class NioChatServer {
 
-    private static Map<String, SocketChannel> clientMap = new HashMap<>();
+    private final static Map<String, SocketChannel> CLIENT_MAP = new HashMap<>();
+
+    public static void main(String[] args) throws IOException {
+        Selector selector = getSelector();
+        while (true) {
+            try {
+                //阻塞，直到关注的事件发生，返回关注的事件的数量
+                selector.select();
+                Set<SelectionKey> selectionKeySet = selector.selectedKeys();
+                handlerEvent(selector, selectionKeySet);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
     private static Selector getSelector() throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
@@ -41,8 +56,8 @@ public class NioChatServer {
         return selector;
     }
 
-    private static void doHandler(Selector selector, Set<SelectionKey> selectionKeys) {
-        selectionKeys.forEach(selectionKey -> {
+    private static void handlerEvent(Selector selector, Set<SelectionKey> selectionKeySet) {
+        selectionKeySet.forEach(selectionKey -> {
             SocketChannel client;
             try {
                 //如果是客户端向服务端连接的事件，则需要服务端接受连接，并且把通道对象注册到选择器
@@ -55,7 +70,7 @@ public class NioChatServer {
                     client.configureBlocking(false);
                     //注册到多路复用器,关注读事件
                     client.register(selector, SelectionKey.OP_READ);
-                    clientMap.put(uuid(), client);
+                    CLIENT_MAP.put(uuid(), client);
                 }
 
                 //有数据发送到服务端的事件
@@ -72,33 +87,38 @@ public class NioChatServer {
                         String receivedMessage = String.valueOf(chars);
                         System.out.println(client + " : ");
                         System.out.println(receivedMessage);
+                        //分发所有的消息
+                        dispatchMessage(client, receivedMessage);
                     }
-
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            selectionKeys.clear();
+            //TODO 这一行很重要 为什么？
+            selectionKeySet.clear();
         });
 
     }
 
-    public static void main(String[] args) throws IOException {
-        Selector selector = getSelector();
-        while (true) {
-            try {
-                //阻塞，直到关注的事件发生，返回关注的事件的数量
-                selector.select();
-                Set<SelectionKey> selectionKeys = selector.selectedKeys();
-                doHandler(selector, selectionKeys);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+    private static void dispatchMessage(SocketChannel sendClient, String receivedMessage) throws IOException {
+        String sendKey = null;
+        for (Map.Entry<String, SocketChannel> entry : CLIENT_MAP.entrySet()) {
+            String key = entry.getKey();
+            SocketChannel value = entry.getValue();
+            if (sendClient == value) {
+                sendKey = key;
             }
+        }
+        for (Map.Entry<String, SocketChannel> entry : CLIENT_MAP.entrySet()) {
+            SocketChannel socketChannel = entry.getValue();
+            ByteBuffer writeBuffer = ByteBuffer.allocate(512);
+            writeBuffer.put((sendKey + ": " + receivedMessage).getBytes());
+            writeBuffer.flip();
+            socketChannel.write(writeBuffer);
         }
     }
 
     private static String uuid() {
         return "【" + UUID.randomUUID().toString() + "】";
     }
-
 }
