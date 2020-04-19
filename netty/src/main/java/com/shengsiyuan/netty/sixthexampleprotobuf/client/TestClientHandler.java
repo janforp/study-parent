@@ -14,12 +14,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class TestClientHandler extends SimpleChannelInboundHandler<MyDataInfo.Person> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.Person msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.Person msg) {
 
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         //客户端向服务端发送数据/请求
         MyDataInfo.Person person = MyDataInfo.Person.newBuilder().setName("张三").setAge(20).setAddress("北京").build();
 
