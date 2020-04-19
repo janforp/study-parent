@@ -1,4 +1,4 @@
-package com.shengsiyuan.netty.nio;
+package com.shengsiyuan.netty.nio.heap;
 
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;

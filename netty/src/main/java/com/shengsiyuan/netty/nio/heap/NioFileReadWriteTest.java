@@ -1,4 +1,4 @@
-package com.shengsiyuan.netty.nio;
+package com.shengsiyuan.netty.nio.heap;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
