@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -30,8 +32,10 @@ public class NioChatClient {
                 Set<SelectionKey> selectionKeySet = selector.selectedKeys();
                 for (SelectionKey selectionKey : selectionKeySet) {
                     //可连接的，即建立连接事件
-                    handleEvent(selectionKey);
+                    handleEvent(selector,selectionKey);
                 }
+                //清除已经处理完的事件
+                selectionKeySet.clear();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -49,7 +53,7 @@ public class NioChatClient {
         return selector;
     }
 
-    private static void handleEvent(SelectionKey selectionKey) throws IOException {
+    private static void handleEvent(Selector selector, SelectionKey selectionKey) throws IOException {
         if (selectionKey.isConnectable()) {
             SocketChannel client = (SocketChannel) selectionKey.channel();
             //连接是否正在进行中
@@ -79,6 +83,15 @@ public class NioChatClient {
                         }
                     }
                 });
+            }
+            client.register(selector, SelectionKey.OP_READ);
+        } else if (selectionKey.isReadable()) {
+            SocketChannel client = (SocketChannel) selectionKey.channel();
+            ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
+            int read = client.read(writeBuffer);
+            if (read > 0) {
+                String msgFromServer = new String(writeBuffer.array(), 0, read);
+                System.out.println(msgFromServer);
             }
         }
     }
