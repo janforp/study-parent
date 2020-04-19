@@ -1,4 +1,4 @@
-package com.shengsiyuan.netty.thirdexample;
+package com.shengsiyuan.netty.thirdexample.server;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
