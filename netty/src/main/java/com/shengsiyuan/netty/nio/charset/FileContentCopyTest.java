@@ -27,7 +27,7 @@ public class FileContentCopyTest {
 
         MappedByteBuffer mappedByteBuffer = readChannel.map(FileChannel.MapMode.READ_ONLY, 0, readFile.length());
 
-        Charset charset = StandardCharsets.UTF_8;
+        Charset charset = StandardCharsets.ISO_8859_1;
         CharBuffer charBuffer = charset.decode(mappedByteBuffer);
         ByteBuffer writeBuffer = charset.encode(charBuffer);
         writeChannel.write(writeBuffer);
