@@ -11,5 +11,12 @@
 
     <artifactId>design-mode</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.14</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>

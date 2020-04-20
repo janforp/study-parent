@@ -8,5 +8,5 @@ package javainvocationhandler;
  */
 public interface People {
 
-    public String work();
+    String work();
 }

@@ -14,7 +14,7 @@ public class WorkHandler<T> implements InvocationHandler {
     /**
      * 代理类中的真实对象
      */
-    private T obj;
+    private final T obj;
 
     /**
      * 构造函数，给我们的真实对象赋值
