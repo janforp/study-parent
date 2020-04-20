@@ -8,13 +8,15 @@ import java.util.UUID;
 /**
  * 类说明：MyRemoteClient
  *
+ * 接口使用方
+ *
  * @author zhucj
  * @since 20200423
  */
-public class MyRemoteClient {
+public class RmiClient {
 
     public static void main(String[] args) {
-        new MyRemoteClient().go();
+        new RmiClient().go();
     }
 
     @SneakyThrows
