@@ -14,13 +14,13 @@ import java.lang.reflect.Method;
  */
 public class CgLibProxy implements MethodInterceptor {
 
-    private static CgLibProxy instance = new CgLibProxy();
+    private static final CgLibProxy INSTANCE = new CgLibProxy();
 
     private CgLibProxy() {
     }
 
     public static CgLibProxy getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     @SuppressWarnings("unchecked")
