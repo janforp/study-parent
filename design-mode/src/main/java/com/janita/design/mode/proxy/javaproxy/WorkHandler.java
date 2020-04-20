@@ -1,4 +1,4 @@
-package javainvocationhandler;
+package com.janita.design.mode.proxy.javaproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

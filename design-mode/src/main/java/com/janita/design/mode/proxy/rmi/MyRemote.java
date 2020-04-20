@@ -1,4 +1,4 @@
-package com.janita.design.mode.agency.rmi;
+package com.janita.design.mode.proxy.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
