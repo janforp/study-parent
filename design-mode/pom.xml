@@ -18,5 +18,10 @@
             <version>1.16.14</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
+        </dependency>
     </dependencies>
 </project>
