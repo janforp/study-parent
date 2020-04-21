@@ -1,0 +1,51 @@
+1.new NioEventLoopGroup(1)
+只是初始化一些参数，并没有真正的启动程序，如果不传1，则默认为当前处理器支持线程 * 2 个线程
+
+2.new ServerBootstrap()
+只是创建实例
+
+3.io.netty.bootstrap.ServerBootstrap.group(io.netty.channel.EventLoopGroup, io.netty.channel.EventLoopGroup)
+设置 acceptor 以及 client 线程
+io.netty.bootstrap.AbstractBootstrap.group：bossGroup
+io.netty.bootstrap.ServerBootstrap.childGroup：workGroup
+完成了2个属性的赋值而已
+
+4.volatile
+TODO 深入了解一下
+a.避免指令重排
+b.happen-before的保证
+
+5.io.netty.bootstrap.AbstractBootstrap.channel
+给属性 io.netty.bootstrap.AbstractBootstrap.channelFactory 赋值
+
+
+
+6.io.netty.channel.socket.nio.NioServerSocketChannel
+a.底层其实就是一个 nio selector
+
+
+7.io.netty.bootstrap.ServerBootstrap.childHandler(io.netty.channel.ChannelHandler)
+给属性 io.netty.bootstrap.ServerBootstrap.childHandler 赋值
+
+8.io.netty.bootstrap.AbstractBootstrap.bind(int)
+绑定一个端口
+
+9.当一个东西有 Future 的时候一般是异步的
+
+10.io.netty.channel.socket.nio.NioServerSocketChannel.newSocket 了解一下
+TODO 了解一下
+
+11.java的Future
+异步任务的执行，并且可以获取异步执行结果
+
+12.java.util.EventListener
+TODO
+
+13.netty的Future:io.netty.util.concurrent.Future
+优势：通过监听器直接通知客户端，而不用客户端调用get()等待
+
+14.
+15.
+16.
+17.
+18.

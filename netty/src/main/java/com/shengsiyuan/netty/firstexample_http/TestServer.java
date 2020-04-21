@@ -1,4 +1,4 @@
-package com.shengsiyuan.netty.firstexample;
+package com.shengsiyuan.netty.firstexample_http;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
