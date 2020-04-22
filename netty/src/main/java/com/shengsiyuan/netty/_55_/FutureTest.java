@@ -37,8 +37,3 @@ public class FutureTest {
         System.out.println("主线程继续做其他事情，不要等待查询返回");
     }
 }
-
-interface ArchiveSearcher {
-
-    String search(String target) throws InterruptedException;
-}

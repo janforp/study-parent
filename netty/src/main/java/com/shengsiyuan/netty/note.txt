@@ -44,8 +44,24 @@ TODO
 13.netty的Future:io.netty.util.concurrent.Future
 优势：通过监听器直接通知客户端，而不用客户端调用get()等待
 
-14.
-15.
+14.io.netty.bootstrap.AbstractBootstrap.initAndRegister
+
+
+
+
+15.io.netty.bootstrap.ServerBootstrap.init
+a.
+
+
+
+
+
+
 16.
+a.io.netty.channel.DefaultChannelId
+b.io.netty.channel.socket.nio.NioServerSocketChannel
+c.
+TODO
+
 17.
 18.
