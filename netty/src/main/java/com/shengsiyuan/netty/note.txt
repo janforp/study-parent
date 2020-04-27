@@ -65,3 +65,8 @@ TODO
 
 17.
 18.
+
+
+The selected-key set is the set of keys such that each
+key's channel was detected to be ready for at least one of the operations
+identified in the key's interest set during a prior selection operation

@@ -16,7 +16,8 @@
         <module>net-code</module>
         <module>servlet</module>
 		<module>design-mode</module>
-	</modules>
+        <module>java-base</module>
+    </modules>
     <packaging>pom</packaging>
 
 	<name>sp</name>
