@@ -10,8 +10,8 @@ package com.janita.design.mode.visit;
 public class NoticeMeetingVisitor implements Visitor {
 
     @Override
-    public void visit(Element element) {
-        Employee employee = (Employee) element;
+    public void visit(BaseElement baseElement) {
+        Employee employee = (Employee) baseElement;
         System.out.println(employee.getName() + ", 开会啦");
     }
 }

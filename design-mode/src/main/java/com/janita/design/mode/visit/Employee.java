@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Employee extends Element {
+public class Employee extends BaseElement {
 
     private String name;
 

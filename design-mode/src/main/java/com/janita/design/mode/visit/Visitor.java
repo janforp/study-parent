@@ -11,9 +11,9 @@ package com.janita.design.mode.visit;
 public interface Visitor {
 
     /**
-     * 访问基lei
+     * 访问基类
      *
-     * @param element 被访问者
+     * @param baseElement 被访问者
      */
-    void visit(Element element);
+    void visit(BaseElement baseElement);
 }

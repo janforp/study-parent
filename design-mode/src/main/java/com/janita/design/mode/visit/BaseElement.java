@@ -6,7 +6,7 @@ package com.janita.design.mode.visit;
  * @author zhucj
  * @since 20200423
  */
-public abstract class Element {
+public abstract class BaseElement {
 
     /**
      * 双重指派/双重分配

@@ -12,7 +12,7 @@ package com.janita.design.mode.visit;
 public class CompensationVisitor implements Visitor {
 
     @Override
-    public void visit(Element element) {
+    public void visit(BaseElement element) {
         Employee employee = (Employee) element;
         System.out.println(employee.getName() + "'的补偿金是： " +
                 (employee.getDegree() * employee.getVacationDays() * 10));
