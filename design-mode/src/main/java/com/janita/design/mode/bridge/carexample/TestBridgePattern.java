@@ -1,9 +1,8 @@
-package com.janita.design.mode.bridge;
+package com.janita.design.mode.bridge.carexample;
 
-import com.janita.design.mode.bridge.car.BigWheel;
-import com.janita.design.mode.bridge.car.Motoren;
-import com.janita.design.mode.bridge.product.CentralLocking;
-import com.janita.design.mode.bridge.product.GearLocking;
+import com.janita.design.mode.bridge.carexample.product.*;
+import com.janita.design.mode.bridge.carexample.car.*;
+
 
 /**
  * 类说明：TestBridgePattern

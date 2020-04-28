@@ -1,6 +1,6 @@
-package com.janita.design.mode.bridge.product;
+package com.janita.design.mode.bridge.carexample.product;
 
-import com.janita.design.mode.bridge.Product;
+import com.janita.design.mode.bridge.carexample.Product;
 
 /**
  * 类说明：CentralLocking

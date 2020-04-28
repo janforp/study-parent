@@ -1,4 +1,4 @@
-package com.janita.design.mode.bridge;
+package com.janita.design.mode.bridge.carexample;
 
 /**
  * 类说明：Car

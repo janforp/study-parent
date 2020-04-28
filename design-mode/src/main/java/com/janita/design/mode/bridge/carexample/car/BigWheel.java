@@ -1,21 +1,21 @@
-package com.janita.design.mode.bridge.car;
+package com.janita.design.mode.bridge.carexample.car;
 
-import com.janita.design.mode.bridge.Car;
-import com.janita.design.mode.bridge.Product;
+import com.janita.design.mode.bridge.carexample.Car;
+import com.janita.design.mode.bridge.carexample.Product;
 
 /**
- * 类说明：Motoren
+ * 类说明：BigWheel
  *
  * @author zhucj
  * @since 20200423
  */
-public class Motoren extends Car {
+public class BigWheel extends Car {
 
     private final Product product;
 
     private final String carType;
 
-    public Motoren(Product product, String carType) {
+    public BigWheel(Product product, String carType) {
         super(product, carType);
         this.product = product;
         this.carType = carType;
@@ -31,5 +31,4 @@ public class Motoren extends Car {
         product.produce();
         System.out.println("Modifing product " + product.productName() + " according to " + carType);
     }
-
 }
