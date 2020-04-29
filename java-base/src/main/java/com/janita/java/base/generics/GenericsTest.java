@@ -1,7 +1,6 @@
 package com.janita.java.base.generics;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 类说明：GenericsTest
@@ -19,35 +18,45 @@ public class GenericsTest {
         //list.add(1);
     }
 
-    public void doSth() {
-        //Box<Fruit> box = new Box<Orange>(new Orange());
-        Orange orange = new Orange();
-        Apple apple = new Apple();
-        Box<? extends Fruit> orangeBox = new Box<Orange>(orange);
-        Box<? extends Fruit> appleBox = new Box<Apple>(apple);
-
+    public void doRightSth() {
+        Box<? extends Fruit> orangeBox = new Box<Orange>(new Orange());
+        Box<? extends Fruit> appleBox = new Box<Apple>(new Apple());
         Fruit orangeBoxInstant = orangeBox.getInstant();
-        //TODO ?
-        //Orange oInst = orangeBox.getInstant();
         Fruit appleBoxInstant = appleBox.getInstant();
-        //TODO ?
-        //Apple appInst = appleBox.getInstant();
         Object fruit = appleBox.getInstant();
-
-        //TODO ?
-        //orangeBox.setInstant(orange);
-        //appleBox.setInstant(apple);
-
         Fruit orangeFruit = new Orange();
-        //TODO ?
-        //orangeBox.setInstant(orangeFruit);
     }
 
-    public void doSth2() {
+    public void doWrongSth() {
+        //TODO ?
+//        Box<Fruit> box = new Box<Orange>(new Orange());
+//        Box<? extends Fruit> orangeBox = new Box<Orange>(new Orange());
+//        Box<? extends Fruit> appleBox = new Box<Apple>(new Apple());
+//        Orange oInst = orangeBox.getInstant();
+//        Apple appInst = appleBox.getInstant();
+//        orangeBox.setInstant(new Orange());
+//        appleBox.setInstant(new Apple());
+//        orangeBox.setInstant(new Orange());
+//
+//        //上边界（Upper Bounded Wildcards）
+//        Box<? extends Fruit> box1 = new Box<Vegetables>(new Cabbage());
+//        Box<? extends Vegetables> box2 = new Box<Cabbage>(new Cabbage());
+//        Vegetables instant = box2.getInstant();
+
+    }
+
+    /**
+     * 通常的做法
+     */
+    public void doNormalSth() {
         Box<Fruit> boxWithApple = new Box<>(new Apple());
         boxWithApple.setInstant(new Apple());
         Fruit instant = boxWithApple.getInstant();
         Apple appleInstant = (Apple) boxWithApple.getInstant();
+    }
+
+    public void downBounded(List<? super Vegetables> list) {
+        list.add(new Cabbage());
     }
 }
 
@@ -68,7 +77,11 @@ class Box<T> {
     }
 }
 
-class Fruit {
+class Food {
+
+}
+
+class Fruit extends Food {
 
 }
 
@@ -77,5 +90,13 @@ class Orange extends Fruit {
 }
 
 class Apple extends Fruit {
+
+}
+
+class Vegetables extends Food {
+
+}
+
+class Cabbage extends Vegetables {
 
 }
