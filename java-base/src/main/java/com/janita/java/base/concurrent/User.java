@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 类说明：User
@@ -68,7 +69,33 @@ class CollectionModifyExceptionTest {
 
         Collection<User> users = new ArrayList<>();
 
-        //new ArrayList();
+        users.add(new User("张三",28));
+        users.add(new User("李四",25));
+        users.add(new User("王五",31));
+
+        Iterator<User> itrUsers = users.iterator();
+
+        while(itrUsers.hasNext()){
+            System.out.println("AAA");
+            User user = itrUsers.next();
+            //删除第一个跟最后一个报错，但是删除中间的不报错
+            if("王五".equals(user.getName())){
+                users.remove(user);
+                // itrUsers.remove();
+            } else {
+                System.out.println(user);
+            }
+        }
+    }
+}
+
+
+class CopyOnWriteArrayListTest {
+
+    public static void main(String[] args) {
+
+        Collection<User> users = new CopyOnWriteArrayList<>();
+
         users.add(new User("张三",28));
         users.add(new User("李四",25));
         users.add(new User("王五",31));
