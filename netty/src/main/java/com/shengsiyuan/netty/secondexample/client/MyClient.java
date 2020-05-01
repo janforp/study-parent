@@ -24,10 +24,12 @@ public class MyClient {
                     .group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
                     .handler(new MyClientInitializer());
-            ChannelFuture channelFuture = bootstrap.connect("localhost", 8899).sync();
+
+            ChannelFuture channelFuture = bootstrap.connect("localhost", 8899);
+            channelFuture.sync();
             Channel channel = channelFuture.channel();
             channel.closeFuture().sync();
-        }finally {
+        } finally {
             eventLoopGroup.shutdownGracefully();
         }
     }
