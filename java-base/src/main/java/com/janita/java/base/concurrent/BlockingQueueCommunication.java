@@ -18,7 +18,7 @@ public class BlockingQueueCommunication {
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
         BlockingQueueCommunicationHelper helper = new BlockingQueueCommunicationHelper();
-        Runnable left = () -> {
+        Runnable leftThread = () -> {
             while (true) {
                 try {
                     helper.leftTask();
@@ -28,7 +28,7 @@ public class BlockingQueueCommunication {
             }
         };
 
-        Runnable right = () -> {
+        Runnable rightThread = () -> {
             while (true) {
                 try {
                     helper.rightTask();
@@ -38,8 +38,8 @@ public class BlockingQueueCommunication {
             }
         };
 
-        threadPool.execute(left);
-        threadPool.execute(right);
+        threadPool.execute(leftThread);
+        threadPool.execute(rightThread);
     }
 }
 
