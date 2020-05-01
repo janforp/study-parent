@@ -43,3 +43,23 @@ public class SemaphoreTest {
         }
     }
 }
+
+class SemaphoreTest2 {
+
+    public static void main(String[] args) throws InterruptedException {
+        //如果是 1 则可以实现同步的效果，通过另外一个构造器，可以实现公平性
+        Semaphore semaphore = new Semaphore(3);
+        semaphore.acquire();
+        semaphore.acquire();
+        semaphore.acquire();
+
+        //此处会阻塞
+        semaphore.acquire();
+
+        semaphore.acquire();
+        semaphore.release();
+        semaphore.release();
+        semaphore.release();
+        semaphore.release();
+    }
+}
