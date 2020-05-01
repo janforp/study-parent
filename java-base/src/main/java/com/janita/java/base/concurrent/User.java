@@ -79,9 +79,9 @@ class CollectionModifyExceptionTest {
             System.out.println("AAA");
             User user = itrUsers.next();
             //删除第一个跟最后一个报错，但是删除中间的不报错
-            if("张三".equals(user.getName())){
+            if("王五".equals(user.getName())){
                 users.remove(user);
-//                itrUsers.remove();
+                // itrUsers.remove();
             } else {
                 System.out.println(user);
             }
