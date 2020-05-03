@@ -34,6 +34,7 @@ public class MyServer {
                     .childHandler(new MyServerInitializer());
             //上面的代码都是赋值，也就初始化对象
 
+            //bind中启动
             ChannelFuture channelFuture = serverBootstrap.bind(8899);
             channelFuture = channelFuture.sync();
 
