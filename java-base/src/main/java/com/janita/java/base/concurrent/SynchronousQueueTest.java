@@ -41,19 +41,20 @@ public class SynchronousQueueTest {
             queue.put(input);
         }
     }
-}
 
-class TestDo {
+    static class TestDo {
 
-    public static String doSome(String input) {
+        public static String doSome(String input) {
 
-        try {
+            try {
 
-            Thread.sleep(1000);
+                Thread.sleep(1000);
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return input + ":" + (System.currentTimeMillis() / 1000);
         }
-        return input + ":" + (System.currentTimeMillis() / 1000);
     }
+
 }
