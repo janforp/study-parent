@@ -4,5 +4,6 @@ EventLoopGroup
 
 NioServerSocketChannel
 
-ChannelPipeline
+ChannelPipeline(每个管道中有一个处理器，请求过来的时候，会按顺序去执行这些处理器)
 
+NioServerSocketChannelConfig
