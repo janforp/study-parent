@@ -4,6 +4,24 @@ EventLoopGroup
 
 NioServerSocketChannel
 
-ChannelPipeline(每个管道中有一个处理器，请求过来的时候，会按顺序去执行这些处理器)
+ChannelPipeline(每个管道中有一个处理器，请求过来的时候，会按顺序去执行这些处理器，也就是 Handler),其中存放的是一个又一个的ChannelHandlerContext对象，而ChannelHandlerContext中存的是一个又一个的ChannelHandler对象
 
-NioServerSocketChannelConfig
+ChannelHandlerContext(是ChannelHandler和ChannelPipeline之间交互的桥梁和纽带)(有AbstractChannelHandlerContext以及DefaultChannelHandlerContext)，通过该对象可以拿到处理器，pipeline，等对象
+
+ChannelHandler
+
+NioServerSocketChannelConfig（他维护了我们设置的 option ）
+
+DefaultAttributeMap（代理模式？）
+
+ChannelConfig
+
+ChannelOption(TCP的一些配置)
+
+AttributeKey(业务数据的传递)
+
+ChannelInitializer(一个简化开发的对象，常用的对象，一个入站的处理器，继承该类之后，可以在 initChannel 方法中添加很多处理器)
+使用ChannelInitializer一次性添加多个handler，然后再删除该 ChannelInitializer 实例（从pipeline中删除）
+
+TODO FastThreadLocal 是如何提供性能的？
+

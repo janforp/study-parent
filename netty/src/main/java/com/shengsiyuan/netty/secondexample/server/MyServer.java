@@ -27,7 +27,9 @@ public class MyServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap
-                    .group(parentGroup,childGroup)
+                    .group(parentGroup, childGroup)
+                    //.option(ChannelOption.SO_RCVBUF, 123)
+                    //.attr()
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.WARN))
                     //给worker，如果用handler，则给boss
@@ -41,7 +43,7 @@ public class MyServer {
             Channel channel = channelFuture.channel();
             ChannelFuture closeFuture = channel.closeFuture();
             closeFuture.sync();
-        }finally {
+        } finally {
             parentGroup.shutdownGracefully();
             childGroup.shutdownGracefully();
         }
