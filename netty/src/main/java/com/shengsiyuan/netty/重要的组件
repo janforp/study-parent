@@ -25,3 +25,9 @@ ChannelInitializer(一个简化开发的对象，常用的对象，一个入站�
 
 TODO FastThreadLocal 是如何提供性能的？
 
+https://netty.io/wiki/new-and-noteworthy-in-4.1.html  : ChannelHandlerContext.attr(..) == Channel.attr(..)
+
+
+
+
+AbstractBootstrapConfig(ServerBootstrapConfig 以及 BootstrapConfig)
