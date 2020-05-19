@@ -31,7 +31,9 @@ public class NioChatServer {
         while (true) {
             try {
                 //阻塞，直到关注的事件发生，返回关注的事件的数量
-                selector.select();
+                //select() 方法仅仅是简单地将就绪的 IO 操作放到 selectedKeys 集合中, 因此如果我们从 selectedKeys 获取到一个 key,
+                // 但是没有将它删除, 那么下一次 select 时, 这个 key 所对应的 IO 事件还在 selectedKeys 中.
+                int select = selector.select();
                 Set<SelectionKey> selectionKeySet = selector.selectedKeys();
                 handlerEvent(selector, selectionKeySet);
             } catch (Exception ex) {
@@ -52,7 +54,7 @@ public class NioChatServer {
         Selector selector = Selector.open();
         //把 ServerSocketChannel 注册到 selector
         //关注连接事件,因为开始肯定是连接，只有建立连接之后才能发生读写事件
-        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT, null);
         return selector;
     }
 
@@ -95,6 +97,8 @@ public class NioChatServer {
                 ex.printStackTrace();
             }
             //TODO 这一行很重要 为什么？
+            //在每次迭代时, 我们都调用 "keyIterator.remove()" 将这个 key 从迭代器中删除, 因为 select() 方法仅仅是简单地将就绪的 IO 操作放到 selectedKeys 集合中,
+            // 因此如果我们从 selectedKeys 获取到一个 key, 但是没有将它删除, 那么下一次 select 时, 这个 key 所对应的 IO 事件还在 selectedKeys 中.
             selectionKeySet.clear();
         });
 
