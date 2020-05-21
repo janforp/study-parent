@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
-import static com.janita.java.base.thinkinjava.Print.print;
+import static com.janita.java.base.thinkinjava._15_genericity.util.Print.print;
 
 /**
  * 类说明：ShowMethods

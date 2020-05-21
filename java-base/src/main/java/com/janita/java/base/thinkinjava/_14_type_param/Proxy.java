@@ -3,7 +3,7 @@ package com.janita.java.base.thinkinjava._14_type_param;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import static com.janita.java.base.thinkinjava.Print.print;
+import static com.janita.java.base.thinkinjava._15_genericity.util.Print.print;
 
 /**
  * 类说明：Proxy

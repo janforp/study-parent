@@ -1,6 +1,6 @@
 package com.janita.java.base.thinkinjava._15_genericity.erased;
 
-import static com.janita.java.base.thinkinjava.Print.print;
+import static com.janita.java.base.thinkinjava._15_genericity.util.Print.print;
 
 /**
  * 类说明：InstantiateGenericType
