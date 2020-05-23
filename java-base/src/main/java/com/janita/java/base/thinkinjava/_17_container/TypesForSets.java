@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * Set:元素根据 equals() 方法确定唯一性
  * HashSet:元素根据 hashCode() 实现快速查询
  * TreeSet:元素还必须实现 Comparable 接口实现排序功能
- * LinkedHashSet 具有 HashSet 的查询速度，并且具有顺序，元素也必须定义 hashCode() 方法
+ * LinkedHashSet 具有 HashSet 的查询速度，并且具有顺序，元素也必须定义 hashCode() 方法,他是按插入顺序保持
  *
  * @author zhucj
  * @since 20200528
@@ -26,9 +26,21 @@ class SetTypeEquals {
         i = n;
     }
 
+    /**
+     * 其实可以只写一行：
+     *
+     * return o instanceof SetTypeEquals && (this.i == ((SetTypeEquals) o).i);
+     */
     @Override
     public boolean equals(Object o) {
-        return o instanceof SetTypeEquals && (i == ((SetTypeEquals) o).i);
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof SetTypeEquals)) {
+            return false;
+        }
+        int otherI = ((SetTypeEquals) o).i;
+        return this.i == otherI;
     }
 
     @Override
@@ -57,6 +69,8 @@ class TreeTypeEqualsAndComparable extends SetTypeEquals implements Comparable<Tr
 
     @Override
     public int compareTo(TreeTypeEqualsAndComparable arg) {
+        //(x < y) ? -1 : ((x == y) ? 0 : 1);
+        //TODO 为什么不直接 return x - y ?因为可能会导致溢出
         return (Integer.compare(arg.i, this.i));
     }
 }
