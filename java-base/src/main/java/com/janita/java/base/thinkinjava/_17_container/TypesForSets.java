@@ -26,10 +26,12 @@ class SetTypeEquals {
         i = n;
     }
 
+    @Override
     public boolean equals(Object o) {
         return o instanceof SetTypeEquals && (i == ((SetTypeEquals) o).i);
     }
 
+    @Override
     public String toString() {
         return Integer.toString(i);
     }
@@ -41,6 +43,7 @@ class HashTypeEqualsAndHasCode extends SetTypeEquals {
         super(n);
     }
 
+    @Override
     public int hashCode() {
         return i;
     }
@@ -52,6 +55,7 @@ class TreeTypeEqualsAndComparable extends SetTypeEquals implements Comparable<Tr
         super(n);
     }
 
+    @Override
     public int compareTo(TreeTypeEqualsAndComparable arg) {
         return (Integer.compare(arg.i, this.i));
     }
