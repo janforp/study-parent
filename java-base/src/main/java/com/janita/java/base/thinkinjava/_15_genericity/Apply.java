@@ -1,6 +1,6 @@
 package com.janita.java.base.thinkinjava._15_genericity;
 
-import com.janita.java.base.thinkinjava._15_genericity.util.Print;
+import com.janita.java.base.thinkinjava.util.Print;
 
 import java.lang.reflect.*;
 import java.util.*;

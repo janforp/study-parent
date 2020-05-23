@@ -8,7 +8,7 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.janita.java.base.thinkinjava._15_genericity.util.Tuple.tuple;
+import static com.janita.java.base.thinkinjava.util.Tuple.tuple;
 
 /**
  * 类说明：DynamicProxyMixin

@@ -1,4 +1,4 @@
-package com.janita.java.base.thinkinjava._15_genericity.util;
+package com.janita.java.base.thinkinjava.util;
 
 import java.io.PrintStream;
 

@@ -1,6 +1,6 @@
 package com.janita.java.base.thinkinjava._14_type_param;
 
-import static com.janita.java.base.thinkinjava._15_genericity.util.Print.print;
+import static com.janita.java.base.thinkinjava.util.Print.print;
 
 /**
  * 类说明：InterfaceViolation
