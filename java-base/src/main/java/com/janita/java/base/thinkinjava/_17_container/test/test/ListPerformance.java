@@ -1,7 +1,8 @@
-package com.janita.java.base.thinkinjava._17_container;
+package com.janita.java.base.thinkinjava._17_container.test.test;
 
 import com.janita.java.base.thinkinjava._16_array.CountingGenerator;
 import com.janita.java.base.thinkinjava._16_array.Generated;
+import com.janita.java.base.thinkinjava._17_container.CountingIntegerList;
 import com.janita.java.base.thinkinjava._17_container.test.Test;
 import com.janita.java.base.thinkinjava._17_container.test.TestParam;
 import com.janita.java.base.thinkinjava._17_container.test.Tester;
