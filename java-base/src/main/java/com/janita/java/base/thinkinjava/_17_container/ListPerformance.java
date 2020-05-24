@@ -17,6 +17,12 @@ import java.util.Vector;
 /**
  * 类说明：ListPerformance
  *
+ * --- Array as List ---
+ *  size     get     set
+ *    10      13      15
+ *   100      12      14
+ *  1000      12      12
+ * 10000      17      13
  * --------------------- ArrayList ---------------------
  *  size     add     get     set iterAdd  insert  remove
  *    10      59      12      16      28     193     180
@@ -29,6 +35,18 @@ import java.util.Vector;
  *   100       7      39      37       9      83      20
  *  1000       9     340     339      46      40      12
  * 10000      11    3734    3787      20      45      16
+ * ----------------------- Vector -----------------------
+ *  size     add     get     set iterAdd  insert  remove
+ *    10      65      12      13      28     187      51
+ *   100      12      12      13      17     185      25
+ *  1000      14      13      13      39     128      65
+ * 10000       9      12      13     307     817     364
+ * -------------------- Queue tests --------------------
+ *  size    addFirst     addLast     rmFirst      rmLast
+ *    10          48          32          53          58
+ *   100          12          12          13          14
+ *  1000           9          10          12          14
+ * 10000          15          17          16           9
  *
  * @author zhucj
  * @since 20200528
