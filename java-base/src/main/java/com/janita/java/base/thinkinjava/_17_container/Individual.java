@@ -1,8 +1,11 @@
 package com.janita.java.base.thinkinjava._17_container;
 
+import com.janita.java.base.thinkinjava.typeinfo.pets.Person;
 import com.janita.java.base.thinkinjava.typeinfo.pets.Pet;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -75,9 +78,11 @@ class IndividualTest {
 
     public static void main(String[] args) {
         Set<Individual> pets = new TreeSet<Individual>();
-        for (List<? extends Pet> lp :
-                MapOfList.petPeople.values()) {
-            for (Pet p : lp) {
+
+        Map<Person, List<? extends Pet>> personListMap = MapOfList.petPeople;
+        Collection<List<? extends Pet>> listCollection = personListMap.values();
+        for (List<? extends Pet> petList : listCollection) {
+            for (Pet p : petList) {
                 pets.add(p);
             }
         }
