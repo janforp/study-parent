@@ -48,6 +48,7 @@ public final class Directory {
             dirs.addAll(other.dirs);
         }
 
+        @Override
         public String toString() {
             return "dirs: " + PPrint.pformat(dirs) + "\n\nfiles: " + PPrint.pformat(files);
         }
@@ -66,12 +67,17 @@ public final class Directory {
     }
 
     public static TreeInfo walk(String start) {
-        return recurseDirs(new File(start), ".*");
+        File file = new File(start);
+        return recurseDirs(file, ".*");
     }
 
     static TreeInfo recurseDirs(File startDir, String regex) {
         TreeInfo result = new TreeInfo();
-        for (File item : startDir.listFiles()) {
+        File[] listFiles = startDir.listFiles();
+        if (listFiles == null) {
+            return result;
+        }
+        for (File item : listFiles) {
             if (item.isDirectory()) {
                 result.dirs.add(item);
                 result.addAll(recurseDirs(item, regex));
@@ -86,7 +92,7 @@ public final class Directory {
     // Simple validation test:
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println(walk("."));
+            System.out.println(walk("/Users/janita/code/studyCode/sp/java-base/src/main/java/com/janita/java/base/thinkinjava/_19_io"));
         } else {
             for (String arg : args) {
                 System.out.println(walk(arg));
