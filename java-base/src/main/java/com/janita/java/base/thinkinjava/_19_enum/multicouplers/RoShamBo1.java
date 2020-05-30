@@ -1,10 +1,10 @@
-package com.janita.java.base.thinkinjava._19_enum.roShamBo1;
+package com.janita.java.base.thinkinjava._19_enum.multicouplers;
 
 import java.util.Random;
 
-import static com.janita.java.base.thinkinjava._19_enum.roShamBo1.Outcome.DRAW;
-import static com.janita.java.base.thinkinjava._19_enum.roShamBo1.Outcome.LOSE;
-import static com.janita.java.base.thinkinjava._19_enum.roShamBo1.Outcome.WIN;
+import static com.janita.java.base.thinkinjava._19_enum.multicouplers.Outcome.DRAW;
+import static com.janita.java.base.thinkinjava._19_enum.multicouplers.Outcome.LOSE;
+import static com.janita.java.base.thinkinjava._19_enum.multicouplers.Outcome.WIN;
 
 /**
  * RoShamBo1
@@ -60,6 +60,7 @@ class Scissors implements Item {
     }
 
     @Override
+
     public Outcome eval(Paper p) {
         return LOSE;
     }

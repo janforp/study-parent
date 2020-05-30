@@ -1,4 +1,4 @@
-package com.janita.java.base.thinkinjava._19_enum.roShamBo1;
+package com.janita.java.base.thinkinjava._19_enum.multicouplers;
 
 /**
  * Outcome
