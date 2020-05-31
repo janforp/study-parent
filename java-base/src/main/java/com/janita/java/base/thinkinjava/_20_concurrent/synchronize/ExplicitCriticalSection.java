@@ -1,4 +1,4 @@
-package com.janita.java.base.thinkinjava._20_concurrent;
+package com.janita.java.base.thinkinjava._20_concurrent.synchronize;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -48,9 +48,9 @@ class ExplicitPairManager2 extends PairManager {
 
 /**
  * TODO 为什么我的会报错？
- * Exception in thread "pool-1-thread-4" com.janita.java.base.thinkinjava._20_concurrent.Pair$PairValuesNotEqualException: Pair values not equal: x: 4, y: 3
- * at com.janita.java.base.thinkinjava._20_concurrent.Pair.checkState(CriticalSection.java:61)
- * at com.janita.java.base.thinkinjava._20_concurrent.PairChecker.run(CriticalSection.java:148)
+ * Exception in thread "pool-1-thread-4" com.janita.java.base.thinkinjava._20_concurrent.synchronize.Pair$PairValuesNotEqualException: Pair values not equal: x: 4, y: 3
+ * at com.janita.java.base.thinkinjava._20_concurrent.synchronize.Pair.checkState(CriticalSection.java:61)
+ * at com.janita.java.base.thinkinjava._20_concurrent.synchronize.PairChecker.run(CriticalSection.java:148)
  * at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
  * at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
  * at java.lang.Thread.run(Thread.java:748)

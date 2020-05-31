@@ -1,4 +1,4 @@
-package com.janita.java.base.thinkinjava._20_concurrent;
+package com.janita.java.base.thinkinjava._20_concurrent.synchronize;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 class Pair { // Not thread-safe
 
