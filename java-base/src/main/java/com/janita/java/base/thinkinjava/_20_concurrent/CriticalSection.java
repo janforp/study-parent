@@ -1,8 +1,3 @@
-//: concurrency/CriticalSection.java
-// Synchronizing blocks instead of entire methods. Also
-// demonstrates protection of a non-thread-safe class
-// with a thread-safe one.
-
 package com.janita.java.base.thinkinjava._20_concurrent;
 
 import java.util.ArrayList;
@@ -180,7 +175,4 @@ public class CriticalSection {
                 pman2 = new PairManager2();
         testApproaches(pman1, pman2);
     }
-} /* Output: (Sample)
-pm1: Pair: x: 15, y: 15 checkCounter = 272565
-pm2: Pair: x: 16, y: 16 checkCounter = 3956974
-*///:~
+}
