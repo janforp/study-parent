@@ -1,6 +1,7 @@
 package com.janita.java.base.thinkinjava._20_concurrent.queue;//: concurrency/ToastOMatic.java
 // A toaster that uses queues.
 
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -190,5 +191,17 @@ public class ToastOMatic {
         exec.execute(new Eater(finishedQueue));
         TimeUnit.SECONDS.sleep(10);
         exec.shutdownNow();
+    }
+}
+
+class Three {
+
+    public static void main(String[] args) {
+        System.out.println(test(null));
+    }
+
+    private static boolean test(Map<String, Boolean> map) {
+        Boolean b =  map != null ? map.get("test") : false;
+        return b;
     }
 }
