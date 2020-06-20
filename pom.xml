@@ -17,6 +17,7 @@
         <module>servlet</module>
 		<module>design-mode</module>
         <module>java-base</module>
+        <module>ssy-java8</module>
     </modules>
     <packaging>pom</packaging>
 
