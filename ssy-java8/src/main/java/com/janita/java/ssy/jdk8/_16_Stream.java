@@ -19,9 +19,10 @@ class StreamTest4 {
     public static void main(String[] args) {
         {
             Stream<String> stringStream = Stream.of("hello", "world", "hello world");
-
             //TODO ？》》？这个 length是个啥？？
             String[] strings = stringStream.toArray(length -> new String[length]);
+            Arrays.asList(strings).forEach(System.out::println);
+            strings = stringStream.toArray(String[]::new);//构造方法引用
             Arrays.asList(strings).forEach(System.out::println);
         }
 
