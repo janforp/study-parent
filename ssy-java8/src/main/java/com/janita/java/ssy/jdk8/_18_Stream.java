@@ -16,6 +16,7 @@ public class _18_Stream {
             Stream<String> stringStream = Stream.of("hello", "world", "helloworld");
             stringStream.map(item -> {
                 String result = item.substring(0, 1).toUpperCase() + item.substring(1);
+                //不会输出
                 System.out.println("test");
                 return result;
             });
