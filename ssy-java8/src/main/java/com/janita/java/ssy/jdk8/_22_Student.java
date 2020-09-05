@@ -25,6 +25,8 @@ public class _22_Student {
         _22_Student lisi = new _22_Student("lisi", 90);
         _22_Student wangwu = new _22_Student("wangwu", 100);
         _22_Student zhaoliu = new _22_Student("zhaoliu", 90);
-        return Arrays.asList(zhangsan, lisi, wangwu, zhaoliu);
+        _22_Student zhaoliu2 = new _22_Student("zhaoliu", 90);
+
+        return Arrays.asList(zhangsan, lisi, wangwu, zhaoliu, zhaoliu2);
     }
 }
