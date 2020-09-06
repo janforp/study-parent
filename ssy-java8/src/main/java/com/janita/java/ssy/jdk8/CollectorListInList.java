@@ -24,11 +24,20 @@ import java.util.stream.Stream;
 public class CollectorListInList {
 
     public static void main(String[] args) {
-        //TODO 要求把所有Item中的SonItem都放到一个集合中
         List<Item> items = get();
+
+        //TODO 要求把所有Item中的SonItem都放到一个集合中
+
+        //方法1：
         List<SonItem> collect = items.stream()
                 .collect(new CollectorListInListImpl());
         System.out.println(collect);
+
+        //方法2：
+        List<SonItem> sonItemList = items.stream()
+                .flatMap(item -> item.getSonItemList().stream())
+                .collect(Collectors.toList());
+        System.out.println(sonItemList);
     }
 
     static List<Item> get() {
