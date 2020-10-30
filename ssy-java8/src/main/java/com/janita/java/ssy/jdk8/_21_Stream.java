@@ -52,3 +52,11 @@ class StreamTest13 {
         System.out.println(collect3);
     }
 }
+
+class ForEach {
+
+    public static void main(String[] args) {
+        System.out.println("Str".getClass());
+        System.out.println(String.class);
+    }
+}
