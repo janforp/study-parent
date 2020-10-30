@@ -18,6 +18,7 @@
 		<module>design-mode</module>
         <module>java-base</module>
         <module>ssy-java8</module>
+        <module>deepinjava</module>
     </modules>
     <packaging>pom</packaging>
 
