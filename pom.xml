@@ -19,6 +19,7 @@
         <module>java-base</module>
         <module>ssy-java8</module>
         <module>deepinjava</module>
+        <module>datastructuresandalgorithms</module>
     </modules>
     <packaging>pom</packaging>
 
