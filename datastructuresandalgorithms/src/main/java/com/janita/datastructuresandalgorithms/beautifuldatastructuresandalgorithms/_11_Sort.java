@@ -3,6 +3,9 @@ package com.janita.datastructuresandalgorithms.beautifuldatastructuresandalgorit
 /**
  * _11_Sort
  *
+ * 逆序度 = 满有序度 - 有序度。
+ * 我们排序的过程就是一种增加有序度，减少逆序度的过程，最后达到满有序度，就说明排序完成了。
+ *
  * @author zhucj
  * @since 20201126
  */
@@ -18,6 +21,10 @@ public class _11_Sort {
         System.out.println(toString);
     }
 
+    /**
+     * 4，5，6，3，2，1，冒泡排序包含两个操作原子，比较和交换。每交换一次，有序度就加 1。不管算法怎么改进，
+     * 交换次数总是确定的，即为逆序度，也就是n*(n-1)/2–初始有序度。此例中就是 15–3=12，要进行 12 次交换操作。
+     */
     public static class BubbleSort {
 
         /**
@@ -88,5 +95,12 @@ public class _11_Sort {
             }
             System.out.println("共进行了 " + (exchangeTimes) + " 次数据交换");
         }
+    }
+
+    /**
+     * 插入排序
+     */
+    public static class InsertionSort {
+
     }
 }
