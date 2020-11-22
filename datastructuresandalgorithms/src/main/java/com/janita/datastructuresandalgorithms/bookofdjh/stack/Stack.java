@@ -1,5 +1,7 @@
 package com.janita.datastructuresandalgorithms.bookofdjh.stack;
 
+import com.janita.datastructuresandalgorithms.bookofdjh.stack.assist.ExceptionStackEmpty;
+
 /**
  * Stack
  *
