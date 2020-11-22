@@ -45,6 +45,25 @@ public class Recursive {
     }
 
     /**
+     * 算法:binarySum(A, i, n) 输入:数组A，非负整数i和正整数n
+     * 输出:A中从位置i起连续n个元素之和 {
+     * if (n<=1) return A[i];
+     * else return BinarySum(A, i, ⎡n/2⎤) + BinarySum(A, i+⎡n/2⎤, ⎣n/2⎦); }
+     *
+     * 如{1,2,3,4,5,6,7,8,9} 从 0 开始 的3个元素和为6
+     *
+     * @return
+     */
+    public static int binarySum(int[] ints, int i, int n) {
+        //TODO
+        if (n <= 1) {
+            return ints[i];
+        }
+        int mi = n >> 1;
+        return binarySum(ints, i, mi) + binarySum(ints, mi + i, mi + 1);
+    }
+
+    /**
      * 算法:ReverseArray(A, lo, hi) 输入:数组A，非负整数lo和hi
      * 输出:A[lo..hi]的次序被倒置 {
      * if (lo<hi) {
@@ -112,17 +131,6 @@ public class Recursive {
             return 2 * (power((r - 1) / 2)) * (power((r - 1) / 2));
         }
         return power(r / 2) * power(r / 2);
-    }
-
-    public static void main(String[] args) {
-        int[] ints = { 1, 2, 3 };
-        System.out.println(linearSum(ints, 3));
-        reverseArray(ints, 0, 2);
-        ints = new int[] { 1, 2, 3 };
-        iterativeReverseArray(ints, 0, 2);
-        print(ints);
-        System.out.println(power(2, 4));
-        System.out.println(power(4));
     }
 
     private static void print(int[] ints) {
