@@ -1,6 +1,7 @@
 package com.janita.datastructuresandalgorithms.bookofdjh.queue.test;
 
 import com.janita.datastructuresandalgorithms.bookofdjh.queue.BatQueueArray;
+import com.janita.datastructuresandalgorithms.bookofdjh.queue.LoopQueueArray;
 import com.janita.datastructuresandalgorithms.bookofdjh.queue.Queue;
 import com.janita.datastructuresandalgorithms.bookofdjh.queue.assist.ExceptionQueueEmpty;
 import com.janita.datastructuresandalgorithms.bookofdjh.queue.assist.ExceptionQueueFull;
@@ -15,11 +16,63 @@ import org.junit.Test;
  * @author zhucj
  * @since 20201126
  */
-public class BatQueueArrayTest {
+public class QueueArrayTest {
 
     @Test
     public void testBatQueueArray() {
         Queue<Integer> queue = new BatQueueArray<>(3);
+        Assert.assertTrue(queue.isEmpty());
+        Assert.assertEquals(0, queue.getSize());
+
+        queue.enqueue(1);
+        Assert.assertEquals(1, queue.getSize());
+
+        queue.enqueue(2);
+        Assert.assertEquals(2, queue.getSize());
+
+        queue.enqueue(3);
+        Assert.assertEquals(3, queue.getSize());
+
+        ExceptionQueueFull full = null;
+        try {
+            queue.enqueue(4);
+        } catch (Exception e) {
+            full = (ExceptionQueueFull) e;
+        }
+        Assert.assertNotNull(full);
+
+        Integer dequeue = queue.dequeue();
+        Assert.assertEquals(1, (int) dequeue);
+        Assert.assertEquals(2, queue.getSize());
+
+        dequeue = queue.dequeue();
+        Assert.assertEquals(2, (int) dequeue);
+        Assert.assertEquals(1, queue.getSize());
+
+        dequeue = queue.dequeue();
+        Assert.assertEquals(3, (int) dequeue);
+        Assert.assertEquals(0, queue.getSize());
+
+        Assert.assertTrue(queue.isEmpty());
+
+        ExceptionQueueEmpty empty = null;
+        try {
+            queue.dequeue();
+        } catch (Exception e) {
+            empty = (ExceptionQueueEmpty) e;
+        }
+        Assert.assertNotNull(empty);
+
+        queue.enqueue(89);
+        Assert.assertEquals(1, queue.getSize());
+
+        Integer front = queue.front();
+        Assert.assertEquals(89, (int) front);
+    }
+
+    @Test
+    public void testQueueArray() {
+        Queue<Integer> queue = new LoopQueueArray<>(3);
         Assert.assertTrue(queue.isEmpty());
         Assert.assertEquals(0, queue.getSize());
 
