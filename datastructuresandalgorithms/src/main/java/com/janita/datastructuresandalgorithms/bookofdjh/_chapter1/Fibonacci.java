@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.bookofdjh;
+package com.janita.datastructuresandalgorithms.bookofdjh._chapter1;
 
 import org.junit.Test;
 

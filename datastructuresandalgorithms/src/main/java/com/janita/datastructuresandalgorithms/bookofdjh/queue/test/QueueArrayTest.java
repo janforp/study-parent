@@ -72,7 +72,8 @@ public class QueueArrayTest {
 
     @Test
     public void testQueueArray() {
-        Queue<Integer> queue = new LoopQueueArray<>(3);
+        //有一个元素是浪费的
+        Queue<Integer> queue = new LoopQueueArray<>(4);
         Assert.assertTrue(queue.isEmpty());
         Assert.assertEquals(0, queue.getSize());
 
