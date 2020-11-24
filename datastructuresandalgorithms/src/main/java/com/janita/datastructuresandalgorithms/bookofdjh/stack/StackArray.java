@@ -9,13 +9,13 @@ import com.janita.datastructuresandalgorithms.bookofdjh.stack.assist.ExceptionSt
  * @author zhucj
  * @since 20201126
  */
-public class StackArray implements Stack {
+public class StackArray<E> implements Stack<E> {
 
     public static final int CAPACITY = 1024;//数组的默认容量
 
     protected int capacity;//数组的实际容量
 
-    protected Object[] s;//对象数组
+    protected E[] s;//对象数组
 
     protected int top = -1;//栈顶元素的位置
 
@@ -25,7 +25,7 @@ public class StackArray implements Stack {
 
     public StackArray(int capacity) {
         this.capacity = capacity;
-        s = new Object[capacity];
+        s = (E[]) new Object[capacity];
     }
 
     @Override
@@ -39,7 +39,7 @@ public class StackArray implements Stack {
     }
 
     @Override
-    public Object top() throws ExceptionStackEmpty {
+    public E top() throws ExceptionStackEmpty {
         if (isEmpty()) {
             throw new ExceptionStackEmpty("意外:栈空");
         }
@@ -47,7 +47,7 @@ public class StackArray implements Stack {
     }
 
     @Override
-    public void push(Object ele) {
+    public void push(E ele) {
         if (getSize() == capacity) {
             throw new ExceptionStackFull("意外:栈溢出");
         }
@@ -55,11 +55,11 @@ public class StackArray implements Stack {
     }
 
     @Override
-    public Object pop() throws ExceptionStackEmpty {
+    public E pop() throws ExceptionStackEmpty {
         if (isEmpty()) {
             throw new ExceptionStackEmpty("意外:栈空");
         }
-        Object ele = s[top];
+        E ele = s[top];
         s[top--] = null;
         return ele;
     }
