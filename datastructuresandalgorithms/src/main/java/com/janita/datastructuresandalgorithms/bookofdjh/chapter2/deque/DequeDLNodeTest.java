@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.bookofdjh._chapter2.deque;
+package com.janita.datastructuresandalgorithms.bookofdjh.chapter2.deque;
 
 import org.junit.Assert;
 import org.junit.Test;

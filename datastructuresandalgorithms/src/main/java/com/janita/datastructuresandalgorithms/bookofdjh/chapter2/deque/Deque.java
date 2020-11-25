@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.bookofdjh._chapter2.deque;
+package com.janita.datastructuresandalgorithms.bookofdjh.chapter2.deque;
 
 /**
  * 双端队列(Double-ended queue)，简称为Deque。顾名思义， 也就是前端与后端都支持插入和删除操作的队列

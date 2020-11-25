@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.bookofdjh._chapter2;
+package com.janita.datastructuresandalgorithms.bookofdjh.chapter2;
 
 /**
  * 抽象出位置(Position)这一概念，使我们既能够保持链表结构高效性，而又不致违背面向对 象的设计原则

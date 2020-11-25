@@ -1,6 +1,6 @@
-package com.janita.datastructuresandalgorithms.bookofdjh._chapter2.deque;
+package com.janita.datastructuresandalgorithms.bookofdjh.chapter2.deque;
 
-import com.janita.datastructuresandalgorithms.bookofdjh._chapter2.Position;
+import com.janita.datastructuresandalgorithms.bookofdjh.chapter2.Position;
 
 /**
  * 在基于NLNode类实现双向链表的时候，为了使编程更加简洁，通常我们都要在最前端和最后 端各设置一个哑元节点(Dummy node )。

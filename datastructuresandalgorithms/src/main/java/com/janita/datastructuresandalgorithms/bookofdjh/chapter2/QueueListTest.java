@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.bookofdjh._chapter2;
+package com.janita.datastructuresandalgorithms.bookofdjh.chapter2;
 
 import com.janita.datastructuresandalgorithms.bookofdjh.queue.Queue;
 import org.junit.Assert;
