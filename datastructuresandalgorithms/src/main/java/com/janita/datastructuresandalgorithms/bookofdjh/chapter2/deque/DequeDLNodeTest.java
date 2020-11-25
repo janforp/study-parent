@@ -32,6 +32,6 @@ public class DequeDLNodeTest {
         deque.insertLast(8);
         deque.insertLast(6);
         deque.insertFirst(3);
-        Assert.assertEquals(3, (int) deque.getSize());
+        Assert.assertEquals(3, deque.getSize());
     }
 }
