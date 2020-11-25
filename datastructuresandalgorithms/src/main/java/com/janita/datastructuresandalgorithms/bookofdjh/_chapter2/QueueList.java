@@ -62,7 +62,7 @@ public class QueueList<E> implements Queue<E> {
     public void enqueue(E obj) throws ExceptionQueueFull {
         Node<E> node = new Node<>();
         node.setElem(obj);
-        //新节点作为末节点插入
+        //新节点作为末节点插入，尾节点的next为null
         node.setNext(null);
         if (size == 0) {
             //若此前队列为空，则直接插入

@@ -1,7 +1,8 @@
 package com.janita.datastructuresandalgorithms.bookofdjh._chapter2;
 
 /**
- * Position
+ * 抽象出位置(Position)这一概念，使我们既能够保持链表结构高效性，而又不致违背面向对 象的设计原则
+ * 1.按线性次序排列的一组位置，就构成了一个列表
  *
  * @author zhucj
  * @since 20201126
