@@ -16,17 +16,17 @@ public class DLNodeList<E> implements List<E> {
     /**
      * 列表的实际规模
      */
-    private int numElem;
+    protected int numElem;
 
     /**
      * 哨兵:首节点+末节点
      */
-    private DLNode<E> header;
+    protected DLNode<E> header;
 
     /**
      * 哨兵:首节点+末节点
      */
-    private DLNode<E> trailer;
+    protected DLNode<E> trailer;
 
     public DLNodeList() {
         this.numElem = 0;
