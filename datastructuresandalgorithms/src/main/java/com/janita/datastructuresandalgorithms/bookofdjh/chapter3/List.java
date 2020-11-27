@@ -1,8 +1,7 @@
 package com.janita.datastructuresandalgorithms.bookofdjh.chapter3;
 
 import com.janita.datastructuresandalgorithms.bookofdjh.chapter2.Position;
-
-import java.util.Iterator;
+import com.janita.datastructuresandalgorithms.bookofdjh.chapter3.iterator.Iterator;
 
 /**
  * List

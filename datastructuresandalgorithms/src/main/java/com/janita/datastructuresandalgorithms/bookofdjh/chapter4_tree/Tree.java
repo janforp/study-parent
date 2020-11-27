@@ -28,21 +28,21 @@ public interface Tree<E> {
      *
      * @return
      */
-    TreeLinkedList<E> getParent();
+    Tree<E> getParent();
 
     /**
      * 返回当前节点的长子
      *
      * @return
      */
-    TreeLinkedList<E> getFirstChild();
+    Tree<E> getFirstChild();
 
     /**
      * 返回当前节点的最大弟弟
      *
      * @return
      */
-    TreeLinkedList<E> getNextSibling();
+    Tree<E> getNextSibling();
 
     /**
      * 返回当前节点后代元素的数目，即以当前节点为根的子树的规模

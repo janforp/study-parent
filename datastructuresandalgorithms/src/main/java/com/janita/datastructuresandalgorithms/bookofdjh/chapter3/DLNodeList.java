@@ -2,8 +2,7 @@ package com.janita.datastructuresandalgorithms.bookofdjh.chapter3;
 
 import com.janita.datastructuresandalgorithms.bookofdjh.chapter2.Position;
 import com.janita.datastructuresandalgorithms.bookofdjh.chapter2.deque.DLNode;
-
-import java.util.Iterator;
+import com.janita.datastructuresandalgorithms.bookofdjh.chapter3.iterator.Iterator;
 
 /**
  * 基于双向链表{@link com.janita.datastructuresandalgorithms.bookofdjh.chapter2.deque.DLNode}实现的列表{@link List}

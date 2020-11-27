@@ -38,9 +38,9 @@ public class IteratorTree<E> implements Iterator<E> {
             //递归基
             return;
         }
-        //首先输出当前节点,放入队列（FIFO）
+        //首先输出当前节点
         list.insertLast(tree);
-        TreeLinkedList<E> subtree = tree.getFirstChild();
+        Tree<E> subtree = tree.getFirstChild();
         while (subtree != null) {
             this.elementsPreorderIterator(subtree);
             subtree = subtree.getNextSibling();
@@ -56,7 +56,7 @@ public class IteratorTree<E> implements Iterator<E> {
             return;
         }
         //从当前节点的长子开始
-        TreeLinkedList<E> subTree = tree.getFirstChild();
+        Tree<E> subTree = tree.getFirstChild();
         while (subTree != null) {//依次对当前节点的各个孩子
             this.elementsPostorderIterator(subTree);//做后序遍历
             subTree = subTree.getNextSibling();
@@ -71,13 +71,13 @@ public class IteratorTree<E> implements Iterator<E> {
         if (tree == null) {
             return;
         }
-        Queue<Tree<E>> queue = new QueueList<>();//空队
-        queue.enqueue(tree);//根节点入队
+        Queue<Tree<E>> queue = new QueueList<>();//空队，,放入队列（FIFO）
+        queue.enqueue(tree);//根节点入队，保证根元素在第一个被弹出访问
         while (!queue.isEmpty()) {
             //在队列重新变空之前
             Tree<E> toIteratorTree = queue.dequeue();//取出队列首节点
             list.insertLast(toIteratorTree);//将新出队的节点接入迭代器中
-            TreeLinkedList<E> subTree = toIteratorTree.getFirstChild();//从tree的第一个孩子起
+            Tree<E> subTree = toIteratorTree.getFirstChild();//从tree的第一个孩子起
             while (subTree != null) {//依次找出所有孩子，并
                 queue.enqueue(subTree);//将其加至队列中
                 subTree = subTree.getNextSibling();
