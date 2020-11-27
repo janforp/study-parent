@@ -8,6 +8,7 @@ import com.janita.datastructuresandalgorithms.bookofdjh.queue.Queue;
 
 /**
  * 基于链表节点实现二叉树节点,该类的每一个对象就是一个二叉树的节点
+ * 代码四.6 基于链表的二叉树节点实现
  *
  * @author zhucj
  * @since 20201126
@@ -177,7 +178,24 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
     }
 
     /**
-     * TODO 在孩子发生变化后，更新当前节点及其祖先的规模
+     * 在孩子发生变化后，更新当前节点及其祖先的规模
+     *
+     * 若当前节点的孩子发生变化，比如原有的某个孩子被删除或者有新的孩子插入，就需要更新当前节点及其祖先的规模记录，以便后续的查询，updateSize()方法的功能正在于此。
+     * 请注意，在这里， 我们允许直接对任何节点执行这一操作。
+     *
+     * 若节点 v 的左、右孩子分别为 lc 和 rc，则 size(v) = 1 + size(lc) + size(rc)。
+     * 因此，一旦其左、右子树的规模都已确定，我们就可以在O(1)时间内得到以节点v为根的子树规模。当然，此后还需要从v出发沿parent引用逆行向上，依次更新各个祖先的规模记录
+     *
+     * 算法:updateSize(v)
+     * 输入:二叉树中任一节点v
+     * 输出:更新v的后代规模记录
+     * {
+     * 令size(v) = 1 + size(lc) + size(rc);//由观察结论四.13
+     * 若v的父亲p存在，则调用updateSize(p)，递归地更新父亲的规模记录;//尾递归，可改写为迭代形式
+     * }
+     *
+     * 若节点 v 的深度为 depth(v)，则总共需要修改 depth(v)+1 个节点的规模。(因为根节点的深度为0，所以 + 1)
+     * 为了更新一个节点的规模记录，只需执行两次 getSize()操作并做两次加法，故 updateSize()算法的总体运行时间为 O(depth(v)+1)。
      */
     @Override
     public void updateSize() {
@@ -191,6 +209,7 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
             //右子树的规模
             size = size + getRChild().getSize();
         }
+        //上面是计算当前节点的规模，下面是更新父节点的规模
         if (hasParent()) {
             //递归更新各个真祖先的规模记录
             getParent().updateSize();
@@ -204,10 +223,29 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
 
     /**
      * 在孩子发生变化后，更新当前节点及其祖先的高度
+     *
+     * 只需读出左、右孩子的高度，取二者中的大者，再计入当前节点本身，就 得到了当前节点v的新高度。
+     *
+     * 当然，此后也需要从v出发沿parent引用逆行向上，依次更新各个祖先 的高度记录。这一过程可以描述为 算法四.5:
+     *
+     * 算法:updateHeight(v)
+     * 输入:二叉树中任一节点v
+     * 输出:更新v的高度记录
+     * {
+     * height(v) = 0;//先假设没有左、右孩子
+     * 若v有左孩子lc，则令:height(v) = Max(height(v), 1 + height(lc));
+     * 若v有右孩子lc，则令:height(v) = Max(height(v), 1 + height(rc));
+     * 若v的父亲p存在，则调用updateHeight(p)，递归地更新父亲的高度记录;
+     * }
+     *
+     * 同样地，若节点 v 的深度为 depth(v)，则总共需要修改 depth(v)+1 个节点的高度记录。
+     * 更新每 一节点本身的高度记录，只需执行两次 getHeight()操作、两次加法以及两次取最大操作，不过常数 时间，故 updateHeight()算法的总体运行时间也是 O(depth(v)+1)。
+     * 这一算法还可以进一步优化。我们注意到，在逆行向上依次更新各祖先高度的过程中，一旦发 现某个祖先的高度没有发生变化，算法即可提前终止。
+     * TODO 请读者按此思路自行改进 {@link BinTreeNode#updateHeightBetter()}
      */
     @Override
     public void updateHeight() {
-        //先假设没有左、右孩子
+        //先假设没有左、右孩子，则叶子节点的高度=0
         height = 0;
         if (hasLChild()) {
             height = Math.max(height, 1 + getLChild().getHeight());
@@ -221,11 +259,59 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
         }
     }
 
+    public void updateHeightBetter() {
+        //先假设没有左、右孩子，则叶子节点的高度=0
+        height = 0;
+        if (hasLChild()) {
+            height = Math.max(height, 1 + getLChild().getHeight());
+        }
+        if (hasRChild()) {
+            height = Math.max(height, 1 + getRChild().getHeight());
+        }
+        if (!hasParent()) {
+            return;
+        }
+        BinTreePosition<E> parentOfThis = parent.getParent();
+        //一旦发 现某个祖先的高度没有发生变化，算法即可提前终止。
+        boolean change = true;
+        while (change) {
+            int heightOld = parentOfThis.getHeight();
+            parentOfThis.updateHeight();
+            int heightNew = parent.getHeight();
+            //递归更新各个真祖先的高度记录
+            if (heightOld == heightNew) {
+                change = false;
+            }
+            parentOfThis = parent.getParent();
+        }
+    }
+
     @Override
     public int getDepth() {
         return depth;
     }
 
+    /**
+     * 在父亲节点发生变化后，有必要更新当前节点的深度记录。
+     *
+     * 只需读出新的父亲节点的深度，再加上一即得到当前节点新的深度。
+     * 当然，
+     * 此后还需要沿着lChild和rChild引用，逐层向下递归地更新每一后代的深度记录。
+     *
+     * 算法:updateDepth(v)
+     * 输入:二叉树中任一节点v
+     * 输出:更新v的深度记录
+     * {
+     * 若v的父亲节点p存在，则令depth(v) = depth(p)+1;
+     * 否则，令depth(v) = 0;
+     * 若v的左孩子lc存在，则调用updateDepth(lc);//沿孩子引用逐层向下，
+     * 若v的右孩子rc存在，则调用updateDepth(rc);//递归地更新所有后代的深度记录
+     * }
+     *
+     * 若节点 v 的后代规模为 size(v)，则总共需要修改 size(v)个节点的深度记录。
+     * 鉴于单个节点的深度记录可以在常数时间内得到更新，故 updateDepth()算法的总体运行时间为 O(size(v))。
+     * 与 updateHeight()算法类似，上述 updateDepth()算法也可以进行优化。
+     */
     @Override
     public void updateDepth() {
         //当前节点
@@ -239,6 +325,12 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
         }
     }
 
+    /**
+     * 二叉树表示中，只要规定“左(右)子树必须 完全居于根节点的(左)右侧”，则所有节点在水平轴上投影的自左向右次序，
+     * 恰好与中序遍历序列的次序吻合。从这个意义上说，中序遍历就是按照自左向右的次序访问各个节点。
+     *
+     * 按照这一思路，对于任一二叉树T，根据其中序遍历序列S(T)，我们都可以在其中所有节点之 间定义出一个线性次序。因此，除首(末)节点外的每一节点都有唯一的直接前驱(后继)。
+     */
     @Override
     public BinTreePosition<E> getPrev() {
         //按照中序遍历的次序，找到当前节点的直接前驱
@@ -287,6 +379,23 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
         return v.getParent();
     }
 
+    /**
+     * 该 方法的功能是，将以某一节点为根的子树从母树中分离出来。
+     *
+     * 算法:secede(v)
+     * 输入:二叉树中任一节点v
+     * 输出:将以v为根的子树丛母树中分离出来
+     * {
+     * 若v有父亲 {
+     * 1.切断父亲指向v的引用;
+     * 2.调用updateSize(v)和updateHeight(v)，更新v及其祖先的规模记录和高度记录;
+     * 3.切断v指向父亲的引用;
+     * 4.调用updateDepth(v)，更新v及其后代的深度记录;
+     * }
+     * }
+     *
+     * @return
+     */
     @Override
     public BinTreePosition<E> secede() {
         //断绝当前节点与其父亲的父子关系,并返回当前节点
@@ -308,6 +417,21 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
         return this;
     }
 
+    /**
+     * 算法:attachL(p, c)
+     * 输入:两个二叉树节点p与c
+     * 输出:将c作为左孩子，与p联接起来
+     * {
+     * 0.若p已经有左孩子lc，则首先调用secede(lc)将其摘除;
+     * 0.调用secede(c)，使c及其后代脱离原属母树;
+     * 1,2.设置相应的引用，在p和c之间建立父子关系;
+     * 3.调用updateSize(p)和updateHeight(p)，更新节点p及其祖先的规模和高度;
+     * 4.调用updateDepth(c)，更新c及其后代节点的深度;
+     * }
+     *
+     * @param c c
+     * @return
+     */
     @Override
     public BinTreePosition<E> attachL(BinTreePosition<E> c) {
         //将节点c作为当前节点的左孩子
@@ -324,7 +448,7 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
 
             c.updateDepth();//更新c及其后代节点的深度
         }
-        return null;
+        return this;
     }
 
     @Override
@@ -353,6 +477,27 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
         return list.elements();
     }
 
+    /**
+     * 作为树的一种特例，二叉树自然继承了一般树结构的前序、后序以及层次等遍历方法。这三个
+     * 遍历算法的实现与普通树大同小异，这里不再赘述。
+     * 需要特别指出的是，对二叉树还可以定义一个新的遍历方法⎯⎯中序遍历(Inorder traversal)。
+     * 顾名思义，在访问每个节点之前，
+     * 1.首先遍历其左子树;
+     * 2.待该节点被访问过后，
+     * 3.才遍历其右子树。
+     * 类似地，由中序遍历确定的节点序列，称作中序遍历序列。第七章将要介绍的查找树，正是建立在中 序遍历序列的基础之上，由此也可见这一遍历算法的重要性。
+     *
+     * 算法:InorderTraversal(v)
+     * 输入:二叉树节点v
+     * 输出:v所有后代的中序遍历序列
+     * {
+     * if (null != v) {//设lc、rc分别为v的左、右孩子
+     * 调用InorderTraversal(lc)对v的左子树做中序遍历;
+     * 访问并输出v;
+     * 调用InorderTraversal(rc)对v的右子树做中序遍历;
+     * }
+     * }
+     */
     @Override
     public Iterator<BinTreePosition<E>> elementsInorder() {
         List<BinTreePosition<E>> list = new DLNodeList<>();

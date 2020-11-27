@@ -4,6 +4,7 @@ import com.janita.datastructuresandalgorithms.bookofdjh.chapter3.iterator.Iterat
 
 /**
  * 基于链表实现二叉树，邓老师取名为：BinTree_LinkedList
+ * 代码四.7 基于链表的二叉树实现
  *
  * @author zhucj
  * @since 20201126
