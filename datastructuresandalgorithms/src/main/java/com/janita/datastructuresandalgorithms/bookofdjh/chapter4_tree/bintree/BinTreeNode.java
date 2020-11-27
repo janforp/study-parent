@@ -335,17 +335,20 @@ public class BinTreeNode<E> implements BinTreePosition<E> {
     public BinTreePosition<E> getPrev() {
         //按照中序遍历的次序，找到当前节点的直接前驱
 
+        //v 有左孩子:此时，从 v 的左孩子出发，沿 rChild 引用不断下行，最后一个(没有右孩子的)节 点就是 u。
         if (hasLChild()) {
             //若左子树非空，则其中的最大者即为当前节点的直接前驱
             return findMaxDescendant(getLChild());
         }
 
+        //v 没有左孩子，同时 v 是右孩子:此时，u 就是 v 的父亲节点;
         //至此，当前节点没有左孩子
         if (isRChild()) {
             //若当前节点是右孩子，则父亲即为其直接前驱
             return getParent();
         }
 
+        //v 没有左孩子，同时 v 是左孩子:此时，从 v 出发沿 parent 引用逆行向上，直到第一个是右孩子 的节点 w，则 u 就是 w 的父亲节点;
         //至此，当前节点没有左孩子，而且是左孩子
         BinTreePosition<E> v = this;
         while (v.isLChild()) {//TODO
