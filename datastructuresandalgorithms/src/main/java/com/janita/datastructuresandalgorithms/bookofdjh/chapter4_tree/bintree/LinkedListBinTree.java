@@ -3,23 +3,23 @@ package com.janita.datastructuresandalgorithms.bookofdjh.chapter4_tree.bintree;
 import com.janita.datastructuresandalgorithms.bookofdjh.chapter3.iterator.Iterator;
 
 /**
- * BinTreeLinkedList
+ * 基于链表实现二叉树，邓老师取名为：BinTree_LinkedList
  *
  * @author zhucj
  * @since 20201126
  */
-public class BinTreeLinkedList<E> implements BinTree<E> {
+public class LinkedListBinTree<E> implements BinTree<E> {
 
     /**
      * 根节点
      */
     private BinTreePosition<E> root;
 
-    public BinTreeLinkedList() {
+    public LinkedListBinTree() {
         this(null);
     }
 
-    public BinTreeLinkedList(BinTreePosition<E> r) {
+    public LinkedListBinTree(BinTreePosition<E> r) {
         this.root = r;
     }
 
