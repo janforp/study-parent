@@ -7,36 +7,36 @@ package dsa;
 
 public interface Graph {
 
-    //ȡͼ�ж��㡢�ߵ���Ŀ
-    public int vNumber();
+	//ȡͼ�ж��㡢�ߵ���Ŀ
+	public int vNumber();
 
-    public int eNumber();
+	public int eNumber();
 
-    //ȡͼ�����ж��㡢����λ�õĵ�����
-    public Iterator vertices();
+	//ȡͼ�����ж��㡢����λ�õĵ�����
+	public Iterator vertices();
 
-    public Iterator vPositions();
+	public Iterator vPositions();
 
-    //����ͼ�����бߡ���λ�õĵ�����
-    public Iterator edges();
+	//����ͼ�����бߡ���λ�õĵ�����
+	public Iterator edges();
 
-    public Iterator ePositions();
+	public Iterator ePositions();
 
-    //����Ƿ���ĳ���ߴӶ���uָ��v
-    public boolean areAdjacent(Vertex u, Vertex v);
+	//����Ƿ���ĳ���ߴӶ���uָ��v
+	public boolean areAdjacent(Vertex u, Vertex v);
 
-    //ȡ�Ӷ���uָ��v�ıߣ��������ڣ��򷵻�null
-    public Edge edgeFromTo(Vertex u, Vertex v);
+	//ȡ�Ӷ���uָ��v�ıߣ��������ڣ��򷵻�null
+	public Edge edgeFromTo(Vertex u, Vertex v);
 
-    //������v�Ӷ��㼯��ɾ����������֮
-    public Vertex remove(Vertex v);
+	//������v�Ӷ��㼯��ɾ����������֮
+	public Vertex remove(Vertex v);
 
-    //����e�ӱ߼���ɾ����������֮
-    public Edge remove(Edge e);
+	//����e�ӱ߼���ɾ����������֮
+	public Edge remove(Edge e);
 
-    //�ڶ��㼯V�в����¶���v����������λ��
-    public Position insert(Vertex v);
+	//�ڶ��㼯V�в����¶���v����������λ��
+	public Position insert(Vertex v);
 
-    //�ڱ߼�E�в����±�e����������λ��
-    public Position insert(Edge e);
+	//�ڱ߼�E�в����±�e����������λ��
+	public Position insert(Edge e);
 }

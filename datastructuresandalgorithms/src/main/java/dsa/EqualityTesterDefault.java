@@ -1,5 +1,5 @@
 /*
- * Ä¬ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
+ * Ä¬ÈÏÅÐµÈÆ÷
  */
 
 package dsa;
@@ -11,5 +11,5 @@ public class EqualityTesterDefault implements EqualityTester {
 
     public boolean isEqualTo(Object a, Object b) {
         return (a.equals(b));
-    }//Ê¹ï¿½ï¿½Javaï¿½á¹©ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
+    }//Ê¹ÓÃJavaÌá¹©µÄÅÐµÈÆ÷
 }

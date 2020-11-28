@@ -1,54 +1,54 @@
 /*
- * ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Õ»ï¿½á¹¹
+ * »ùÓÚµ¥Á´±íÊµÏÖÕ»½á¹¹
  */
 
 package dsa;
 
 public class Stack_List implements Stack {
 
-    protected Node top;//Ö¸ï¿½ï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½
+    protected Node top;//Ö¸ÏòÕ»¶¥ÔªËØ
 
-    protected int size;//Õ»ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½Ä¿
+    protected int size;//Õ»ÖÐÔªËØµÄÊýÄ¿
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½
+    //¹¹Ôì·½·¨£¨¿ÕÕ»£©
     public Stack_List() {
         top = null;
         size = 0;
     }
 
-    //ï¿½ï¿½Ñ¯ï¿½ï¿½Ç°Õ»ï¿½Ä¹ï¿½Ä£
+    //²éÑ¯µ±Ç°Õ»µÄ¹æÄ£
     public int getSize() {
         return size;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Õ»ï¿½ï¿½
+    //ÅÐ¶ÏÊÇ·ñÕ»¿Õ
     public boolean isEmpty() {
         return (top == null) ? true : false;
     }
 
     //Ñ¹Õ»
     public void push(Object elem) {
-        Node v = new Node(elem, top);//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Â½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½×½Úµï¿½ï¿½ï¿½ï¿½
-        top = v;//ï¿½ï¿½ï¿½ï¿½ï¿½×½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-        size++;//ï¿½ï¿½ï¿½Â¹ï¿½Ä£ï¿½ï¿½Â¼
+        Node v = new Node(elem, top);//´´½¨Ò»¸öÐÂ½Úµã£¬½«Æä×÷ÎªÊ×½Úµã²åÈë
+        top = v;//¸üÐÂÊ×½ÚµãÒýÓÃ
+        size++;//¸üÐÂ¹æÄ£¼ÇÂ¼
     }
 
-    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½
+    //¶ÁÈ¡£¨µ«²»É¾³ý£©Õ»¶¥
     public Object top() throws ExceptionStackEmpty {
 		if (isEmpty()) {
-			throw new ExceptionStackEmpty("ï¿½ï¿½ï¿½â£ºÕ»ï¿½ï¿½");
-		}
+            throw new ExceptionStackEmpty("ÒâÍâ£ºÕ»¿Õ");
+        }
         return top.getElem();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½
+    //µ¯³öÕ»¶¥
     public Object pop() throws ExceptionStackEmpty {
-		if (isEmpty()) {
-			throw new ExceptionStackEmpty("ï¿½ï¿½ï¿½â£ºÕ»ï¿½ï¿½");
-		}
+        if (isEmpty()) {
+            throw new ExceptionStackEmpty("ÒâÍâ£ºÕ»¿Õ");
+        }
         Object temp = top.getElem();
-        top = top.getNext();//ï¿½ï¿½ï¿½ï¿½ï¿½×½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-        size--;//ï¿½ï¿½ï¿½Â¹ï¿½Ä£ï¿½ï¿½Â¼
+        top = top.getNext();//¸üÐÂÊ×½ÚµãÒýÓÃ
+        size--;//¸üÐÂ¹æÄ£¼ÇÂ¼
         return temp;
     }
 }

@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟斤拷锟斤拷栈应锟斤拷push锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对满栈应用push方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionStackFull extends RuntimeException {
-
 	public ExceptionStackFull(String err) {
 		super(err);
 	}

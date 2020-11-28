@@ -1,50 +1,50 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Êµï¿½Öµï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+ * »ùÓÚÁÐ±íÊµÏÖµÄÔªËØµü´úÆ÷
  */
 
 package dsa;
 
 public class IteratorElement implements Iterator {
 
-    private List list;//ï¿½Ð±ï¿½
+    private List list;//ÁÐ±í
 
-    private Position nextPosition;//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+    private Position nextPosition;//µ±Ç°£¨ÏÂÒ»¸ö£©ÔªËØµÄÎ»ÖÃ
 
-    //Ä¬ï¿½Ï¹ï¿½ï¿½ì·½ï¿½ï¿½
+    //Ä¬ÈÏ¹¹Ôì·½·¨
     public IteratorElement() {
         list = null;
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+    //¹¹Ôì·½·¨
     public IteratorElement(List L) {
         list = L;
-		if (list.isEmpty())//ï¿½ï¿½ï¿½Ð±ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½
-		{
-			nextPosition = null;//ï¿½ï¿½Ç°Ôªï¿½ï¿½ï¿½Ã¿ï¿½
-		} else//ï¿½ï¿½ï¿½ï¿½
-		{
-			nextPosition = list.first();//ï¿½Óµï¿½Ò»ï¿½ï¿½Ôªï¿½Ø¿ï¿½Ê¼
-		}
+        if (list.isEmpty())//ÈôÁÐ±íÎª¿Õ£¬Ôò
+        {
+            nextPosition = null;//µ±Ç°ÔªËØÖÃ¿Õ
+        } else//·ñÔò
+        {
+            nextPosition = list.first();//´ÓµÚÒ»¸öÔªËØ¿ªÊ¼
+        }
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    //¼ì²éµü´úÆ÷ÖÐÊÇ·ñ»¹ÓÐÊ£ÓàµÄÔªËØ
     public boolean hasNext() {
         return (null != nextPosition);
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
+    //·µ»Øµü´úÆ÷ÖÐµÄÏÂÒ»ÔªËØ
     public Object getNext() throws ExceptionNoSuchElement {
-		if (!hasNext()) {
-			throw new ExceptionNoSuchElement("ï¿½ï¿½ï¿½â£ºÃ»ï¿½ï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½");
-		}
+        if (!hasNext()) {
+            throw new ExceptionNoSuchElement("ÒâÍâ£ºÃ»ÓÐÏÂÒ»ÔªËØ");
+        }
         Position currentPosition = nextPosition;
-		if (currentPosition == list.last())//ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½Î²Ôªï¿½Ø£ï¿½ï¿½ï¿½
-		{
-			nextPosition = null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
-		} else//ï¿½ï¿½ï¿½ï¿½
-		{
-			nextPosition = list.getNext(currentPosition);//×ªï¿½ï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
-		}
+        if (currentPosition == list.last())//ÈôÒÑµ½´ïÎ²ÔªËØ£¬Ôò
+        {
+            nextPosition = null;//²»ÔÙÓÐÏÂÒ»ÔªËØ
+        } else//·ñÔò
+        {
+            nextPosition = list.getNext(currentPosition);//×ªÏòÏÂÒ»ÔªËØ
+        }
         return currentPosition.getElem();
     }
 }

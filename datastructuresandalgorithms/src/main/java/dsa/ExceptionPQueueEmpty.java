@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟皆空碉拷锟斤拷锟饺讹拷锟斤拷应锟斤拷getMin()锟斤拷delMin()锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对空的优先队列应用getMin()或delMin()方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionPQueueEmpty extends RuntimeException {
-
 	public ExceptionPQueueEmpty(String err) {
 		super(err);
 	}

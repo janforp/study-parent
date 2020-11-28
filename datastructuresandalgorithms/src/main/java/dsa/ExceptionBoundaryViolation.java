@@ -1,11 +1,10 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ê¡¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½Ğ±ï¿½ï¿½Î»ï¿½ï¿½Ô½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â½«ï¿½ï¿½ï¿½×³ï¿½
+ * µ±×÷Îª²ÎÊıµÄÊı×éÏÂ±ê¡¢ÏòÁ¿µÄÖÈ»òÁĞ±íµÄÎ»ÖÃÔ½½çÊ±£¬±¾ÒâÍâ½«±»Å×³ö
  */
 
 package dsa;
 
 public class ExceptionBoundaryViolation extends RuntimeException {
-
 	public ExceptionBoundaryViolation(String err) {
 		super(err);
 	}

@@ -1,5 +1,5 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò£¨·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Êµï¿½Öµï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½
+ * »ùÓÚÓĞĞò£¨·ÇÉı£©ÁĞ±íÊµÏÖµÄÓÅÏÈ¶ÓÁĞ
  */
 
 package dsa;
@@ -10,74 +10,74 @@ public class PQueue_SortedList implements PQueue {
 
     private Comparator C;
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ä¬ï¿½Ï±È½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÄ¬ÈÏ±È½ÏÆ÷£©
     public PQueue_SortedList() {
         this(new ComparatorDefault(), null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨±È½ÏÆ÷£©
     public PQueue_SortedList(Comparator c) {
         this(c, null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê¼Ôªï¿½Ø£ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨³õÊ¼ÔªËØ£©
     public PQueue_SortedList(Sequence s) {
         this(new ComparatorDefault(), s);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½Í³ï¿½Ê¼Ôªï¿½Ø£ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨±È½ÏÆ÷ºÍ³õÊ¼ÔªËØ£©
     public PQueue_SortedList(Comparator c, Sequence s) {
         L = new List_DLNode();
         C = c;
-		if (null != s) {
-			while (!s.isEmpty()) {
-				Entry e = (Entry) s.removeFirst();
-				insert(e.getKey(), e.getValue());
-			}
-		}
+        if (null != s) {
+            while (!s.isEmpty()) {
+                Entry e = (Entry) s.removeFirst();
+                insert(e.getKey(), e.getValue());
+            }
+        }
     }
 
-    //Í³ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ĞµÄ¹ï¿½Ä£
+    //Í³¼ÆÓÅÏÈ¶ÓÁĞµÄ¹æÄ£
     public int getSize() {
         return L.getSize();
     }
 
-    //ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅĞ¶ÏÓÅÏÈ¶ÓÁĞÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return L.isEmpty();
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½;ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò·µ»ØÆäÖĞµÄ×îĞ¡ÌõÄ¿£¨²¢²»É¾³ı£©;·ñÔò£¬±¨´í
     public Entry getMin() throws ExceptionPQueueEmpty {
-		if (L.isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½Ğ¿ï¿½");
-		}
+        if (L.isEmpty()) {
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁĞ¿Õ");
+        }
         return (Entry) L.last();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½Ø¼ï¿½ï¿½ï¿½kï¿½Ï³ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿
+    //½«¶ÔÏóobjÓë¹Ø¼üÂëkºÏ³ÉÒ»¸öÌõÄ¿£¬½«Æä²åÈëQÖĞ£¬²¢·µ»Ø¸ÃÌõÄ¿
     public Entry insert(Object key, Object obj) throws ExceptionKeyInvalid {
-        Entry entry = new EntryDefault(key, obj);//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
-		if (L.isEmpty()//ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½Îªï¿½ï¿½
-				|| (0 > C.compare(((Entry) (L.first().getElem())).getKey(), entry.getKey())))
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Çµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
-		{
-			L.insertFirst(entry);//ï¿½ï¿½Ö±ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·
-		} else {//ï¿½ï¿½ï¿½ï¿½
-			Position curPos = L.last();//ï¿½ï¿½Î²ï¿½ï¿½Ä¿ï¿½ï¿½Ê¼
-			while (0 > C.compare(((Entry) (curPos.getElem())).getKey(), entry.getKey())) {
-				curPos = L.getPrev(curPos);//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Æ£ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ä¿
-			}
-			L.insertAfter(curPos, entry);//ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Ä¿Ö®ï¿½ï¿½ï¿½ï¿½ï¿½entry
-		}
+        Entry entry = new EntryDefault(key, obj);//´´½¨Ò»¸öĞÂÌõÄ¿
+        if (L.isEmpty()//ÈôÓÅÏÈ¶ÓÁĞÎª¿Õ
+                || (0 > C.compare(((Entry) (L.first().getElem())).getKey(), entry.getKey())))
+        //»òĞÂÌõÄ¿ÊÇµ±Ç°×î´óÕß
+        {
+            L.insertFirst(entry);//ÔòÖ±½Ó²åÈëÖÁ±íÍ·
+        } else {//·ñÔò
+            Position curPos = L.last();//´ÓÎ²ÌõÄ¿¿ªÊ¼
+            while (0 > C.compare(((Entry) (curPos.getElem())).getKey(), entry.getKey())) {
+                curPos = L.getPrev(curPos);//²»¶ÏÇ°ÒÆ£¬Ö±µ½µÚÒ»¸ö²»Ğ¡ÓÚentryµÄÌõÄ¿
+            }
+            L.insertAfter(curPos, entry);//½ô½Ó¸ÃÌõÄ¿Ö®ºó²åÈëentry
+        }
         return (entry);
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò´ÓÆäÖĞÕª³ı¹Ø¼üÂë×îĞ¡µÄÌõÄ¿£¬²¢·µ»Ø¸ÃÌõÄ¿£»·ñÔò£¬±¨´í
     public Entry delMin() throws ExceptionPQueueEmpty {
-		if (L.isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½Ğ¿ï¿½");
-		}
+        if (L.isEmpty()) {
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁĞ¿Õ");
+        }
         return (Entry) L.remove(L.last());
     }
 }

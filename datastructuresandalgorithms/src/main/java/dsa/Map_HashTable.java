@@ -27,9 +27,9 @@ public class Map_HashTable implements Map {
         T = t;
         N = p(n);//Ͱ��������ȡΪ��С��n����С����
         A = new Map[N];
-		for (int i = 0; i < N; i++) {
-			A[i] = new Map_DLNode(T);
-		}
+        for (int i = 0; i < N; i++) {
+            A[i] = new Map_DLNode(T);
+        }
         size = 0;
     }
 
@@ -41,23 +41,23 @@ public class Map_HashTable implements Map {
 
     //�ж�n�Ƿ�Ϊ����
     private static boolean prime(int n) {
-		for (int i = 3; i < 1 + Math.sqrt(n); i++) {
-			if (n / i * i == n) {
-				return false;
-			}
-		}
+        for (int i = 3; i < 1 + Math.sqrt(n); i++) {
+            if (n / i * i == n) {
+                return false;
+            }
+        }
         return true;
     }
 
     //ȡ��С��n����С����
     private static int p(int n) {
-		if (3 > n) {
-			n = 3;
-		}
+        if (3 > n) {
+            n = 3;
+        }
         n = n | 1;//������
-		while (!prime(n)) {
-			n += 2;
-		}
+        while (!prime(n)) {
+            n += 2;
+        }
         return n;
     }
 
@@ -83,9 +83,9 @@ public class Map_HashTable implements Map {
         Object oldValue = A[h(key)].put(key, value);
         if (null == oldValue) {//���������Ŀδ������ԭɢ�б��У���
             size++;//���¹�ģ��¼
-			if (size > N * maxLemda) {
-				rehash();//��װ�����ӹ�������ɢ��
-			}
+            if (size > N * maxLemda) {
+                rehash();//��װ�����ӹ�������ɢ��
+            }
         }
         return oldValue;
     }
@@ -93,9 +93,9 @@ public class Map_HashTable implements Map {
     //��M�д�����keyΪ�ؼ������Ŀ����ɾ��֮�����������ݶ��󣻷��򣬷���null
     public Object remove(Object key) {
         Object oldValue = A[h(key)].remove(key);
-		if (null != oldValue) {
-			size--;
-		}
+        if (null != oldValue) {
+            size--;
+        }
         return oldValue;
     }
 
@@ -105,9 +105,9 @@ public class Map_HashTable implements Map {
         List L = new List_DLNode();
         for (int i = 0; i < N; i++) {
             Iterator it = A[i].entries();
-			while (it.hasNext()) {
-				L.insertLast(it.getNext());
-			}
+            while (it.hasNext()) {
+                L.insertLast(it.getNext());
+            }
         }
         return new IteratorElement(L);
     }
@@ -117,9 +117,9 @@ public class Map_HashTable implements Map {
         Iterator it = this.entries();
         N = p(N << 1);
         A = new Map[N];//Ͱ�����������ټӱ�
-		for (int i = 0; i < N; i++) {
-			A[i] = new Map_DLNode(T);//Ϊÿ��Ͱ����һ����ӳ��
-		}
+        for (int i = 0; i < N; i++) {
+            A[i] = new Map_DLNode(T);//Ϊÿ��Ͱ����һ����ӳ��
+        }
         while (it.hasNext()) {//�����Ӧ��ӳ��ṹ�е�
             Entry e = (Entry) it.getNext();//����Ŀ��һȡ��������
             Object k = e.getKey();//�ؼ����

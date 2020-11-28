@@ -1,12 +1,12 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADTï¿½Ó¿ï¿½
+ * µü´úÆ÷ADT½Ó¿Ú
  */
 
 package dsa;
 
-public interface Iterator {
+public interface Iterator<E> {
 
-    boolean hasNext();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    boolean hasNext();//¼ì²éµü´úÆ÷ÖÐÊÇ·ñ»¹ÓÐÊ£ÓàµÄÔªËØ
 
-    Object getNext();//ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
+    E getNext();//·µ»Øµü´úÆ÷ÖÐµÄÏÂÒ»ÔªËØ
 }

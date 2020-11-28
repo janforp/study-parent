@@ -1,30 +1,30 @@
 /*
- * 锟斤拷锟斤拷锟接匡拷
+ * 向量接口
  */
 
 package dsa;
 
 public interface Vector {
 
-    //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷元锟斤拷锟斤拷目
+    //返回向量中元素数目
     public int getSize();
 
-    //锟叫讹拷锟斤拷锟斤拷锟角凤拷为锟斤拷
+    //判断向量是否为空
     public boolean isEmpty();
 
-    //取锟斤拷为r锟斤拷元锟斤拷
+    //取秩为r的元素
     public Object getAtRank(int r)
             throws ExceptionBoundaryViolation;
 
-    //锟斤拷锟斤拷为r锟斤拷元锟斤拷锟芥换为obj
+    //将秩为r的元素替换为obj
     public Object replaceAtRank(int r, Object obj)
             throws ExceptionBoundaryViolation;
 
-    //锟斤拷锟斤拷obj锟斤拷锟斤拷为锟斤拷为r锟斤拷元锟截ｏ拷锟斤拷锟截革拷元锟斤拷
+    //插入obj，作为秩为r的元素；返回该元素
     public Object insertAtRank(int r, Object obj)
             throws ExceptionBoundaryViolation;
 
-    //删锟斤拷锟斤拷为r锟斤拷元锟斤拷
+    //删除秩为r的元素
     public Object removeAtRank(int r)
             throws ExceptionBoundaryViolation;
 }

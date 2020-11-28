@@ -1,11 +1,10 @@
 /*
- * О©╫О©╫О©╫О©╫н╙О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫б╠Й║╒О©╫О©╫О©╫О©╫О©╫О©╫О©╫х╩О©╫О©╫п╠О©╫О©╫н╩О©╫ц╥г╥О©╫й╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫Б╫╚О©╫О©╫О©╫вЁО©╫
+ * ╣╠вВн╙╡нйЩ╣дйЩвИоб╠Й║╒оРа©╣джх╩Рап╠М╣дн╩жц╥г╥╗й╠ё╛╠╬рБмБ╫╚╠╩евЁЖ
  */
 
 package dsa;
 
 public class ExceptionPositionInvalid extends RuntimeException {
-
 	public ExceptionPositionInvalid(String err) {
 		super(err);
 	}

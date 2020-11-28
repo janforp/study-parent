@@ -1,88 +1,88 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Öµï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
+ * »ùÓÚÖÈÊµÏÖµÄÍêÈ«¶þ²æÊ÷½Úµã
  */
 
 package dsa;
 
 public class ComplBinTreeNode_Rank extends BinTreeNode implements BinTreePosition {
 
-	private Vector T;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private Vector T;//ËùÊôµÄÊ÷
 
-	private int rank;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
+    private int rank;//ÔÚËùÊôÊ÷ÖÐµÄÖÈ
 
-	private Object element;//ï¿½ï¿½ÅµÄ¶ï¿½ï¿½ï¿½
+    private Object element;//´æ·ÅµÄ¶ÔÏó
 
-	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
-	public ComplBinTreeNode_Rank(Vector t, Object obj) {
-		element = obj;
-		T = t;
-		rank = T.getSize();
-		T.insertAtRank(rank, this);
-	}
+    //¹¹Ôìº¯Êý
+    public ComplBinTreeNode_Rank(Vector t, Object obj) {
+        element = obj;
+        T = t;
+        rank = T.getSize();
+        T.insertAtRank(rank, this);
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½Ð´ï¿½ÅµÄ¶ï¿½ï¿½ï¿½
-	public Object getElem() {
-		return element;
-	}
+    //·µ»Øµ±Ç°½ÚµãÖÐ´æ·ÅµÄ¶ÔÏó
+    public Object getElem() {
+        return element;
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½ï¿½ëµ±Ç°ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public Object setElem(Object obj) {
-		Object bak = element;
-		element = obj;
-		return bak;
-	}
+    //½«¶ÔÏóobj´æÈëµ±Ç°½Úµã£¬²¢·µ»Ø´ËÇ°µÄÄÚÈÝ
+    public Object setElem(Object obj) {
+        Object bak = element;
+        element = obj;
+        return bak;
+    }
 
-	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ð¸ï¿½ï¿½×£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
-	public boolean hasParent() {
-		return (0 != rank) ? true : false;
-	}
+    //ÅÐ¶ÏÊÇ·ñÓÐ¸¸Ç×£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
+    public boolean hasParent() {
+        return (0 != rank) ? true : false;
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½Úµï¿½
-	public BinTreePosition getParent() {
-		return hasParent() ? (BinTreePosition) T.getAtRank((rank - 1) / 2) : null;
-	}
+    //·µ»Øµ±Ç°½ÚµãµÄ¸¸½Úµã
+    public BinTreePosition getParent() {
+        return hasParent() ? (BinTreePosition) T.getAtRank((rank - 1) / 2) : null;
+    }
 
-	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
-	public boolean hasLChild() {
-		return (1 + rank * 2 < T.getSize()) ? true : false;
-	}
+    //ÅÐ¶ÏÊÇ·ñÓÐ×óº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
+    public boolean hasLChild() {
+        return (1 + rank * 2 < T.getSize()) ? true : false;
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public BinTreePosition getLChild() {
-		return hasLChild() ? (BinTreePosition) (T.getAtRank(1 + rank * 2)) : null;
-	}
+    //·µ»Øµ±Ç°½ÚµãµÄ×óº¢×Ó
+    public BinTreePosition getLChild() {
+        return hasLChild() ? (BinTreePosition) (T.getAtRank(1 + rank * 2)) : null;
+    }
 
-	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
-	public boolean hasRChild() {
-		return (2 + rank * 2 < T.getSize()) ? true : false;
-	}
+    //ÅÐ¶ÏÊÇ·ñÓÐÓÒº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
+    public boolean hasRChild() {
+        return (2 + rank * 2 < T.getSize()) ? true : false;
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
-	public BinTreePosition getRChild() {
-		return hasRChild() ? (BinTreePosition) (T.getAtRank(2 + rank * 2)) : null;
-	}
+    //·µ»Øµ±Ç°½ÚµãµÄÓÒº¢×Ó
+    public BinTreePosition getRChild() {
+        return hasRChild() ? (BinTreePosition) (T.getAtRank(2 + rank * 2)) : null;
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½Ä¿
-	public int getSize() {
-		int size = 1;
-		if (hasLChild()) {
-			size += getLChild().getSize();
-		}
-		if (hasRChild()) {
-			size += getRChild().getSize();
-		}
-		return size;
-	}
+    //·µ»Øµ±Ç°½Úµãºó´úÔªËØµÄÊýÄ¿
+    public int getSize() {
+        int size = 1;
+        if (hasLChild()) {
+            size += getLChild().getSize();
+        }
+        if (hasRChild()) {
+            size += getRChild().getSize();
+        }
+        return size;
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½Ä¸ß¶ï¿½
-	public int getHeight() {
-		int hL = hasLChild() ? getLChild().getHeight() : -1;
-		int hR = hasRChild() ? getRChild().getHeight() : -1;
-		return 1 + Math.max(hL, hR);
-	}
+    //·µ»Øµ±Ç°½ÚµãµÄ¸ß¶È
+    public int getHeight() {
+        int hL = hasLChild() ? getLChild().getHeight() : -1;
+        int hR = hasRChild() ? getRChild().getHeight() : -1;
+        return 1 + Math.max(hL, hR);
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-	public int getDepth() {
-		return hasParent() ? 1 + getParent().getDepth() : 0;
-	}
+    //·µ»Øµ±Ç°½ÚµãµÄÉî¶È
+    public int getDepth() {
+        return hasParent() ? 1 + getParent().getDepth() : 0;
+    }
 }

@@ -1,51 +1,51 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ã·¨Ä£ï¿½ï¿½
+ * £¨ÓÐÏò£©Í¼µÄÉî¶ÈÓÅÏÈ±éÀúËã·¨Ä£°å
  */
 
 package dsa;
 
 public abstract class DFS extends GraphTraverse {
 
-	//ï¿½ï¿½ï¿½ï¿½
-	protected static int clock = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ÃµÄ¼ï¿½Ê±ï¿½ï¿½
+    //±äÁ¿
+    protected static int clock = 0;//±éÀú¹ý³ÌÖÐÊ¹ÓÃµÄ¼ÆÊ±ÖÓ
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
-	public DFS(Graph g) {
-		super(g);
-	}
+    //¹¹Ôì·½·¨
+    public DFS(Graph g) {
+        super(g);
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ã·¨
-	protected Object traverse(Vertex v, Object info) {//ï¿½Ó¶ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
-		if (UNDISCOVERED != v.getStatus()) {
-			return null;//ï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½Ê¹ï¿½ï¿½Ä¶ï¿½ï¿½ã£¨ï¿½ï¿½Ô·ï¿½ï¿½ï¿½Í¨Í¼ï¿½ï¿½
-		}
-		v.setDStamp(clock++);
-		v.setStatus(DISCOVERED);
-		visit(v, info);//ï¿½ï¿½ï¿½Êµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
-		for (Iterator it = v.outEdges(); it.hasNext(); ) {//ï¿½ï¿½ï¿½ï¿½ë¶¥ï¿½ï¿½v
-			Edge e = (Edge) it.getNext();//Í¨ï¿½ï¿½ï¿½ï¿½e = (v, u)
-			Vertex u = (Vertex) e.getVPosInV(1).getElem();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½u
-			switch (u.getStatus()) {//ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½Ç°ï¿½Ä²ï¿½Í¬×´Ì¬ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
-				case UNDISCOVERED://ï¿½ï¿½uï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½
-					e.setType(TREE);//eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½
-					traverse(u, info);//ï¿½ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
-					break;
-				case DISCOVERED://ï¿½ï¿½uï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-					e.setType(BACKWARD);//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½
-					break;
-				default://VISITEDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½Ä·ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
-					if (u.getDStamp() < v.getDStamp())//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ÖµÃ¸ï¿½ï¿½ç£¬ï¿½ï¿½
-					{
-						e.setType(CROSS);//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½
-					} else//ï¿½ï¿½ï¿½ï¿½
-					{
-						e.setType(FORWARD);//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½ï¿½ï¿½ß¡ï¿½
-					}
-					break;
-			}
-		}//ï¿½ï¿½ï¿½Ë£ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¾Ó¶ï¿½ï¿½Ñ·ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		v.setFStamp(clock++);
-		v.setStatus(VISITED);//ï¿½ï¿½vï¿½ï¿½ï¿½ÎªVISITED
-		return null;//È»ï¿½ï¿½ï¿½ï¿½ï¿½
-	}
+    //Éî¶ÈÓÅÏÈ±éÀúËã·¨
+    protected Object traverse(Vertex v, Object info) {//´Ó¶¥µãv³ö·¢£¬×öÉî¶ÈÓÅÏÈ²éÕÒ
+        if (UNDISCOVERED != v.getStatus()) {
+            return null;//Ìø¹ýÒÑ·ÃÎÊ¹ýµÄ¶¥µã£¨Õë¶Ô·ÇÁ¬Í¨Í¼£©
+        }
+        v.setDStamp(clock++);
+        v.setStatus(DISCOVERED);
+        visit(v, info);//·ÃÎÊµ±Ç°¶¥µã
+        for (Iterator it = v.outEdges(); it.hasNext(); ) {//¼ì²éÓë¶¥µãv
+            Edge e = (Edge) it.getNext();//Í¨¹ý±ße = (v, u)
+            Vertex u = (Vertex) e.getVPosInV(1).getElem();//ÏàÁªµÄÃ¿Ò»¶¥µãu
+            switch (u.getStatus()) {//¸ù¾Ýuµ±Ç°µÄ²»Í¬×´Ì¬£¬·Ö±ð×öÏàÓ¦´¦Àí
+                case UNDISCOVERED://ÈôuÉÐÎ´±»·¢ÏÖ£¬Ôò
+                    e.setType(TREE);//e±»¹éÀàÎª¡°Ê÷±ß¡±
+                    traverse(u, info);//´Óu³ö·¢£¬¼ÌÐø×öÉî¶ÈÓÅÏÈ²éÕÒ
+                    break;
+                case DISCOVERED://ÈôuÒÑ¾­±»·¢ÏÖ£¬µ«¶ÔÆä·ÃÎÊÉÐÎ´½áÊø£¬Ôò
+                    e.setType(BACKWARD);//½«e¹éÀàÎª¡°ºóÏò¿ç±ß¡±
+                    break;
+                default://VISITED£¬¼´¶ÔuµÄ·ÃÎÊÒÑ¾­½áÊø
+                    if (u.getDStamp() < v.getDStamp())//ÈôÏà¶ÔÓÚv£¬u±»·¢ÏÖµÃ¸üÔç£¬Ôò
+                    {
+                        e.setType(CROSS);//½«e¹éÀàÎª¡°ºá¿ç±ß¡±
+                    } else//·ñÔò
+                    {
+                        e.setType(FORWARD);//½«e¹éÀàÎª¡°Ç°Ïò¿ç±ß¡±
+                    }
+                    break;
+            }
+        }//ÖÁ´Ë£¬vµÄËùÓÐÁÚ¾Ó¶¼ÒÑ·ÃÎÊ½áÊø£¬¹Ê
+        v.setFStamp(clock++);
+        v.setStatus(VISITED);//½«v±ê¼ÇÎªVISITED
+        return null;//È»ºó»ØËÝ
+    }
 }

@@ -1,16 +1,16 @@
 /*
- * ï¿½ï¿½ï¿½Ð½Ó¿ï¿½
+ * ÐòÁÐ½Ó¿Ú
  */
 
 package dsa;
 
 public interface Sequence extends Vector, List {
 
-    //ï¿½ï¿½0 <= r < getSize()ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //Èô0 <= r < getSize()£¬Ôò·µ»ØÖÈÎªrµÄÔªËØËùÔÚµÄÎ»ÖÃ£»·ñÔò£¬±¨´í
     public Position rank2Pos(int r)
             throws ExceptionBoundaryViolation;
 
-    //ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄºÏ·ï¿½Î»ï¿½Ã£ï¿½ï¿½ò·µ»Ø´ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôpÊÇÐòÁÐÖÐµÄºÏ·¨Î»ÖÃ£¬Ôò·µ»Ø´æ·ÅÓÚp´¦µÄÔªËØµÄÖÈ£»·ñÔò£¬±¨´í
     public int pos2Rank(Position p)
             throws ExceptionPositionInvalid;
 }

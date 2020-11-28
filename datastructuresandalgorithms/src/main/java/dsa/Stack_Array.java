@@ -1,62 +1,62 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Stackï¿½Ó¿ï¿½
+ * ½èÖú¶¨³¤Êý×éÊµÏÖStack½Ó¿Ú
  */
 
 package dsa;
 
 public class Stack_Array implements Stack {
 
-    public static final int CAPACITY = 1024;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public static final int CAPACITY = 1024;//Êý×éµÄÄ¬ÈÏÈÝÁ¿
 
-    protected int capacity;//ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    protected int capacity;//Êý×éµÄÊµ¼ÊÈÝÁ¿
 
-    protected Object[] S;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    protected Object[] S;//¶ÔÏóÊý×é
 
-    protected int top = -1;//Õ»ï¿½ï¿½Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+    protected int top = -1;//Õ»¶¥ÔªËØµÄÎ»ÖÃ
 
-    //ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+    //°´Ä¬ÈÏÈÝÁ¿´´½¨Õ»¶ÔÏó
     public Stack_Array() {
         this(CAPACITY);
     }
 
-    //ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+    //°´Ö¸¶¨ÈÝÁ¿´´½¨Õ»¶ÔÏó
     public Stack_Array(int cap) {
         capacity = cap;
         S = new Object[capacity];
     }
 
-    //ï¿½ï¿½È¡Õ»ï¿½ï¿½Ç°ï¿½Ä¹ï¿½Ä£
+    //»ñÈ¡Õ»µ±Ç°µÄ¹æÄ£
     public int getSize() {
         return (top + 1);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½Õ»ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //²âÊÔÕ»ÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return (top < 0);
     }
 
-    //ï¿½ï¿½Õ»
+    //ÈëÕ»
     public void push(Object obj) throws ExceptionStackFull {
 		if (getSize() == capacity) {
-			throw new ExceptionStackFull("ï¿½ï¿½ï¿½â£ºÕ»ï¿½ï¿½ï¿½");
-		}
+            throw new ExceptionStackFull("ÒâÍâ£ºÕ»Òç³ö");
+        }
         S[++top] = obj;
     }
 
-    //È¡Õ»ï¿½ï¿½Ôªï¿½ï¿½
+    //È¡Õ»¶¥ÔªËØ
     public Object top() throws ExceptionStackEmpty {
 		if (isEmpty()) {
-			throw new ExceptionStackEmpty("ï¿½ï¿½ï¿½â£ºÕ»ï¿½ï¿½");
-		}
+            throw new ExceptionStackEmpty("ÒâÍâ£ºÕ»¿Õ");
+        }
         return S[top];
     }
 
-    //ï¿½ï¿½Õ»
+    //³öÕ»
     public Object pop() throws ExceptionStackEmpty {
         Object elem;
 		if (isEmpty()) {
-			throw new ExceptionStackEmpty("ï¿½ï¿½ï¿½â£ºÕ»ï¿½ï¿½");
-		}
+            throw new ExceptionStackEmpty("ÒâÍâ£ºÕ»¿Õ");
+        }
         elem = S[top];
         S[top--] = null;
         return elem;

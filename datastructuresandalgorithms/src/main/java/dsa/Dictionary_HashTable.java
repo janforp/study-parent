@@ -1,98 +1,98 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½É¢ï¿½Ğ±ï¿½Êµï¿½ÖµÄ£ï¿½ï¿½ï¿½ï¿½ò£©´Êµï¿½á¹¹
- * ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½Í»
+ * »ùÓÚÉ¢ÁĞ±íÊµÏÖµÄ£¨ÎŞĞò£©´Êµä½á¹¹
+ * ²ÉÓÃ·ÖÀëÁ´²ßÂÔ½â¾ö³åÍ»
  */
 
 package dsa;
 
 public class Dictionary_HashTable implements Dictionary {
 
-    private Dictionary[] A;//Í°ï¿½ï¿½ï¿½é£¬Ã¿ï¿½ï¿½Í°ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Êµï¿½ÖµÄ£ï¿½ï¿½Êµï¿½á¹¹
+    private Dictionary[] A;//Í°Êı×é£¬Ã¿¸öÍ°±¾ÉíÒ²ÊÇÒ»¸ö£¨»ùÓÚÁĞ±íÊµÏÖµÄ£©´Êµä½á¹¹
 
-    private int N;//É¢ï¿½Ğ±ï¿½
+    private int N;//É¢ÁĞ±í³¤
 
-    private final double maxLemda = 0.75;//×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private final double maxLemda = 0.75;//×°ÌîÒò×ÓÉÏÏŞ
 
-    private int size;//ï¿½Êµï¿½á¹¹ï¿½Ä¹ï¿½Ä£
+    private int size;//´Êµä½á¹¹µÄ¹æÄ£
 
-    private EqualityTester T;//ï¿½Ğµï¿½ï¿½ï¿½
+    private EqualityTester T;//ÅĞµÈÆ÷
 
-    //Ä¬ï¿½Ï¹ï¿½ï¿½ì·½ï¿½ï¿½
+    //Ä¬ÈÏ¹¹Ôì·½·¨
     public Dictionary_HashTable() {
         this(0, new EqualityTesterDefault());
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+    //¹¹Ôì·½·¨
     public Dictionary_HashTable(int n, EqualityTester t) {
         T = t;
-        N = p(n);//Í°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Îªï¿½ï¿½Ğ¡ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½
+        N = p(n);//Í°Êı×éÈİÁ¿È¡Îª²»Ğ¡ÓÚnµÄ×îĞ¡ËØÊı
         A = new Dictionary[N];
-		for (int i = 0; i < N; i++) {
-			A[i] = new Dictionary_DLNode(T);
-		}
+        for (int i = 0; i < N; i++) {
+            A[i] = new Dictionary_DLNode(T);
+        }
         size = 0;
     }
 
-    /***************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ *****************************/
-    //É¢ï¿½Ğ¶ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½à·¨ï¿½ï¿½
+    /***************************** ¸¨Öú·½·¨ *****************************/
+    //É¢ÁĞ¶¨Ö·º¯Êı£¨²ÉÓÃÄ£Óà·¨£©
     private int h(Object key) {
         return key.hashCode() % N;
     }
 
-    //ï¿½Ğ¶ï¿½nï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½
+    //ÅĞ¶ÏnÊÇ·ñÎªËØÊı
     private static boolean prime(int n) {
-		for (int i = 3; i < 1 + Math.sqrt(n); i++) {
-			if (n / i * i == n) {
-				return false;
-			}
+        for (int i = 3; i < 1 + Math.sqrt(n); i++) {
+            if (n / i * i == n) {
+                return false;
+            }
 		}
         return true;
     }
 
-    //È¡ï¿½ï¿½Ğ¡ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½
+    //È¡²»Ğ¡ÓÚnµÄ×îĞ¡ËØÊı
     private static int p(int n) {
-		if (3 > n) {
-			n = 3;
-		}
-        n = n | 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		while (!prime(n)) {
-			n += 2;
-		}
+        if (3 > n) {
+            n = 3;
+        }
+        n = n | 1;//ÆæÊı»¯
+        while (!prime(n)) {
+            n += 2;
+        }
         return n;
     }
 
-    /***************************** ADTï¿½ï¿½ï¿½ï¿½ *****************************/
-    //ï¿½ï¿½Ñ¯ï¿½Êµï¿½á¹¹ï¿½ï¿½Ç°ï¿½Ä¹ï¿½Ä£
+    /***************************** ADT·½·¨ *****************************/
+    //²éÑ¯´Êµä½á¹¹µ±Ç°µÄ¹æÄ£
     public int getSize() {
         return size;
     }
 
-    //ï¿½Ğ¶Ï´Êµï¿½á¹¹ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅĞ¶Ï´Êµä½á¹¹ÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return 0 == size;
     }
 
-    //ï¿½ï¿½ï¿½Êµï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½keyÎªï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´ÊµäÖĞ´æÔÚÒÔkeyÎª¹Ø¼üÂëµÄÌõÄ¿£¬Ôò·µ»ØÆäÖĞµÄÒ»¸öÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry find(Object key) {
         return A[h(key)].find(key);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂëÎªkeyµÄÌõÄ¿×é³ÉµÄµü´úÆ÷
     public Iterator findAll(Object key) {
         return A[h(key)].findAll(key);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿(key, value)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿
+    //²åÈëÌõÄ¿(key, value)£¬²¢·µ»Ø¸ÃÌõÄ¿
     public Entry insert(Object key, Object value) {
-        Entry entry = A[h(key)].insert(key, value);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Í°A[h(key)]ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ó´Êµï¿½
-        size++;//ï¿½ï¿½ï¿½Â¹ï¿½Ä£ï¿½ï¿½Â¼
-		if (size > N * maxLemda) {
-			rehash();//ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¢ï¿½ï¿½
-		}
-        return entry;//ï¿½ï¿½ï¿½ï¿½nullï¿½ï¿½Ö¾
+        Entry entry = A[h(key)].insert(key, value);//½«ĞÂÌõÄ¿²åÖÁÍ°A[h(key)]¶ÔÓ¦µÄ×Ó´Êµä
+        size++;//¸üĞÂ¹æÄ£¼ÇÂ¼
+        if (size > N * maxLemda) {
+            rehash();//Èô×°ÌîÒò×Ó¹ı´ó£¬ÔòÖØÉ¢ÁĞ
+        }
+        return entry;//·µ»Ønull±êÖ¾
     }
 
-    //ï¿½ï¿½ï¿½Êµï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½keyÎªï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´ÊµäÖĞ´æÔÚÒÔkeyÎª¹Ø¼üÂëµÄÌõÄ¿£¬Ôò½«ÆäÕª³ı²¢·µ»Ø£»·ñÔò£¬·µ»Ønull
     public Entry remove(Object key) {
         Entry oldEntry = A[h(key)].remove(key);
 		if (null != oldEntry) {
@@ -101,7 +101,7 @@ public class Dictionary_HashTable implements Dictionary {
         return oldEntry;
     }
 
-    //ï¿½ï¿½ï¿½Ø´Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»Ø´ÊµäÖĞËùÓĞÌõÄ¿µÄÒ»¸öµü´úÆ÷
     public Iterator entries() {
         List L = new List_DLNode();
         for (int i = 0; i < N; i++) {
@@ -113,19 +113,19 @@ public class Dictionary_HashTable implements Dictionary {
         return new IteratorElement(L);
     }
 
-    //ï¿½ï¿½É¢ï¿½ï¿½
+    //ÖØÉ¢ÁĞ
     private void rehash() {
         Iterator it = this.entries();
         N = p(N << 1);
-        A = new Dictionary[N];//Í°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¼Ó±ï¿½
-		for (int i = 0; i < N; i++) {
-			A[i] = new Dictionary_DLNode(T);//ÎªÃ¿ï¿½ï¿½Í°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó´Êµï¿½
-		}
-        while (it.hasNext()) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä´Êµï¿½á¹¹ï¿½Ğµï¿½
-            Entry e = (Entry) it.getNext();//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ò»È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            Object k = e.getKey();//ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½
-            Object v = e.getValue();//ï¿½ï¿½ï¿½İ¶ï¿½ï¿½ï¿½
-            A[h(k)].insert(k, v);//ï¿½ï¿½ï¿½ï¿½Îªï¿½Âµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ó´Êµï¿½ï¿½ï¿½
+        A = new Dictionary[N];//Í°Êı×éÈİÁ¿ÖÁÉÙ¼Ó±¶
+        for (int i = 0; i < N; i++) {
+            A[i] = new Dictionary_DLNode(T);//ÎªÃ¿¸öÍ°·ÖÅäÒ»¸ö×Ó´Êµä
+        }
+        while (it.hasNext()) {//½«Æä¶ÔÓ¦µÄ´Êµä½á¹¹ÖĞµÄ
+            Entry e = (Entry) it.getNext();//¸÷ÌõÄ¿ÖğÒ»È¡³ö£¬½«Æä
+            Object k = e.getKey();//¹Ø¼üÂëºÍ
+            Object v = e.getValue();//Êı¾İ¶ÔÏó
+            A[h(k)].insert(k, v);//ÕûºÏÎªĞÂµÄÌõÄ¿£¬²åÈë¶ÔÓ¦µÄ×Ó´ÊµäÖĞ
         }
     }
 }

@@ -1,70 +1,70 @@
 /*
- * ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¶ï¿½ï¿½Ð½á¹¹
+ * »ùÓÚµ¥Á´±íÊµÏÖ¶ÓÁÐ½á¹¹
  */
 
 package dsa;
 
 public class Queue_List implements Queue {
 
-    protected Node head;//Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    protected Node head;//Ö¸Ïò±íÊ×ÔªËØ
 
-    protected Node tail;//Ö¸ï¿½ï¿½ï¿½Ä©Ôªï¿½ï¿½
+    protected Node tail;//Ö¸Ïò±íÄ©ÔªËØ
 
-    protected int size;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½Ä¿
+    protected int size;//¶ÓÁÐÖÐÔªËØµÄÊýÄ¿
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½Ð£ï¿½
+    //¹¹Ôì·½·¨£¨¿Õ¶ÓÁÐ£©
     public Queue_List() {
         head = tail = null;
         size = 0;
     }
 
-    //ï¿½ï¿½Ñ¯ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ÐµÄ¹ï¿½Ä£
+    //²éÑ¯µ±Ç°¶ÓÁÐµÄ¹æÄ£
     public int getSize() {
         return size;
     }
 
-    //ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶Ï¶ÓÁÐÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return (0 == size) ? true : false;
     }
 
-    //ï¿½ï¿½ï¿½
+    //Èë¶Ó
     public void enqueue(Object obj) {
         Node node = new Node();
         node.setElem(obj);
-        node.setNext(null);//ï¿½Â½Úµï¿½ï¿½ï¿½ÎªÄ©ï¿½Úµï¿½ï¿½ï¿½ï¿½
-		if (0 == size) {
-			head = node;//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Ö±ï¿½Ó²ï¿½ï¿½ï¿½
-		} else {
-			tail.setNext(node);//ï¿½ï¿½ï¿½ò£¬½ï¿½ï¿½Â½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä©ï¿½ï¿½
-		}
-        tail = node;//ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ä©ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-        size++;//ï¿½ï¿½ï¿½Â¹ï¿½Ä£
+        node.setNext(null);//ÐÂ½Úµã×÷ÎªÄ©½Úµã²åÈë
+        if (0 == size) {
+            head = node;//Èô´ËÇ°¶ÓÁÐÎª¿Õ£¬ÔòÖ±½Ó²åÈë
+        } else {
+            tail.setNext(node);//·ñÔò£¬½«ÐÂ½Úµã½ÓÖÁ¶ÓÁÐÄ©¶Ë
+        }
+        tail = node;//¸üÐÂÖ¸ÏòÄ©½ÚµãÒýÓÃ
+        size++;//¸üÐÂ¹æÄ£
     }
 
-    //ï¿½ï¿½ï¿½ï¿½
+    //³ö¶Ó
     public Object dequeue() throws ExceptionQueueEmpty {
-		if (0 == size) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ð¿ï¿½");
-		}
+        if (0 == size) {
+            throw new ExceptionQueueEmpty("ÒâÍâ£º¶ÓÁÐ¿Õ");
+        }
         Object obj = head.getElem();
         head = head.getNext();
         size--;
-		if (0 == size) {
-			tail = null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¿Õ£ï¿½ï¿½ë½«Ä©ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½
-		}
+        if (0 == size) {
+            tail = null;//Èô¶ÓÁÐÒÑ¿Õ£¬Ðë½«Ä©½ÚµãÒýÓÃÖÃ¿Õ
+        }
         return obj;
     }
 
-    //È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    //È¡£¨²¢²»É¾³ý£©¶ÓÊ×ÔªËØ
     public Object front() throws ExceptionQueueEmpty {
-		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ð¿ï¿½");
-		}
+        if (isEmpty()) {
+            throw new ExceptionQueueEmpty("ÒâÍâ£º¶ÓÁÐ¿Õ");
+        }
         return head.getElem();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADTï¿½ï¿½
+    //±éÀú£¨²»ÊôÓÚADT£©
     public void Traversal() {
         Node p = head;
         while (null != p) {

@@ -1,20 +1,20 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Êµï¿½Ó¿ï¿½
+ * ÓÐÐò´Êµä½Ó¿Ú
  */
 
 package dsa;
 
 public interface SortedDictionary extends Dictionary {
 
-    //ï¿½ï¿½ï¿½Êµï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ð¹Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´Êµä·Ç¿Õ£¬Ôò·µ»ØÆäÖÐ¹Ø¼üÂë×îÐ¡µÄÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry first();
 
-    //ï¿½ï¿½ï¿½Êµï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ð¹Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´Êµä·Ç¿Õ£¬Ôò·µ»ØÆäÖÐ¹Ø¼üÂë×î´óµÄÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry last();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ë²»Ð¡ï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂë²»Ð¡ÓÚkeyµÄÌõÄ¿ÒÀ·Ç½µÐò×é³ÉµÄµü´úÆ÷
     public Iterator successors(Object key);
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ë²»ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂë²»´óÓÚkeyµÄÌõÄ¿ÒÀ·ÇÉýÐò×é³ÉµÄµü´úÆ÷
     public Iterator predecessors(Object key);
 }

@@ -1,18 +1,18 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ë«ï¿½Ë¶ï¿½ï¿½Ð½á¹¹
+ * »ùÓÚË«ÏòÁ´±íÊµÏÖË«¶Ë¶ÓÁÐ½á¹¹
  */
 
 package dsa;
 
 public class Deque_DLNode implements Deque {
 
-    protected DLNode header;//Ö¸ï¿½ï¿½Í·ï¿½Úµã£¨ï¿½Ú±ï¿½ï¿½ï¿½
+    protected DLNode header;//Ö¸ÏòÍ·½Úµã£¨ÉÚ±ø£©
 
-    protected DLNode trailer;//Ö¸ï¿½ï¿½Î²ï¿½Úµã£¨ï¿½Ú±ï¿½ï¿½ï¿½
+    protected DLNode trailer;//Ö¸ÏòÎ²½Úµã£¨ÉÚ±ø£©
 
-    protected int size;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½Ä¿
+    protected int size;//¶ÓÁÐÖÐÔªËØµÄÊýÄ¿
 
-    //ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+    //¹¹Ôìº¯Êý
     public Deque_DLNode() {
         header = new DLNode();
         trailer = new DLNode();
@@ -21,33 +21,33 @@ public class Deque_DLNode implements Deque {
         size = 0;
     }
 
-    //ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ä¿
+    //·µ»Ø¶ÓÁÐÖÐÔªËØÊýÄ¿
     public int getSize() {
         return size;
     }
 
-    //ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶Ï¶ÓÁÐÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return (0 == size) ? true : false;
     }
 
-    //È¡ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½
+    //È¡Ê×ÔªËØ£¨µ«²»É¾³ý£©
     public Object first() throws ExceptionQueueEmpty {
 		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºË«ï¿½Ë¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
+            throw new ExceptionQueueEmpty("ÒâÍâ£ºË«¶Ë¶ÓÁÐÎª¿Õ");
+        }
         return header.getNext().getElem();
     }
 
-    //È¡Ä©Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½
+    //È¡Ä©ÔªËØ£¨µ«²»É¾³ý£©
     public Object last() throws ExceptionQueueEmpty {
 		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºË«ï¿½Ë¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
+            throw new ExceptionQueueEmpty("ÒâÍâ£ºË«¶Ë¶ÓÁÐÎª¿Õ");
+        }
         return trailer.getPrev().getElem();
     }
 
-    //ï¿½Ú¶ï¿½ï¿½ï¿½Ç°ï¿½Ë²ï¿½ï¿½ï¿½ï¿½Â½Úµï¿½
+    //ÔÚ¶ÓÁÐÇ°¶Ë²åÈëÐÂ½Úµã
     public void insertFirst(Object obj) {
         DLNode second = header.getNext();
         DLNode first = new DLNode(obj, header, second);
@@ -56,7 +56,7 @@ public class Deque_DLNode implements Deque {
         size++;
     }
 
-    //ï¿½Ú¶ï¿½ï¿½Ðºï¿½Ë²ï¿½ï¿½ï¿½ï¿½Â½Úµï¿½
+    //ÔÚ¶ÓÁÐºó¶Ë²åÈëÐÂ½Úµã
     public void insertLast(Object obj) {
         DLNode second = trailer.getPrev();
         DLNode first = new DLNode(obj, second, trailer);
@@ -65,11 +65,11 @@ public class Deque_DLNode implements Deque {
         size++;
     }
 
-    //É¾ï¿½ï¿½ï¿½×½Úµï¿½
+    //É¾³ýÊ×½Úµã
     public Object removeFirst() throws ExceptionQueueEmpty {
 		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºË«ï¿½Ë¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
+            throw new ExceptionQueueEmpty("ÒâÍâ£ºË«¶Ë¶ÓÁÐÎª¿Õ");
+        }
         DLNode first = header.getNext();
         DLNode second = first.getNext();
         Object obj = first.getElem();
@@ -79,11 +79,11 @@ public class Deque_DLNode implements Deque {
         return (obj);
     }
 
-    //É¾ï¿½ï¿½Ä©ï¿½Úµï¿½
+    //É¾³ýÄ©½Úµã
     public Object removeLast() throws ExceptionQueueEmpty {
 		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºË«ï¿½Ë¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
+            throw new ExceptionQueueEmpty("ÒâÍâ£ºË«¶Ë¶ÓÁÐÎª¿Õ");
+        }
         DLNode first = trailer.getPrev();
         DLNode second = first.getPrev();
         Object obj = first.getElem();
@@ -93,7 +93,7 @@ public class Deque_DLNode implements Deque {
         return (obj);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½
+    //±éÀú
     public void Traversal() {
         DLNode p = header.getNext();
         while (p != trailer) {

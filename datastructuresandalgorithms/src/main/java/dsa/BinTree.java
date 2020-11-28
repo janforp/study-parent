@@ -1,32 +1,32 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
+ * ¶þ²æÊ÷½Ó¿Ú
  */
 
 package dsa;
 
 public interface BinTree {
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    public BinTreePosition getRoot();
+	//·µ»ØÊ÷¸ù
+	public BinTreePosition getRoot();
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
-    public boolean isEmpty();
+	//ÅÐ¶ÏÊÇ·ñÊ÷¿Õ
+	public boolean isEmpty();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
-    public int getSize();
+	//·µ»ØÊ÷µÄ¹æÄ££¨¼´Ê÷¸ùµÄºó´úÊýÄ¿£©
+	public int getSize();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
-    public int getHeight();
+	//·µ»ØÊ÷£¨¸ù£©µÄ¸ß¶È
+	public int getHeight();
 
-    //Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
-    public Iterator elementsPreorder();
+	//Ç°Ðò±éÀú
+	public Iterator elementsPreorder();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    public Iterator elementsInorder();
+	//ÖÐÐò±éÀú
+	public Iterator elementsInorder();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    public Iterator elementsPostorder();
+	//ºóÐò±éÀú
+	public Iterator elementsPostorder();
 
-    //ï¿½ï¿½Î±ï¿½ï¿½ï¿½
-    public Iterator elementsLevelorder();
+	//²ã´Î±éÀú
+	public Iterator elementsLevelorder();
 }

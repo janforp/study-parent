@@ -6,8 +6,7 @@
 package dsa;
 
 public interface Edge {
-
-	//����
+//����
 	final static int UNKNOWN = 0;//δ֪��
 	final static int TREE = 1;//����
 	final static int CROSS = 2;//����
@@ -31,6 +30,5 @@ public interface Edge {
 
 	//��ȡ�����ñߵ������Ա�����
 	public int getType();
-
 	public int setType(int t);
 }

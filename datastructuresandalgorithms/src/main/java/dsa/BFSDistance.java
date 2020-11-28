@@ -1,31 +1,31 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½BFSï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ã·¨
+ * £¨ÓÐÏò£©Í¼»ùÓÚBFSµÄ×î¶Ì¾àÀëËã·¨
  */
 
 package dsa;
 
 public class BFSDistance extends BFS {
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
-	public BFSDistance(Graph g) {
-		super(g);
-	}
+    //¹¹Ôì·½·¨
+    public BFSDistance(Graph g) {
+        super(g);
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ã·¨ï¿½Ð£ï¿½infoï¿½Ç¶ï¿½ï¿½ï¿½vï¿½ï¿½Ç°ï¿½ï¿½
-	protected Object visit(Vertex v, Object info) {
-		if (null == info)//vÎªBFSï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
-		{
-			v.setDistance(0);
-		} else {
-			v.setDistance(((Vertex) info).getDistance() + 1);//ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½sï¿½Ä¾ï¿½ï¿½ï¿½ = Ç°ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½+1
-		}
-		return null;
-	}
+    //¶¥µã·ÃÎÊ²Ù×÷£ºÔÚ±¾Ëã·¨ÖÐ£¬infoÊÇ¶¥µãvµÄÇ°Çý
+    protected Object visit(Vertex v, Object info) {
+        if (null == info)//vÎªBFSµÄÆðÊ¼¶¥µã
+        {
+            v.setDistance(0);
+        } else {
+            v.setDistance(((Vertex) info).getDistance() + 1);//ÉèÖÃvµ½sµÄ¾àÀë = Ç°ÇýµÄ¾àÀë+1
+        }
+        return null;
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½BFSÊµï¿½Öµï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½sÎªï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ã£¬infoï¿½ï¿½ï¿½ã·¨ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½
-	public Object algorithm(Vertex s, Object info) {
-		reset(s);
-		traverse(s, info);//BFSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½distanceï¿½ï¿½ï¿½ï¿½
-		return null;
-	}
+    //»ùÓÚBFSÊµÏÖµÄ×î¶Ì¾àÀëËã·¨£ºsÎªÆðÊ¼¶¥µã£¬infoÏòËã·¨´«µÝ²ÎÊý
+    public Object algorithm(Vertex s, Object info) {
+        reset(s);
+        traverse(s, info);//BFS£ºµ½ÆðµãµÄ×î¶Ì¾àÀë¼ÇÂ¼ÔÚ¸÷¶¥µãµÄdistanceÓòÖÐ
+        return null;
+    }
 }

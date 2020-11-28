@@ -5,24 +5,15 @@
 package dsa;
 
 public class Vertex_List implements Vertex {
-
-	//����
+//����
 	protected Object info;//��ǰ�����д�ŵ�����Ԫ��
-
 	protected Position vPosInV;//��ǰ������������ͼ�Ķ����V�е�λ��
-
 	protected List outEdges;//�����߱�����Ե�ǰ����Ϊβ�����бߣ���λ�ã�
-
 	protected List inEdges;//�����߱�����Ե�ǰ����Ϊͷ�����бߣ���λ�ã�
-
 	protected int status;//���ڱ���ͼ�Ȳ��������У������״̬
-
 	protected int dStamp;//ʱ���ǩ��DFS�����иö��㱻����ʱ��ʱ��
-
 	protected int fStamp;//ʱ���ǩ��DFS�����иö��㱻���ʽ���ʱ��ʱ��
-
 	protected int distance;//��ָ�����ľ��룺BFS��Dijkstra���㷨��ȷ���ö��㵽���ľ���
-
 	protected Vertex bfsParent;//����̾�������BFS��BestFS���еĸ���
 
 	//���췽������ͼG������һ������Ϊx���¶���

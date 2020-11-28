@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟斤拷没锟叫猴拷痰牡锟斤拷锟斤拷锟皆拷锟接︼拷锟絞etNext()锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对没有后继的迭代器元素应用getNext()方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionNoSuchElement extends RuntimeException {
-
 	public ExceptionNoSuchElement(String err) {
 		super(err);
 	}

@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟斤拷锟斤拷锟斤拷锟斤拷应锟斤拷enqueue锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对满队列应用enqueue方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionQueueFull extends RuntimeException {
-
 	public ExceptionQueueFull(String err) {
 		super(err);
 	}

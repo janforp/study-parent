@@ -1,12 +1,12 @@
 /*
- * Î»ï¿½ï¿½ADTï¿½Ó¿ï¿½
+ * Î»ÖÃADT½Ó¿Ú
  */
 
 package dsa;
 
 public interface Position {
 
-    public Object getElem();//ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½Ú¸ï¿½Î»ï¿½Ãµï¿½Ôªï¿½ï¿½
+    public Object getElem();//·µ»Ø´æ·ÅÓÚ¸ÃÎ»ÖÃµÄÔªËØ
 
-    public Object setElem(Object e);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ø´ï¿½Ç°ï¿½ï¿½Åµï¿½Ôªï¿½ï¿½
+    public Object setElem(Object e);//½«¸ø¶¨ÔªËØ´æ·ÅÖÁ¸ÃÎ»ÖÃ£¬·µ»Ø´ËÇ°´æ·ÅµÄÔªËØ
 }

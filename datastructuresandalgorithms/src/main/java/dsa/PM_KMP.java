@@ -5,34 +5,33 @@ package dsa;/*
  */
 
 public class PM_KMP {
+//////////////////////////////////////////////////////////////////////////
+// T:	0		1		.		.		.		i		i+1	.		.		.		i+k	.		.		n-1
+//		--------------------|-------------------|------------
+// P:											j		j+1	.		.		.		j+k	.		.
+//												|-------------------|
+//////////////////////////////////////////////////////////////////////////
+public static int PM(String T, String P) {//KMP�㷨
+	int[] next = BuildNextImproved(P);//����next[]��
 
-	//////////////////////////////////////////////////////////////////////////
-	// T:	0		1		.		.		.		i		i+1	.		.		.		i+k	.		.		n-1
-	//		--------------------|-------------------|------------
-	// P:											j		j+1	.		.		.		j+k	.		.
-	//												|-------------------|
-	//////////////////////////////////////////////////////////////////////////
-	public static int PM(String T, String P) {//KMP�㷨
-		int[] next = BuildNextImproved(P);//����next[]��
+	int i = 0;//����ָ��
+	int j = 0;//ģʽ��ָ��
 
-		int i = 0;//����ָ��
-		int j = 0;//ģʽ��ָ��
+	while (j < P.length() && i < T.length()) {//������������Ƚ��ַ�
+		ShowProgress(T, P, i - j, j);
+		ShowNextTable(next, i - j, P.length());
+		System.out.println();
+		if (0 > j || T.charAt(i) == P.charAt(j)) {//��ƥ�䣬��P���Ƴ�����ࣨ���ʣ������������ܷ񽻻����򣿣�
+			i++;
+			j++;//��ת����һ���ַ�
+		} else//����
+		{
+			j = next[j];//ģʽ�����ƣ�ע�⣺�������û��ˣ�
+		}
+	}//while
 
-		while (j < P.length() && i < T.length()) {//������������Ƚ��ַ�
-			ShowProgress(T, P, i - j, j);
-			ShowNextTable(next, i - j, P.length());
-			System.out.println();
-			if (0 > j || T.charAt(i) == P.charAt(j)) {//��ƥ�䣬��P���Ƴ�����ࣨ���ʣ������������ܷ񽻻����򣿣�
-				i++;
-				j++;//��ת����һ���ַ�
-			} else//����
-			{
-				j = next[j];//ģʽ�����ƣ�ע�⣺�������û��ˣ�
-			}
-		}//while
-
-		return (i - j);
-	}
+	return (i - j);
+}
 
 	protected static int[] BuildNext(String P) {//����ģʽ��P��next[]��
 		int[] next = new int[P.length()];//next[]��

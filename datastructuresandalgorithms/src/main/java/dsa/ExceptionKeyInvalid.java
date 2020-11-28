@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图使锟矫非凤拷锟截硷拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图使用非法关键码时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionKeyInvalid extends RuntimeException {
-
 	public ExceptionKeyInvalid(String err) {
 		super(err);
 	}

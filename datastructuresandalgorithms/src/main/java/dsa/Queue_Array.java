@@ -1,76 +1,76 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Queueï¿½Ó¿ï¿½
+ * ½èÖú¶¨³¤Ñ­»·Êý×éÊµÏÖQueue½Ó¿Ú
  */
 
 package dsa;
 
 public class Queue_Array implements Queue {
 
-    public static final int CAPACITY = 1000;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public static final int CAPACITY = 1000;//Êý×éµÄÄ¬ÈÏÈÝÁ¿
 
-    protected int capacity;//ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    protected int capacity;//Êý×éµÄÊµ¼ÊÈÝÁ¿
 
-    protected Object[] Q;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    protected Object[] Q;//¶ÔÏóÊý×é
 
-    protected int f = 0;//ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+    protected int f = 0;//¶ÓÊ×ÔªËØµÄÎ»ÖÃ
 
-    protected int r = 0;//ï¿½ï¿½Î²Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+    protected int r = 0;//¶ÓÎ²ÔªËØµÄÎ»ÖÃ
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½Ð£ï¿½
+    //¹¹Ôì·½·¨£¨¿Õ¶ÓÁÐ£©
     public Queue_Array() {
         this(CAPACITY);
     }
 
-    //ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //°´Ö¸¶¨ÈÝÁ¿´´½¨¶ÔÏó
     public Queue_Array(int cap) {
         capacity = cap;
         Q = new Object[capacity];
     }
 
-    //ï¿½ï¿½Ñ¯ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ÐµÄ¹ï¿½Ä£
+    //²éÑ¯µ±Ç°¶ÓÁÐµÄ¹æÄ£
     public int getSize() {
         return (capacity - f + r) % capacity;
     }
 
-    //ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶Ï¶ÓÁÐÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return (f == r);
     }
 
-    //ï¿½ï¿½ï¿½
+    //Èë¶Ó
     public void enqueue(Object obj) throws ExceptionQueueFull {
-		if (getSize() == capacity - 1) {
-			throw new ExceptionQueueFull("Queue overflow.");
-		}
+        if (getSize() == capacity - 1) {
+            throw new ExceptionQueueFull("Queue overflow.");
+        }
         Q[r] = obj;
         r = (r + 1) % capacity;
     }
 
-    //ï¿½ï¿½ï¿½ï¿½
+    //³ö¶Ó
     public Object dequeue() {
         Object elem;
-		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ð¿ï¿½");
-		}
+        if (isEmpty()) {
+            throw new ExceptionQueueEmpty("ÒâÍâ£º¶ÓÁÐ¿Õ");
+        }
         elem = Q[f];
         Q[f] = null;
         f = (f + 1) % capacity;
         return elem;
     }
 
-    //È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    //È¡£¨²¢²»É¾³ý£©¶ÓÊ×ÔªËØ
     public Object front() throws ExceptionQueueEmpty {
-		if (isEmpty()) {
-			throw new ExceptionQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ð¿ï¿½");
-		}
+        if (isEmpty()) {
+            throw new ExceptionQueueEmpty("ÒâÍâ£º¶ÓÁÐ¿Õ");
+        }
         return Q[f];
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADTï¿½ï¿½
+    //±éÀú£¨²»ÊôÓÚADT£©
     public void Traversal() {
-		for (int i = f; i < r; i++) {
-			System.out.print(Q[i] + " ");
-		}
+        for (int i = f; i < r; i++) {
+            System.out.print(Q[i] + " ");
+        }
         System.out.println();
     }
 }

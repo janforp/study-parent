@@ -1,23 +1,23 @@
 /*
- * Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * Æ½ÃæÕû¸ñµã
  */
 
 package dsa;
 
 public class Point2D {
 
-    private int x, y;
+	private int x, y;
 
-    public Point2D(int xx, int yy) {
-        x = xx;
-        y = yy;
-    }
+	public Point2D(int xx, int yy) {
+		x = xx;
+		y = yy;
+	}
 
-    public int getX() {
-        return x;
-    }
+	public int getX() {
+		return x;
+	}
 
-    public int getY() {
-        return y;
-    }
+	public int getY() {
+		return y;
+	}
 }

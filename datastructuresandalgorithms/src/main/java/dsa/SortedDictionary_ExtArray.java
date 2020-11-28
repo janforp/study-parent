@@ -1,184 +1,184 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½Êµï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½
+ * »ùÓÚÓĞĞò²éÕÒ±íÊµÏÖµÄÓĞĞò´Êµä
  */
 
 package dsa;
 
 public class SortedDictionary_ExtArray implements SortedDictionary {
 
-    Vector S;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò±ï¿½
+    Vector S;//ÓĞĞò²éÕÒ±í
 
-    Comparator C;//ï¿½È½ï¿½ï¿½ï¿½
+    Comparator C;//±È½ÏÆ÷
 
-    //Ä¬ï¿½Ï¹ï¿½ï¿½ì·½ï¿½ï¿½
+    //Ä¬ÈÏ¹¹Ôì·½·¨
     public SortedDictionary_ExtArray() {
         this(new ComparatorDefault());
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+    //¹¹Ôì·½·¨
     public SortedDictionary_ExtArray(Comparator comp) {
         S = new Vector_ExtArray();
         C = comp;
     }
 
-    /**************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ****************************/
-    //ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½
-    //ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½È£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î£ï¿½ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
-    //ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½Õ·ï¿½ï¿½Øµï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½
+    /**************************** ¸¨Öú·½·¨ ****************************/
+    //¶ş·Ö²éÕÒ
+    //·µ»ØÖµ¿ÉÄÜÊÇÃüÖĞÔªËØµÄÖÈ£¬Ò²¿ÉÄÜÊÇkey¿ÉÒÔ²åÈëµÄÖÈ
+    //¾ßÌåÈçºÎ£¬ĞèÒª½øÒ»²½¼ì²é
+    //²»±äĞÔ£ºÈô½«key°´ÕÕ·µ»ØµÄÖÈ²åÈëÓĞĞòÏòÁ¿£¬ÏòÁ¿ÒÀÈ»ÓĞĞò
     private static int binSearch(Vector s, Comparator c, Object key, int lo, int hi) {
-		if (lo > hi) {
-			return lo;//ï¿½İ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
-		}
+        if (lo > hi) {
+            return lo;//µİ¹é»ù£¬²éÕÒÊ§°Ü
+        }
 
-        int mi = (lo + hi) >> 1;//È¡ï¿½ï¿½Öµ
-        Entry e = (Entry) s.getAtRank(mi);//ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ä¿
-        int flag = c.compare(key, e.getKey());//ï¿½È½Ï¹Ø¼ï¿½ï¿½ï¿½
-		if (flag < 0) {
-			return binSearch(s, c, key, lo, mi - 1);//×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		} else if (flag > 0) {
-			return binSearch(s, c, key, mi + 1, hi);//×ªï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ï¿½ï¿½
-		} else {
-			return mi;//ï¿½ï¿½ï¿½ï¿½
-		}
+        int mi = (lo + hi) >> 1;//È¡ÖĞÖµ
+        Entry e = (Entry) s.getAtRank(mi);//¾ÓÖĞµÄÌõÄ¿
+        int flag = c.compare(key, e.getKey());//±È½Ï¹Ø¼üÂë
+        if (flag < 0) {
+            return binSearch(s, c, key, lo, mi - 1);//×ªÏò×ó°ëÇø¼ä
+        } else if (flag > 0) {
+            return binSearch(s, c, key, mi + 1, hi);//×ªÏòÓÒ°ëÇø¼ä
+        } else {
+            return mi;//ÃüÖĞ
+        }
     }
 
-    /**************************** ï¿½ï¿½ï¿½ï¿½Êµï¿½ADTï¿½ï¿½ï¿½ï¿½ ****************************/
-    //ï¿½ï¿½Ñ¯ï¿½Êµï¿½á¹¹ï¿½ï¿½Ç°ï¿½Ä¹ï¿½Ä£
+    /**************************** ÎŞĞò´ÊµäADT·½·¨ ****************************/
+    //²éÑ¯´Êµä½á¹¹µ±Ç°µÄ¹æÄ£
     public int getSize() {
         return S.getSize();
     }
 
-    //ï¿½Ğ¶Ï´Êµï¿½á¹¹ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅĞ¶Ï´Êµä½á¹¹ÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return S.isEmpty();
     }
 
-    //ï¿½ï¿½ï¿½Êµï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½keyÎªï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´ÊµäÖĞ´æÔÚÒÔkeyÎª¹Ø¼üÂëµÄÌõÄ¿£¬Ôò·µ»ØÆäÖĞµÄÒ»¸öÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry find(Object key) {
-        int k = binSearch(S, C, key, 0, S.getSize() - 1);//ï¿½ï¿½ï¿½Ò¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿
+        int k = binSearch(S, C, key, 0, S.getSize() - 1);//²éÕÒ¹Ø¼üÂëÎªkeyµÄÌõÄ¿
 		if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
-			return null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»ï¿½Ê§ï¿½Ü±ï¿½Ö¾
-		}
+            return null;//ÈôÕâÑùµÄÌõÄ¿²»´æÔÚ£¬Ôò·µ»ØÊ§°Ü±êÖ¾
+        }
         return (Entry) S.getAtRank(k);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂëÎªkeyµÄÌõÄ¿×é³ÉµÄµü´úÆ÷
     public Iterator findAll(Object key) {
-        List L = new List_DLNode();//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½L
+        List L = new List_DLNode();//´´½¨Ò»¸öÁ´±íL
 
-        int k = binSearch(S, C, key, 0, S.getSize() - 1);//ï¿½ï¿½ï¿½Ò¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿
-		if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
-			return new IteratorElement(L);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»Ø¿Õµï¿½ï¿½ï¿½ï¿½ï¿½
-		}
-
-        L.insertFirst(S.getAtRank(k));//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½
-
-        int lo = k;//ï¿½ï¿½S[k-1]ï¿½ï¿½Ê¼
-        while (0 <= --lo) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
-			if (0 != C.compare(key, ((Entry) S.getAtRank(lo)).getKey())) {
-				break;//Ö±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ä¿
-			}
-            L.insertFirst(S.getAtRank(lo));//ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½
+        int k = binSearch(S, C, key, 0, S.getSize() - 1);//²éÕÒ¹Ø¼üÂëÎªkeyµÄÌõÄ¿
+        if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
+            return new IteratorElement(L);//ÈôÕâÑùµÄÌõÄ¿²»´æÔÚ£¬Ôò·µ»Ø¿Õµü´úÆ÷
         }
 
-        int hi = k;//ï¿½ï¿½S[k+1]ï¿½ï¿½Ê¼
-        while (++hi < S.getSize()) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			if (0 != C.compare(key, ((Entry) S.getAtRank(hi)).getKey())) {
-				break;//Ö±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ä¿
-			}
-            L.insertLast(S.getAtRank(hi));//ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½
+        L.insertFirst(S.getAtRank(k));//½«e²åÈëLÖĞ
+
+        int lo = k;//´ÓS[k-1]¿ªÊ¼
+        while (0 <= --lo) {//²»¶ÏÏòÇ°ËÑË÷
+            if (0 != C.compare(key, ((Entry) S.getAtRank(lo)).getKey())) {
+                break;//Ö±µ½µÚÒ»¸ö²»ÃüÖĞµÄÌõÄ¿
+            }
+            L.insertFirst(S.getAtRank(lo));//½«ÃüÖĞµÄÌõÄ¿²åÈëLÖĞ
         }
 
-        return new IteratorElement(L);//ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+        int hi = k;//´ÓS[k+1]¿ªÊ¼
+        while (++hi < S.getSize()) {//²»¶ÏÏòºóËÑË÷
+            if (0 != C.compare(key, ((Entry) S.getAtRank(hi)).getKey())) {
+                break;//Ö±µ½µÚÒ»¸ö²»ÃüÖĞµÄÌõÄ¿
+            }
+            L.insertLast(S.getAtRank(hi));//½«ÃüÖĞµÄÌõÄ¿²åÈëLÖĞ
+        }
+
+        return new IteratorElement(L);//ÓÉL´´½¨µü´úÆ÷£¬·µ»ØÖ®
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿(key, value)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿
+    //²åÈëÌõÄ¿(key, value)£¬²¢·µ»Ø¸ÃÌõÄ¿
     public Entry insert(Object key, Object value) {
-        Entry e = new EntryDefault(key, value);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+        Entry e = new EntryDefault(key, value);//´´½¨ĞÂÌõÄ¿
 
-        //ï¿½ï¿½ï¿½Êµï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Ö±ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
-		if (S.isEmpty()) {
-			return (Entry) S.insertAtRank(0, e);
-		}
+        //Èô´ÊµäÎª¿Õ£¬ÔòÖ±½Ó²åÈëĞÂÔªËØ
+        if (S.isEmpty()) {
+            return (Entry) S.insertAtRank(0, e);
+        }
 
-        //Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½Ò£ï¿½È·ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½Î»ï¿½ï¿½
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½é£ºï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½Sï¿½ï¿½Îªï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ó£¬¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //Í¨¹ı¶ş·Ö²éÕÒ£¬È·¶¨¿É²åÈëÎ»ÖÃ
+        //Çë¶ÁÕß×Ô¼º¼ì²é£º¼´±ãkeyÔÚSÖĞÎª×îĞ¡»ò×î´ó£¬¶¼¿ÉÒÔÕı³£²åÈë
         return (Entry) S.insertAtRank(binSearch(S, C, key, 0, S.getSize() - 1), e);
     }
 
-    //ï¿½ï¿½ï¿½Êµï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½keyÎªï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´ÊµäÖĞ´æÔÚÒÔkeyÎª¹Ø¼üÂëµÄÌõÄ¿£¬Ôò½«Õª³ıÆäÖĞµÄÒ»¸ö²¢·µ»Ø£»·ñÔò£¬·µ»Ønull
     public Entry remove(Object key) {
-        int k = binSearch(S, C, key, 0, S.getSize() - 1);//ï¿½ï¿½ï¿½Ò¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿
+        int k = binSearch(S, C, key, 0, S.getSize() - 1);//²éÕÒ¹Ø¼üÂëÎªkeyµÄÌõÄ¿
 		if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
-			return null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»ï¿½Ê§ï¿½Ü±ï¿½Ö¾
-		}
+            return null;//ÈôÕâÑùµÄÌõÄ¿²»´æÔÚ£¬Ôò·µ»ØÊ§°Ü±êÖ¾
+        }
         return (Entry) S.removeAtRank(k);
     }
 
-    //ï¿½ï¿½ï¿½Ø´Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»Ø´ÊµäÖĞËùÓĞÌõÄ¿µÄÒ»¸öµü´úÆ÷
     public Iterator entries() {
         List L = new List_DLNode();
-		for (int i = 0; i < S.getSize(); i++) {
-			L.insertLast(S.getAtRank(i));
-		}
-        return new IteratorElement(L);//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Listï¿½Ó¿ÚµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+        for (int i = 0; i < S.getSize(); i++) {
+            L.insertLast(S.getAtRank(i));
+        }
+        return new IteratorElement(L);//Ö±½ÓÀûÓÃList½Ó¿ÚµÄ·½·¨Éú³ÉÔªËØµü´úÆ÷
     }
 
-    /**************************** ï¿½ï¿½ï¿½ï¿½Êµï¿½ADTï¿½ï¿½ï¿½ï¿½ ****************************/
-    //ï¿½ï¿½ï¿½Êµï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ğ¹Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    /**************************** ÓĞĞò´ÊµäADT·½·¨ ****************************/
+    //Èô´Êµä·Ç¿Õ£¬Ôò·µ»ØÆäÖĞ¹Ø¼üÂë×îĞ¡µÄÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry first() {
         return (S.isEmpty()) ? null : (Entry) S.getAtRank(0);
     }
 
-    //ï¿½ï¿½ï¿½Êµï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ğ¹Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½null
+    //Èô´Êµä·Ç¿Õ£¬Ôò·µ»ØÆäÖĞ¹Ø¼üÂë×î´óµÄÌõÄ¿£»·ñÔò£¬·µ»Ønull
     public Entry last() {
         return (S.isEmpty()) ? null : (Entry) S.getAtRank(S.getSize() - 1);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ë²»Ğ¡ï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂë²»Ğ¡ÓÚkeyµÄÌõÄ¿ÒÀ·Ç½µĞò×é³ÉµÄµü´úÆ÷
     public Iterator successors(Object key) {
-        List L = new List_DLNode();//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½L
+        List L = new List_DLNode();//´´½¨Ò»¸öÁ´±íL
 
-        int k = binSearch(S, C, key, 0, S.getSize() - 1);//ï¿½ï¿½ï¿½Ò¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿
-		if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
-			return new IteratorElement(L);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»Ø¿Õµï¿½ï¿½ï¿½ï¿½ï¿½
-		}
+        int k = binSearch(S, C, key, 0, S.getSize() - 1);//²éÕÒ¹Ø¼üÂëÎªkeyµÄÌõÄ¿
+        if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
+            return new IteratorElement(L);//ÈôÕâÑùµÄÌõÄ¿²»´æÔÚ£¬Ôò·µ»Ø¿Õµü´úÆ÷
+        }
 
-		while (0 <= --k)//ï¿½ï¿½S[k-1]ï¿½ï¿½Ê¼ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½Ôªï¿½ï¿½
-		{
-			if (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey())) {
-				break;
-			}
-		}
-		while (S.getSize() > ++k)//ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		{
-			L.insertLast(S.getAtRank(k));//ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½
-		}
+        while (0 <= --k)//´ÓS[k-1]¿ªÊ¼ÏòÇ°ËÑË÷£¬Ö±ÖÁ·ûºÏÒªÇóµÄ¡¢ÖÈ×îĞ¡µÄÔªËØ
+        {
+            if (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey())) {
+                break;
+            }
+        }
+        while (S.getSize() > ++k)//½«ºó¼ÌµÄËùÓĞÔªËØÒÀ´Î
+        {
+            L.insertLast(S.getAtRank(k));//²åÈëLÖĞ
+        }
 
-        return new IteratorElement(L);//ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+        return new IteratorElement(L);//ÓÉL´´½¨µü´úÆ÷£¬·µ»ØÖ®
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½É¹Ø¼ï¿½ï¿½ë²»ï¿½ï¿½ï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»ØÓÉ¹Ø¼üÂë²»´óÓÚkeyµÄÌõÄ¿ÒÀ·ÇÉıĞò×é³ÉµÄµü´úÆ÷
     public Iterator predecessors(Object key) {
-        List L = new List_DLNode();//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½L
+        List L = new List_DLNode();//´´½¨Ò»¸öÁ´±íL
 
-        int k = binSearch(S, C, key, 0, S.getSize() - 1);//ï¿½ï¿½ï¿½Ò¹Ø¼ï¿½ï¿½ï¿½Îªkeyï¿½ï¿½ï¿½ï¿½Ä¿
-		if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
-			return new IteratorElement(L);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»Ø¿Õµï¿½ï¿½ï¿½ï¿½ï¿½
-		}
+        int k = binSearch(S, C, key, 0, S.getSize() - 1);//²éÕÒ¹Ø¼üÂëÎªkeyµÄÌõÄ¿
+        if (0 > k || k >= S.getSize() || (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey()))) {
+            return new IteratorElement(L);//ÈôÕâÑùµÄÌõÄ¿²»´æÔÚ£¬Ôò·µ»Ø¿Õµü´úÆ÷
+        }
 
-		while (S.getSize() > ++k)//ï¿½ï¿½S[k-1]ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
-		{
-			if (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey())) {
-				break;
-			}
-		}
-		while (0 <= --k)//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		{
-			L.insertLast(S.getAtRank(k));//ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½
-		}
+        while (S.getSize() > ++k)//´ÓS[k-1]¿ªÊ¼ÏòºóËÑË÷£¬Ö±ÖÁ·ûºÏÒªÇóµÄ¡¢ÖÈ×î´óµÄÔªËØ
+        {
+            if (0 != C.compare(key, ((Entry) S.getAtRank(k)).getKey())) {
+                break;
+            }
+        }
+        while (0 <= --k)//½«Ç°ÇıµÄËùÓĞÔªËØÒÀ´Î
+        {
+            L.insertLast(S.getAtRank(k));//²åÈëLÖĞ
+        }
 
-        return new IteratorElement(L);//ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+        return new IteratorElement(L);//ÓÉL´´½¨µü´úÆ÷£¬·µ»ØÖ®
     }
 }

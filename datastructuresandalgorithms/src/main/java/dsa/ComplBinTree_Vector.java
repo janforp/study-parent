@@ -1,71 +1,71 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Öµï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * »ùÓÚÏòÁ¿ÊµÏÖµÄÍêÈ«¶þ²æÊ÷
  */
 
 package dsa;
 
 public class ComplBinTree_Vector extends BinTree_LinkedList implements ComplBinTree {
 
-	private Vector T;//ï¿½ï¿½ï¿½ï¿½
+    private Vector T;//ÏòÁ¿
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ÏµÄ¿ï¿½ï¿½ï¿½
-	public ComplBinTree_Vector() {
-		T = new Vector_ExtArray();
-		root = null;
-	}
+    //¹¹Ôì·½·¨£ºÄ¬ÈÏµÄ¿ÕÊ÷
+    public ComplBinTree_Vector() {
+        T = new Vector_ExtArray();
+        root = null;
+    }
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	public ComplBinTree_Vector(Sequence s) {
-		this();
-		if (null != s) {
-			while (!s.isEmpty()) {
-				addLast(s.removeFirst());
-			}
-		}
-	}
+    //¹¹Ôì·½·¨£º°´ÕÕ¸ø¶¨µÄ½ÚµãÐòÁÐ£¬ÅúÁ¿Ê½½¨Á¢ÍêÈ«¶þ²æÊ÷
+    public ComplBinTree_Vector(Sequence s) {
+        this();
+        if (null != s) {
+            while (!s.isEmpty()) {
+                addLast(s.removeFirst());
+            }
+        }
+    }
 
-	/*---------- BinaryTreeï¿½Ó¿ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ ----------*/
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
-	public BinTreePosition getRoot() {
-		return T.isEmpty() ? null : posOfNode(0);
-	}
+    /*---------- BinaryTree½Ó¿ÚÖÐ¸÷·½·¨µÄÊµÏÖ ----------*/
+    //·µ»ØÊ÷¸ù£¨ÖØÐ´£©
+    public BinTreePosition getRoot() {
+        return T.isEmpty() ? null : posOfNode(0);
+    }
 
-	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
-	public boolean isEmpty() {
-		return T.isEmpty();
-	}
+    //ÅÐ¶ÏÊÇ·ñÊ÷¿Õ£¨ÖØÐ´£©
+    public boolean isEmpty() {
+        return T.isEmpty();
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
-	public int getSize() {
-		return T.getSize();
-	}
+    //·µ»ØÊ÷µÄ¹æÄ££¨ÖØÐ´£©
+    public int getSize() {
+        return T.getSize();
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ß¶È£ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
-	public int getHeight() {
-		return isEmpty() ? -1 : getRoot().getHeight();
-	}
+    //·µ»ØÊ÷£¨¸ù£©µÄ¸ß¶È£¨ÖØÐ´£©
+    public int getHeight() {
+        return isEmpty() ? -1 : getRoot().getHeight();
+    }
 
-	/*---------- ComplBinTreeï¿½Ó¿ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ ----------*/
-	//ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½â²¿ï¿½Úµã£¬ï¿½Ã½Úµï¿½ï¿½Îªï¿½Âµï¿½Ä©ï¿½Úµï¿½
-	public BinTreePosition addLast(Object e) {
-		BinTreePosition node = new ComplBinTreeNode_Rank(T, e);
-		root = (BinTreePosition) T.getAtRank(0);
-		return node;
-	}
+    /*---------- ComplBinTree½Ó¿ÚÖÐ¸÷·½·¨µÄÊµÏÖ ----------*/
+    //Éú³É²¢·µ»ØÒ»¸ö´æ·ÅeµÄÍâ²¿½Úµã£¬¸Ã½Úµã³ÉÎªÐÂµÄÄ©½Úµã
+    public BinTreePosition addLast(Object e) {
+        BinTreePosition node = new ComplBinTreeNode_Rank(T, e);
+        root = (BinTreePosition) T.getAtRank(0);
+        return node;
+    }
 
-	//É¾ï¿½ï¿½Ä©ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½
-	public Object delLast() {
-		if (isEmpty()) {
-			return null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ£ï¿½ï¿½Ñ¿Õ£ï¿½ï¿½Þ·ï¿½É¾ï¿½ï¿½
-		}
-		if (1 == getSize()) {
-			root = null;//ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		}
-		return T.removeAtRank(T.getSize() - 1);
-	}
+    //É¾³ýÄ©½Úµã£¬²¢·µ»ØÆäÖÐ´æ·ÅµÄÄÚÈÝ
+    public Object delLast() {
+        if (isEmpty()) {
+            return null;//ÈôÊ÷£¨¶Ñ£©ÒÑ¿Õ£¬ÎÞ·¨É¾³ý
+        }
+        if (1 == getSize()) {
+            root = null;//ÈôÉ¾³ý×îºóÒ»¸ö½Úµã£¬ÔòÊ÷¿Õ
+        }
+        return T.removeAtRank(T.getSize() - 1);
+    }
 
-	//ï¿½ï¿½ï¿½Ø°ï¿½ï¿½Õ²ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªiï¿½Ä½Úµï¿½ï¿½Î»ï¿½Ã£ï¿½0 <= i < size()
-	public BinTreePosition posOfNode(int i) {
-		return (BinTreePosition) T.getAtRank(i);
-	}
+    //·µ»Ø°´ÕÕ²ã´Î±éÀú±àºÅÎªiµÄ½ÚµãµÄÎ»ÖÃ£¬0 <= i < size()
+    public BinTreePosition posOfNode(int i) {
+        return (BinTreePosition) T.getAtRank(i);
+    }
 }

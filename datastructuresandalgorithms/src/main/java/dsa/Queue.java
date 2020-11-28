@@ -1,23 +1,23 @@
 /*
- * ï¿½ï¿½ï¿½Ð½Ó¿ï¿½
+ * ¶ÓÁÐ½Ó¿Ú
  */
 
 package dsa;
 
 public interface Queue {
 
-    public int getSize();//ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ä¿
+    public int getSize();//·µ»Ø¶ÓÁÐÖÐÔªËØÊýÄ¿
 
-    public boolean isEmpty();//ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    public boolean isEmpty();//ÅÐ¶Ï¶ÓÁÐÊÇ·ñÎª¿Õ
 
-    public Object front()//È¡ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½
+    public Object front()//È¡¶ÓÊ×ÔªËØ£¨µ«²»É¾³ý£©
             throws ExceptionQueueEmpty;
 
     public void enqueue(Object obj)
-            throws ExceptionQueueFull;//ï¿½ï¿½ï¿½
+            throws ExceptionQueueFull;//Èë¶Ó
 
-    public Object dequeue()//ï¿½ï¿½ï¿½ï¿½
+    public Object dequeue()//³ö¶Ó
             throws ExceptionQueueEmpty;
 
-    public void Traversal();//ï¿½ï¿½ï¿½ï¿½
+    public void Traversal();//±éÀú
 }

@@ -1,75 +1,74 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * »ùÓÚË«ÏòÁ´±íÊµÏÖÐòÁÐ
  */
 
 package dsa;
 
 public class Sequence_DLNode extends List_DLNode implements Sequence {
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½Ç·ï¿½ï¿½ï¿½[0, n)Ö®ï¿½ï¿½
-    protected void checkRank(int r, int n)
-            throws ExceptionBoundaryViolation {
-		if (r < 0 || r >= n) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½" + r + "ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[0, " + n + ")");
-		}
+    //¼ì²éÖÈrÊÇ·ñÔÚ[0, n)Ö®¼ä
+    protected void checkRank(int r, int n) throws ExceptionBoundaryViolation {
+        if (r < 0 || r >= n) {
+            throw new ExceptionBoundaryViolation("ÒâÍâ£º·Ç·¨µÄÖÈ" + r + "£¬Ó¦¸ÃÊôÓÚ[0, " + n + ")");
+        }
     }
 
-    //ï¿½ï¿½0 <= r < getSize()ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½--O(n)
+    //Èô0 <= r < getSize()£¬Ôò·µ»ØÖÈÎªrµÄÔªËØËùÔÚµÄÎ»ÖÃ£»·ñÔò£¬±¨´í--O(n)
     public Position rank2Pos(int r) throws ExceptionBoundaryViolation {
         DLNode node;
         checkRank(r, getSize());
-        if (r <= getSize() / 2) {//ï¿½ï¿½ï¿½È½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
-            node = header.getNext();//ï¿½ï¿½Ç°ï¿½Ë¿ï¿½Ê¼
-			for (int i = 0; i < r; i++) {
-				node = node.getNext();//ï¿½ï¿½Ò»É¨ï¿½ï¿½
-			}
-        } else {//ï¿½ï¿½ï¿½È½Ï´ï¿½ï¿½ï¿½
-            node = trailer.getPrev();//ï¿½Óºï¿½Ë¿ï¿½Ê¼
-			for (int i = 1; i < getSize() - r; i++) {
-				node = node.getPrev();//ï¿½ï¿½Ò»É¨ï¿½ï¿½
-			}
+        if (r <= getSize() / 2) {//ÈôÖÈ½ÏÐ¡£¬Ôò
+            node = header.getNext();//´ÓÇ°¶Ë¿ªÊ¼
+            for (int i = 0; i < r; i++) {
+                node = node.getNext();//ÖðÒ»É¨Ãè
+            }
+        } else {//ÈôÖÈ½Ï´ó£¬Ôò
+            node = trailer.getPrev();//´Óºó¶Ë¿ªÊ¼
+            for (int i = 1; i < getSize() - r; i++) {
+                node = node.getPrev();//ÖðÒ»É¨Ãè
+            }
         }
         return node;
     }
 
-    //ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄºÏ·ï¿½Î»ï¿½Ã£ï¿½ï¿½ò·µ»Ø´ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½--O(n)
+    //ÈôpÊÇÐòÁÐÖÐµÄºÏ·¨Î»ÖÃ£¬Ôò·µ»Ø´æ·ÅÓÚp´¦µÄÔªËØµÄÖÈ£»·ñÔò£¬±¨´í--O(n)
     public int pos2Rank(Position p) throws ExceptionPositionInvalid {
         DLNode node = header.getNext();
         int r = 0;
         while (node != trailer) {
-			if (node == p) {
-				return (r);
-			}
+            if (node == p) {
+                return (r);
+            }
             node = node.getNext();
             r++;
         }
-        throw new ExceptionPositionInvalid("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        throw new ExceptionPositionInvalid("ÒâÍâ£º×÷Îª²ÎÊýµÄÎ»ÖÃ²»ÊôÓÚÐòÁÐ");
     }
 
-    //È¡ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½--O(n)
+    //È¡ÖÈÎªrµÄÔªËØ--O(n)
     public Object getAtRank(int r) throws ExceptionBoundaryViolation {
         checkRank(r, getSize());
         return rank2Pos(r).getElem();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½ï¿½æ»»Îªobj--O(n)
+    //½«ÖÈÎªrµÄÔªËØÌæ»»Îªobj--O(n)
     public Object replaceAtRank(int r, Object obj) throws ExceptionBoundaryViolation {
         checkRank(r, getSize());
         return replace(rank2Pos(r), obj);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½--O(n)ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Ôªï¿½ï¿½
+    //²åÈëobj£¬×÷ÎªÖÈÎªrµÄÔªËØ--O(n)£»·µ»Ø¸ÃÔªËØ
     public Object insertAtRank(int r, Object obj) throws ExceptionBoundaryViolation {
         checkRank(r, getSize() + 1);
-		if (getSize() == r) {
-			insertLast(obj);
-		} else {
-			insertBefore(rank2Pos(r), obj);
-		}
+        if (getSize() == r) {
+            insertLast(obj);
+        } else {
+            insertBefore(rank2Pos(r), obj);
+        }
         return obj;
     }
 
-    //É¾ï¿½ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½--O(n)
+    //É¾³ýÖÈÎªrµÄÔªËØ--O(n)
     public Object removeAtRank(int r) throws ExceptionBoundaryViolation {
         checkRank(r, getSize());
         return remove(rank2Pos(r));

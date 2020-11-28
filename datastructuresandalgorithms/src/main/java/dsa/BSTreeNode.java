@@ -1,43 +1,43 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Öµï¿½BSTï¿½Úµï¿½ï¿½ï¿½
+ * »ùÓÚÁ´±íÊµÏÖµÄBST½ÚµãÀà
  */
 
 package dsa;
 
 public class BSTreeNode extends BinTreeNode implements BinTreePosition, Entry {
 
-    /**************************** ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ ****************************/
+    /**************************** ¹¹Ôì·½·¨ ****************************/
     public BSTreeNode() {
         super();
     }
 
     public BSTreeNode(
-            Object e,//ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition p,//ï¿½ï¿½ï¿½Úµï¿½
-            boolean asLChild,//ï¿½Ç·ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition l,//ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition r)//ï¿½Òºï¿½ï¿½ï¿½
+            Object e,//½ÚµãÄÚÈÝ
+            BinTreePosition p,//¸¸½Úµã
+            boolean asLChild,//ÊÇ·ñ×÷Îª¸¸½ÚµãµÄ×óº¢×Ó
+            BinTreePosition l,//×óº¢×Ó
+            BinTreePosition r)//ÓÒº¢×Ó
     {
         super(e, p, asLChild, l, r);
     }
 
-    /**************************** Êµï¿½ï¿½Entryï¿½Ó¿ÚµÄ·ï¿½ï¿½ï¿½ ****************************/
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½Ä¹Ø¼ï¿½ï¿½ï¿½
+    /**************************** ÊµÏÖEntry½Ó¿ÚµÄ·½·¨ ****************************/
+    //·µ»Øµ±Ç°½ÚµãµÄ¹Ø¼üÂë
     public Object getKey() {
         return ((Entry) getElem()).getKey();
     }
 
-    //ï¿½Þ¸ï¿½ï¿½ï¿½Ä¿ï¿½Ä¹Ø¼ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½Ø´ï¿½Ç°ï¿½ï¿½ÅµÄ¹Ø¼ï¿½ï¿½ï¿½
+    //ÐÞ¸ÄÌõÄ¿µÄ¹Ø¼üÂë£¬·µ»Ø´ËÇ°´æ·ÅµÄ¹Ø¼üÂë
     public Object setKey(Object k) {
         return ((Entry) getElem()).setKey(k);
     }
 
-    //È¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
+    //È¡ÌõÄ¿µÄÊý¾Ý¶ÔÏó
     public Object getValue() {
         return ((Entry) getElem()).getValue();
     }
 
-    //ï¿½Þ¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ó£¬·ï¿½ï¿½Ø´ï¿½Ç°ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
+    //ÐÞ¸ÄÌõÄ¿µÄÊý¾Ý¶ÔÏó£¬·µ»Ø´ËÇ°´æ·ÅµÄÊý¾Ý¶ÔÏó
     public Object setValue(Object v) {
         return ((Entry) getElem()).setValue(v);
     }

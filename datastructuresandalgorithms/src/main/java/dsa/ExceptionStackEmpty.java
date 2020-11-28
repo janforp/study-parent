@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟皆匡拷栈应锟斤拷pop锟斤拷top锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对空栈应用pop或top方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionStackEmpty extends RuntimeException {
-
 	public ExceptionStackEmpty(String err) {
 		super(err);
 	}

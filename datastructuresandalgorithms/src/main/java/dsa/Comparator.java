@@ -1,10 +1,10 @@
 /*
- * ï¿½È½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
+ * ±È½ÏÆ÷½Ó¿Ú
  */
 
 package dsa;
 
 public interface Comparator {
 
-    public int compare(Object a, Object b);//ï¿½ï¿½a>ï¿½ï¿½=ï¿½ï¿½<ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int compare(Object a, Object b);//Èôa>£¨=»ò<£©b£¬·µ»ØÕýÊý¡¢Áã»ò¸ºÊý
 }

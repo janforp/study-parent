@@ -1,23 +1,23 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½Ú½Ó±ß±ï¿½Êµï¿½ï¿½Í¼ï¿½á¹¹
+ * »ùÓÚÁÚ½Ó±ß±íÊµÏÖÍ¼½á¹¹
  */
 
 package dsa;
 
 public class Graph_List implements Graph {
 
-	//ï¿½ï¿½ï¿½ï¿½
-	protected List E;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+	//±äÁ¿
+	protected List E;//ÈÝÆ÷£º´æ·ÅÍ¼ÖÐËùÓÐ±ß
 
-	protected List V;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
+	protected List V;//ÈÝÆ÷£º´æ·ÅÍ¼ÖÐËùÓÐ¶¥µã
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+	//¹¹Ôì·½·¨
 	public Graph_List() {
 		E = new List_DLNode();
 		V = new List_DLNode();
 	}
 
-	//È¡Í¼ï¿½Ä±ß±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¡Í¼µÄ±ß±í¡¢¶¥µã±í
 	protected List getE() {
 		return E;
 	}
@@ -26,7 +26,7 @@ public class Graph_List implements Graph {
 		return V;
 	}
 
-	//È¡Í¼ï¿½Ð¶ï¿½ï¿½ã¡¢ï¿½ßµï¿½ï¿½ï¿½Ä¿
+	//È¡Í¼ÖÐ¶¥µã¡¢±ßµÄÊýÄ¿
 	public int vNumber() {
 		return V.getSize();
 	}
@@ -35,7 +35,7 @@ public class Graph_List implements Graph {
 		return E.getSize();
 	}
 
-	//È¡Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ã¡¢ï¿½ï¿½ï¿½ï¿½Î»ï¿½ÃµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+	//È¡Í¼ÖÐËùÓÐ¶¥µã¡¢¶¥µãÎ»ÖÃµÄµü´úÆ÷
 	public Iterator vertices() {
 		return V.elements();
 	}
@@ -44,7 +44,7 @@ public class Graph_List implements Graph {
 		return V.positions();
 	}
 
-	//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ß¡ï¿½ï¿½ï¿½Î»ï¿½ÃµÄµï¿½ï¿½ï¿½ï¿½ï¿½
+	//·µ»ØÍ¼ÖÐËùÓÐ±ß¡¢±ßÎ»ÖÃµÄµü´úÆ÷
 	public Iterator edges() {
 		return E.elements();
 	}
@@ -53,49 +53,49 @@ public class Graph_List implements Graph {
 		return E.positions();
 	}
 
-	//ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ß´Ó¶ï¿½ï¿½ï¿½uÖ¸ï¿½ï¿½v
+	//¼ì²âÊÇ·ñÓÐÄ³Ìõ±ß´Ó¶¥µãuÖ¸Ïòv
 	public boolean areAdjacent(Vertex u, Vertex v) {
 		return (null != edgeFromTo(u, v));
 	}
 
-	//È¡ï¿½Ó¶ï¿½ï¿½ï¿½uÖ¸ï¿½ï¿½vï¿½Ä±ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»ï¿½null
+	//È¡´Ó¶¥µãuÖ¸ÏòvµÄ±ß£¬Èô²»´æÔÚ£¬Ôò·µ»Ønull
 	public Edge edgeFromTo(Vertex u, Vertex v) {
-		for (Iterator it = u.outEdges(); it.hasNext(); ) {//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
-			Edge e = (Edge) it.getNext();//ï¿½ï¿½uÎªÎ²ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½e
-			if (v == e.getVPosInV(1).getElem())//ï¿½ï¿½eï¿½ï¿½(u, v)ï¿½ï¿½ï¿½ï¿½
+		for (Iterator it = u.outEdges(); it.hasNext(); ) {//ÖðÒ»¼ì²é
+			Edge e = (Edge) it.getNext();//ÒÔuÎªÎ²µÄÃ¿Ò»Ìõ±ße
+			if (v == e.getVPosInV(1).getElem())//ÈôeÊÇ(u, v)£¬Ôò
 			{
-				return e;//ï¿½ï¿½ï¿½Ø¸Ã±ï¿½
+				return e;//·µ»Ø¸Ã±ß
 			}
 		}
-		return null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(u, v)ï¿½ï¿½ï¿½ò·µ»ï¿½null
+		return null;//Èô²»´æÔÚÕâÑùµÄ(u, v)£¬Ôò·µ»Ønull
 	}
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ó¶ï¿½ï¿½ã¼¯ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+	//½«¶¥µãv´Ó¶¥µã¼¯ÖÐÉ¾³ý£¬²¢·µ»ØÖ®
 	public Vertex remove(Vertex v) {
-		while (0 < v.outDeg())//ï¿½ï¿½ï¿½ï¿½vÎªÎ²ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+		while (0 < v.outDeg())//½«ÒÔvÎªÎ²µÄËùÓÐ±ß
 		{
-			remove((Edge) (((Vertex_List) v).outEdges.first()).getElem());//ï¿½ï¿½Ò»É¾ï¿½ï¿½
+			remove((Edge) (((Vertex_List) v).outEdges.first()).getElem());//ÖðÒ»É¾³ý
 		}
-		while (0 < v.inDeg())//ï¿½ï¿½ï¿½ï¿½vÎªÍ·ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+		while (0 < v.inDeg())//½«ÒÔvÎªÍ·µÄËùÓÐ±ß
 		{
-			remove((Edge) (((Vertex_List) v).inEdges.first()).getElem());//ï¿½ï¿½Ò»É¾ï¿½ï¿½
+			remove((Edge) (((Vertex_List) v).inEdges.first()).getElem());//ÖðÒ»É¾³ý
 		}
-		return (Vertex) V.remove(v.getVPosInV());//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½v
+		return (Vertex) V.remove(v.getVPosInV());//ÔÚ¶¥µã±íÖÐÉ¾³ýv
 	}
 
-	//ï¿½ï¿½ï¿½ï¿½eï¿½Ó±ß¼ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+	//½«±ße´Ó±ß¼¯ÖÐÉ¾³ý£¬²¢·µ»ØÖ®
 	public Edge remove(Edge e) {
-		((Vertex_List) e.getVPosInV(0).getElem()).outEdges.remove(e.getEPosInI(0));//ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ß±ï¿½ï¿½ï¿½É¾ï¿½ï¿½e
-		((Vertex_List) e.getVPosInV(1).getElem()).inEdges.remove(e.getEPosInI(1));//ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ß±ï¿½ï¿½ï¿½É¾ï¿½ï¿½e
-		return (Edge) E.remove(e.getEPosInE());//ï¿½Ó±ß±ï¿½ï¿½ï¿½É¾ï¿½ï¿½e
+		((Vertex_List) e.getVPosInV(0).getElem()).outEdges.remove(e.getEPosInI(0));//´ÓÆðµãµÄ³ö±ß±íÖÐÉ¾³ýe
+		((Vertex_List) e.getVPosInV(1).getElem()).inEdges.remove(e.getEPosInI(1));//´ÓÖÕµãµÄÈë±ß±íÖÐÉ¾³ýe
+		return (Edge) E.remove(e.getEPosInE());//´Ó±ß±íÖÐÉ¾³ýe
 	}
 
-	//ï¿½Ú¶ï¿½ï¿½ã¼¯Vï¿½Ð²ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	//ÔÚ¶¥µã¼¯VÖÐ²åÈëÐÂ¶¥µãv£¬²¢·µ»ØÆäÎ»ÖÃ
 	public Position insert(Vertex v) {
 		return V.insertLast(v);
 	}
 
-	//ï¿½Ú±ß¼ï¿½Eï¿½Ð²ï¿½ï¿½ï¿½ï¿½Â±ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	//ÔÚ±ß¼¯EÖÐ²åÈëÐÂ±ße£¬²¢·µ»ØÆäÎ»ÖÃ
 	public Position insert(Edge e) {
 		return E.insertLast(e);
 	}

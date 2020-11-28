@@ -1,62 +1,62 @@
 /*
- * ï¿½ï¿½ï¿½Ã¶ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½
+ * ÀûÓÃ¶ÑÊµÏÖÓÅÏÈ¶ÓÁÐ
  */
 
 package dsa;
 
 public class PQueue_Heap implements PQueue {
 
-    private ComplBinTree H;//ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½Ä¶ï¿½
+    private ComplBinTree H;//ÍêÈ«¶þ²æÊ÷ÐÎÊ½µÄ¶Ñ
 
-    private Comparator comp;//ï¿½È½ï¿½ï¿½ï¿½
+    private Comparator comp;//±È½ÏÆ÷
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+    //¹¹Ôì·½·¨
     public PQueue_Heap() {
         this(new ComparatorDefault(), null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ÏµÄ¿ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½
+    //¹¹Ôì·½·¨£ºÄ¬ÈÏµÄ¿ÕÓÅÏÈ¶ÓÁÐ
     public PQueue_Heap(Comparator c) {
         this(c, null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³Ò»ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½Sï¿½ï¿½Ôªï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(key, value)ï¿½ï¿½ï¿½ï¿½Ä¿
+    //¹¹Ôì·½·¨£º¸ù¾ÝÄ³Ò»ÐòÁÐÖ±½ÓÅúÁ¿Ê½¹¹Ôì¶ÑËã·¨£¬SÖÐÔªËØ¶¼ÊÇÐÎÈç(key, value)µÄÌõÄ¿
     public PQueue_Heap(Sequence S) {
         this(new ComparatorDefault(), S);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³Ò»ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½sï¿½ï¿½Ôªï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(key, value)ï¿½ï¿½ï¿½ï¿½Ä¿
+    //¹¹Ôì·½·¨£º¸ù¾ÝÄ³Ò»ÐòÁÐÖ±½ÓÅúÁ¿Ê½¹¹Ôì¶ÑËã·¨£¬sÖÐÔªËØ¶¼ÊÇÐÎÈç(key, value)µÄÌõÄ¿
     public PQueue_Heap(Comparator c, Sequence s) {
         comp = c;
         H = new ComplBinTree_Vector(s);
         if (!H.isEmpty()) {
-			for (int i = H.getSize() / 2 - 1; i >= 0; i--)//ï¿½Ôµ×¶ï¿½ï¿½ï¿½
-			{
-				percolateDown(H.posOfNode(i));//ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			}
+            for (int i = H.getSize() / 2 - 1; i >= 0; i--)//×Ôµ×¶øÉÏ
+            {
+                percolateDown(H.posOfNode(i));//Öð½Úµã½øÐÐÏÂÂË
+            }
         }
     }
 
-    /*-------- PQueueï¿½Ó¿ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ --------*/
-    //Í³ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ÐµÄ¹ï¿½Ä£
+    /*-------- PQueue½Ó¿ÚÖÐ¶¨ÒåµÄ·½·¨ --------*/
+    //Í³¼ÆÓÅÏÈ¶ÓÁÐµÄ¹æÄ£
     public int getSize() {
         return H.getSize();
     }
 
-    //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶ÏÓÅÏÈ¶ÓÁÐÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return H.isEmpty();
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½;ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò·µ»ØÆäÖÐµÄ×îÐ¡ÌõÄ¿£¨²¢²»É¾³ý£©;·ñÔò£¬±¨´í
     public Entry getMin() throws ExceptionPQueueEmpty {
-		if (isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
+        if (isEmpty()) {
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁÐÎª¿Õ");
+        }
         return (Entry) H.getRoot().getElem();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½Ø¼ï¿½ï¿½ï¿½kï¿½Ï³ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿
+    //½«¶ÔÏóobjÓë¹Ø¼üÂëkºÏ³ÉÒ»¸öÌõÄ¿£¬½«Æä²åÈëQÖÐ£¬²¢·µ»Ø¸ÃÌõÄ¿
     public Entry insert(Object key, Object obj) throws ExceptionKeyInvalid {
         checkKey(key);
         Entry entry = new EntryDefault(key, obj);
@@ -64,71 +64,71 @@ public class PQueue_Heap implements PQueue {
         return entry;
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò´ÓÆäÖÐÕª³ý¹Ø¼üÂë×îÐ¡µÄÌõÄ¿£¬²¢·µ»Ø¸ÃÌõÄ¿£»·ñÔò£¬±¨´í
     public Entry delMin() throws ExceptionPQueueEmpty {
-		if (isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½Îªï¿½ï¿½");
-		}
-        Entry min = (Entry) H.getRoot().getElem();//ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½
-		if (1 == getSize())//ï¿½ï¿½Ö»Ê£ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿
-		{
-			H.delLast();//Ö±ï¿½ï¿½Õªï¿½ï¿½Ö®
-		} else {//ï¿½ï¿½ï¿½ï¿½
-			H.getRoot().setElem(((ComplBinTreeNode_Rank) H.delLast()).getElem());
-			//È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ö²ï¿½ï¿½Ñ¶ï¿½
-			percolateDown(H.getRoot());
-		}
-        return min;//ï¿½ï¿½ï¿½ï¿½Ô­ï¿½Ñ¶ï¿½
+        if (isEmpty()) {
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁÐÎª¿Õ");
+        }
+        Entry min = (Entry) H.getRoot().getElem();//±£Áô¶Ñ¶¥
+        if (1 == getSize())//ÈôÖ»Ê£ÏÂ×îºóÒ»¸öÌõÄ¿
+        {
+            H.delLast();//Ö±½ÓÕª³ýÖ®
+        } else {//·ñÔò
+            H.getRoot().setElem(((ComplBinTreeNode_Rank) H.delLast()).getElem());
+            //È¡³ö×îºóÒ»¸öÌõÄ¿£¬Ö²Èë¶Ñ¶¥
+            percolateDown(H.getRoot());
+        }
+        return min;//·µ»ØÔ­¶Ñ¶¥
     }
 
-    /*-------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ --------*/
-    //ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½Ä¿É±È½ï¿½ï¿½ï¿½
+    /*-------- ¸¨Öú·½·¨ --------*/
+    //¼ì²é¹Ø¼üÂëµÄ¿É±È½ÏÐÔ
     protected void checkKey(Object key) throws ExceptionKeyInvalid {
         try {
             comp.compare(key, key);
         } catch (Exception e) {
-            throw new ExceptionKeyInvalid("ï¿½Þ·ï¿½ï¿½È½Ï¹Ø¼ï¿½ï¿½ï¿½");
+            throw new ExceptionKeyInvalid("ÎÞ·¨±È½Ï¹Ø¼üÂë");
         }
     }
 
-    //ï¿½ï¿½ï¿½Ø½Úµï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ä¹Ø¼ï¿½ï¿½ï¿½
+    //·µ»Ø½Úµãv£¨ÖÐËù´æÌõÄ¿£©µÄ¹Ø¼üÂë
     protected Object key(BinTreePosition v) {
         return ((Entry) (v.getElem())).getKey();
     }
 
-    /*-------- ï¿½ã·¨ï¿½ï¿½ï¿½ï¿½ --------*/
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµã£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½Ý£ï¿½
+    /*-------- Ëã·¨·½·¨ --------*/
+    //½»»»¸¸×Ó½Úµã£¨ÖÐËù´æ·ÅµÄÄÚÈÝ£©
     protected void swapParentChild(BinTreePosition u, BinTreePosition v) {
         Object temp = u.getElem();
         u.setElem(v.getElem());
         v.setElem(temp);
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+    //ÉÏÂËËã·¨
     protected void percolateUp(BinTreePosition v) {
-        BinTreePosition root = H.getRoot();//ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Úµï¿½
-        while (v != H.getRoot()) {//ï¿½ï¿½ï¿½Ïµï¿½
-            BinTreePosition p = v.getParent();//È¡ï¿½ï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½ï¿½
-			if (0 >= comp.compare(key(p), key(v))) {
-				break;//ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½×±Èºï¿½ï¿½ï¿½Ð¡
-			}
-            swapParentChild(p, v);//ï¿½ï¿½ï¿½ò£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½
-            v = p;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ¸ï¿½ï¿½Úµã£¨ï¿½ï¿½Ô­ï¿½ÈµÄºï¿½ï¿½Ó£ï¿½
+        BinTreePosition root = H.getRoot();//¼ÇÂ¼¸ù½Úµã
+        while (v != H.getRoot()) {//²»¶ÏµØ
+            BinTreePosition p = v.getParent();//È¡µ±Ç°½ÚµãµÄ¸¸Ç×
+            if (0 >= comp.compare(key(p), key(v))) {
+                break;//³ý·Ç¸¸Ç×±Èº¢×ÓÐ¡
+            }
+            swapParentChild(p, v);//·ñÔò£¬½»»»¸¸×Ó´ÎÐò
+            v = p;//¼ÌÐø¿¼²ìÐÂµÄ¸¸½Úµã£¨¼´Ô­ÏÈµÄº¢×Ó£©
         }
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+    //ÏÂÂËËã·¨
     protected void percolateDown(BinTreePosition v) {
-        while (v.hasLChild()) {//Ö±ï¿½ï¿½vï¿½ï¿½ÎªÒ¶ï¿½ï¿½
-            BinTreePosition smallerChild = v.getLChild();//ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÓµÄ£ï¿½ï¿½Ø¼ï¿½ï¿½ë£©ï¿½ï¿½Ð¡
-			if (v.hasRChild() && 0 < comp.compare(key(v.getLChild()), key(v.getRChild()))) {
-				smallerChild = v.getRChild();//ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½ï¿½È½ÏµÄ¶ï¿½ï¿½ï¿½
-			}
-			if (0 <= comp.compare(key(smallerChild), key(v))) {
-				break;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			}
-            swapParentChild(v, smallerChild);//ï¿½ï¿½ï¿½ò£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Äºï¿½ï¿½Ó½ï¿½ï¿½ï¿½
-            v = smallerChild;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        while (v.hasLChild()) {//Ö±µ½v³ÉÎªÒ¶×Ó
+            BinTreePosition smallerChild = v.getLChild();//Ê×ÏÈ¼ÙÉè×óº¢×ÓµÄ£¨¹Ø¼üÂë£©¸üÐ¡
+            if (v.hasRChild() && 0 < comp.compare(key(v.getLChild()), key(v.getRChild()))) {
+                smallerChild = v.getRChild();//ÈôÓÒº¢×Ó´æÔÚÇÒ¸üÐ¡£¬Ôò½«ÓÒº¢×Ó×÷Îª½øÒ»²½±È½ÏµÄ¶ÔÏó
+            }
+            if (0 <= comp.compare(key(smallerChild), key(v))) {
+                break;//ÈôÁ½¸öº¢×Ó¶¼²»±Èv¸üÐ¡£¬ÔòÏÂÂËÍê³É
+            }
+            swapParentChild(v, smallerChild);//·ñÔò£¬½«ÆäÓë¸üÐ¡µÄº¢×Ó½»»»
+            v = smallerChild;//²¢¼ÌÐø¿¼²ìÕâ¸öº¢×Ó
         }
     }
 }

@@ -1,62 +1,62 @@
 /*
- * ï¿½Ð±ï¿½ADTï¿½Ó¿ï¿½
+ * ÁÐ±íADT½Ó¿Ú
  */
 
 package dsa;
 
 public interface List {
 
-    //ï¿½ï¿½Ñ¯ï¿½Ð±ï¿½Ç°ï¿½Ä¹ï¿½Ä£
+    //²éÑ¯ÁÐ±íµ±Ç°µÄ¹æÄ£
     public int getSize();
 
-    //ï¿½Ð¶ï¿½ï¿½Ð±ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶ÏÁÐ±íÊÇ·ñÎª¿Õ
     public boolean isEmpty();
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ò»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
+    //·µ»ØµÚÒ»¸öÔªËØ£¨µÄÎ»ÖÃ£©
     public Position first();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
+    //·µ»Ø×îºóÒ»¸öÔªËØ£¨µÄÎ»ÖÃ£©
     public Position last();
 
-    //ï¿½ï¿½ï¿½Ø½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
+    //·µ»Ø½ô½Ó¸ø¶¨Î»ÖÃÖ®ºóµÄÔªËØ£¨µÄÎ»ÖÃ£©
     public Position getNext(Position p)
             throws ExceptionPositionInvalid, ExceptionBoundaryViolation;
 
-    //ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®Ç°ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
+    //·µ»Ø½ô¿¿¸ø¶¨Î»ÖÃÖ®Ç°µÄÔªËØ£¨µÄÎ»ÖÃ£©
     public Position getPrev(Position p)
             throws ExceptionPositionInvalid, ExceptionBoundaryViolation;
 
-    //ï¿½ï¿½eï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    //½«e×÷ÎªµÚÒ»¸öÔªËØ²åÈëÁÐ±í
     public Position insertFirst(Object e);
 
-    //ï¿½ï¿½eï¿½ï¿½Îªï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    //½«e×÷Îª×îºóÒ»¸öÔªËØ²åÈëÁÐ±í
     public Position insertLast(Object e);
 
-    //ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    //½«e²åÈëÖÁ½ô½Ó¸ø¶¨Î»ÖÃÖ®ºóµÄÎ»ÖÃ
     public Position insertAfter(Position p, Object e)
             throws ExceptionPositionInvalid;
 
-    //ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®Ç°ï¿½ï¿½Î»ï¿½ï¿½
+    //½«e²åÈëÖÁ½ô¿¿¸ø¶¨Î»ÖÃÖ®Ç°µÄÎ»ÖÃ
     public Position insertBefore(Position p, Object e)
             throws ExceptionPositionInvalid;
 
-    //É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã´ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+    //É¾³ý¸ø¶¨Î»ÖÃ´¦µÄÔªËØ£¬²¢·µ»ØÖ®
     public Object remove(Position p)
             throws ExceptionPositionInvalid;
 
-    //É¾ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+    //É¾³ýÊ×ÔªËØ£¬²¢·µ»ØÖ®
     public Object removeFirst();
 
-    //É¾ï¿½ï¿½Ä©Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
+    //É¾³ýÄ©ÔªËØ£¬²¢·µ»ØÖ®
     public Object removeLast();
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½Î»ï¿½Ãµï¿½Ôªï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½æ»»ï¿½ï¿½Ôªï¿½ï¿½
+    //½«´¦ÓÚ¸ø¶¨Î»ÖÃµÄÔªËØÌæ»»ÎªÐÂÔªËØ£¬²¢·µ»Ø±»Ìæ»»µÄÔªËØ
     public Object replace(Position p, Object e)
             throws ExceptionPositionInvalid;
 
-    //Î»ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
+    //Î»ÖÃµü´úÆ÷
     public Iterator positions();
 
-    //Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÔªËØµü´úÆ÷
     public Iterator elements();
 }

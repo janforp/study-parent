@@ -1,18 +1,18 @@
 /*
- * Õ»ï¿½Ó¿ï¿½
+ * Õ»½Ó¿Ú
  */
 
 package dsa;
 
 public interface Stack {
 
-    public int getSize();//ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ä¿
+    public int getSize();//·µ»ØÕ»ÖÐÔªËØÊýÄ¿
 
-    public boolean isEmpty();//ï¿½Ð¶ï¿½Õ»ï¿½Ç·ï¿½Îªï¿½ï¿½
+    public boolean isEmpty();//ÅÐ¶ÏÕ»ÊÇ·ñÎª¿Õ
 
-    public Object top() throws ExceptionStackEmpty;//È¡Õ»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½
+    public Object top() throws ExceptionStackEmpty;//È¡Õ»¶¥ÔªËØ£¨µ«²»É¾³ý£©
 
-    public void push(Object ele);//ï¿½ï¿½Õ»
+    public void push(Object ele);//ÈëÕ»
 
-    public Object pop() throws ExceptionStackEmpty;//ï¿½ï¿½Õ»
+    public Object pop() throws ExceptionStackEmpty;//³öÕ»
 }

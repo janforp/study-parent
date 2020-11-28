@@ -1,11 +1,10 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â½«ï¿½ï¿½ï¿½×³ï¿½
+ * µ±ÊÔÍ¼¶Ô¿ÕÊ÷½øÐÐ²Ù×÷Ê±£¬±¾ÒâÍâ½«±»Å×³ö
  */
 
 package dsa;
 
 public class ExceptionTreeEmpty extends RuntimeException {
-
 	public ExceptionTreeEmpty(String err) {
 		super(err);
 	}

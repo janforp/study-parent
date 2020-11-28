@@ -1,82 +1,82 @@
 /**
- * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Êµï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * »ùÓÚÁÐ±íÊµÏÖµÄÊ÷µü´úÆ÷
  */
 
 package dsa;
 
 public class IteratorTree implements Iterator {
 
-    private List list;//ï¿½Ð±ï¿½
+	private List list;//ÁÐ±í
 
-    private Position nextPosition;//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Î»ï¿½ï¿½
+	private Position nextPosition;//µ±Ç°£¨ÏÂÒ»¸ö£©ÔªËØµÄÎ»ÖÃ
 
-    //Ä¬ï¿½Ï¹ï¿½ï¿½ì·½ï¿½ï¿½
-    public IteratorTree() {
-        list = null;
-    }
+	//Ä¬ÈÏ¹¹Ôì·½·¨
+	public IteratorTree() {
+		list = null;
+	}
 
-    //Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
-    public void elementsPreorderIterator(TreeLinkedList T) {
+	//Ç°Ðò±éÀú
+	public void elementsPreorderIterator(TreeLinkedList T) {
 		if (null == T) {
-			return;//ï¿½Ý¹ï¿½ï¿½
+			return;//µÝ¹é»ù
 		}
-        list.insertLast(T);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½
-        TreeLinkedList subtree = T.getFirstChild();//ï¿½Óµï¿½Ç°ï¿½Úµï¿½Ä³ï¿½ï¿½Ó¿ï¿½Ê¼
-        while (null != subtree) {//ï¿½ï¿½ï¿½Î¶Ôµï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            this.elementsPreorderIterator(subtree);//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
-            subtree = subtree.getNextSibling();
-        }
-    }
+		list.insertLast(T);//Ê×ÏÈÊä³öµ±Ç°½Úµã
+		TreeLinkedList subtree = T.getFirstChild();//´Óµ±Ç°½ÚµãµÄ³¤×Ó¿ªÊ¼
+		while (null != subtree) {//ÒÀ´Î¶Ôµ±Ç°½ÚµãµÄ¸÷¸öº¢×Ó
+			this.elementsPreorderIterator(subtree);//×öÇ°Ðò±éÀú
+			subtree = subtree.getNextSibling();
+		}
+	}
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    public void elementsPostorderIterator(TreeLinkedList T) {
+	//ºóÐò±éÀú
+	public void elementsPostorderIterator(TreeLinkedList T) {
 		if (null == T) {
-			return;//ï¿½Ý¹ï¿½ï¿½
+			return;//µÝ¹é»ù
 		}
-        TreeLinkedList subtree = T.getFirstChild();//ï¿½Óµï¿½Ç°ï¿½Úµï¿½Ä³ï¿½ï¿½Ó¿ï¿½Ê¼
-        while (null != subtree) {//ï¿½ï¿½ï¿½Î¶Ôµï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            this.elementsPostorderIterator(subtree);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            subtree = subtree.getNextSibling();
-        }
-        list.insertLast(T);//ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å·ï¿½ï¿½Êµï¿½Ç°ï¿½Úµï¿½
-    }
+		TreeLinkedList subtree = T.getFirstChild();//´Óµ±Ç°½ÚµãµÄ³¤×Ó¿ªÊ¼
+		while (null != subtree) {//ÒÀ´Î¶Ôµ±Ç°½ÚµãµÄ¸÷¸öº¢×Ó
+			this.elementsPostorderIterator(subtree);//×öºóÐò±éÀú
+			subtree = subtree.getNextSibling();
+		}
+		list.insertLast(T);//µ±ËùÓÐºó´ú¶¼·ÃÎÊ¹ýºó£¬×îºó²Å·ÃÎÊµ±Ç°½Úµã
+	}
 
-    //ï¿½ï¿½Î±ï¿½ï¿½ï¿½
-    public void levelTraversalIterator(TreeLinkedList T) {
+	//²ã´Î±éÀú
+	public void levelTraversalIterator(TreeLinkedList T) {
 		if (null == T) {
 			return;
 		}
-        Queue_List Q = new Queue_List();//ï¿½Õ¶ï¿½
-        Q.enqueue(T);//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½
-        while (!Q.isEmpty()) {//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½Ö®Ç°
-            TreeLinkedList tree = (TreeLinkedList) (Q.dequeue());//È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×½Úµï¿½
-            list.insertLast(tree);//ï¿½ï¿½ï¿½Â³ï¿½ï¿½ÓµÄ½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            TreeLinkedList subtree = tree.getFirstChild();//ï¿½ï¿½treeï¿½Äµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            while (null != subtree) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½Ó£ï¿½ï¿½ï¿½
-                Q.enqueue(subtree);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-                subtree = subtree.getNextSibling();
-            }
-        }
-    }
+		Queue_List Q = new Queue_List();//¿Õ¶Ó
+		Q.enqueue(T);//¸ù½ÚµãÈë¶Ó
+		while (!Q.isEmpty()) {//ÔÚ¶ÓÁÐÖØÐÂ±ä¿ÕÖ®Ç°
+			TreeLinkedList tree = (TreeLinkedList) (Q.dequeue());//È¡³ö¶ÓÁÐÊ×½Úµã
+			list.insertLast(tree);//½«ÐÂ³ö¶ÓµÄ½Úµã½ÓÈëµü´úÆ÷ÖÐ
+			TreeLinkedList subtree = tree.getFirstChild();//´ÓtreeµÄµÚÒ»¸öº¢×ÓÆð
+			while (null != subtree) {//ÒÀ´ÎÕÒ³öËùÓÐº¢×Ó£¬²¢
+				Q.enqueue(subtree);//½«Æä¼ÓÖÁ¶ÓÁÐÖÐ
+				subtree = subtree.getNextSibling();
+			}
+		}
+	}
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½Ôªï¿½ï¿½
-    public boolean hasNext() {
-        return (null != nextPosition);
-    }
+	//¼ì²éµü´úÆ÷ÖÐÊÇ·ñ»¹ÓÐÊ£ÓàµÄÔªËØ
+	public boolean hasNext() {
+		return (null != nextPosition);
+	}
 
-    //ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
-    public Object getNext() throws ExceptionNoSuchElement {
+	//·µ»Øµü´úÆ÷ÖÐµÄÏÂÒ»ÔªËØ
+	public Object getNext() throws ExceptionNoSuchElement {
 		if (!hasNext()) {
 			throw new ExceptionNoSuchElement("No next position");
 		}
-        Position currentPosition = nextPosition;
-		if (currentPosition == list.last())//ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½Î²Ôªï¿½Ø£ï¿½ï¿½ï¿½
+		Position currentPosition = nextPosition;
+		if (currentPosition == list.last())//ÈôÒÑµ½´ïÎ²ÔªËØ£¬Ôò
 		{
-			nextPosition = null;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
-		} else//ï¿½ï¿½ï¿½ï¿½
+			nextPosition = null;//²»ÔÙÓÐÏÂÒ»ÔªËØ
+		} else//·ñÔò
 		{
-			nextPosition = list.getNext(currentPosition);//×ªï¿½ï¿½ï¿½ï¿½Ò»Ôªï¿½ï¿½
+			nextPosition = list.getNext(currentPosition);//×ªÏòÏÂÒ»ÔªËØ
 		}
-        return currentPosition.getElem();
-    }
+		return currentPosition.getElem();
+	}
 }

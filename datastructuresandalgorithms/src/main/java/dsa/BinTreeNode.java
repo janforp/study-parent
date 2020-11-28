@@ -1,382 +1,382 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Êµï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
+ * »ùÓÚÁ´±í½ÚµãÊµÏÖ¶þ²æÊ÷½Úµã
  */
 
 package dsa;
 
 public class BinTreeNode implements BinTreePosition {
 
-    protected Object element;//ï¿½Ã½Úµï¿½ï¿½Ð´ï¿½ÅµÄ¶ï¿½ï¿½ï¿½
+    protected Object element;//¸Ã½ÚµãÖÐ´æ·ÅµÄ¶ÔÏó
 
-    protected BinTreePosition parent;//ï¿½ï¿½ï¿½ï¿½
+    protected BinTreePosition parent;//¸¸Ç×
 
-    protected BinTreePosition lChild;//ï¿½ï¿½ï¿½ï¿½
+    protected BinTreePosition lChild;//×óº¢×Ó
 
-    protected BinTreePosition rChild;//ï¿½Òºï¿½ï¿½ï¿½
+    protected BinTreePosition rChild;//ÓÒº¢×Ó
 
-    protected int size;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+    protected int size;//ºó´úÊýÄ¿
 
-    protected int height;//ï¿½ß¶ï¿½
+    protected int height;//¸ß¶È
 
-    protected int depth;//ï¿½ï¿½ï¿½
+    protected int depth;//Éî¶È
 
-    /**************************** ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ ****************************/
+    /**************************** ¹¹Ôì·½·¨ ****************************/
     public BinTreeNode() {
         this(null, null, true, null, null);
     }
 
     public BinTreeNode(
-            Object e,//ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition p,//ï¿½ï¿½ï¿½Úµï¿½
-            boolean asLChild,//ï¿½Ç·ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition l,//ï¿½ï¿½ï¿½ï¿½
-            BinTreePosition r)//ï¿½Òºï¿½ï¿½ï¿½
+            Object e,//½ÚµãÄÚÈÝ
+            BinTreePosition p,//¸¸½Úµã
+            boolean asLChild,//ÊÇ·ñ×÷Îª¸¸½ÚµãµÄ×óº¢×Ó
+            BinTreePosition l,//×óº¢×Ó
+            BinTreePosition r)//ÓÒº¢×Ó
     {
         size = 1;
         height = depth = 0;
-        parent = lChild = rChild = null;//ï¿½ï¿½Ê¼ï¿½ï¿½
+        parent = lChild = rChild = null;//³õÊ¼»¯
 
-        element = e;//ï¿½ï¿½ÅµÄ¶ï¿½ï¿½ï¿½
+        element = e;//´æ·ÅµÄ¶ÔÏó
 
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ë¸¸ï¿½×µÄ¹ï¿½Ïµ
-		if (null != p) {
-			if (asLChild) {
+        //½¨Á¢Óë¸¸Ç×µÄ¹ØÏµ
+        if (null != p) {
+            if (asLChild) {
 				p.attachL(this);
 			} else {
 				p.attachR(this);
 			}
 		}
 
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ëº¢ï¿½ÓµÄ¹ï¿½Ïµ
-		if (null != l) {
-			attachL(l);
-		}
-		if (null != r) {
-			attachR(r);
-		}
+        //½¨Á¢Óëº¢×ÓµÄ¹ØÏµ
+        if (null != l) {
+            attachL(l);
+        }
+        if (null != r) {
+            attachR(r);
+        }
     }
 
-    /**************************** Positionï¿½Ó¿Ú·ï¿½ï¿½ï¿½ ********************************/
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½Ð´ï¿½ÅµÄ¶ï¿½ï¿½ï¿½
+    /**************************** Position½Ó¿Ú·½·¨ ********************************/
+    //·µ»Øµ±Ç°½ÚµãÖÐ´æ·ÅµÄ¶ÔÏó
     public Object getElem() {
         return element;
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½ï¿½ëµ±Ç°ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //½«¶ÔÏóobj´æÈëµ±Ç°½Úµã£¬²¢·µ»Ø´ËÇ°µÄÄÚÈÝ
     public Object setElem(Object obj) {
         Object bak = element;
         element = obj;
         return bak;
     }
 
-    /**************************** BinTreePositionï¿½Ó¿Ú·ï¿½ï¿½ï¿½ *************************/
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ð¸ï¿½ï¿½×£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
+    /**************************** BinTreePosition½Ó¿Ú·½·¨ *************************/
+    //ÅÐ¶ÏÊÇ·ñÓÐ¸¸Ç×£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
     public boolean hasParent() {
         return null != parent;
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½Úµï¿½
+    //·µ»Øµ±Ç°½ÚµãµÄ¸¸½Úµã
     public BinTreePosition getParent() {
         return parent;
     }
 
-    //ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½Úµï¿½Ä¸ï¿½ï¿½Úµï¿½
+    //ÉèÖÃµ±Ç°½ÚµãµÄ¸¸½Úµã
     public void setParent(BinTreePosition p) {
         parent = p;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ÎªÒ¶ï¿½ï¿½
+    //ÅÐ¶ÏÊÇ·ñÎªÒ¶×Ó
     public boolean isLeaf() {
         return !hasLChild() && !hasRChild();
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
-    //ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ð¸ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½false
+    //ÅÐ¶ÏÊÇ·ñÎª×óº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
+    //Èôµ±Ç°½ÚµãÓÐ¸¸Ç×£¬¶øÇÒÊÇ×óº¢×Ó£¬Ôò·µ»Øtrue£»·ñÔò£¬·µ»Øfalse
     public boolean isLChild() {
         return (hasParent() && this == getParent().getLChild()) ? true : false;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
+    //ÅÐ¶ÏÊÇ·ñÓÐ×óº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
     public boolean hasLChild() {
         return null != lChild;
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»Øµ±Ç°½ÚµãµÄ×óº¢×Ó
     public BinTreePosition getLChild() {
         return lChild;
     }
 
-    //ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½×¢ï¿½â£ºthis.lChildï¿½ï¿½c.parentï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Îªï¿½Õ£ï¿½
+    //ÉèÖÃµ±Ç°½ÚµãµÄ×óº¢×Ó£¨×¢Òâ£ºthis.lChildºÍc.parent¶¼²»Ò»¶¨Îª¿Õ£©
     public void setLChild(BinTreePosition c) {
         lChild = c;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îªï¿½Òºï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
-    //ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ð¸ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½false
+    //ÅÐ¶ÏÊÇ·ñÎªÓÒº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
+    //Èôµ±Ç°½ÚµãÓÐ¸¸Ç×£¬¶øÇÒÊÇÓÒº¢×Ó£¬Ôò·µ»Øtrue£»·ñÔò£¬·µ»Øfalse
     public boolean isRChild() {
         return (hasParent() && this == getParent().getRChild()) ? true : false;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½ÎªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£©
+    //ÅÐ¶ÏÊÇ·ñÓÐÓÒº¢×Ó£¨ÎªÊ¹´úÂëÃèÊö¼ò½à£©
     public boolean hasRChild() {
         return null != rChild;
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
+    //·µ»Øµ±Ç°½ÚµãµÄÓÒº¢×Ó
     public BinTreePosition getRChild() {
         return rChild;
     }
 
-    //ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½×¢ï¿½â£ºthis.rChildï¿½ï¿½c.parentï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Îªï¿½Õ£ï¿½
+    //ÉèÖÃµ±Ç°½ÚµãµÄÓÒº¢×Ó£¨×¢Òâ£ºthis.rChildºÍc.parent¶¼²»Ò»¶¨Îª¿Õ£©
     public void setRChild(BinTreePosition c) {
         rChild = c;
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½Ä¿
+    //·µ»Øµ±Ç°½Úµãºó´úÔªËØµÄÊýÄ¿
     public int getSize() {
         return size;
     }
 
-    //ï¿½Úºï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ó£¬¸ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¹ï¿½Ä£
+    //ÔÚº¢×Ó·¢Éú±ä»¯ºó£¬¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¹æÄ£
     public void updateSize() {
-        size = 1;//ï¿½ï¿½Ç°ï¿½Úµï¿½
+        size = 1;//µ±Ç°½Úµã
 		if (hasLChild()) {
-			size += getLChild().getSize();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ä£
-		}
+            size += getLChild().getSize();//×ó×ÓÊ÷µÄ¹æÄ£
+        }
 		if (hasRChild()) {
-			size += getRChild().getSize();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ä£
-		}
+            size += getRChild().getSize();//ÓÒ×ÓÊ÷µÄ¹æÄ£
+        }
 
 		if (hasParent()) {
-			getParent().updateSize();//ï¿½Ý¹ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¹ï¿½Ä£ï¿½ï¿½Â¼
-		}
+            getParent().updateSize();//µÝ¹é¸üÐÂ¸÷¸öÕæ×æÏÈµÄ¹æÄ£¼ÇÂ¼
+        }
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½Ä¸ß¶ï¿½
+    //·µ»Øµ±Ç°½ÚµãµÄ¸ß¶È
     public int getHeight() {
         return height;
     }
 
-    //ï¿½Úºï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ó£¬¸ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¸ß¶ï¿½
+    //ÔÚº¢×Ó·¢Éú±ä»¯ºó£¬¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¸ß¶È
     public void updateHeight() {
-        height = 0;//ï¿½È¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
+        height = 0;//ÏÈ¼ÙÉèÃ»ÓÐ×ó¡¢ÓÒº¢×Ó
 		if (hasLChild()) {
-			height = Math.max(height, 1 + getLChild().getHeight());//ï¿½ï¿½ï¿½ï¿½
-		}
+            height = Math.max(height, 1 + getLChild().getHeight());//×óº¢×Ó
+        }
 		if (hasRChild()) {
-			height = Math.max(height, 1 + getRChild().getHeight());//ï¿½Òºï¿½ï¿½ï¿½
-		}
+            height = Math.max(height, 1 + getRChild().getHeight());//ÓÒº¢×Ó
+        }
 
 		if (hasParent()) {
-			getParent().updateHeight();//ï¿½Ý¹ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¸ß¶È¼ï¿½Â¼
-		}
+            getParent().updateHeight();//µÝ¹é¸üÐÂ¸÷¸öÕæ×æÏÈµÄ¸ß¶È¼ÇÂ¼
+        }
     }
 
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+    //·µ»Øµ±Ç°½ÚµãµÄÉî¶È
     public int getDepth() {
         return depth;
     }
 
-    //ï¿½Ú¸ï¿½ï¿½×·ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ó£¬¸ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÔÚ¸¸Ç×·¢Éú±ä»¯ºó£¬¸üÐÂµ±Ç°½Úµã¼°Æäºó´úµÄÉî¶È
     public void updateDepth() {
-        depth = hasParent() ? 1 + getParent().getDepth() : 0;//ï¿½ï¿½Ç°ï¿½Úµï¿½
+        depth = hasParent() ? 1 + getParent().getDepth() : 0;//µ±Ç°½Úµã
 
 		if (hasLChild()) {
-			getLChild().updateDepth();//ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½
-		}
+            getLChild().updateDepth();//ÑØº¢×ÓÒýÓÃÖð²ãÏòÏÂ£¬
+        }
 		if (hasRChild()) {
-			getRChild().updateDepth();//ï¿½Ý¹ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½Â¼
-		}
+            getRChild().updateDepth();//µÝ¹éµØ¸üÐÂËùÓÐºó´úµÄÉî¶È¼ÇÂ¼
+        }
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ö±ï¿½ï¿½Ç°ï¿½ï¿½
+    //°´ÕÕÖÐÐò±éÀúµÄ´ÎÐò£¬ÕÒµ½µ±Ç°½ÚµãµÄÖ±½ÓÇ°Çý
     public BinTreePosition getPrev() {
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½Îªï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ö±ï¿½ï¿½Ç°ï¿½ï¿½
-		if (hasLChild()) {
-			return findMaxDescendant(getLChild());
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		if (isRChild()) {
-			return getParent();//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½×¼ï¿½Îªï¿½ï¿½Ö±ï¿½ï¿½Ç°ï¿½ï¿½
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        BinTreePosition v = this;//ï¿½Óµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½
-		while (v.isLChild()) {
-			v = v.getParent();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½ï¿½
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½vï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¸ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½×µï¿½ï¿½Òºï¿½ï¿½ï¿½
+        //Èô×ó×ÓÊ÷·Ç¿Õ£¬ÔòÆäÖÐµÄ×î´óÕß¼´Îªµ±Ç°½ÚµãµÄÖ±½ÓÇ°Çý
+        if (hasLChild()) {
+            return findMaxDescendant(getLChild());
+        }
+        //ÖÁ´Ë£¬µ±Ç°½ÚµãÃ»ÓÐ×óº¢×Ó
+        if (isRChild()) {
+            return getParent();//Èôµ±Ç°½ÚµãÊÇÓÒº¢×Ó£¬Ôò¸¸Ç×¼´ÎªÆäÖ±½ÓÇ°Çý
+        }
+        //ÖÁ´Ë£¬µ±Ç°½ÚµãÃ»ÓÐ×óº¢×Ó£¬¶øÇÒÊÇ×óº¢×Ó
+        BinTreePosition v = this;//´Óµ±Ç°½Úµã³ö·¢
+        while (v.isLChild()) {
+            v = v.getParent();//ÑØ×óº¢×ÓÁ´Ò»Ö±ÉÏÉý
+        }
+        //ÖÁ´Ë£¬v»òÕßÃ»ÓÐ¸¸Ç×£¬»òÕßÊÇ¸¸Ç×µÄÓÒº¢×Ó
         return v.getParent();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ö±ï¿½Óºï¿½ï¿½
+    //°´ÕÕÖÐÐò±éÀúµÄ´ÎÐò£¬ÕÒµ½µ±Ç°½ÚµãµÄÖ±½Óºó¼Ì
     public BinTreePosition getSucc() {
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ð¡ï¿½ß¼ï¿½Îªï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½Ö±ï¿½Óºï¿½ï¿½
-		if (hasRChild()) {
-			return findMinDescendant(getRChild());
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ã»ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
-		if (isLChild()) {
-			return getParent();//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½×¼ï¿½Îªï¿½ï¿½Ö±ï¿½Óºï¿½ï¿½
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ã»ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
-        BinTreePosition v = this;//ï¿½Óµï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½
-		while (v.isRChild()) {
-			v = v.getParent();//ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½ï¿½
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½vï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¸ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½×µï¿½ï¿½ï¿½ï¿½ï¿½
+        //ÈôÓÒ×ÓÊ÷·Ç¿Õ£¬ÔòÆäÖÐµÄ×îÐ¡Õß¼´Îªµ±Ç°½ÚµãµÄÖ±½Óºó¼Ì
+        if (hasRChild()) {
+            return findMinDescendant(getRChild());
+        }
+        //ÖÁ´Ë£¬µ±Ç°½ÚµãÃ»ÓÐÓÒº¢×Ó
+        if (isLChild()) {
+            return getParent();//Èôµ±Ç°½ÚµãÊÇ×óº¢×Ó£¬Ôò¸¸Ç×¼´ÎªÆäÖ±½Óºó¼Ì
+        }
+        //ÖÁ´Ë£¬µ±Ç°½ÚµãÃ»ÓÐÓÒº¢×Ó£¬¶øÇÒÊÇÓÒº¢×Ó
+        BinTreePosition v = this;//´Óµ±Ç°½Úµã³ö·¢
+        while (v.isRChild()) {
+            v = v.getParent();//ÑØÓÒº¢×ÓÁ´Ò»Ö±ÉÏÉý
+        }
+        //ÖÁ´Ë£¬v»òÕßÃ»ÓÐ¸¸Ç×£¬»òÕßÊÇ¸¸Ç×µÄ×óº¢×Ó
         return v.getParent();
     }
 
-    //ï¿½Ï¾ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ä¸¸ï¿½×µÄ¸ï¿½ï¿½Ó¹ï¿½Ïµ
-    //ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½
+    //¶Ï¾øµ±Ç°½ÚµãÓëÆä¸¸Ç×µÄ¸¸×Ó¹ØÏµ
+    //·µ»Øµ±Ç°½Úµã
     public BinTreePosition secede() {
         if (null != parent) {
-			if (isLChild()) {
-				parent.setLChild(null);//ï¿½Ð¶Ï¸ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			} else {
-				parent.setRChild(null);
-			}
+            if (isLChild()) {
+                parent.setLChild(null);//ÇÐ¶Ï¸¸Ç×Ö¸Ïòµ±Ç°½ÚµãµÄÒýÓÃ
+            } else {
+                parent.setRChild(null);
+            }
 
-            parent.updateSize();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¹ï¿½Ä£
-            parent.updateHeight();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¸ß¶ï¿½
+            parent.updateSize();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¹æÄ£
+            parent.updateHeight();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¸ß¶È
 
-            parent = null;//ï¿½Ð¶Ïµï¿½Ç°ï¿½Úµï¿½Ö¸ï¿½ï¿½Ô­ï¿½ï¿½ï¿½×µï¿½ï¿½ï¿½ï¿½ï¿½
-            updateDepth();//ï¿½ï¿½ï¿½Â½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+            parent = null;//ÇÐ¶Ïµ±Ç°½ÚµãÖ¸ÏòÔ­¸¸Ç×µÄÒýÓÃ
+            updateDepth();//¸üÐÂ½Úµã¼°Æäºó´ú½ÚµãµÄÉî¶È
         }
 
-        return this;//ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½Úµï¿½
+        return this;//·µ»Øµ±Ç°½Úµã
     }
 
-    //ï¿½ï¿½ï¿½Úµï¿½cï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //½«½Úµãc×÷Îªµ±Ç°½ÚµãµÄ×óº¢×Ó
     public BinTreePosition attachL(BinTreePosition c) {
 		if (hasLChild()) {
-			getLChild().secede();//Õªï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ô­ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½
-		}
+            getLChild().secede();//Õª³ýµ±Ç°½ÚµãÔ­ÏÈµÄ×óº¢×Ó
+        }
 
         if (null != c) {
-            c.secede();//cï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½
+            c.secede();//cÍÑÀëÔ­¸¸Ç×
             lChild = c;
-            c.setParent(this);//È·ï¿½ï¿½ï¿½ÂµÄ¸ï¿½ï¿½Ó¹ï¿½Ïµ
-            updateSize();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¹ï¿½Ä£
-            updateHeight();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¸ß¶ï¿½
-            c.updateDepth();//ï¿½ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+            c.setParent(this);//È·Á¢ÐÂµÄ¸¸×Ó¹ØÏµ
+            updateSize();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¹æÄ£
+            updateHeight();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¸ß¶È
+            c.updateDepth();//¸üÐÂc¼°Æäºó´ú½ÚµãµÄÉî¶È
         }
 
         return this;
     }
 
-    //ï¿½ï¿½ï¿½Úµï¿½cï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½Úµï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
+    //½«½Úµãc×÷Îªµ±Ç°½ÚµãµÄÓÒº¢×Ó
     public BinTreePosition attachR(BinTreePosition c) {
 		if (hasRChild()) {
-			getRChild().secede();//Õªï¿½ï¿½ï¿½ï¿½Ç°ï¿½Úµï¿½Ô­ï¿½Èµï¿½ï¿½Òºï¿½ï¿½ï¿½
-		}
+            getRChild().secede();//Õª³ýµ±Ç°½ÚµãÔ­ÏÈµÄÓÒº¢×Ó
+        }
 
         if (null != c) {
-            c.secede();//cï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½
+            c.secede();//cÍÑÀëÔ­¸¸Ç×
             rChild = c;
-            c.setParent(this);//È·ï¿½ï¿½ï¿½ÂµÄ¸ï¿½ï¿½Ó¹ï¿½Ïµ
-            updateSize();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¹ï¿½Ä£
-            updateHeight();//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½Úµã¼°ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ¸ß¶ï¿½
-            c.updateDepth();//ï¿½ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+            c.setParent(this);//È·Á¢ÐÂµÄ¸¸×Ó¹ØÏµ
+            updateSize();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¹æÄ£
+            updateHeight();//¸üÐÂµ±Ç°½Úµã¼°Æä×æÏÈµÄ¸ß¶È
+            c.updateDepth();//¸üÐÂc¼°Æäºó´ú½ÚµãµÄÉî¶È
         }
 
         return this;
     }
 
-    //Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
+    //Ç°Ðò±éÀú
     public Iterator elementsPreorder() {
         List list = new List_DLNode();
         preorder(list, this);
         return list.elements();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÖÐÐò±éÀú
     public Iterator elementsInorder() {
         List list = new List_DLNode();
         inorder(list, this);
         return list.elements();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ºóÐò±éÀú
     public Iterator elementsPostorder() {
         List list = new List_DLNode();
         postorder(list, this);
         return list.elements();
     }
 
-    //ï¿½ï¿½Î±ï¿½ï¿½ï¿½
+    //²ã´Î±éÀú
     public Iterator elementsLevelorder() {
         List list = new List_DLNode();
         levelorder(list, this);
         return list.elements();
     }
 
-    /**************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ****************************/
-    //ï¿½ï¿½vï¿½Äºï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
+    /**************************** ¸¨Öú·½·¨ ****************************/
+    //ÔÚvµÄºó´úÖÐ£¬ÕÒ³ö×îÐ¡Õß
     protected static BinTreePosition findMinDescendant(BinTreePosition v) {
-		if (null != v) {
-			while (v.hasLChild()) {
-				v = v.getLChild();//ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½Â½ï¿½
-			}
-		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½vï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (null != v) {
+            while (v.hasLChild()) {
+                v = v.getLChild();//´Óv³ö·¢£¬ÑØ×óº¢×ÓÁ´Ò»Ö±ÏÂ½µ
+            }
+        }
+        //ÖÁ´Ë£¬v»òÕßÎª¿Õ£¬»òÕßÃ»ÓÐ×óº¢×Ó
         return v;
     }
 
-    //ï¿½ï¿½vï¿½Äºï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÔÚvµÄºó´úÖÐ£¬ÕÒ³ö×î´óÕß
     protected static BinTreePosition findMaxDescendant(BinTreePosition v) {
 		if (null != v) {
 			while (v.hasRChild()) {
-				v = v.getRChild();//ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½Â½ï¿½
-			}
+                v = v.getRChild();//´Óv³ö·¢£¬ÑØÓÒº¢×ÓÁ´Ò»Ö±ÏÂ½µ
+            }
 		}
-        //ï¿½ï¿½ï¿½Ë£ï¿½vï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½
+        //ÖÁ´Ë£¬v»òÕßÎª¿Õ£¬»òÕßÃ»ÓÐÓÒº¢×Ó
         return v;
     }
 
-    //Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vÎªï¿½ï¿½ï¿½ÚµÄ£ï¿½ï¿½Ó£ï¿½ï¿½ï¿½
+    //Ç°Ðò±éÀúÒÔvÎª¸ù½ÚµÄ£¨×Ó£©Ê÷
     protected static void preorder(List list, BinTreePosition v) {
-		if (null == v) {
-			return;//ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		}
-        list.insertLast(v);//ï¿½ï¿½ï¿½ï¿½v
-        preorder(list, v.getLChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        preorder(list, v.getRChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (null == v) {
+            return;//µÝ¹é»ù£º¿ÕÊ÷
+        }
+        list.insertLast(v);//·ÃÎÊv
+        preorder(list, v.getLChild());//±éÀú×ó×ÓÊ÷
+        preorder(list, v.getRChild());//±éÀúÓÒ×ÓÊ÷
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vÎªï¿½ï¿½ï¿½ÚµÄ£ï¿½ï¿½Ó£ï¿½ï¿½ï¿½
+    //ÖÐÐò±éÀúÒÔvÎª¸ù½ÚµÄ£¨×Ó£©Ê÷
     protected static void inorder(List list, BinTreePosition v) {
-		if (null == v) {
-			return;//ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		}
-        inorder(list, v.getLChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        list.insertLast(v);//ï¿½ï¿½ï¿½ï¿½v
-        inorder(list, v.getRChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (null == v) {
+            return;//µÝ¹é»ù£º¿ÕÊ÷
+        }
+        inorder(list, v.getLChild());//±éÀú×ó×ÓÊ÷
+        list.insertLast(v);//·ÃÎÊv
+        inorder(list, v.getRChild());//±éÀúÓÒ×ÓÊ÷
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vÎªï¿½ï¿½ï¿½ÚµÄ£ï¿½ï¿½Ó£ï¿½ï¿½ï¿½
+    //ºóÐò±éÀúÒÔvÎª¸ù½ÚµÄ£¨×Ó£©Ê÷
     protected static void postorder(List list, BinTreePosition v) {
-		if (null == v) {
-			return;//ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		}
-        postorder(list, v.getLChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        postorder(list, v.getRChild());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        list.insertLast(v);//ï¿½ï¿½ï¿½ï¿½v
+        if (null == v) {
+            return;//µÝ¹é»ù£º¿ÕÊ÷
+        }
+        postorder(list, v.getLChild());//±éÀú×ó×ÓÊ÷
+        postorder(list, v.getRChild());//±éÀúÓÒ×ÓÊ÷
+        list.insertLast(v);//·ÃÎÊv
     }
 
-    //ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½vÎªï¿½ï¿½ï¿½ÚµÄ£ï¿½ï¿½Ó£ï¿½ï¿½ï¿½
+    //²ã´Î±éÀúÒÔvÎª¸ù½ÚµÄ£¨×Ó£©Ê÷
     protected static void levelorder(List list, BinTreePosition v) {
-        Queue_List Q = new Queue_List();//ï¿½Õ¶ï¿½
-        Q.enqueue(v);//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½
+        Queue_List Q = new Queue_List();//¿Õ¶Ó
+        Q.enqueue(v);//¸ù½ÚµãÈë¶Ó
         while (!Q.isEmpty()) {
-            BinTreePosition u = (BinTreePosition) Q.dequeue();//ï¿½ï¿½ï¿½ï¿½
-            list.insertLast(u);//ï¿½ï¿½ï¿½ï¿½v
-			if (u.hasLChild()) {
-				Q.enqueue(u.getLChild());
-			}
-			if (u.hasRChild()) {
-				Q.enqueue(u.getRChild());
-			}
+            BinTreePosition u = (BinTreePosition) Q.dequeue();//³ö¶Ó
+            list.insertLast(u);//·ÃÎÊv
+            if (u.hasLChild()) {
+                Q.enqueue(u.getLChild());
+            }
+            if (u.hasRChild()) {
+                Q.enqueue(u.getRChild());
+            }
         }
     }
 }

@@ -1,173 +1,173 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ð±ï¿½á¹¹
+ * »ùÓÚË«ÏòÁ´±íÊµÏÖÁÐ±í½á¹¹
  */
 
 package dsa;
 
 public class List_DLNode implements List {
 
-	protected int numElem;//ï¿½Ð±ï¿½ï¿½Êµï¿½Ê¹ï¿½Ä£
+    protected int numElem;//ÁÐ±íµÄÊµ¼Ê¹æÄ£
 
-	protected DLNode header, trailer;//ï¿½Ú±ï¿½ï¿½ï¿½ï¿½×½Úµï¿½+Ä©ï¿½Úµï¿½
+    protected DLNode header, trailer;//ÉÚ±ø£ºÊ×½Úµã+Ä©½Úµã
 
-	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
-	public List_DLNode() {
-		numElem = 0;//ï¿½Õ±ï¿½
-		header = new DLNode(null, null, null);//Í·ï¿½Úµï¿½
-		trailer = new DLNode(null, header, null);//Î²ï¿½Úµï¿½
-		header.setNext(trailer);//Í·ï¿½ï¿½Î²ï¿½Úµï¿½ï¿½à»¥ï¿½ï¿½ï¿½ï¿½
-	}
+    //¹¹Ôìº¯Êý
+    public List_DLNode() {
+        numElem = 0;//¿Õ±í
+        header = new DLNode(null, null, null);//Í·½Úµã
+        trailer = new DLNode(null, header, null);//Î²½Úµã
+        header.setNext(trailer);//Í·¡¢Î²½ÚµãÏà»¥Á´½Ó
+    }
 
-	/**************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ****************************/
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îª*DLNode
-	protected DLNode checkPosition(Position p) throws ExceptionPositionInvalid {
-		if (null == p) {
-			throw new ExceptionPositionInvalid("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ý¸ï¿½List_DLNodeï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½null");
-		}
-		if (header == p) {
-			throw new ExceptionPositionInvalid("ï¿½ï¿½ï¿½â£ºÍ·ï¿½Úµï¿½ï¿½Ú±ï¿½Î»ï¿½Ã·Ç·ï¿½");
-		}
-		if (trailer == p) {
-			throw new ExceptionPositionInvalid("ï¿½ï¿½ï¿½â£ºÎ²ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Î»ï¿½Ã·Ç·ï¿½");
-		}
-		DLNode temp = (DLNode) p;
-		return temp;
-	}
+    /**************************** ¸¨Öú·½·¨ ****************************/
+    //¼ì²é¸ø¶¨Î»ÖÃÔÚÁÐ±íÖÐÊÇ·ñºÏ·¨£¬ÈôÊÇ£¬Ôò½«Æä×ª»»Îª*DLNode
+    protected DLNode checkPosition(Position p) throws ExceptionPositionInvalid {
+        if (null == p) {
+            throw new ExceptionPositionInvalid("ÒâÍâ£º´«µÝ¸øList_DLNodeµÄÎ»ÖÃÊÇnull");
+        }
+        if (header == p) {
+            throw new ExceptionPositionInvalid("ÒâÍâ£ºÍ·½ÚµãÉÚ±øÎ»ÖÃ·Ç·¨");
+        }
+        if (trailer == p) {
+            throw new ExceptionPositionInvalid("ÒâÍâ£ºÎ²½áµãÉÚ±øÎ»ÖÃ·Ç·¨");
+        }
+        DLNode temp = (DLNode) p;
+        return temp;
+    }
 
-	/**************************** ADTï¿½ï¿½ï¿½ï¿½ ****************************/
-	//ï¿½ï¿½Ñ¯ï¿½Ð±ï¿½Ç°ï¿½Ä¹ï¿½Ä£
-	public int getSize() {
-		return numElem;
-	}
+    /**************************** ADT·½·¨ ****************************/
+    //²éÑ¯ÁÐ±íµ±Ç°µÄ¹æÄ£
+    public int getSize() {
+        return numElem;
+    }
 
-	//ï¿½Ð¶ï¿½ï¿½Ð±ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
-	public boolean isEmpty() {
-		return (numElem == 0);
-	}
+    //ÅÐ¶ÏÁÐ±íÊÇ·ñÎª¿Õ
+    public boolean isEmpty() {
+        return (numElem == 0);
+    }
 
-	//ï¿½ï¿½ï¿½Øµï¿½Ò»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
-	public Position first() throws ExceptionListEmpty {
-		if (isEmpty()) {
-			throw new ExceptionListEmpty("ï¿½ï¿½ï¿½â£ºï¿½Ð±ï¿½ï¿½");
-		}
-		return header.getNext();
-	}
+    //·µ»ØµÚÒ»¸öÔªËØ£¨µÄÎ»ÖÃ£©
+    public Position first() throws ExceptionListEmpty {
+        if (isEmpty()) {
+            throw new ExceptionListEmpty("ÒâÍâ£ºÁÐ±í¿Õ");
+        }
+        return header.getNext();
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
-	public Position last() throws ExceptionListEmpty {
-		if (isEmpty()) {
-			throw new ExceptionListEmpty("ï¿½ï¿½ï¿½â£ºï¿½Ð±ï¿½ï¿½");
-		}
-		return trailer.getPrev();
-	}
+    //·µ»Ø×îºóÒ»¸öÔªËØ£¨µÄÎ»ÖÃ£©
+    public Position last() throws ExceptionListEmpty {
+        if (isEmpty()) {
+            throw new ExceptionListEmpty("ÒâÍâ£ºÁÐ±í¿Õ");
+        }
+        return trailer.getPrev();
+    }
 
-	//ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®Ç°ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
-	public Position getPrev(Position p)
-			throws ExceptionPositionInvalid, ExceptionBoundaryViolation {
-		DLNode v = checkPosition(p);
-		DLNode prev = v.getPrev();
-		if (prev == header) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Í¼Ô½ï¿½ï¿½ï¿½Ð±ï¿½Ç°ï¿½ï¿½");
-		}
-		return prev;
-	}
+    //·µ»Ø½ô¿¿¸ø¶¨Î»ÖÃÖ®Ç°µÄÔªËØ£¨µÄÎ»ÖÃ£©
+    public Position getPrev(Position p)
+            throws ExceptionPositionInvalid, ExceptionBoundaryViolation {
+        DLNode v = checkPosition(p);
+        DLNode prev = v.getPrev();
+        if (prev == header) {
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÆóÍ¼Ô½¹ýÁÐ±íÇ°¶Ë");
+        }
+        return prev;
+    }
 
-	//ï¿½ï¿½ï¿½Ø½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½
-	public Position getNext(Position p)
-			throws ExceptionPositionInvalid, ExceptionBoundaryViolation {
-		DLNode v = checkPosition(p);
-		DLNode next = v.getNext();
-		if (next == trailer) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Í¼Ô½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½");
-		}
-		return next;
-	}
+    //·µ»Ø½ô½Ó¸ø¶¨Î»ÖÃÖ®ºóµÄÔªËØ£¨µÄÎ»ÖÃ£©
+    public Position getNext(Position p)
+            throws ExceptionPositionInvalid, ExceptionBoundaryViolation {
+        DLNode v = checkPosition(p);
+        DLNode next = v.getNext();
+        if (next == trailer) {
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÆóÍ¼Ô½¹ýÁÐ±íºó¶Ë");
+        }
+        return next;
+    }
 
-	//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®Ç°ï¿½ï¿½Î»ï¿½ï¿½
-	public Position insertBefore(Position p, Object element)
-			throws ExceptionPositionInvalid {
-		DLNode v = checkPosition(p);
-		numElem++;
-		DLNode newNode = new DLNode(element, v.getPrev(), v);
-		v.getPrev().setNext(newNode);
-		v.setPrev(newNode);
-		return newNode;
-	}
+    //½«e²åÈëÖÁ½ô¿¿¸ø¶¨Î»ÖÃÖ®Ç°µÄÎ»ÖÃ
+    public Position insertBefore(Position p, Object element)
+            throws ExceptionPositionInvalid {
+        DLNode v = checkPosition(p);
+        numElem++;
+        DLNode newNode = new DLNode(element, v.getPrev(), v);
+        v.getPrev().setNext(newNode);
+        v.setPrev(newNode);
+        return newNode;
+    }
 
-	//ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Î»ï¿½ï¿½
-	public Position insertAfter(Position p, Object element)
-			throws ExceptionPositionInvalid {
-		DLNode v = checkPosition(p);
-		numElem++;
-		DLNode newNode = new DLNode(element, v, v.getNext());
-		v.getNext().setPrev(newNode);
-		v.setNext(newNode);
-		return newNode;
-	}
+    //½«e²åÈëÖÁ½ô½Ó¸ø¶¨Î»ÖÃÖ®ºóµÄÎ»ÖÃ
+    public Position insertAfter(Position p, Object element)
+            throws ExceptionPositionInvalid {
+        DLNode v = checkPosition(p);
+        numElem++;
+        DLNode newNode = new DLNode(element, v, v.getNext());
+        v.getNext().setPrev(newNode);
+        v.setNext(newNode);
+        return newNode;
+    }
 
-	//ï¿½ï¿½eï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
-	public Position insertFirst(Object e) {
-		numElem++;
-		DLNode newNode = new DLNode(e, header, header.getNext());
-		header.getNext().setPrev(newNode);
-		header.setNext(newNode);
-		return newNode;
-	}
+    //½«e×÷ÎªµÚÒ»¸öÔªËØ²åÈëÁÐ±í
+    public Position insertFirst(Object e) {
+        numElem++;
+        DLNode newNode = new DLNode(e, header, header.getNext());
+        header.getNext().setPrev(newNode);
+        header.setNext(newNode);
+        return newNode;
+    }
 
-	//ï¿½ï¿½eï¿½ï¿½Îªï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
-	public Position insertLast(Object e) {
-		numElem++;
-		DLNode newNode = new DLNode(e, trailer.getPrev(), trailer);
-		if (null == trailer.getPrev()) {
-			System.out.println("!!!Prev of trailer is NULL!!!");
-		}
-		trailer.getPrev().setNext(newNode);
-		trailer.setPrev(newNode);
-		return newNode;
-	}
+    //½«e×÷Îª×îºóÒ»¸öÔªËØ²åÈëÁÐ±í
+    public Position insertLast(Object e) {
+        numElem++;
+        DLNode newNode = new DLNode(e, trailer.getPrev(), trailer);
+        if (null == trailer.getPrev()) {
+            System.out.println("!!!Prev of trailer is NULL!!!");
+        }
+        trailer.getPrev().setNext(newNode);
+        trailer.setPrev(newNode);
+        return newNode;
+    }
 
-	//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã´ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
-	public Object remove(Position p)
-			throws ExceptionPositionInvalid {
-		DLNode v = checkPosition(p);
-		numElem--;
-		DLNode vPrev = v.getPrev();
-		DLNode vNext = v.getNext();
-		vPrev.setNext(vNext);
-		vNext.setPrev(vPrev);
-		Object vElem = v.getElem();
-		//ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½Úµã£©ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ÃµÄ¿Õ¼ï¿½
-		v.setNext(null);
-		v.setPrev(null);
-		return vElem;
-	}
+    //É¾³ý¸ø¶¨Î»ÖÃ´¦µÄÔªËØ£¬²¢·µ»ØÖ®
+    public Object remove(Position p)
+            throws ExceptionPositionInvalid {
+        DLNode v = checkPosition(p);
+        numElem--;
+        DLNode vPrev = v.getPrev();
+        DLNode vNext = v.getNext();
+        vPrev.setNext(vNext);
+        vNext.setPrev(vPrev);
+        Object vElem = v.getElem();
+        //½«¸ÃÎ»ÖÃ£¨½Úµã£©´ÓÁÐ±íÖÐÕª³ö£¬ÒÔ±ãÏµÍ³»ØÊÕÆäÕ¼ÓÃµÄ¿Õ¼ä
+        v.setNext(null);
+        v.setPrev(null);
+        return vElem;
+    }
 
-	//É¾ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
-	public Object removeFirst() {
-		return remove(header.getNext());
-	}
+    //É¾³ýÊ×ÔªËØ£¬²¢·µ»ØÖ®
+    public Object removeFirst() {
+        return remove(header.getNext());
+    }
 
-	//É¾ï¿½ï¿½Ä©Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®
-	public Object removeLast() {
-		return remove(trailer.getPrev());
-	}
+    //É¾³ýÄ©ÔªËØ£¬²¢·µ»ØÖ®
+    public Object removeLast() {
+        return remove(trailer.getPrev());
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½Î»ï¿½Ãµï¿½Ôªï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½æ»»ï¿½ï¿½Ôªï¿½ï¿½
-	public Object replace(Position p, Object obj)
-			throws ExceptionPositionInvalid {
-		DLNode v = checkPosition(p);
-		Object oldElem = v.getElem();
-		v.setElem(obj);
-		return oldElem;
-	}
+    //½«´¦ÓÚ¸ø¶¨Î»ÖÃµÄÔªËØÌæ»»ÎªÐÂÔªËØ£¬²¢·µ»Ø±»Ìæ»»µÄÔªËØ
+    public Object replace(Position p, Object obj)
+            throws ExceptionPositionInvalid {
+        DLNode v = checkPosition(p);
+        Object oldElem = v.getElem();
+        v.setElem(obj);
+        return oldElem;
+    }
 
-	//Î»ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
-	public Iterator positions() {
-		return new IteratorPosition(this);
-	}
+    //Î»ÖÃµü´úÆ÷
+    public Iterator positions() {
+        return new IteratorPosition(this);
+    }
 
-	//Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
-	public Iterator elements() {
-		return new IteratorElement(this);
-	}
+    //ÔªËØµü´úÆ÷
+    public Iterator elements() {
+        return new IteratorElement(this);
+    }
 }

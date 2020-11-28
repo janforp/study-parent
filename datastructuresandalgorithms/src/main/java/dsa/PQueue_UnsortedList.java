@@ -1,5 +1,5 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Êµï¿½Öµï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½
+ * »ùÓÚÎÞÐòÁÐ±íÊµÏÖµÄÓÅÏÈ¶ÓÁÐ
  */
 
 package dsa;
@@ -10,22 +10,22 @@ public class PQueue_UnsortedList implements PQueue {
 
     private Comparator C;
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ä¬ï¿½Ï±È½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÄ¬ÈÏ±È½ÏÆ÷£©
     public PQueue_UnsortedList() {
         this(new ComparatorDefault(), null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨±È½ÏÆ÷£©
     public PQueue_UnsortedList(Comparator c) {
         this(c, null);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê¼Ôªï¿½Ø£ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨³õÊ¼ÔªËØ£©
     public PQueue_UnsortedList(Sequence s) {
         this(new ComparatorDefault(), s);
     }
 
-    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½Í³ï¿½Ê¼Ôªï¿½Ø£ï¿½
+    //¹¹Ôì·½·¨£¨Ê¹ÓÃÖ¸¶¨±È½ÏÆ÷ºÍ³õÊ¼ÔªËØ£©
     public PQueue_UnsortedList(Comparator c, Sequence s) {
         L = new List_DLNode();
         C = c;
@@ -37,55 +37,55 @@ public class PQueue_UnsortedList implements PQueue {
 		}
     }
 
-    //Í³ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ÐµÄ¹ï¿½Ä£
+    //Í³¼ÆÓÅÏÈ¶ÓÁÐµÄ¹æÄ£
     public int getSize() {
         return L.getSize();
     }
 
-    //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶ÏÓÅÏÈ¶ÓÁÐÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return L.isEmpty();
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½;ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò·µ»ØÆäÖÐµÄ×îÐ¡ÌõÄ¿£¨²¢²»É¾³ý£©;·ñÔò£¬±¨´í
     public Entry getMin() throws ExceptionPQueueEmpty {
-		if (L.isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½Ð¿ï¿½");
-		}
+        if (L.isEmpty()) {
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁÐ¿Õ");
+        }
         Position minPos = L.first();
         Position curPos = L.getNext(minPos);
-		while (null != curPos)//ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¿
-		{
-			if (0 < C.compare(minPos.getElem(), curPos.getElem())) {
-				minPos = curPos;
-			}
-		}
+        while (null != curPos)//ÒÀ´Î¼ì²éËùÓÐÎ»ÖÃ£¬ÕÒ³ö×îÐ¡ÌõÄ¿
+        {
+            if (0 < C.compare(minPos.getElem(), curPos.getElem())) {
+                minPos = curPos;
+            }
+        }
         return (Entry) minPos.getElem();
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½Ø¼ï¿½ï¿½ï¿½kï¿½Ï³ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿
+    //½«¶ÔÏóobjÓë¹Ø¼üÂëkºÏ³ÉÒ»¸öÌõÄ¿£¬½«Æä²åÈëQÖÐ£¬²¢·µ»Ø¸ÃÌõÄ¿
     public Entry insert(Object key, Object obj) throws ExceptionKeyInvalid {
-        Entry entry = new EntryDefault(key, obj);//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
-        L.insertLast(entry);//ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ä©Î²
+        Entry entry = new EntryDefault(key, obj);//´´½¨Ò»¸öÐÂÌõÄ¿
+        L.insertLast(entry);//½ÓÖÁÁÐ±íÄ©Î²
         return (entry);
     }
 
-    //ï¿½ï¿½Qï¿½Ç¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬±ï¿½ï¿½ï¿½
+    //ÈôQ·Ç¿Õ£¬Ôò´ÓÆäÖÐÕª³ý¹Ø¼üÂë×îÐ¡µÄÌõÄ¿£¬²¢·µ»Ø¸ÃÌõÄ¿£»·ñÔò£¬±¨´í
     public Entry delMin() throws ExceptionPQueueEmpty {
 		if (L.isEmpty()) {
-			throw new ExceptionPQueueEmpty("ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½È¶ï¿½ï¿½Ð¿ï¿½");
-		}
+            throw new ExceptionPQueueEmpty("ÒâÍâ£ºÓÅÏÈ¶ÓÁÐ¿Õ");
+        }
         Position minPos = L.first();
         Iterator it = L.positions();
-        while (it.hasNext()) {//ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¿
+        while (it.hasNext()) {//ÒÀ´Î¼ì²éËùÓÐÎ»ÖÃ£¬ÕÒ³ö×îÐ¡ÌõÄ¿
             Position curPos = (Position) (it.getNext());
             //			System.out.println("\t" + ((Entry)(curPos.getElem())).getKey());
-			if (0 < C.compare(
-					((Entry) (minPos.getElem())).getKey(),
-					((Entry) (curPos.getElem())).getKey())
-			) {
-				minPos = curPos;
-			}
+            if (0 < C.compare(
+                    ((Entry) (minPos.getElem())).getKey(),
+                    ((Entry) (curPos.getElem())).getKey())
+            ) {
+                minPos = curPos;
+            }
         }
         return (Entry) L.remove(minPos);
     }

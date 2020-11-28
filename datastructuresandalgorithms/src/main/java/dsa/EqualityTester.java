@@ -1,10 +1,10 @@
 /*
- * ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
+ * ÅÐµÈÆ÷½Ó¿Ú
  */
 
 package dsa;
 
 public interface EqualityTester {
 
-    public boolean isEqualTo(Object a, Object b);//ï¿½ï¿½aï¿½ï¿½bï¿½ï¿½È£ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò£¬·ï¿½ï¿½ï¿½false
+    public boolean isEqualTo(Object a, Object b);//ÈôaÓëbÏàµÈ£¬Ôò·µ»Øtrue£»·ñÔò£¬·µ»Øfalse
 }

@@ -1,27 +1,27 @@
 /*
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½DFSÄ£ï¿½ï¿½Ä¿É´ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+ * £¨ÓÐÏò£©Í¼»ùÓÚDFSÄ£°åµÄ¿É´ï·ÖÁ¿Ëã·¨
  */
 
 package dsa;
 
 public class DFSReachableComponent extends DFS {
 
-	//ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
-	public DFSReachableComponent(Graph g) {
-		super(g);
-	}
+    //¹¹Ôì·½·¨
+    public DFSReachableComponent(Graph g) {
+        super(g);
+    }
 
-	//DFSï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ô¶ï¿½ï¿½ï¿½vï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê²ï¿½ï¿½ï¿½ï¿½ï¿½infoÊµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ð¿É´ï¿½Ä¶ï¿½ï¿½ã£©
-	protected Object visit(Vertex v, Object info) {
-		((Stack) info).push(v);
-		return null;
-	}
+    //DFS¹ý³ÌÖÐ¶Ô¶¥µãvµÄ¾ßÌå·ÃÎÊ²Ù×÷£¨infoÊµ¼ÊÉÏÊÇÒ»¸öÕ»£¬¼ÇÂ¼ËùÓÐ¿É´ïµÄ¶¥µã£©
+    protected Object visit(Vertex v, Object info) {
+        ((Stack) info).push(v);
+        return null;
+    }
 
-	//ï¿½ï¿½ï¿½ï¿½DFSï¿½Ä¿É´ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½sÎªï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ã£¨infoÊµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ð¿É´ï¿½Ä¶ï¿½ï¿½ã£©
-	public Object algorithm(Vertex s, Object info) {
-		reset(s);
-		Stack S = new Stack_Array();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½É´ï¿½Ä¶ï¿½ï¿½ï¿½
-		traverse(s, info);//DFS
-		return null;
-	}
+    //»ùÓÚDFSµÄ¿É´ïÐÔËã·¨£ºsÎªÆðÊ¼¶¥µã£¨infoÊµ¼ÊÉÏÊÇÒ»¸öÕ»£¬¼ÇÂ¼ËùÓÐ¿É´ïµÄ¶¥µã£©
+    public Object algorithm(Vertex s, Object info) {
+        reset(s);
+        Stack S = new Stack_Array();//±£´æ´ÓÆðÊ¼¶¥µã¿É´ïµÄ¶¥µã
+        traverse(s, info);//DFS
+        return null;
+    }
 }

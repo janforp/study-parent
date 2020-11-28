@@ -1,7 +1,7 @@
 /*
- * ï¿½é²¢ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½merge()ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Êµï¿½Ö²ï¿½Í¬
- * ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨Êµï¿½ï¿½
+ * ¹é²¢ÅÅÐòËã·¨
+ * Õë¶ÔÏòÁ¿ºÍÁÐ±íÁ½ÖÖÇé¿ö£¬merge()·½·¨µÄ¾ßÌåÊµÏÖ²»Í¬
+ * ÕâÀïÖ»Õë¶Ô»ùÓÚÁÐ±íµÄÐòÁÐ£¬¸ø³öËã·¨ÊµÏÖ
  */
 
 package dsa;
@@ -21,35 +21,35 @@ public class Sorter_Mergesort implements Sorter {
     public void sort(Sequence S) {//Mergesort
         int n = S.getSize();
 		if (1 >= n) {
-			return;//ï¿½Ý¹ï¿½ï¿½
-		}
+            return;//µÝ¹é»ù
+        }
         Sequence S1 = new Sequence_DLNode();
         Sequence S2 = new Sequence_DLNode();
-        while (!S.isEmpty()) {//ï¿½ï¿½Sï¿½ï¿½ï¿½ÈµØ·Ö³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½S1ï¿½ï¿½S2
+        while (!S.isEmpty()) {//½«S¾ùÔÈµØ·Ö³ÉÁ½¸ö×ÓÐòÁÐS1ºÍS2
             S1.insertLast(S.remove(S.first()));
-			if (!S.isEmpty()) {
-				S2.insertLast(S.remove(S.first()));
-			}
+            if (!S.isEmpty()) {
+                S2.insertLast(S.remove(S.first()));
+            }
         }
         sort(S1);
         sort(S2);
         merge(S, S1, S2);
     }
 
-    public void merge(Sequence S, Sequence S1, Sequence S2) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ä¹é²¢ï¿½ã·¨
+    public void merge(Sequence S, Sequence S1, Sequence S2) {//ÓÐÐòÁÐ±íµÄ¹é²¢Ëã·¨
         while (!S1.isEmpty() || !S2.isEmpty()) {
             Object e;
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Îªï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Õªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ðµï¿½Ð¡ï¿½ï¿½e
-			if (S1.isEmpty()) {
-				e = S2.remove(S2.first());
-			} else if (S2.isEmpty()) {
-				e = S1.remove(S1.first());
-			} else if (0 < C.compare(S1.first().getElem(), S2.first().getElem())) {
-				e = S2.remove(S2.first());
-			} else {
+            //ÔÚÁ½¸ö×ÓÁÐ±í±äÎª¿ÕÖ®Ç°£¬²»¶ÏµØÕª³öÁ½¸öÊ×ÔªËØÖÐµÄÐ¡Õße
+            if (S1.isEmpty()) {
+                e = S2.remove(S2.first());
+            } else if (S2.isEmpty()) {
+                e = S1.remove(S1.first());
+            } else if (0 < C.compare(S1.first().getElem(), S2.first().getElem())) {
+                e = S2.remove(S2.first());
+            } else {
 				e = S1.remove(S1.first());
 			}
-            //ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø²ï¿½ï¿½ï¿½Sï¿½ï¿½Î²ï¿½ï¿½
+            //½«¸ÃÔªËØ²åÖÁSµÄÎ²²¿
             S.insertLast(e);
         }//while
     }

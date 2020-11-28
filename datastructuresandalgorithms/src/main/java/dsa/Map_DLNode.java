@@ -38,9 +38,9 @@ public class Map_DLNode implements Map {
         while (P.hasNext()) {
             Position pos = (Position) P.getNext();
             Entry entry = (EntryDefault) pos.getElem();
-			if (T.isEqualTo(entry.getKey(), key)) {
-				return entry.getValue();
-			}
+            if (T.isEqualTo(entry.getKey(), key)) {
+                return entry.getValue();
+            }
         }
         return null;
     }

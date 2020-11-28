@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷为锟斤拷锟斤拷锟斤拷锟叫憋拷锟窖匡拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当作为参数的列表已空时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionListEmpty extends RuntimeException {
-
 	public ExceptionListEmpty(String err) {
 		super(err);
 	}

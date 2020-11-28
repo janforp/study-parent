@@ -1,86 +1,86 @@
 /*
- * ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+ * »ùÓÚ¿ÉÀ©³äÊý×éµÄÏòÁ¿ÊµÏÖ
  */
 
 package dsa;
 
 public class Vector_ExtArray implements Vector {
 
-    private int N = 8;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private int N = 8;//Êý×éµÄÈÝÁ¿£¬¿É²»¶ÏÔö¼Ó
 
-    private int n;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ê¹ï¿½Ä£
+    private int n;//ÏòÁ¿µÄÊµ¼Ê¹æÄ£
 
-    private Object A[];//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private Object A[];//¶ÔÏóÊý×é
 
-    //ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+    //¹¹Ôìº¯Êý
     public Vector_ExtArray() {
         A = new Object[N];
         n = 0;
     }
 
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ä¿
+    //·µ»ØÏòÁ¿ÖÐÔªËØÊýÄ¿
     public int getSize() {
         return n;
     }
 
-    //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+    //ÅÐ¶ÏÏòÁ¿ÊÇ·ñÎª¿Õ
     public boolean isEmpty() {
         return (0 == n) ? true : false;
     }
 
-    //È¡ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½
+    //È¡ÖÈÎªrµÄÔªËØ
     public Object getAtRank(int r)
             throws ExceptionBoundaryViolation {
 		if (0 > r || r >= n) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Ô½ï¿½ï¿½");
-		}
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÖÈÔ½½ç");
+        }
         return A[r];
     }
 
-    //ï¿½ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½ï¿½æ»»Îªobj
+    //½«ÖÈÎªrµÄÔªËØÌæ»»Îªobj
     public Object replaceAtRank(int r, Object obj)
             throws ExceptionBoundaryViolation {
 		if (0 > r || r >= n) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Ô½ï¿½ï¿½");
-		}
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÖÈÔ½½ç");
+        }
         Object bak = A[r];
         A[r] = obj;
         return bak;
     }
 
-    //ï¿½ï¿½ï¿½ï¿½objï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Ôªï¿½ï¿½
+    //²åÈëobj£¬×÷ÎªÖÈÎªrµÄÔªËØ£»²¢·µ»Ø¸ÃÔªËØ
     public Object insertAtRank(int r, Object obj)
             throws ExceptionBoundaryViolation {
-		if (0 > r || r > n) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Ô½ï¿½ï¿½");
-		}
-        if (N <= n) {//ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
-            N *= 2;
-            Object B[] = new Object[N];//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			for (int i = 0; i < n; i++) {
-				B[i] = A[i];//A[]ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½B[]
-			}
-            A = B;//ï¿½ï¿½Bï¿½æ»»Aï¿½ï¿½Ô­A[]ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Õ£ï¿½
+        if (0 > r || r > n) {
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÖÈÔ½½ç");
         }
-		for (int i = n; i > r; i--) {
-			A[i] = A[i - 1];//ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Ë³ï¿½Îºï¿½ï¿½ï¿½
-		}
-        A[r] = obj;//ï¿½ï¿½ï¿½ï¿½
-        n++;//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½ï¿½Ä£
+        if (N <= n) {//¿Õ¼äÒç³öµÄ´¦Àí
+            N *= 2;
+            Object B[] = new Object[N];//¿ª±ÙÒ»¸öÈÝÁ¿¼Ó±¶µÄÊý×é
+            for (int i = 0; i < n; i++) {
+                B[i] = A[i];//A[]ÖÐÄÚÈÝ¸´ÖÆÖÁB[]
+            }
+            A = B;//ÓÃBÌæ»»A£¨Ô­A[]½«±»×Ô¶¯»ØÊÕ£©
+        }
+        for (int i = n; i > r; i--) {
+            A[i] = A[i - 1];//ºóÐøÔªËØË³´ÎºóÒÆ
+        }
+        A[r] = obj;//²åÈë
+        n++;//¸üÐÂµ±Ç°¹æÄ£
         return obj;
     }
 
-    //É¾ï¿½ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½
+    //É¾³ýÖÈÎªrµÄÔªËØ
     public Object removeAtRank(int r)
             throws ExceptionBoundaryViolation {
 		if (0 > r || r >= n) {
-			throw new ExceptionBoundaryViolation("ï¿½ï¿½ï¿½â£ºï¿½ï¿½Ô½ï¿½ï¿½");
-		}
+            throw new ExceptionBoundaryViolation("ÒâÍâ£ºÖÈÔ½½ç");
+        }
         Object bak = A[r];
 		for (int i = r; i < n - 1; i++) {
-			A[i] = A[i + 1];//ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Ë³ï¿½ï¿½Ç°ï¿½ï¿½
-		}
-        n--;//ï¿½ï¿½ï¿½Âµï¿½Ç°ï¿½ï¿½Ä£
+            A[i] = A[i + 1];//ºóÐøÔªËØË³´ÎÇ°ÒÆ
+        }
+        n--;//¸üÐÂµ±Ç°¹æÄ£
         return bak;
     }
 }

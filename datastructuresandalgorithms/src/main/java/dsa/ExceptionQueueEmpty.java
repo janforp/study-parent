@@ -1,11 +1,10 @@
 /*
- * 锟斤拷锟斤拷图锟皆空讹拷锟斤拷应锟斤拷front锟斤拷dequeue锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟解将锟斤拷锟阶筹拷
+ * 当试图对空队列应用front或dequeue方法时，本意外将被抛出
  */
 
 package dsa;
 
 public class ExceptionQueueEmpty extends RuntimeException {
-
 	public ExceptionQueueEmpty(String err) {
 		super(err);
 	}
