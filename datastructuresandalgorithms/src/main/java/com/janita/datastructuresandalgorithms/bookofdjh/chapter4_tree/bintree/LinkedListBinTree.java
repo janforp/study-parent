@@ -14,7 +14,7 @@ public class LinkedListBinTree<E> implements BinTree<E> {
     /**
      * 根节点
      */
-    private BinTreePosition<E> root;
+    protected BinTreePosition<E> root;
 
     public LinkedListBinTree() {
         this(null);

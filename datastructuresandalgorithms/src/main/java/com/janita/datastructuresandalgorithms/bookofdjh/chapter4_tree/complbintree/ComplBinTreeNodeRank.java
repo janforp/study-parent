@@ -58,6 +58,7 @@ public class ComplBinTreeNodeRank<E> extends BinTreeNode<E> implements BinTreePo
     @Override
     public BinTreePosition<E> getParent() {
         return hasParent() ?
+                //若节点 v 有父节点，则 i(parent(v)) = ⎣(i(v) - 1)/2⎦ = ⎡(i(v)/2⎤ - 1。
                 t.getAtRank((rank - 1) / 2)
                 : null;
     }
@@ -70,7 +71,48 @@ public class ComplBinTreeNodeRank<E> extends BinTreeNode<E> implements BinTreePo
     @Override
     public BinTreePosition<E> getLChild() {
         return hasLChild() ?
+                //若节点 v 有左孩子，则 i(lchild(v)) = 2×i(v) + 1;
                 t.getAtRank(1 + 2 * rank)
                 : null;
+    }
+
+    @Override
+    public boolean hasRChild() {
+        //.若节点 v 有右孩子，则 i(rchild(v)) = 2×i(v) + 2;
+        return (2 + rank * 2) < t.getSize();
+    }
+
+    @Override
+    public BinTreePosition<E> getRChild() {
+        return hasRChild() ?
+                //.若节点 v 有右孩子，则 i(rchild(v)) = 2×i(v) + 2;
+                t.getAtRank(2 + 2 * rank)
+                : null;
+    }
+
+    @Override
+    public int getSize() {
+        int size = 1;
+        if (hasLChild()) {
+            size = size + getLChild().getSize();
+        }
+        if (hasRChild()) {
+            size = size + getRChild().getSize();
+        }
+        return size;
+    }
+
+    @Override
+    public int getHeight() {
+        int hL = hasLChild() ? getLChild().getHeight() : -1;
+        int hR = hasRChild() ? getRChild().getHeight() : -1;
+        return 1 + Math.max(hL, hR);
+    }
+
+    @Override
+    public int getDepth() {
+        return hasParent() ?
+                getParent().getDepth() + 1
+                : 0;
     }
 }
