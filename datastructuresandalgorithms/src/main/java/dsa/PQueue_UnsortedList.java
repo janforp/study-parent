@@ -29,12 +29,12 @@ public class PQueue_UnsortedList implements PQueue {
     public PQueue_UnsortedList(Comparator c, Sequence s) {
         L = new List_DLNode();
         C = c;
-		if (null != s) {
-			while (!s.isEmpty()) {
-				Entry e = (Entry) s.removeFirst();
-				insert(e.getKey(), e.getValue());
-			}
-		}
+        if (null != s) {
+            while (!s.isEmpty()) {
+                Entry e = (Entry) s.removeFirst();
+                insert(e.getKey(), e.getValue());
+            }
+        }
     }
 
     //统计优先队列的规模
@@ -72,7 +72,7 @@ public class PQueue_UnsortedList implements PQueue {
 
     //若Q非空，则从其中摘除关键码最小的条目，并返回该条目；否则，报错
     public Entry delMin() throws ExceptionPQueueEmpty {
-		if (L.isEmpty()) {
+        if (L.isEmpty()) {
             throw new ExceptionPQueueEmpty("意外：优先队列空");
         }
         Position minPos = L.first();

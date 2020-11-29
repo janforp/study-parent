@@ -30,8 +30,7 @@ public class PQueue_Heap implements PQueue {
         comp = c;
         H = new ComplBinTree_Vector(s);
         if (!H.isEmpty()) {
-            for (int i = H.getSize() / 2 - 1; i >= 0; i--)//自底而上
-            {
+            for (int i = H.getSize() / 2 - 1; i >= 0; i--) {//自底而上
                 percolateDown(H.posOfNode(i));//逐节点进行下滤
             }
         }
@@ -70,8 +69,7 @@ public class PQueue_Heap implements PQueue {
             throw new ExceptionPQueueEmpty("意外：优先队列为空");
         }
         Entry min = (Entry) H.getRoot().getElem();//保留堆顶
-        if (1 == getSize())//若只剩下最后一个条目
-        {
+        if (1 == getSize()) {//若只剩下最后一个条目
             H.delLast();//直接摘除之
         } else {//否则
             H.getRoot().setElem(((ComplBinTreeNode_Rank) H.delLast()).getElem());
@@ -106,7 +104,7 @@ public class PQueue_Heap implements PQueue {
 
     //上滤算法
     protected void percolateUp(BinTreePosition v) {
-        BinTreePosition root = H.getRoot();//记录根节点
+        //BinTreePosition root = H.getRoot();//记录根节点
         while (v != H.getRoot()) {//不断地
             BinTreePosition p = v.getParent();//取当前节点的父亲
             if (0 >= comp.compare(key(p), key(v))) {
