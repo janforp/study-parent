@@ -1,6 +1,5 @@
 package com.janita.datastructuresandalgorithms.beautifuldatastructuresandalgorithms;
 
-import com.janita.datastructuresandalgorithms.bookofdjh.chapter9.PM_BruteForce;
 import org.junit.Test;
 
 /**
@@ -43,7 +42,6 @@ public class Pivot {
         String main = "Now is the time for all good people to come";
         String pattern = "people";
         System.out.println(main.indexOf(pattern));
-        System.out.println(PM_BruteForce.PM(main, pattern));
     }
 
     public static void main(String[] args) {
