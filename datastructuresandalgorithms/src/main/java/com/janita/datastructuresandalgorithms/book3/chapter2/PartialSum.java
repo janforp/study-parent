@@ -1,4 +1,4 @@
-package com.janita.datastructuresandalgorithms.book3;
+package com.janita.datastructuresandalgorithms.book3.chapter2;
 
 import org.junit.Test;
 
