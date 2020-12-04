@@ -55,7 +55,7 @@ public class Exercise3 {
     }
 
     @Test
-    public void exercise3_4() {
+    public void exercise3_4_5() {
         List<Integer> list = intersection(Lists.newArrayList(1, 2, 3, 4), Lists.newArrayList(3, 4, 5, 6));
         Assert.assertEquals(3, (int) list.get(0));
         Assert.assertEquals(4, (int) list.get(1));
@@ -96,29 +96,40 @@ public class Exercise3 {
         return list;
     }
 
-    private static List<Integer> union(List<Integer> orderList1, List<Integer> orderList2) {
-        if (orderList1 == null) {
-            return orderList2;
-        }
-        if (orderList2 == null) {
-            return orderList1;
-        }
-        int size1 = orderList1.size();
-        int size2 = orderList2.size();
-        Integer start1 = orderList1.get(0);
-        Integer end1 = orderList1.get(orderList1.size() - 1);
+    private static <T extends Comparable<? super T>> List<T> union(List<T> leftOrderList, List<T> rightOrderList) {
+        leftOrderList.addAll(rightOrderList);
+        return leftOrderList;
+    }
 
-        Integer start2 = orderList2.get(0);
-        Integer end2 = orderList2.get(orderList2.size() - 1);
+    @Test
+    public void exercise3_6() {
+        //约瑟夫问题
+        List<Integer> list = intersection(Lists.newArrayList(1, 2, 3, 4), Lists.newArrayList(3, 4, 5, 6));
+        Assert.assertEquals(3, (int) list.get(0));
+        Assert.assertEquals(4, (int) list.get(1));
+    }
 
-        if (end1 <= start2) {
-            orderList1.addAll(orderList2);
-            return orderList1;
+    /**
+     * @param arr 所有数据
+     * @param n 数据的总数
+     * @param m 经过m次传递后拿着土豆的人被清除
+     * @param <T>
+     * @return
+     */
+    private static <T extends JosephusPlayer> T josephusProblem(T[] arr, int n, int m) {
+        int startIndex = 0;
+        while (true) {
+            int passNum = 0;
+            for (int i = startIndex; i < arr.length; i++) {
+                passNum++;
+                T t = arr[startIndex];
+
+            }
         }
-        if (end2 <= start1) {
-            orderList2.addAll(orderList1);
-            return orderList2;
-        }
-        return null;
+    }
+
+    private static class JosephusPlayer {
+
+        private boolean out;
     }
 }
