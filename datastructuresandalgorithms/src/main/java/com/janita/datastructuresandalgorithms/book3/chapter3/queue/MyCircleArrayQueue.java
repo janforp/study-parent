@@ -134,7 +134,6 @@ public class MyCircleArrayQueue<T> implements MyQueue<T> {
         Assert.assertEquals(9, (int) queue.dequeue());
         Assert.assertEquals(10, (int) queue.dequeue());
         Assert.assertEquals(11, (int) queue.dequeue());
-
         Assert.assertEquals(0, (int) queue.size());
     }
 }
