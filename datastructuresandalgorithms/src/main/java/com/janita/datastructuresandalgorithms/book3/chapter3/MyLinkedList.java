@@ -1,5 +1,8 @@
 package com.janita.datastructuresandalgorithms.book3.chapter3;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -74,6 +77,27 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     public T remove(int idx) {
         return remove(getNode(idx));
+    }
+
+    public boolean contains(T x) {
+        if (x == null) {
+            Node<T> p = beginMarker.next;
+            while (p != endMarker) {
+                if (p.data == null) {
+                    return true;
+                }
+                p = p.next;
+            }
+        } else {
+            Node<T> p = beginMarker.next;
+            while (p != endMarker) {
+                if (x.equals(p.data)) {
+                    return true;
+                }
+                p = p.next;
+            }
+        }
+        return false;
     }
 
     private T remove(Node<T> p) {
@@ -181,5 +205,17 @@ public class MyLinkedList<T> implements Iterable<T> {
         private Node<T> prev;
 
         private Node<T> next;
+    }
+
+    @Test
+    public void test() {
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.add(1);
+        linkedList.add(2);
+        Assert.assertFalse(linkedList.contains(3));
+        Assert.assertTrue(linkedList.contains(1));
+        Assert.assertFalse(linkedList.contains(null));
+        linkedList.add(null);
+        Assert.assertTrue(linkedList.contains(null));
     }
 }
