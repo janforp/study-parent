@@ -11,6 +11,10 @@ import java.util.ListIterator;
  */
 public interface MyList<T> extends Iterable<T> {
 
+    int size();
+
+    boolean isEmpty();
+
     boolean add(T x);
 
     void addFirst(T x);

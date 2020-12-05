@@ -1,6 +1,8 @@
 package com.janita.datastructuresandalgorithms.book3.chapter3;
 
 import com.google.common.collect.Lists;
+import com.janita.datastructuresandalgorithms.book3.chapter3.queue.MyLinkedListUseLazyDelete;
+import com.janita.datastructuresandalgorithms.book3.chapter3.queue.MyList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,6 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 /**
  * Exercise
@@ -296,5 +299,48 @@ public class Exercise3 {
         Assert.assertEquals(1, (int) list.getFirst());
         list.removeLast();
         Assert.assertEquals(5, (int) list.getLast());
+    }
+
+    @Test
+    public void exercise3_20() {
+        MyList<Integer> list = new MyLinkedListUseLazyDelete<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        Integer remove = list.remove(0);
+        Assert.assertEquals(1, (int) remove);
+
+        Assert.assertEquals(5, list.size());
+        Assert.assertEquals(2, (int) list.getFirst());
+        Integer first = list.removeFirst();
+        Assert.assertEquals(2, (int) first);
+        Assert.assertEquals(4, list.size());
+        list.add(7);
+        Assert.assertEquals(5, list.size());
+
+        Integer last = list.removeLast();
+        Assert.assertEquals(7, (int) last);
+        list.add(8);
+        Assert.assertEquals(8, (int) list.getLast());
+        Assert.assertEquals(3, (int) list.getFirst());
+
+        list.removeFirst();
+        list.removeFirst();
+        list.removeFirst();
+        list.removeFirst();
+        list.removeFirst();
+
+        Assert.assertTrue(list.isEmpty());
+
+        NoSuchElementException exception = null;
+        try {
+            list.removeFirst();
+        } catch (NoSuchElementException e) {
+            exception = e;
+        }
+        Assert.assertNotNull(exception);
     }
 }
