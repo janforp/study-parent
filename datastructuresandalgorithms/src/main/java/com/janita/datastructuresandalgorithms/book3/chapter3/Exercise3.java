@@ -109,27 +109,35 @@ public class Exercise3 {
         Assert.assertEquals(4, (int) list.get(1));
     }
 
-    /**
-     * @param arr 所有数据
-     * @param n 数据的总数
-     * @param m 经过m次传递后拿着土豆的人被清除
-     * @param <T>
-     * @return
-     */
-    private static <T extends JosephusPlayer> T josephusProblem(T[] arr, int n, int m) {
-        int startIndex = 0;
-        while (true) {
-            int passNum = 0;
-            for (int i = startIndex; i < arr.length; i++) {
-                passNum++;
-                T t = arr[startIndex];
+    @Test
+    public void tes3_6t() {
+        int winner = JosephusPlayer.josephusProblem(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 2);
+        Assert.assertEquals(4, winner);
 
-            }
-        }
+        winner = JosephusPlayer.josephusProblem(Lists.newArrayList(1, 2, 3, 4, 5, 6), 3);
+        Assert.assertEquals(5, winner);
     }
 
     private static class JosephusPlayer {
 
-        private boolean out;
+        /**
+         * 从列表的第一个个元素开始计数，第m个元素，删除 m + 1 元素，然后继续从m后开始数
+         *
+         * @param playerList 所有数据
+         * @param m 经过m次传递后拿着土豆的人被清除
+         * @param <T>
+         * @return
+         */
+        private static <T> T josephusProblem(List<T> playerList, int m) {
+            //不考虑极端情况
+            int index = 0;
+            while (playerList.size() > 1) {
+                index = (index + m) % playerList.size();
+                T remove = playerList.remove(index);
+                System.out.println(remove + "被移除");
+            }
+            System.out.println(playerList.get(0) + "赢了");
+            return playerList.get(0);
+        }
     }
 }
