@@ -1,10 +1,12 @@
 package com.janita.datastructuresandalgorithms.book3.chapter3;
 
+import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -100,10 +102,31 @@ public class MyLinkedList<T> implements Iterable<T> {
         return false;
     }
 
+    private Node<T> get(T x) {
+        if (x == null) {
+            Node<T> p = beginMarker.next;
+            while (p != endMarker) {
+                if (p.data == null) {
+                    return p;
+                }
+                p = p.next;
+            }
+        } else {
+            Node<T> p = beginMarker.next;
+            while (p != endMarker) {
+                if (x.equals(p.data)) {
+                    return p;
+                }
+                p = p.next;
+            }
+        }
+        return null;
+    }
+
     private T remove(Node<T> p) {
         p.next.prev = p.prev;
         p.prev.next = p.next;
-        theSize++;
+        theSize--;
         modCount++;
         return p.data;
     }
@@ -141,6 +164,17 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     private Node<T> getNode(int idx) {
         return getNode(idx, 0, size() - 1);
+    }
+
+    public void removeAll(Iterable<? extends T> items) {
+        Iterator<? extends T> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            T next = iterator.next();
+            Node<T> tNode = get(next);
+            if (tNode != null) {
+                remove(tNode);
+            }
+        }
     }
 
     @Override
@@ -217,5 +251,40 @@ public class MyLinkedList<T> implements Iterable<T> {
         Assert.assertFalse(linkedList.contains(null));
         linkedList.add(null);
         Assert.assertTrue(linkedList.contains(null));
+
+        linkedList.add(4);
+        linkedList.add(5);
+        linkedList.add(6);
+
+        List<Integer> addAllList = Lists.newArrayList(4, 5, 6);
+        Iterable<Integer> integers = new Iterable<Integer>() {
+            @Override
+            public Iterator<Integer> iterator() {
+                return addAllList.iterator();
+            }
+        };
+
+        linkedList.removeAll(addAllList);
+    }
+
+    @Test
+    public void test2() {
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+        linkedList.add(5);
+        linkedList.add(6);
+        Assert.assertEquals(6, linkedList.size());
+        List<Integer> addAllList = Lists.newArrayList(4, 5, 6);
+        Iterable<Integer> integers = new Iterable<Integer>() {
+            @Override
+            public Iterator<Integer> iterator() {
+                return addAllList.iterator();
+            }
+        };
+        linkedList.removeAll(addAllList);
+        Assert.assertEquals(3, linkedList.size());
     }
 }

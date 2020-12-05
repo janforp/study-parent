@@ -175,7 +175,6 @@ public class CircleLinkedList {
         list.insert(new Node(3));
         list.insert(new Node(4));
         System.out.println(list.printCircleLinkedList());
-
     }
 }
 

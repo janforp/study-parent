@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -138,6 +140,67 @@ public class Exercise3 {
             }
             System.out.println(playerList.get(0) + "赢了");
             return playerList.get(0);
+        }
+    }
+
+    private static void removeFirstHalf(List<Integer> lst) {
+        int theSIze = lst.size() / 2;
+        for (int i = 0; i < theSIze; i++) {
+            lst.remove(0);
+        }
+    }
+
+    private static void removeFirstHalfUseIterator(List<Integer> lst) {
+        int theSIze = lst.size() / 2;
+        Iterator<Integer> iterator = lst.iterator();
+        int start = 1;
+        while (iterator.hasNext() && start <= theSIze) {
+            iterator.next();
+            iterator.remove();
+            start++;
+        }
+    }
+
+    @Test
+    public void exercise3_8() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        removeFirstHalf(list);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+
+        list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        removeFirstHalfUseIterator(list);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+
+        list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        removeFirstHalf(list);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+
+        list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        removeFirstHalfUseIterator(list);
+        for (Integer integer : list) {
+            System.out.println(integer);
         }
     }
 }

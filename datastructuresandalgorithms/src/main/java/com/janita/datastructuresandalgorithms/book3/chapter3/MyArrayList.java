@@ -1,8 +1,10 @@
 package com.janita.datastructuresandalgorithms.book3.chapter3;
 
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -109,6 +111,18 @@ public class MyArrayList<T> implements Iterable<T> {
         return removed;
     }
 
+    /**
+     * 添加所有元素到末端
+     *
+     * @param items
+     */
+    public void addAll(Iterable<? extends T> items) {
+        Iterator<? extends T> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            add(iterator.next());
+        }
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new ArrayListIterator();
@@ -144,5 +158,14 @@ public class MyArrayList<T> implements Iterable<T> {
         list.add(2);
         list.add(3);
         System.out.println(list);
+
+        List<Integer> addAllList = Lists.newArrayList(4, 5, 6);
+        Iterable<Integer> integers = new Iterable<Integer>() {
+            @Override
+            public Iterator<Integer> iterator() {
+                return addAllList.iterator();
+            }
+        };
+        list.addAll(integers);
     }
 }
