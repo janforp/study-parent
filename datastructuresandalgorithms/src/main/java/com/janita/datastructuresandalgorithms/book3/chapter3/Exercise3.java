@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Exercise
@@ -202,5 +203,98 @@ public class Exercise3 {
         for (Integer integer : list) {
             System.out.println(integer);
         }
+    }
+
+    @Test
+    public void exercise3_13() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        ListIterator<Integer> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            Integer next = listIterator.next();
+            System.out.println(next);
+        }
+        while (listIterator.hasPrevious()) {
+            Integer previous = listIterator.previous();
+            System.out.println(previous);
+        }
+    }
+
+    @Test
+    public void exercise3_14() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        ListIterator<Integer> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            Integer next = listIterator.next();
+            System.out.println(next);
+        }
+        while (listIterator.hasPrevious()) {
+            Integer previous = listIterator.previous();
+            System.out.println(previous);
+        }
+    }
+
+    @Test
+    public void exercise3_15() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        MyLinkedList<Integer> list2 = new MyLinkedList<>();
+        list2.add(10);
+        list2.add(100);
+
+        list.splice(list2);
+
+        Assert.assertEquals(7, list.size());
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+    }
+
+    @Test
+    public void exercise3_16() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Iterator<Integer> reverseIterator = list.reverseIterator();
+        while (reverseIterator.hasNext()) {
+            System.out.println(reverseIterator.next());
+        }
+    }
+
+    @Test
+    public void exercise3_18() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        list.addFirst(0);
+        Assert.assertEquals(0, (int) list.get(0));
+        list.addLast(6);
+        Assert.assertEquals(6, (int) list.getLast());
+        list.removeFirst();
+        Assert.assertEquals(1, (int) list.getFirst());
+        list.removeLast();
+        Assert.assertEquals(5, (int) list.getLast());
     }
 }

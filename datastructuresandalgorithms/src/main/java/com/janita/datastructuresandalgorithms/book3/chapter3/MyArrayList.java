@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -123,9 +124,88 @@ public class MyArrayList<T> implements Iterable<T> {
         }
     }
 
+    public Iterator<T> reverseIterator() {
+        return new ArrayListReverseIterator();
+    }
+
+    public class ArrayListReverseIterator implements Iterator<T> {
+
+        private int current = theSize;
+
+        @Override
+        public boolean hasNext() {
+            return current > 0;
+        }
+
+        @Override
+        public T next() {
+            return theItems[--current];
+        }
+    }
+
+    public ListIterator<T> listIterator() {
+        return new ArrayListIterator2();
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new ArrayListIterator();
+    }
+
+    private class ArrayListIterator2 implements ListIterator<T> {
+
+        private int current = 0;
+
+        @Override
+        public boolean hasNext() {
+            return current < size();
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return theItems[current++];
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current > 0;
+        }
+
+        @Override
+        public T previous() {
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            return theItems[--current];
+        }
+
+        @Override
+        public int nextIndex() {
+            return current;
+        }
+
+        @Override
+        public int previousIndex() {
+            return current - 1;
+        }
+
+        @Override
+        public void remove() {
+            MyArrayList.this.remove(current);
+        }
+
+        @Override
+        public void set(T t) {
+            theItems[current] = t;
+        }
+
+        @Override
+        public void add(T t) {
+            MyArrayList.this.add(current, t);
+        }
     }
 
     private class ArrayListIterator implements Iterator<T> {

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -60,6 +61,30 @@ public class MyLinkedList<T> implements Iterable<T> {
     public boolean add(T x) {
         add(size(), x);
         return true;
+    }
+
+    public void addFirst(T x) {
+        add(0, x);
+    }
+
+    public void addLast(T x) {
+        add(size(), x);
+    }
+
+    public void removeFirst() {
+        remove(0);
+    }
+
+    public void removeLast() {
+        remove(size() - 1);
+    }
+
+    public T getFirst() {
+        return get(0);
+    }
+
+    public T getLast() {
+        return get(size() - 1);
     }
 
     private void add(int idx, T x) {
@@ -177,6 +202,18 @@ public class MyLinkedList<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * 将lst中的所有项都删除，把他们放到 MyLinkedList.this的itr之前，而lst和this必须是不同的表
+     * 城西必须是常数时间
+     *
+     * @param lst
+     */
+    public void splice(MyLinkedList<? extends T> lst) {
+        for (T t : lst) {
+            add(0, t);
+        }
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new LinkedListIterator();
@@ -223,6 +260,73 @@ public class MyLinkedList<T> implements Iterable<T> {
             MyLinkedList.this.remove(current.prev);
             expectedModeCount++;
             okToRemove = false;
+        }
+    }
+
+    public ListIterator<T> listIterator() {
+        return new MyListIterator();
+    }
+
+    private class MyListIterator implements ListIterator<T> {
+
+        private Node<T> current = beginMarker.next;
+
+        private int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return current != endMarker;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T value = current.data;
+            current = current.next;
+            currentIndex++;
+            return value;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current != beginMarker.next;
+        }
+
+        @Override
+        public T previous() {
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            current = current.prev;
+            currentIndex--;
+            return current.data;
+        }
+
+        @Override
+        public int nextIndex() {
+            return currentIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            return currentIndex - 1;
+        }
+
+        @Override
+        public void remove() {
+            MyLinkedList.this.remove(current);
+        }
+
+        @Override
+        public void set(T t) {
+            current.data = t;
+        }
+
+        @Override
+        public void add(T t) {
+            MyLinkedList.this.add(t);
         }
     }
 
