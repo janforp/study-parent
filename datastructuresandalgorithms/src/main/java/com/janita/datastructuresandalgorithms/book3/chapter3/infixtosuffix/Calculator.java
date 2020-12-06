@@ -26,6 +26,7 @@ public class Calculator {
     /**
      * 将中缀表达式转化成后缀表达式
      * a + b * c + (d * e + f) * g
+     * 1 + 2 * 3 + (4 * 5 + 6) * 7 = 7 + 26 * 7 = 189
      * 对应的后缀表达式为 a b c * + d e * f + g * +
      *
      * @param s
