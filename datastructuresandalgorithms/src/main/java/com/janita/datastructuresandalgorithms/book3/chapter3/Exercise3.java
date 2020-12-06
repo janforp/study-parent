@@ -3,6 +3,7 @@ package com.janita.datastructuresandalgorithms.book3.chapter3;
 import com.google.common.collect.Lists;
 import com.janita.datastructuresandalgorithms.book3.chapter3.queue.MyLinkedListUseLazyDelete;
 import com.janita.datastructuresandalgorithms.book3.chapter3.queue.MyList;
+import com.janita.datastructuresandalgorithms.book3.chapter3.queue.MyQueue;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -420,6 +421,24 @@ public class Exercise3 {
         stack.push(20);
         stack.push(30);
         Assert.assertEquals(30, (int) stack.peek());
+        Assert.assertEquals(2, stack.size());
+    }
+
+    @Test
+    public void exercise3_32() {
+        MyQueue<Integer> stack = new MySingleNodeQueue<>();
+        stack.enqueue(1);
+        stack.enqueue(2);
+        stack.enqueue(3);
+        stack.enqueue(4);
+        Assert.assertEquals(4, stack.size());
+        Assert.assertEquals(1, (int) stack.dequeue());
+        Assert.assertEquals(2, (int) stack.dequeue());
+        Assert.assertEquals(3, (int) stack.dequeue());
+        Assert.assertEquals(4, (int) stack.dequeue());
+        Assert.assertTrue(stack.isEmpty());
+        stack.enqueue(20);
+        stack.enqueue(30);
         Assert.assertEquals(2, stack.size());
     }
 }
