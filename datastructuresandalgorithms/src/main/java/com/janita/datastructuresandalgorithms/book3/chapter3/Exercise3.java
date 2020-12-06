@@ -343,4 +343,14 @@ public class Exercise3 {
         }
         Assert.assertNotNull(exception);
     }
+
+    @Test
+    public void exercise3_25() {
+        Exercise3_25_MyIntStack myIntStack = new Exercise3_25_MyIntStack(10);
+        int[] a = { 2, -4, -5, 4, -100, 7, -2, -9, -3 };
+        for (int i = 0; i < a.length; i++) {
+            myIntStack.push(a[i]);
+        }
+        Assert.assertEquals(-100, myIntStack.findMin());
+    }
 }
