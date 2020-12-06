@@ -353,4 +353,38 @@ public class Exercise3 {
         }
         Assert.assertEquals(-100, myIntStack.findMin());
     }
+
+    @Test
+    public void exercise3_28() {
+        Exercise3_28_MyDeque<Integer> deque = new Exercise3_28_MyDeque<>();
+        deque.push(1);
+        int pop = deque.pop();
+        Assert.assertEquals(1, pop);
+
+        deque.push(1);
+        int eject = deque.eject();
+        Assert.assertEquals(1, eject);
+
+        deque.push(1);
+        deque.inject(2);
+        deque.push(3);
+        deque.inject(4);
+        //3124
+        Assert.assertEquals(3, (int) deque.pop());
+        Assert.assertEquals(1, (int) deque.pop());
+        Assert.assertEquals(2, (int) deque.pop());
+        Assert.assertEquals(4, (int) deque.pop());
+
+        deque.push(1);
+        deque.inject(2);
+        deque.push(3);
+        deque.inject(4);
+
+        deque.printReverse();
+        //3124
+        Assert.assertEquals(4, (int) deque.eject());
+        Assert.assertEquals(2, (int) deque.eject());
+        Assert.assertEquals(1, (int) deque.eject());
+        Assert.assertEquals(3, (int) deque.eject());
+    }
 }
