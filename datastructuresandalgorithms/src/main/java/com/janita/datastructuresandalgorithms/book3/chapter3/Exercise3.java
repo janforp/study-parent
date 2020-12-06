@@ -387,4 +387,20 @@ public class Exercise3 {
         Assert.assertEquals(1, (int) deque.eject());
         Assert.assertEquals(3, (int) deque.eject());
     }
+
+    @Test
+    public void exercise3_30() {
+        MySelfAdjustingList<Integer> list = new MySelfAdjustingArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        Assert.assertEquals(4, list.size());
+        Integer remove = list.remove(2);
+        Assert.assertEquals(2, (int) remove);
+        Integer integer = list.find(1);
+        Assert.assertEquals(1, (int) integer);
+        integer = list.find(4);
+        Assert.assertEquals(4, (int) integer);
+    }
 }

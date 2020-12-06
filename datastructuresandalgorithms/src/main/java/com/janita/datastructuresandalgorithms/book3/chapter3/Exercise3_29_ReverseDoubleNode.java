@@ -36,12 +36,12 @@ public class Exercise3_29_ReverseDoubleNode<T> {
 
     @Test
     public void test() {
-        DoubleNode<Integer> node1 = new DoubleNode<>(1, null, null);
-        DoubleNode<Integer> node2 = new DoubleNode<>(1, node1, null);
-        node1.next = node2;
-        DoubleNode<Integer> node3 = new DoubleNode<>(1, node2, null);
+        DoubleNode<Integer> head = new DoubleNode<>(1, null, null);
+        DoubleNode<Integer> node2 = new DoubleNode<>(2, head, null);
+        head.next = node2;
+        DoubleNode<Integer> node3 = new DoubleNode<>(3, node2, null);
         node2.next = node3;
-        DoubleNode<Integer> reverse = reverse(node1);
-        System.out.println(reverse);
+        DoubleNode<Integer> reverseHead = reverse(head);
+        System.out.println(reverseHead);
     }
 }
