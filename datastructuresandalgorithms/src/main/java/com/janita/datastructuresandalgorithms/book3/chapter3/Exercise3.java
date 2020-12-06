@@ -403,4 +403,23 @@ public class Exercise3 {
         integer = list.find(4);
         Assert.assertEquals(4, (int) integer);
     }
+
+    @Test
+    public void exercise3_31() {
+        MyStack<Integer> stack = new MySingleNodeStack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        Assert.assertEquals(4, stack.size());
+        Assert.assertEquals(4, (int) stack.pop());
+        Assert.assertEquals(3, (int) stack.pop());
+        Assert.assertEquals(2, (int) stack.pop());
+        Assert.assertEquals(1, (int) stack.pop());
+        Assert.assertTrue(stack.isEmpty());
+        stack.push(20);
+        stack.push(30);
+        Assert.assertEquals(30, (int) stack.peek());
+        Assert.assertEquals(2, stack.size());
+    }
 }
