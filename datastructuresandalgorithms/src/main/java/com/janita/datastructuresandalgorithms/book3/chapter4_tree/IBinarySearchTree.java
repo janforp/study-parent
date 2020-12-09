@@ -1,5 +1,9 @@
 package com.janita.datastructuresandalgorithms.book3.chapter4_tree;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 /**
  * IBinarySearchTree
  *
@@ -23,4 +27,28 @@ public interface IBinarySearchTree<T> {
     void remove(T x);
 
     void printTree();
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    class BinaryNode<T> {
+
+        protected T element;
+
+        protected BinaryNode<T> left;
+
+        protected BinaryNode<T> right;
+
+        public BinaryNode(T element) {
+            this(element, null, null);
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "element=" + element +
+                    '}';
+        }
+    }
+
 }
