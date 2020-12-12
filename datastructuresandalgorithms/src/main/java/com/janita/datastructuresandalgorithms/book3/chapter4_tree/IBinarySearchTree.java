@@ -2,7 +2,6 @@ package com.janita.datastructuresandalgorithms.book3.chapter4_tree;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * IBinarySearchTree
@@ -28,7 +27,6 @@ public interface IBinarySearchTree<T> {
 
     void printTree();
 
-    @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     class BinaryNode<T> {
