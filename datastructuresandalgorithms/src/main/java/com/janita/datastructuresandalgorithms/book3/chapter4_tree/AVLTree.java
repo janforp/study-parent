@@ -214,6 +214,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         /**========== 维护平衡 Start ==========*/
         //更新Height
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+        return balance(node);
+    }
+
+    private Node balance(Node node) {
         //计算平衡因子
         int balanceFactor = getBalanceFactor(node);
         //LL左孩子节点的左侧产生不平衡
@@ -465,32 +469,7 @@ public class AVLTree<K extends Comparable<K>, V> {
 
         //更新Height
         resultNode.height = 1 + Math.max(getHeight(resultNode.left), getHeight(resultNode.right));
-        //计算平衡因子
-        int balanceFactor = getBalanceFactor(resultNode);
-        //LL左孩子节点的左侧产生不平衡
-        if (balanceFactor > 1 && getBalanceFactor(resultNode.left) >= 0) {
-            //右旋转操作
-            return rightRotate(resultNode);
-        }
-        //RR右孩子节点的右侧产生不平衡
-        if (balanceFactor < -1 && getBalanceFactor(resultNode.right) <= 0) {
-            //左旋转操作
-            return leftRotate(resultNode);
-        }
-        //LR左孩子节点的右侧产生不平衡
-        if (balanceFactor > 1 && getBalanceFactor(resultNode.left) < 0) {
-            resultNode.left = leftRotate(resultNode.left);
-            //右旋转操作
-            return rightRotate(resultNode);
-        }
-        //RL右孩子节点的左侧产生不平衡
-        if (balanceFactor < -1 && getBalanceFactor(resultNode.right) > 0) {
-            resultNode.right = rightRotate(resultNode.right);
-            //右旋转操作
-            return leftRotate(resultNode);
-        }
-        /**========== 维护平衡 End ==========*/
-        return resultNode;
+        return balance(node);
     }
 
     public boolean contains(K key) {
