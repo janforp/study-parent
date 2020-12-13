@@ -217,6 +217,23 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
         return balance(node);
     }
 
+    private Node connect34(Node a, Node b, Node c,
+            Node t0, Node t1, Node t2, Node t3) {
+        a.left = t0;
+        a.right = t1;
+        a.height = Math.max(getHeight(a.left), getHeight(a.right)) + 1;
+
+        c.left = t2;
+        c.right = t3;
+        c.height = Math.max(getHeight(c.left), getHeight(c.right)) + 1;
+
+        b.left = a;
+        b.right = c;
+        b.height = Math.max(getHeight(b.left), getHeight(b.right)) + 1;
+
+        return b;
+    }
+
     private Node balance(Node node) {
         //计算平衡因子
         int balanceFactor = getBalanceFactor(node);
