@@ -8,17 +8,17 @@ import java.util.ArrayList;
 /**
  * AVL平衡二叉树
  *
- * @author ronglexie
+ * @author zhucj
  * @version 2018/9/1
  */
 @SuppressWarnings("all")
-public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
+public class AVLTreeWith34<K extends Comparable<K>, V> {
 
     private Node root;
 
     private int size;
 
-    public AVLTreeParentAnd34() {
+    public AVLTreeWith34() {
         root = null;
         size = 0;
     }
@@ -28,7 +28,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return int
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     private int getHeight(Node node) {
@@ -43,7 +43,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return int
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     private int getBalanceFactor(Node node) {
@@ -58,7 +58,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param
      * @return boolean
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     private boolean isBinarySearchTree() {
@@ -76,7 +76,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      * 查看AVL平衡二叉树是否是平衡二叉树
      *
      * @return boolean
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     private boolean isBalanced() {
@@ -137,7 +137,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param y
      * @return AVLTree<K, V>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     private Node leftRotate(Node y) {
@@ -160,7 +160,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return void
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private void inOrder(Node node, ArrayList<K> keys) {
@@ -178,7 +178,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      * @param key
      * @param value
      * @return void
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/9/1
      */
     public void add(K key, V value) {
@@ -193,7 +193,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      * @param key
      * @param value
      * @return void
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/19
      */
     private Node add(Node node, K key, V value) {
@@ -214,7 +214,44 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
         /**========== 维护平衡 Start ==========*/
         //更新Height
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
-        return balance(node);
+        return balance34(node);
+    }
+
+    private Node balance34(Node node) {
+        //计算平衡因子
+        int balanceFactor = getBalanceFactor(node);
+        //LL左孩子节点的左侧产生不平衡
+        if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
+            //右旋转操作
+            return connect34(
+                    node.left.left, node.left, node,
+                    node.left.left.left, node.left.left.right, node.left.right, node.right
+            );
+        }
+        //RR右孩子节点的右侧产生不平衡
+        if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
+            //左旋转操作
+            return connect34(
+                    node, node.right, node.right.right,
+                    node.left, node.right.left, node.right.right.left, node.right.right.right
+            );
+        }
+        //LR左孩子节点的右侧产生不平衡
+        if (balanceFactor > 1 && getBalanceFactor(node.left) < 0) {
+            return connect34(
+                    node.left, node.left.right, node,
+                    node.left.left, node.left.right.left, node.left.right.right, node.right
+            );
+        }
+        //RL右孩子节点的左侧产生不平衡
+        if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
+            return connect34(
+                    node, node.right.left, node.right,
+                    node.left, node.right.left.left, node.right.left.right, node.right.right
+            );
+        }
+        /**========== 维护平衡 End ==========*/
+        return node;
     }
 
     private Node connect34(Node a, Node b, Node c,
@@ -234,41 +271,12 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
         return b;
     }
 
-    private Node balance(Node node) {
-        //计算平衡因子
-        int balanceFactor = getBalanceFactor(node);
-        //LL左孩子节点的左侧产生不平衡
-        if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
-            //右旋转操作
-            return rightRotate(node);
-        }
-        //RR右孩子节点的右侧产生不平衡
-        if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
-            //左旋转操作
-            return leftRotate(node);
-        }
-        //LR左孩子节点的右侧产生不平衡
-        if (balanceFactor > 1 && getBalanceFactor(node.left) < 0) {
-            node.left = leftRotate(node.left);
-            //右旋转操作
-            return rightRotate(node);
-        }
-        //RL右孩子节点的左侧产生不平衡
-        if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
-            node.right = rightRotate(node.right);
-            //右旋转操作
-            return leftRotate(node);
-        }
-        /**========== 维护平衡 End ==========*/
-        return node;
-    }
-
     /**
      * 查找AVL平衡二叉树的最小值
      *
      * @param
      * @return V
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     public V minimum() {
@@ -284,7 +292,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private Node minimum(Node node) {
@@ -302,7 +310,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param
      * @return V
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     public V maximize() {
@@ -318,7 +326,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private Node maximize(Node node) {
@@ -337,7 +345,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param
      * @return V
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     public V removeMax() {
@@ -352,7 +360,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private Node removeMax(Node node) {
@@ -371,7 +379,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     public V removeMin() {
@@ -386,7 +394,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      *
      * @param node
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private Node removeMin(Node node) {
@@ -421,7 +429,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      * @param node
      * @param key
      * @return BinarySearchTree<E>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private Node remove(Node node, K key) {
@@ -486,7 +494,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
 
         //更新Height
         resultNode.height = 1 + Math.max(getHeight(resultNode.left), getHeight(resultNode.right));
-        return balance(resultNode);
+        return balance34(resultNode);
     }
 
     public boolean contains(K key) {
@@ -520,7 +528,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
      * @param node
      * @param key
      * @return map.LinkedListMap<K, V>.Node
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/19
      */
     public Node getNode(Node node, K key) {
@@ -540,7 +548,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
     /**
      * 节点类
      *
-     * @author ronglexie
+     * @author zhucj
      * @version 2018/8/18
      */
     private class Node {
@@ -573,7 +581,7 @@ public class AVLTreeParentAnd34<K extends Comparable<K>, V> {
 
     @Test
     public void test() {
-        AVLTreeParentAnd34<Integer, String> tree = new AVLTreeParentAnd34<>();
+        AVLTreeWith34<Integer, String> tree = new AVLTreeWith34<>();
         tree.add(3, "3");
         tree.add(2, "2");
         tree.add(1, "1");
