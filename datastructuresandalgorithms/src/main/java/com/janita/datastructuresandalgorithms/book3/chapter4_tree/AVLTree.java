@@ -33,7 +33,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      */
     private int getHeight(Node node) {
         if (node == null) {
-            return 0;
+            return -1;
         }
         return node.height;
     }
@@ -562,7 +562,7 @@ public class AVLTree<K extends Comparable<K>, V> {
             this.value = value;
             left = null;
             right = null;
-            height = 1;
+            height = 0;
         }
 
         @Override
