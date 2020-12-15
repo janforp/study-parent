@@ -30,37 +30,34 @@ public class SplayTreeM<T extends Comparable<? super T>> {
         }
         SplayTreeNode<T> p;//父亲
         SplayTreeNode<T> g;//爷爷
-        while ((p = v.parent) != null && (g = v.parent.parent) != null) {
+        while ((p = v.parent) != null && (g = v.parent.parent) != null) {//只要父亲，祖父同时存在，我们就进行一次双层伸展
             SplayTreeNode<T> gg = g.parent;//每轮之后，v都将以原曾祖父为父
-            if (isLeftChild(v)) {
-                if (isLeftChild(p)) {
-                    //zig-zig
+            if (isLeftChild(v)) {//zig类型
+                if (isLeftChild(p)) {//zig-zig
                     attachAsLeftChild(g, p.right);
                     attachAsLeftChild(p, v.right);
                     attachAsRightChild(p, g);
                     attachAsRightChild(v, p);
-                } else {
-                    //zig-zag,画图一下子就明白了
+                } else {//zig-zag
                     attachAsRightChild(g, v.left);
                     attachAsLeftChild(p, v.right);
                     attachAsLeftChild(v, g);
                     attachAsRightChild(v, p);
                 }
-            } else if (isRightChild(v)) {
-                if (isRightChild(p)) {
-                    //zag-zag
+            } else if (isRightChild(v)) {//zag类型
+                if (isRightChild(p)) {//zag-zag
                     attachAsRightChild(g, p.left);
                     attachAsRightChild(p, v.left);
                     attachAsLeftChild(p, g);
                     attachAsLeftChild(v, p);
-                } else {
-                    //zag-zig
+                } else {//zag-zig
                     attachAsRightChild(p, v.left);
                     attachAsLeftChild(g, v.right);
                     attachAsLeftChild(v, p);
                     attachAsRightChild(v, g);
                 }
             }
+            //没经过一次双重伸展，都需要把局部的新的子树，接入到原树中对应的位置
             if (gg == null) {//若无曾祖父gg，则v现为树根
                 v.parent = null;
             } else {//否则,gg此后应以v为左或右孩子
@@ -71,6 +68,7 @@ public class SplayTreeM<T extends Comparable<? super T>> {
                 }
             }
         }
+        //所有的双层伸展都完成之后，可能还需要进行一次单层调整，因为最后一次双层伸展之后，节点只有一个父亲而没有祖父的情况是存在的
         if (p != null) {
             if (isLeftChild(v)) {
                 attachAsRightChild(p, v.right);
@@ -79,8 +77,8 @@ public class SplayTreeM<T extends Comparable<? super T>> {
                 attachAsRightChild(p, v.left);
                 attachAsLeftChild(v, p);
             }
-            v.parent = null;
         }
+        v.parent = null;
         return v;
     }
 
