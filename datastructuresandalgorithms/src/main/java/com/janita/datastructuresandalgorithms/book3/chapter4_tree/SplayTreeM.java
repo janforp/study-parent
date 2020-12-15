@@ -40,11 +40,11 @@ public class SplayTreeM<T extends Comparable<? super T>> {
                     attachAsRightChild(p, g);
                     attachAsRightChild(v, p);
                 } else {
-                    //zig-zag
-                    attachAsRightChild(g, p.left);
-                    attachAsRightChild(p, v.left);
-                    attachAsLeftChild(v, p);
-                    attachAsLeftChild(p, g);
+                    //zig-zag,画图一下子就明白了
+                    attachAsRightChild(g, v.left);
+                    attachAsLeftChild(p, v.right);
+                    attachAsLeftChild(v, g);
+                    attachAsRightChild(v, p);
                 }
             } else if (isRightChild(v)) {
                 if (isRightChild(p)) {
@@ -241,5 +241,14 @@ public class SplayTreeM<T extends Comparable<? super T>> {
         SplayTreeM<Integer> splay = new SplayTreeM<>();
         splay.splay(node1);
         Assert.assertEquals(7, (int) node6.right.element);
+
+        splay.splay(node3);
+
+        Assert.assertEquals(1, (int) node3.left.element);
+        Assert.assertEquals(14, (int) node3.right.element);
+
+        Assert.assertEquals(6, (int) node10.left.element);
+        Assert.assertEquals(13, (int) node12.right.element);
+
     }
 }
