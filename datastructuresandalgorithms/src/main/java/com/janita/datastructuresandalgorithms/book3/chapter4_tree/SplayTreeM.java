@@ -1,9 +1,8 @@
 package com.janita.datastructuresandalgorithms.book3.chapter4_tree;
 
+import lombok.AllArgsConstructor;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.NoSuchElementException;
 
 /**
  * SplayTreeM
@@ -13,7 +12,7 @@ import java.util.NoSuchElementException;
  */
 public class SplayTreeM<T extends Comparable<? super T>> {
 
-    private SplayTreeNode root;
+    private SplayTreeNode<T> root;
 
     private int size;
 
@@ -22,84 +21,17 @@ public class SplayTreeM<T extends Comparable<? super T>> {
         size = 0;
     }
 
-    public boolean insert(T x) {
-        if (x == null) {
-            throw new NullPointerException("不接受空数据");
-        }
-        SplayTreeNode newNode = new SplayTreeNode(x);
-        size++;
-        if (root == null) {
-            root = newNode;
-            return true;
-        }
-        SplayTreeNode node = find(root, x);
-        if (node == null) {
-            root = newNode;
-            return true;
-        }
-        if (node.element.equals(x)) {
-            throw new RuntimeException("不能添加重复元素");
-        }
-        SplayTreeNode left = node.left;
-        SplayTreeNode right = node.right;
-        newNode.left = node;
-        newNode.right = right;
-        node.parent = newNode;
-        if (right != null) {
-            right.parent = newNode;
-        }
-        root = newNode;
-        return true;
-    }
-
-    public T find(T x) {
-        SplayTreeNode node = find(root, x);
-        if (node == null) {
-            throw new NoSuchElementException();
-        }
-        return node.element;
-    }
-
-    private SplayTreeNode find(SplayTreeNode node, T x) {
-        if (x == null) {
-            throw new NullPointerException("不接受空数据");
-        }
-        if (size == 0) {
-            return null;
-        }
-        if (node == null) {
-            return null;
-        }
-        SplayTreeNode result = node;
-        while (x.compareTo(result.element) < 0) {
-            if (result.left != null) {
-                result = result.left;
-            } else {
-                break;
-            }
-        }
-        while (x.compareTo(result.element) > 0) {
-            if (result.right != null) {
-                result = result.right;
-            } else {
-                break;
-            }
-        }
-        splay(result);
-        return result;
-    }
-
-    private SplayTreeNode splay(SplayTreeNode v) {
+    private SplayTreeNode<T> splay(SplayTreeNode<T> v) {
         if (v == null) {
             return null;
         }
         if (v == root) {
             return v;
         }
-        SplayTreeNode p;//父亲
-        SplayTreeNode g;//爷爷
+        SplayTreeNode<T> p;//父亲
+        SplayTreeNode<T> g;//爷爷
         while ((p = v.parent) != null && (g = v.parent.parent) != null) {
-            SplayTreeNode gg = g.parent;//每轮之后，v都将以原曾祖父为父
+            SplayTreeNode<T> gg = g.parent;//每轮之后，v都将以原曾祖父为父
             if (isLeftChild(v)) {
                 if (isLeftChild(p)) {
                     //zig-zig
@@ -152,59 +84,52 @@ public class SplayTreeM<T extends Comparable<? super T>> {
         return v;
     }
 
-    private void attachAsRightChild(SplayTreeNode p, SplayTreeNode rc) {
+    private void attachAsRightChild(SplayTreeNode<T> p, SplayTreeNode<T> rc) {
         p.right = rc;
         if (rc != null) {
             rc.parent = p;
         }
     }
 
-    private void attachAsLeftChild(SplayTreeNode p, SplayTreeNode lc) {
+    private void attachAsLeftChild(SplayTreeNode<T> p, SplayTreeNode<T> lc) {
         p.left = lc;
         if (lc != null) {
             lc.parent = p;
         }
     }
 
-    private boolean isRightChild(SplayTreeNode v) {
+    private boolean isRightChild(SplayTreeNode<T> v) {
         if (v == null) {
             return false;
         }
-        SplayTreeNode parent = v.parent;
+        SplayTreeNode<T> parent = v.parent;
         if (parent == null) {
             return false;
         }
         return parent.right == v;
     }
 
-    private boolean isLeftChild(SplayTreeNode v) {
+    private boolean isLeftChild(SplayTreeNode<T> v) {
         if (v == null) {
             return false;
         }
-        SplayTreeNode parent = v.parent;
+        SplayTreeNode<T> parent = v.parent;
         if (parent == null) {
             return false;
         }
         return parent.left == v;
     }
 
-    private boolean contains(T x) {
-        SplayTreeNode node = find(root, x);
-        if (node == null) {
-            return false;
-        }
-        return node.element.equals(x);
-    }
-
-    private class SplayTreeNode {
+    @AllArgsConstructor
+    private static class SplayTreeNode<T> {
 
         private T element;
 
-        private SplayTreeNode parent;
+        private SplayTreeNode<T> parent;
 
-        private SplayTreeNode left;
+        private SplayTreeNode<T> left;
 
-        private SplayTreeNode right;
+        private SplayTreeNode<T> right;
 
         SplayTreeNode(T element) {
             this.element = element;
@@ -212,31 +137,109 @@ public class SplayTreeM<T extends Comparable<? super T>> {
 
         @Override
         public String toString() {
-            return "SplayTreeNode{" +
+            return "SplayTreeNode<T>{" +
                     "element=" + element +
                     '}';
         }
     }
 
     @Test
-    public void test() {
-        SplayTreeM<Integer> treeM = new SplayTreeM<>();
-        treeM.insert(1);
-        treeM.insert(2);
-        treeM.insert(3);
-        treeM.insert(4);
-        treeM.insert(14);
-        treeM.insert(5);
-        treeM.insert(6);
-        treeM.insert(9);
-        treeM.insert(7);
-        treeM.insert(8);
-        treeM.insert(11);
-        treeM.insert(10);
-        treeM.insert(12);
-        treeM.insert(13);
+    public void test1() {
 
-        Integer integer = treeM.find(1);
-        Assert.assertNotNull(integer);
+        SplayTreeNode<Integer> node7 = new SplayTreeNode<>(7);
+        SplayTreeNode<Integer> node6 = new SplayTreeNode<>(6);
+        SplayTreeNode<Integer> node5 = new SplayTreeNode<>(5);
+        SplayTreeNode<Integer> node4 = new SplayTreeNode<>(4);
+        SplayTreeNode<Integer> node3 = new SplayTreeNode<>(3);
+        SplayTreeNode<Integer> node2 = new SplayTreeNode<>(2);
+        SplayTreeNode<Integer> node1 = new SplayTreeNode<>(1);
+
+        node7.left = node6;
+        node6.parent = node7;
+
+        node6.left = node5;
+        node5.parent = node6;
+
+        node5.left = node4;
+        node4.parent = node5;
+
+        node4.left = node3;
+        node3.parent = node4;
+
+        node3.left = node2;
+        node2.parent = node3;
+
+        node2.left = node1;
+        node1.parent = node2;
+
+        Assert.assertNotNull(node7);
+    }
+
+    @Test
+    public void test2() {
+        SplayTreeNode<Integer> node15 = new SplayTreeNode<>(15);
+        SplayTreeNode<Integer> node14 = new SplayTreeNode<>(14);
+        SplayTreeNode<Integer> node13 = new SplayTreeNode<>(13);
+        SplayTreeNode<Integer> node12 = new SplayTreeNode<>(12);
+        SplayTreeNode<Integer> node11 = new SplayTreeNode<>(11);
+        SplayTreeNode<Integer> node10 = new SplayTreeNode<>(10);
+        SplayTreeNode<Integer> node9 = new SplayTreeNode<>(9);
+        SplayTreeNode<Integer> node8 = new SplayTreeNode<>(8);
+
+        SplayTreeNode<Integer> node7 = new SplayTreeNode<>(7);
+        SplayTreeNode<Integer> node6 = new SplayTreeNode<>(6);
+        SplayTreeNode<Integer> node5 = new SplayTreeNode<>(5);
+        SplayTreeNode<Integer> node4 = new SplayTreeNode<>(4);
+        SplayTreeNode<Integer> node3 = new SplayTreeNode<>(3);
+        SplayTreeNode<Integer> node2 = new SplayTreeNode<>(2);
+        SplayTreeNode<Integer> node1 = new SplayTreeNode<>(1);
+
+        node15.left = node14;
+        node14.parent = node15;
+
+        node14.left = node13;
+        node13.parent = node14;
+
+        node13.left = node12;
+        node12.parent = node13;
+
+        node12.left = node11;
+        node11.parent = node12;
+
+        node11.left = node10;
+        node10.parent = node11;
+
+        node10.left = node9;
+        node9.parent = node10;
+
+        node9.left = node8;
+        node8.parent = node9;
+
+        node8.left = node7;
+        node7.parent = node8;
+
+        node7.left = node6;
+        node6.parent = node7;
+
+        node6.left = node5;
+        node5.parent = node6;
+
+        node5.left = node4;
+        node4.parent = node5;
+
+        node4.left = node3;
+        node3.parent = node4;
+
+        node3.left = node2;
+        node2.parent = node3;
+
+        node2.left = node1;
+        node1.parent = node2;
+
+        Assert.assertNotNull(node15);
+
+        SplayTreeM<Integer> splay = new SplayTreeM<>();
+        splay.splay(node1);
+        Assert.assertEquals(7, (int) node6.right.element);
     }
 }
