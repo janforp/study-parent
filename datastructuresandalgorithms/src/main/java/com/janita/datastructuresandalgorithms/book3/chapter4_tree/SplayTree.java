@@ -1,311 +1,218 @@
 package com.janita.datastructuresandalgorithms.book3.chapter4_tree;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Stack;
+import lombok.AllArgsConstructor;
 
 /**
- * Top-Down Splay Tree implementation (http://en.wikipedia.org/wiki/Splay_tree).
- * Largely based on the implementation by Danny Sleator <sleator@cs.cmu.edu>, available at http://www.link.cs.cmu.edu/splay/ (public domain).
- * Cleaned & refactored code, added generics, builders, iterator, and a couple of minor performance improvements.
+ * SplayTreeM
  *
- * @param <T>
- * @author Pedro Oliveira (http://www.cpdomina.net), original by Danny Sleator (sleator@cs.cmu.edu)
+ * @author zhucj
+ * @since 20201224
  */
-public class SplayTree<T extends Comparable<T>> implements Iterable<T> {
+public class SplayTree<T extends Comparable<? super T>> {
 
-    private BinaryNode root;
+    private SplayTreeNode root;
 
-    private final BinaryNode aux;
+    private int size;
 
     public SplayTree() {
         root = null;
-        aux = new BinaryNode(null);
+        size = 0;
     }
 
-    /**
-     * Build an empty Splay Tree
-     *
-     * @param <T>
-     * @return
-     */
-    public static <T extends Comparable<T>> SplayTree<T> create() {
-        return new SplayTree<T>();
+    private SplayTreeNode search(T e) {
+        SplayTreeNode p = searchIn(root, e);
+        root = splay(p);
+        return root;
     }
 
-    /**
-     * Build a Splay Tree with the given elements
-     *
-     * @param <T>
-     * @param elements
-     * @return
-     */
-    public static <T extends Comparable<T>> SplayTree<T> create(T... elements) {
-        SplayTree<T> tree = new SplayTree<T>();
-        for (T element : elements) {
-            tree.insert(element);
-        }
-        return tree;
-    }
-
-    /**
-     * Insert the given element into the tree.
-     *
-     * @param element The element to insert
-     * @return False if element already present, true otherwise
-     */
-    public boolean insert(T element) {
-        if (root == null) {
-            root = new BinaryNode(element);
-            return true;
-        }
-        splay(element);
-
-        final int c = element.compareTo(root.key);
-        if (c == 0) {
+    public boolean contains(T e) {
+        SplayTreeNode node = search(e);
+        if (node == null) {
             return false;
         }
-
-        BinaryNode n = new BinaryNode(element);
-        if (c < 0) {
-            n.left = root.left;
-            n.right = root;
-            root.left = null;
-        } else {
-            n.right = root.right;
-            n.left = root;
-            root.right = null;
-        }
-        root = n;
-        return true;
+        return node.element.equals(e);
     }
 
     /**
-     * Remove the given element from the tree.
+     * 试图找到e，如果e不存在，则找到接近e的节点
      *
-     * @param element The element to remove.
-     * @return False if element not present, true otherwise
-     */
-    public boolean remove(T element) {
-        splay(element);
-
-        if (element.compareTo(root.key) != 0) {
-            return false;
-        }
-
-        // Now delete the root
-        if (root.left == null) {
-            root = root.right;
-        } else {
-            BinaryNode x = root.right;
-            root = root.left;
-            splay(element);
-            root.right = x;
-        }
-        return true;
-    }
-
-    /**
-     * Find the smallest element in the tree.
-     *
+     * @param v
+     * @param e
      * @return
      */
-    public T findMin() {
-        BinaryNode x = root;
-        if (root == null) {
-            return null;
+    private SplayTreeNode searchIn(SplayTreeNode v, T e) {
+        if (v == null || e.equals(v.element)) {
+            return v;
         }
-        while (x.left != null) {
-            x = x.left;
-        }
-        splay(x.key);
-        return x.key;
-    }
-
-    /**
-     * Find the largest element in the tree.
-     *
-     * @return
-     */
-    public T findMax() {
-        BinaryNode x = root;
-        if (root == null) {
-            return null;
-        }
-        while (x.right != null) {
-            x = x.right;
-        }
-        splay(x.key);
-        return x.key;
-    }
-
-    /**
-     * Find an item in the tree.
-     *
-     * @param element The element to find
-     * @return
-     */
-    public T find(T element) {
-        if (root == null) {
-            return null;
-        }
-        splay(element);
-        if (root.key.compareTo(element) != 0) {
-            return null;
-        }
-        return root.key;
-    }
-
-    /**
-     * Check if the tree contains the given element.
-     *
-     * @param element
-     * @return True if present, false otherwise
-     */
-    public boolean contains(T element) {
-        return find(element) != null;
-    }
-
-    /**
-     * Test if the tree is logically empty.
-     *
-     * @return True if empty, false otherwise.
-     */
-    public boolean isEmpty() {
-        return root == null;
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Iterable#iterator()
-     */
-    public Iterator<T> iterator() {
-        return new SplayTreeIterator();
-    }
-
-    /**
-     * Internal method to perform a top-down splay.
-     * If the element is in the tree, then the {@link BinaryNode} containing that element becomes the root.
-     * Otherwise, the root will be the ceiling or floor {@link BinaryNode} of the given element.
-     *
-     * @param element
-     */
-    private void splay(T element) {
-        BinaryNode l, r, t, y;
-        l = r = aux;
-        t = root;
-        aux.left = aux.right = null;
-        while (true) {
-            final int comp = element.compareTo(t.key);
-            if (comp < 0) {
-                if (t.left == null) {
-                    break;
-                }
-                if (element.compareTo(t.left.key) < 0) {
-                    y = t.left;                            /* rotate right */
-                    t.left = y.right;
-                    y.right = t;
-                    t = y;
-                    if (t.left == null) {
-                        break;
-                    }
-                }
-                r.left = t;                                 /* link right */
-                r = t;
-                t = t.left;
-            } else if (comp > 0) {
-                if (t.right == null) {
-                    break;
-                }
-                if (element.compareTo(t.right.key) > 0) {
-                    y = t.right;                            /* rotate left */
-                    t.right = y.left;
-                    y.left = t;
-                    t = y;
-                    if (t.right == null) {
-                        break;
-                    }
-                }
-                l.right = t;                                /* link left */
-                l = t;
-                t = t.right;
+        SplayTreeNode result = v;
+        while (e.compareTo(result.element) > 0) {
+            if (result.right != null) {
+                result = result.right;
             } else {
                 break;
             }
         }
-        l.right = t.left;                                   /* assemble */
-        r.left = t.right;
-        t.left = aux.right;
-        t.right = aux.left;
-        root = t;
-    }
-
-    /**
-     * {@link SplayTree} internal node
-     *
-     * @author Pedro Oliveira
-     */
-    private class BinaryNode {
-
-        public final T key;          // The data in the node
-
-        public BinaryNode left;         // Left child
-
-        public BinaryNode right;        // Right child
-
-        public BinaryNode(T theKey) {
-            key = theKey;
-            left = right = null;
-        }
-    }
-
-    /**
-     * Stack-based {@link SplayTree} iterator
-     *
-     * @author Pedro Oliveira
-     */
-    private class SplayTreeIterator implements Iterator<T> {
-
-        private final Stack<BinaryNode> nodes;
-
-        public SplayTreeIterator() {
-            nodes = new Stack<BinaryNode>();
-            pushLeft(root);
-        }
-
-        public boolean hasNext() {
-            return !nodes.isEmpty();
-        }
-
-        public T next() {
-            BinaryNode node = nodes.pop();
-            if (node != null) {
-                pushLeft(node.right);
-                return node.key;
-            }
-            throw new NoSuchElementException();
-        }
-
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-
-        private void pushLeft(BinaryNode node) {
-            while (node != null) {
-                nodes.push(node);
-                node = node.left;
+        while (e.compareTo(result.element) < 0) {
+            if (result.left != null) {
+                result = result.left;
+            } else {
+                break;
             }
         }
-
+        return result;
     }
 
-    @Test
-    public void test() {
-        SplayTree<Integer> tree = SplayTree.create(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        Integer integer = tree.find(5);
-        Assert.assertNull(integer);
+    public T insert(T e) {
+        if (root == null) {
+            size++;
+            root = new SplayTreeNode(e);
+            return e;
+        }
+        SplayTreeNode search = search(e);
+        if (search != null && search.element.equals(e)) {
+            return e;
+        }
+        size++;
+        SplayTreeNode t = root;
+        SplayTreeNode newNode = new SplayTreeNode(e);
+        SplayTreeNode left = t.left;
+        SplayTreeNode right = t.right;
+        if (e.compareTo(t.element) > 0) {
+            newNode.right = right;
+            if (right != null) {
+                right.parent = newNode;
+            }
+            newNode.left = t;
+            t.parent = newNode;
+            root = newNode;
+        } else {
+            newNode.left = left;
+            if (left != null) {
+                left.parent = newNode;
+            }
+            t.left = newNode;
+            newNode.parent = t;
+        }
+        return e;
     }
 
+    private SplayTreeNode splay(SplayTreeNode v) {
+        if (v == null) {
+            return null;
+        }
+        if (v == root) {
+            return v;
+        }
+        SplayTreeNode p;//父亲
+        SplayTreeNode g;//爷爷
+        while ((p = v.parent) != null && (g = v.parent.parent) != null) {//只要父亲，祖父同时存在，我们就进行一次双层伸展
+            SplayTreeNode gg = g.parent;//每轮之后，v都将以原曾祖父为父
+            if (isLeftChild(v)) {//zig类型
+                if (isLeftChild(p)) {//zig-zig
+                    attachAsLeftChild(g, p.right);
+                    attachAsLeftChild(p, v.right);
+                    attachAsRightChild(p, g);
+                    attachAsRightChild(v, p);
+                } else {//zig-zag
+                    attachAsRightChild(g, v.left);
+                    attachAsLeftChild(p, v.right);
+                    attachAsLeftChild(v, g);
+                    attachAsRightChild(v, p);
+                }
+            } else if (isRightChild(v)) {//zag类型
+                if (isRightChild(p)) {//zag-zag
+                    attachAsRightChild(g, p.left);
+                    attachAsRightChild(p, v.left);
+                    attachAsLeftChild(p, g);
+                    attachAsLeftChild(v, p);
+                } else {//zag-zig
+                    attachAsRightChild(p, v.left);
+                    attachAsLeftChild(g, v.right);
+                    attachAsLeftChild(v, p);
+                    attachAsRightChild(v, g);
+                }
+            }
+            //没经过一次双重伸展，都需要把局部的新的子树，接入到原树中对应的位置
+            if (gg == null) {//若无曾祖父gg，则v现为树根
+                v.parent = null;
+            } else {//否则,gg此后应以v为左或右孩子
+                if (g == gg.left) {
+                    attachAsLeftChild(gg, v);
+                } else {
+                    attachAsRightChild(gg, v);
+                }
+            }
+        }
+        //所有的双层伸展都完成之后，可能还需要进行一次单层调整，因为最后一次双层伸展之后，节点只有一个父亲而没有祖父的情况是存在的
+        if (p != null) {
+            if (isLeftChild(v)) {
+                attachAsLeftChild(p, v.right);
+                attachAsRightChild(v, p);
+            } else {
+                attachAsRightChild(p, v.left);
+                attachAsLeftChild(v, p);
+            }
+        }
+        v.parent = null;
+        return v;
+    }
+
+    private void attachAsRightChild(SplayTreeNode p, SplayTreeNode rc) {
+        p.right = rc;
+        if (rc != null) {
+            rc.parent = p;
+        }
+    }
+
+    private void attachAsLeftChild(SplayTreeNode p, SplayTreeNode lc) {
+        p.left = lc;
+        if (lc != null) {
+            lc.parent = p;
+        }
+    }
+
+    private boolean isRightChild(SplayTreeNode v) {
+        if (v == null) {
+            return false;
+        }
+        SplayTreeNode parent = v.parent;
+        if (parent == null) {
+            return false;
+        }
+        return parent.right == v;
+    }
+
+    private boolean isLeftChild(SplayTreeNode v) {
+        if (v == null) {
+            return false;
+        }
+        SplayTreeNode parent = v.parent;
+        if (parent == null) {
+            return false;
+        }
+        return parent.left == v;
+    }
+
+    @AllArgsConstructor
+    private class SplayTreeNode {
+
+        private T element;
+
+        private SplayTreeNode parent;
+
+        private SplayTreeNode left;
+
+        private SplayTreeNode right;
+
+        SplayTreeNode(T element) {
+            this.element = element;
+        }
+
+        @Override
+        public String toString() {
+            return "SplayTreeNode{" +
+                    "element=" + element +
+                    '}';
+        }
+    }
 }

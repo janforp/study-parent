@@ -9,11 +9,11 @@ import org.junit.Test;
  * @author zhucj
  * @since 20201224
  */
-public class SplayTreeMTest {
+public class SplayTreeTest {
 
     @Test
     public void testInsert() {
-        SplayTreeM<Integer> tree = create(3);
+        SplayTree<Integer> tree = create(3);
         boolean contains = tree.contains(1);
         Assert.assertTrue(contains);
         tree.insert(20);
@@ -22,8 +22,8 @@ public class SplayTreeMTest {
         tree.contains(3);
     }
 
-    private SplayTreeM<Integer> create(int i) {
-        SplayTreeM<Integer> tree = new SplayTreeM<>();
+    private SplayTree<Integer> create(int i) {
+        SplayTree<Integer> tree = new SplayTree<>();
         for (int j = 1; j <= i; j++) {
             tree.insert(j);
         }
