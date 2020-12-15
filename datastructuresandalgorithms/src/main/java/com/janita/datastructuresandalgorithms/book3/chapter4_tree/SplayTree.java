@@ -33,6 +33,55 @@ public class SplayTree<T extends Comparable<? super T>> {
         return node.element.equals(e);
     }
 
+    public boolean remove(T e) {
+        if (root == null) {
+            return false;
+        }
+        if (!e.equals(search(e).element)) {
+            return false;
+        }
+        SplayTreeNode w = root;//search之后待删除节点已经提升至树根
+        if (!hasLChild(root)) {//无左子树
+            root = root.right;
+            if (root != null) {
+                root.parent = null;
+            }
+        } else if (!hasRChild(root)) {//无右子树
+            root = root.left;
+            if (root != null) {
+                root.parent = null;
+            }
+        } else {//左右子树同时存在
+            SplayTreeNode lTree = root.left;
+            lTree.parent = null;
+            root.left = null;//暂时切下左子树
+            root = root.right;
+            root.parent = null;//保留右子树
+            //TODO 此处需要验证下
+            search(w.element);//必然失败的查找，导致右子树中的最小元素被提升到root位置，左子树为空
+            root.left = lTree;
+            lTree.parent = root;
+        }
+        //release(w.element);
+        size--;
+        //release(w);
+        return true;
+    }
+
+    private boolean hasRChild(SplayTreeNode node) {
+        if (node == null) {
+            return false;
+        }
+        return node.right != null;
+    }
+
+    private boolean hasLChild(SplayTreeNode node) {
+        if (node == null) {
+            return false;
+        }
+        return node.left != null;
+    }
+
     /**
      * 试图找到e，如果e不存在，则找到接近e的节点
      *
