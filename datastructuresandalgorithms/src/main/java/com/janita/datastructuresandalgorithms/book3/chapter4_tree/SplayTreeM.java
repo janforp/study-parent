@@ -21,6 +21,41 @@ public class SplayTreeM<T extends Comparable<? super T>> {
         size = 0;
     }
 
+    private SplayTreeNode<T> search(T e) {
+        SplayTreeNode<T> p = searchIn(root, e);
+        root = splay(p);
+        return root;
+    }
+
+    /**
+     * 试图找到e，如果e不存在，则找到接近
+     *
+     * @param v
+     * @param e
+     * @return
+     */
+    private SplayTreeNode<T> searchIn(SplayTreeNode<T> v, T e) {
+        if (v == null || e.equals(v.element)) {
+            return v;
+        }
+        SplayTreeNode<T> result = v;
+        while (e.compareTo(result.element) > 0) {
+            if (result.right != null) {
+                result = result.right;
+            } else {
+                break;
+            }
+        }
+        while (e.compareTo(result.element) < 0) {
+            if (result.left != null) {
+                result = result.left;
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
     private SplayTreeNode<T> splay(SplayTreeNode<T> v) {
         if (v == null) {
             return null;
