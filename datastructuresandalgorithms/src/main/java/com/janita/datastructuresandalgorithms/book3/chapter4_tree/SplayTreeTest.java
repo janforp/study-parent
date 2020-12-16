@@ -41,4 +41,11 @@ public class SplayTreeTest {
         }
         return tree;
     }
+
+    @Test
+    public void testDr() {
+        SplayTree<Integer> tree = create(7);
+        boolean contains = tree.contains(1);
+        Assert.assertTrue(contains);
+    }
 }
