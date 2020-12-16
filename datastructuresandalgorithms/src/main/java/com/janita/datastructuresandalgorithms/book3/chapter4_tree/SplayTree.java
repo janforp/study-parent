@@ -19,6 +19,14 @@ public class SplayTree<T extends Comparable<? super T>> {
         size = 0;
     }
 
+    @Override
+    public String toString() {
+        return "SplayTree{" +
+                "root=" + root +
+                ", size=" + size +
+                '}';
+    }
+
     private SplayTreeNode search(T e) {
         SplayTreeNode p = searchIn(root, e);
         root = splay(p);
@@ -261,6 +269,8 @@ public class SplayTree<T extends Comparable<? super T>> {
         public String toString() {
             return "SplayTreeNode{" +
                     "element=" + element +
+                    ", left=" + left +
+                    ", right=" + right +
                     '}';
         }
     }

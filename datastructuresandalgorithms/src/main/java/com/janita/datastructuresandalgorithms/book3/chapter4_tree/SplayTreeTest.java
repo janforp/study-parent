@@ -22,6 +22,18 @@ public class SplayTreeTest {
         tree.contains(3);
     }
 
+    @Test
+    public void testRemove() {
+        SplayTree<Integer> tree = create(15);
+        boolean contains = tree.contains(10);
+        Assert.assertTrue(contains);//此时1-9在10的左侧，11-15在右侧
+        String s = tree.toString();
+        System.out.println(s);
+
+        tree = create(15);
+        tree.remove(10);
+    }
+
     private SplayTree<Integer> create(int i) {
         SplayTree<Integer> tree = new SplayTree<>();
         for (int j = 1; j <= i; j++) {
