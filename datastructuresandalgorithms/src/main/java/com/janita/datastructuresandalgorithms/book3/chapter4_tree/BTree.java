@@ -125,21 +125,29 @@ public class BTree<T extends Comparable<? super T>> {
      * @param v 待处理节点
      */
     private void solveOverflow(BTNode<T> v) {//因插入而上溢之后的分裂处理
+        //若插入节点的孩子数量并没有超过该B-树的阶次，则无需处理
         if (order >= v.child.size()) {
             return;//递归基，当前节点并未上溢
         }
-        //该节点发生了上溢
+        //否则，该节点发生了上溢，下面的逻辑进行处理。
+
+        //取中位数关键码作为分割点
+        //待处理节点v的关键码： 0,1,2...s-1; s; s+1,s+2,....order-1
+        // 因为刚刚发生上溢，所以该节点有 order-1 - 0 + 1 = order 个关键码，
+        // 超出了关键码上限 order - 1
+        //如order=6,则分为：0,1,2; 3; 4,5
         int s = order / 2;//轴点(此时应有_order = key.size() = child.size() - 1)
         BTNode<T> u = new BTNode<>();//注意:新节点已有一个空孩子
-        for (int j = 0; j < order - s - 1; j++) {//v右侧的_order-s-1个孩子及关键码分裂为右侧节点u
+        for (int j = 0; j < order - s - 1; j++) {//v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u
             u.child.insertElementAt(v.child.remove(s + 1), j);//逐个移动效率低
             u.key.insertElementAt(v.key.remove(s + 1), j);//此策略可以改进
         }
         //移动v最靠右的孩子
+        //TODO ？
         u.child.setElementAt(v.child.remove(s + 1), order - s - 1);
         if (u.child.get(0) != null) {//若u的孩子们非空，则
             for (int j = 0; j < order - s; j++) {//将他们的父节点统一
-                u.child.setElementAt(u, j);//指向u
+                u.child.get(j).parent = u;//指向u
             }
         }
         BTNode<T> p = v.parent;//v当前的父节点p
@@ -152,7 +160,7 @@ public class BTree<T extends Comparable<? super T>> {
         p.key.insertElementAt(v.key.remove(s), r);//轴点兲键码上升
         p.child.insertElementAt(u, r + 1);//新节点u与父节点p互//新节点u与父节点p互联联
         u.parent = p;//新节点u与父节点p互联
-        solveOverflow(p);//上升一局，如有必要则继续分裂——至夗逑弻O(logn)局
+        solveOverflow(p);//上升一局，如有必要则继续分裂——至多递归O(log n)层
     }
 
     private void solveUnderflow(BTNode<T> node) {//因删除而下溢之后合并处理
@@ -196,7 +204,7 @@ public class BTree<T extends Comparable<? super T>> {
             parent = null;
             key = new Vector<>();
             child = new Vector<>();
-            //左左侧的孩子先放进去
+            //最左侧的孩子先放进去，一个空孩子
             child.insertElementAt(null, 0);
         }
 
