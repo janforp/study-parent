@@ -42,7 +42,7 @@ public class BTree<T extends Comparable<? super T>> {
         hot = null;
         while (v != null) {
             Vector<T> key = v.key;
-            int r = search(key, e);
+            int r = searchInVector(key, e);
             if (r >= 0 && e.equals(key.get(r))) {
                 //成功:在当前节点命中目标关键码
                 return e;
@@ -57,7 +57,7 @@ public class BTree<T extends Comparable<? super T>> {
     /**
      * 在key中，找到不大于e的最大index
      */
-    private static <T extends Comparable<? super T>> int search(Vector<T> key, T e) {
+    private static <T extends Comparable<? super T>> int searchInVector(Vector<T> key, T e) {
         for (int i = 0; i < key.size(); i++) {
             T t = key.get(i);
             int compareTo = e.compareTo(t);
@@ -77,11 +77,30 @@ public class BTree<T extends Comparable<? super T>> {
             //不能插入重复元素
             return false;
         }
-        Vector<T> key = hot.key;
+        Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
-        int r = search(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
+        int r = searchInVector(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
         key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
-        hot.child.insertElementAt(null, r + 2);//TODO 创建一个空子树指针
+        hot.child.insertElementAt(null, r + 2);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null
+        size++;//更新规模
+        //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)，则插入操作随即完成
+        //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
+        // 由代码8.9可见，这项任务将借助调 整算法solveOverflow(_hot)来完成。
+        solveOverflow(hot);//如有必要，需要分裂
+        return true;//插入成功
+    }
+
+    public boolean insert2(T e) {
+        T v = search(e);
+        if (v != null) {
+            //不能插入重复元素
+            return false;
+        }
+        Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
+        //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
+        int r = searchInVector(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
+        key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
+        hot.child.add(null);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null,该写法与 insert 写法效果一样，但是比较费解，所以编码还是要有一定的语意，不能往前想几步！！！！！
         size++;//更新规模
         //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)，则插入操作随即完成
         //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
