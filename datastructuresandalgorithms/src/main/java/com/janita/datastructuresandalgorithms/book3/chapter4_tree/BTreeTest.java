@@ -83,6 +83,34 @@ public class BTreeTest {
         tree.insert(23);
         tree.insert(29);
         tree.insert(45);
+
+        BTree.BTNode<Integer> root = tree.root;
+        Assert.assertEquals(36, (int) root.keys.get(0));
+        Assert.assertEquals(53, (int) root.keys.get(1));
+
+        Vector<BTree.BTNode<Integer>> children = root.children;
+        Assert.assertEquals(3, children.size());
+
+        BTree.BTNode<Integer> _23 = children.get(0);
+        BTree.BTNode<Integer> _45 = children.get(1);
+        BTree.BTNode<Integer> _77_89 = children.get(2);
+
+        Assert.assertEquals(1, _23.keys.size());
+        Assert.assertEquals(45, (int) _45.keys.get(0));
+
+        Assert.assertEquals(77, (int) _77_89.keys.get(0));
+        Assert.assertEquals(89, (int) _77_89.keys.get(1));
+
+        Assert.assertEquals(19, (int) _23.children.get(0).keys.get(0));
+        Assert.assertEquals(29, (int) _23.children.get(1).keys.get(0));
+
+        Assert.assertEquals(75, (int) _77_89.children.get(0).keys.get(0));
+        Assert.assertEquals(97, (int) _77_89.children.get(2).keys.get(0));
+
+        Assert.assertEquals(79, (int) _77_89.children.get(1).keys.get(0));
+
+        Assert.assertEquals(79, (int) _77_89.children.get(1).keys.get(0));
+        Assert.assertEquals(84, (int) _77_89.children.get(1).keys.get(1));
     }
 
     private static Vector<Integer> ofKeys(Integer... es) {
