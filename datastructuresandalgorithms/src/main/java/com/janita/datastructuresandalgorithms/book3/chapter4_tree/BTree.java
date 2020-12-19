@@ -141,11 +141,11 @@ public class BTree<T extends Comparable<? super T>> {
     /**
      * 对节点v的上溢进行处理
      *
-     * @param v 待处理节点
+     * @param toSplitNode 待处理节点
      */
-    private void solveOverflow(BTNode<T> v) {//因插入而上溢之后的分裂处理
+    private void solveOverflow(BTNode<T> toSplitNode) {//因插入而上溢之后的分裂处理
         //若插入节点的孩子数量并没有超过该B-树的阶次，则无需处理
-        if (order >= v.children.size()) {
+        if (order >= toSplitNode.children.size()) {
             return;//递归基，当前节点并未上溢
         }
         //否则，该节点发生了上溢，下面的逻辑进行处理。
@@ -161,15 +161,15 @@ public class BTree<T extends Comparable<? super T>> {
         //v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u (order - 1 - s - 1 + 1 = order - s - 1)
         for (int j = 0; j < order - s - 1; j++) {
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的孩子移到u节点中
-            BTNode<T> removeNode = v.children.remove(s + 1);
+            BTNode<T> removeNode = toSplitNode.children.remove(s + 1);
             splitNode.children.insertElementAt(removeNode, j);//逐个移动效率低
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的关键码移到u节点中
-            T removeKey = v.keys.remove(s + 1);
+            T removeKey = toSplitNode.keys.remove(s + 1);
             splitNode.keys.insertElementAt(removeKey, j);//此策略可以改进
         }
         //移动v最靠右的孩子
         //TODO ？
-        BTNode<T> lastRemoveNode = v.children.remove(s + 1);
+        BTNode<T> lastRemoveNode = toSplitNode.children.remove(s + 1);
         splitNode.children.setElementAt(lastRemoveNode, order - s - 1);
         if (splitNode.children.get(0) != null) {//若u的孩子们非空，则
             for (int j = 0; j < order - s; j++) {//将他们的父节点统一
@@ -178,14 +178,14 @@ public class BTree<T extends Comparable<? super T>> {
         }
 
         //v当前的父节点p,其实也是分裂出来的节点u的父亲
-        BTNode<T> p = v.parent;
+        BTNode<T> p = toSplitNode.parent;
         if (p == null) {//若p为空则创建之
             root = p = new BTNode<>();
-            p.children.setElementAt(v, 0);
-            v.parent = p;
+            p.children.setElementAt(toSplitNode, 0);
+            toSplitNode.parent = p;
         }
-        int r = 1 + searchInKeys(p.keys, v.keys.get(0));//p中指向u的下标
-        p.keys.insertElementAt(v.keys.remove(s), r);//轴点兲键码上升
+        int r = 1 + searchInKeys(p.keys, toSplitNode.keys.get(0));//p中指向u的下标
+        p.keys.insertElementAt(toSplitNode.keys.remove(s), r);//轴点兲键码上升
         p.children.insertElementAt(splitNode, r + 1);//新节点u与父节点p互联联
         splitNode.parent = p;//新节点u与父节点p互联
         solveOverflow(p);//上升一局，如有必要则继续分裂——至多递归O(log n)层
