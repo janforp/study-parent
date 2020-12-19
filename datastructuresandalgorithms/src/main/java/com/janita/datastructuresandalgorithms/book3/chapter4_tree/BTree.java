@@ -30,7 +30,8 @@ public class BTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * 与二叉搜索树类似，B-树的每一次查找过程中，在每一高度上至多访问 一个节点。这就意味着，对于高度为h的B-树，外存访问不超过O(h - 1)次。
+     * 与二叉搜索树类似，B-树的每一次查找过程中，在每一高度上至多访问 一个节点。
+     * 这就意味着，对于高度为h的B-树，外存访问不超过O(h - 1)次。
      *
      * TODO 查找过程必然终止于某一外部节点v，且其父节点由变量 _hot指示
      *
@@ -41,7 +42,7 @@ public class BTree<T extends Comparable<? super T>> {
         BTNode<T> v = root;
         hot = null;
         while (v != null) {
-            Vector<T> key = v.key;
+            Vector<T> key = v.keys;
             int r = searchInKey(key, e);
             if (r >= 0 && e.equals(key.get(r))) {
                 //成功:在当前节点命中目标关键码
@@ -49,7 +50,7 @@ public class BTree<T extends Comparable<? super T>> {
             }
             hot = v;
             //否则，转入对应子树(hot指向其父)——需做I/O，最费时间
-            v = v.child.get(r + 1);
+            v = v.children.get(r + 1);
         }
         return null;
     }
@@ -83,11 +84,11 @@ public class BTree<T extends Comparable<? super T>> {
             //不能插入重复元素
             return false;
         }
-        Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
+        Vector<T> key = hot.keys;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
         int r = searchInKey(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
         key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
-        hot.child.insertElementAt(null, r + 2);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null
+        hot.children.insertElementAt(null, r + 2);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null
         size++;//更新规模
         //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)，则插入操作随即完成
         //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
@@ -102,11 +103,11 @@ public class BTree<T extends Comparable<? super T>> {
             //不能插入重复元素
             return false;
         }
-        Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
+        Vector<T> key = hot.keys;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
         int r = searchInKey(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
         key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
-        hot.child.add(null);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null,该写法与 insert 写法效果一样，但是比较费解，所以编码还是要有一定的语意，不能往前想几步！！！！！
+        hot.children.add(null);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null,该写法与 insert 写法效果一样，但是比较费解，所以编码还是要有一定的语意，不能往前想几步！！！！！
         size++;//更新规模
         //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)，则插入操作随即完成
         //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
@@ -126,7 +127,7 @@ public class BTree<T extends Comparable<? super T>> {
      */
     private void solveOverflow(BTNode<T> v) {//因插入而上溢之后的分裂处理
         //若插入节点的孩子数量并没有超过该B-树的阶次，则无需处理
-        if (order >= v.child.size()) {
+        if (order >= v.children.size()) {
             return;//递归基，当前节点并未上溢
         }
         //否则，该节点发生了上溢，下面的逻辑进行处理。
@@ -140,27 +141,27 @@ public class BTree<T extends Comparable<? super T>> {
         BTNode<T> u = new BTNode<>();//注意:新节点已有一个空孩子
         for (int j = 0; j < order - s - 1; j++) {//v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的孩子移到u节点中
-            u.child.insertElementAt(v.child.remove(s + 1), j);//逐个移动效率低
+            u.children.insertElementAt(v.children.remove(s + 1), j);//逐个移动效率低
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的关键码移到u节点中
-            u.key.insertElementAt(v.key.remove(s + 1), j);//此策略可以改进
+            u.keys.insertElementAt(v.keys.remove(s + 1), j);//此策略可以改进
         }
         //移动v最靠右的孩子
         //TODO ？
-        u.child.setElementAt(v.child.remove(s + 1), order - s - 1);
-        if (u.child.get(0) != null) {//若u的孩子们非空，则
+        u.children.setElementAt(v.children.remove(s + 1), order - s - 1);
+        if (u.children.get(0) != null) {//若u的孩子们非空，则
             for (int j = 0; j < order - s; j++) {//将他们的父节点统一
-                u.child.get(j).parent = u;//指向u
+                u.children.get(j).parent = u;//指向u
             }
         }
         BTNode<T> p = v.parent;//v当前的父节点p
         if (p == null) {//若p为空则创建之
             root = p = new BTNode<>();
-            p.child.setElementAt(v, 0);
+            p.children.setElementAt(v, 0);
             v.parent = p;
         }
-        int r = 1 + searchInKey(p.key, v.key.get(0));//p中指向u的下标
-        p.key.insertElementAt(v.key.remove(s), r);//轴点兲键码上升
-        p.child.insertElementAt(u, r + 1);//新节点u与父节点p互//新节点u与父节点p互联联
+        int r = 1 + searchInKey(p.keys, v.keys.get(0));//p中指向u的下标
+        p.keys.insertElementAt(v.keys.remove(s), r);//轴点兲键码上升
+        p.children.insertElementAt(u, r + 1);//新节点u与父节点p互//新节点u与父节点p互联联
         u.parent = p;//新节点u与父节点p互联
         solveOverflow(p);//上升一局，如有必要则继续分裂——至多递归O(log n)层
     }
@@ -192,31 +193,31 @@ public class BTree<T extends Comparable<? super T>> {
 
         private BTNode<T> parent;//父节点
 
-        private Vector<T> key;//兲键码向量
+        private Vector<T> keys;//兲键码向量
 
         /**
          * 孩子向量的实际长度总是比关键码向量多一。
          */
-        private Vector<BTNode<T>> child;//孩子向量(其长度总比key多一)
+        private Vector<BTNode<T>> children;//孩子向量(其长度总比key多一)
 
         /**
          * 注意:BTNode叧能作为根节点创建，而且刜始时有0个关键码和1个空孩子
          */
         BTNode() {
             parent = null;
-            key = new Vector<>();
-            child = new Vector<>();
+            keys = new Vector<>();
+            children = new Vector<>();
             //最左侧的孩子先放进去，一个空孩子
-            child.insertElementAt(null, 0);
+            children.insertElementAt(null, 0);
         }
 
         BTNode(T e, BTNode<T> lc, BTNode<T> rc) {
             parent = null;//作为根节点，而且刜始时
-            key = new Vector<>();
-            key.insertElementAt(e, 0);//叧有一个兲键码，以及
-            child = new Vector<>();
-            child.insertElementAt(lc, 0);//两个孩子
-            child.insertElementAt(rc, 1);
+            keys = new Vector<>();
+            keys.insertElementAt(e, 0);//叧有一个兲键码，以及
+            children = new Vector<>();
+            children.insertElementAt(lc, 0);//两个孩子
+            children.insertElementAt(rc, 1);
             if (lc != null) {
                 lc.parent = this;
             }
