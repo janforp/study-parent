@@ -12,7 +12,6 @@ public class BTree<T extends Comparable<? super T>> {
 
     protected BTNode<T> root;//根节点
 
-    //TODO ?
     protected BTNode<T> hot;//hot
 
     protected int size;//存放关键码总数
@@ -25,15 +24,12 @@ public class BTree<T extends Comparable<? super T>> {
         }
         this.order = order;
         this.size = 0;
-        //TODO ? C++为何此处初始化了root？
         this.root = new BTNode<>();
     }
 
     /**
      * 与二叉搜索树类似，B-树的每一次查找过程中，在每一高度上至多访问 一个节点。
      * 这就意味着，对于高度为h的B-树，外存访问不超过O(h - 1)次。
-     *
-     * TODO 查找过程必然终止于某一外部节点v，且其父节点由变量 _hot指示
      *
      * @param e 被查询的数据
      * @return 查询到返回，否则返回null
@@ -46,11 +42,13 @@ public class BTree<T extends Comparable<? super T>> {
             return null;
         }
         BTNode<T> v = root;
+        //用于保存查询失败前的节点引用
         hot = null;
         while (v != null) {
-            Vector<T> key = v.keys;
-            int r = searchInKeys(key, e);
-            if (r >= 0 && e.equals(key.get(r))) {
+            Vector<T> keys = v.keys;
+            //找到，或者返回不大于e的最大下标
+            int r = searchInKeys(keys, e);
+            if (r >= 0 && e.equals(keys.get(r))) {
                 //成功:在当前节点命中目标关键码
                 return e;
             }
@@ -109,8 +107,8 @@ public class BTree<T extends Comparable<? super T>> {
         size++;//更新规模
         //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)
         //则插入操作随即完成
-        //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
-        // 由代码8.9可见，这项任务将借助调 整算法solveOverflow(_hot)来完成。
+        //否则，称该节点发生了一次上溢，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
+        //这项任务将借助调 整算法solveOverflow(_hot)来完成。
         solveOverflow(hot);//如有必要，需要分裂
         return true;//插入成功
     }
@@ -161,13 +159,16 @@ public class BTree<T extends Comparable<? super T>> {
         //v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u (order - 1 - s - 1 + 1 = order - s - 1)
         for (int j = 0; j < order - s - 1; j++) {
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的孩子移到u节点中
-            u.children.insertElementAt(v.children.remove(s + 1), j);//逐个移动效率低
+            BTNode<T> removeNode = v.children.remove(s + 1);
+            u.children.insertElementAt(removeNode, j);//逐个移动效率低
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的关键码移到u节点中
-            u.keys.insertElementAt(v.keys.remove(s + 1), j);//此策略可以改进
+            T removeKey = v.keys.remove(s + 1);
+            u.keys.insertElementAt(removeKey, j);//此策略可以改进
         }
         //移动v最靠右的孩子
         //TODO ？
-        u.children.setElementAt(v.children.remove(s + 1), order - s - 1);
+        BTNode<T> lastRemoveNode = v.children.remove(s + 1);
+        u.children.setElementAt(lastRemoveNode, order - s - 1);
         if (u.children.get(0) != null) {//若u的孩子们非空，则
             for (int j = 0; j < order - s; j++) {//将他们的父节点统一
                 u.children.get(j).parent = u;//指向u
@@ -246,6 +247,14 @@ public class BTree<T extends Comparable<? super T>> {
             if (rc != null) {
                 rc.parent = this;
             }
+        }
+
+        @Override
+        public String toString() {
+            return "BTNode{" +
+                    "keys=" + keys +
+                    ", children=" + children +
+                    '}';
         }
     }
 }
