@@ -42,7 +42,7 @@ public class BTree<T extends Comparable<? super T>> {
         hot = null;
         while (v != null) {
             Vector<T> key = v.key;
-            int r = searchInVector(key, e);
+            int r = searchInKey(key, e);
             if (r >= 0 && e.equals(key.get(r))) {
                 //成功:在当前节点命中目标关键码
                 return e;
@@ -57,7 +57,7 @@ public class BTree<T extends Comparable<? super T>> {
     /**
      * 在key中，找到不大于e的最大index
      */
-    private static <T extends Comparable<? super T>> int searchInVector(Vector<T> key, T e) {
+    private static <T extends Comparable<? super T>> int searchInKey(Vector<T> key, T e) {
         for (int i = 0; i < key.size(); i++) {
             T t = key.get(i);
             int compareTo = e.compareTo(t);
@@ -85,7 +85,7 @@ public class BTree<T extends Comparable<? super T>> {
         }
         Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
-        int r = searchInVector(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
+        int r = searchInKey(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
         key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
         hot.child.insertElementAt(null, r + 2);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null
         size++;//更新规模
@@ -104,7 +104,7 @@ public class BTree<T extends Comparable<? super T>> {
         }
         Vector<T> key = hot.key;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
-        int r = searchInVector(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
+        int r = searchInKey(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
         key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
         hot.child.add(null);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null,该写法与 insert 写法效果一样，但是比较费解，所以编码还是要有一定的语意，不能往前想几步！！！！！
         size++;//更新规模
@@ -158,7 +158,7 @@ public class BTree<T extends Comparable<? super T>> {
             p.child.setElementAt(v, 0);
             v.parent = p;
         }
-        int r = 1 + searchInVector(p.key, v.key.get(0));//p中指向u的下标
+        int r = 1 + searchInKey(p.key, v.key.get(0));//p中指向u的下标
         p.key.insertElementAt(v.key.remove(s), r);//轴点兲键码上升
         p.child.insertElementAt(u, r + 1);//新节点u与父节点p互//新节点u与父节点p互联联
         u.parent = p;//新节点u与父节点p互联
