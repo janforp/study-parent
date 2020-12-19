@@ -92,23 +92,25 @@ public class BTree<T extends Comparable<? super T>> {
         if (e == null) {
             throw new NullPointerException();
         }
+        //找到，返回具体的节点，否则元素插入到hot节点中
         T v = search(e);
         if (v != null) {
             //不能插入重复元素
             return false;
         }
-        Vector<T> keys = hot.keys;//search 方法必然终止与一个叶子节点
+        Vector<T> hotKeys = hot.keys;//search 方法必然终止与一个叶子节点
         //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，
-        // 却可以确定e在其中的正确插入位置r。最后，只需将e插至这一位置。
-        int r = searchInKeys(keys, e);//在节点_hot的有序关键码向量中查找合适的插入位置
-        keys.insertElementAt(e, r + 1);//将新关键码插至对应的位置
+        //却可以确定e在其中的 正确插入位置 r。最后，只需将e插至这一位置。
+        int r = searchInKeys(hotKeys, e);//在节点_hot的有序关键码向量中查找合适的插入位置
+        hotKeys.insertElementAt(e, r + 1);//将新关键码插至对应的位置
         //新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null
+        //插入关键码的同时也插入该关键码右侧的child
         hot.children.insertElementAt(null, r + 2);
         size++;//更新规模
-        //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)
+        //至此，hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)
         //则插入操作随即完成
         //否则，称该节点发生了一次上溢，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
-        //这项任务将借助调 整算法solveOverflow(_hot)来完成。
+        //这项任务将借助调 整算法solveOverflow(hot)来完成。
         solveOverflow(hot);//如有必要，需要分裂
         return true;//插入成功
     }
@@ -154,24 +156,24 @@ public class BTree<T extends Comparable<? super T>> {
         // 超出了关键码上限 order - 1
         //如order=6,则,s = 6 / 2 = 3,则分为：0,1,2; 3; 4,5
         int s = order / 2;//轴点(此时应有_order = key.size() = child.size() - 1)
-        BTNode<T> u = new BTNode<>();//注意:新节点已有一个空孩子
+        BTNode<T> splitNode = new BTNode<>();//注意:新节点已有一个空孩子
 
         //v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u (order - 1 - s - 1 + 1 = order - s - 1)
         for (int j = 0; j < order - s - 1; j++) {
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的孩子移到u节点中
             BTNode<T> removeNode = v.children.remove(s + 1);
-            u.children.insertElementAt(removeNode, j);//逐个移动效率低
+            splitNode.children.insertElementAt(removeNode, j);//逐个移动效率低
             //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的关键码移到u节点中
             T removeKey = v.keys.remove(s + 1);
-            u.keys.insertElementAt(removeKey, j);//此策略可以改进
+            splitNode.keys.insertElementAt(removeKey, j);//此策略可以改进
         }
         //移动v最靠右的孩子
         //TODO ？
         BTNode<T> lastRemoveNode = v.children.remove(s + 1);
-        u.children.setElementAt(lastRemoveNode, order - s - 1);
-        if (u.children.get(0) != null) {//若u的孩子们非空，则
+        splitNode.children.setElementAt(lastRemoveNode, order - s - 1);
+        if (splitNode.children.get(0) != null) {//若u的孩子们非空，则
             for (int j = 0; j < order - s; j++) {//将他们的父节点统一
-                u.children.get(j).parent = u;//指向u
+                splitNode.children.get(j).parent = splitNode;//指向u
             }
         }
 
@@ -184,8 +186,8 @@ public class BTree<T extends Comparable<? super T>> {
         }
         int r = 1 + searchInKeys(p.keys, v.keys.get(0));//p中指向u的下标
         p.keys.insertElementAt(v.keys.remove(s), r);//轴点兲键码上升
-        p.children.insertElementAt(u, r + 1);//新节点u与父节点p互联联
-        u.parent = p;//新节点u与父节点p互联
+        p.children.insertElementAt(splitNode, r + 1);//新节点u与父节点p互联联
+        splitNode.parent = p;//新节点u与父节点p互联
         solveOverflow(p);//上升一局，如有必要则继续分裂——至多递归O(log n)层
     }
 
@@ -212,16 +214,16 @@ public class BTree<T extends Comparable<? super T>> {
      * |I| = |N| + 1 = 4
      * 孩子向量的实际长度总是比关键码向量多一。
      */
-    private static class BTNode<T extends Comparable<? super T>> {
+    public static class BTNode<T extends Comparable<? super T>> {
 
-        private BTNode<T> parent;//父节点
+        public BTNode<T> parent;//父节点
 
-        private Vector<T> keys;//兲键码向量
+        public Vector<T> keys;//兲键码向量
 
         /**
          * 孩子向量的实际长度总是比关键码向量多一。
          */
-        private Vector<BTNode<T>> children;//孩子向量(其长度总比key多一)
+        public Vector<BTNode<T>> children;//孩子向量(其长度总比key多一)
 
         /**
          * 注意:BTNode叧能作为根节点创建，而且刜始时有0个关键码和1个空孩子
