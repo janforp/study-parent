@@ -71,6 +71,12 @@ public class BTree<T extends Comparable<? super T>> {
         return -1;
     }
 
+    /**
+     * O(h)
+     *
+     * @param e
+     * @return
+     */
     public boolean insert(T e) {
         T v = search(e);
         if (v != null) {
@@ -90,7 +96,7 @@ public class BTree<T extends Comparable<? super T>> {
         return true;//插入成功
     }
 
-    public boolean insert2(T e) {
+    private boolean insert2(T e) {
         T v = search(e);
         if (v != null) {
             //不能插入重复元素
@@ -113,8 +119,40 @@ public class BTree<T extends Comparable<? super T>> {
         return false;
     }
 
-    private void solveOverflow(BTNode<T> node) {//因插入而上溢之后的分裂处理
-
+    /**
+     * 对节点v的上溢进行处理
+     *
+     * @param v 待处理节点
+     */
+    private void solveOverflow(BTNode<T> v) {//因插入而上溢之后的分裂处理
+        if (order >= v.child.size()) {
+            return;//递归基，当前节点并未上溢
+        }
+        //该节点发生了上溢
+        int s = order / 2;//轴点(此时应有_order = key.size() = child.size() - 1)
+        BTNode<T> u = new BTNode<>();//注意:新节点已有一个空孩子
+        for (int j = 0; j < order - s - 1; j++) {//v右侧的_order-s-1个孩子及关键码分裂为右侧节点u
+            u.child.insertElementAt(v.child.remove(s + 1), j);//逐个移动效率低
+            u.key.insertElementAt(v.key.remove(s + 1), j);//此策略可以改进
+        }
+        //移动v最靠右的孩子
+        u.child.setElementAt(v.child.remove(s + 1), order - s - 1);
+        if (u.child.get(0) != null) {//若u的孩子们非空，则
+            for (int j = 0; j < order - s; j++) {//将他们的父节点统一
+                u.child.setElementAt(u, j);//指向u
+            }
+        }
+        BTNode<T> p = v.parent;//v当前的父节点p
+        if (p == null) {//若p为空则创建之
+            root = p = new BTNode<>();
+            p.child.setElementAt(v, 0);
+            v.parent = p;
+        }
+        int r = 1 + searchInVector(p.key, v.key.get(0));//p中指向u的下标
+        p.key.insertElementAt(v.key.remove(s), r);//轴点兲键码上升
+        p.child.insertElementAt(u, r + 1);//新节点u与父节点p互//新节点u与父节点p互联联
+        u.parent = p;//新节点u与父节点p互联
+        solveOverflow(p);//上升一局，如有必要则继续分裂——至夗逑弻O(logn)局
     }
 
     private void solveUnderflow(BTNode<T> node) {//因删除而下溢之后合并处理
@@ -158,6 +196,8 @@ public class BTree<T extends Comparable<? super T>> {
             parent = null;
             key = new Vector<>();
             child = new Vector<>();
+            //左左侧的孩子先放进去
+            child.insertElementAt(null, 0);
         }
 
         BTNode(T e, BTNode<T> lc, BTNode<T> rc) {
