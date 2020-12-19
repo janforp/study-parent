@@ -135,11 +135,13 @@ public class BTree<T extends Comparable<? super T>> {
         //待处理节点v的关键码： 0,1,2...s-1; s; s+1,s+2,....order-1
         // 因为刚刚发生上溢，所以该节点有 order-1 - 0 + 1 = order 个关键码，
         // 超出了关键码上限 order - 1
-        //如order=6,则分为：0,1,2; 3; 4,5
+        //如order=6,则,s = 6 / 2 = 3,则分为：0,1,2; 3; 4,5
         int s = order / 2;//轴点(此时应有_order = key.size() = child.size() - 1)
         BTNode<T> u = new BTNode<>();//注意:新节点已有一个空孩子
         for (int j = 0; j < order - s - 1; j++) {//v右侧的 order-s-1 个孩子及关键码分裂为右侧节点u
+            //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的孩子移到u节点中
             u.child.insertElementAt(v.child.remove(s + 1), j);//逐个移动效率低
+            //之前上溢节点v已经分裂为2个节点，v以及u，现在要把v左侧的关键码移到u节点中
             u.key.insertElementAt(v.key.remove(s + 1), j);//此策略可以改进
         }
         //移动v最靠右的孩子
