@@ -21,7 +21,7 @@ public class BTree<T extends Comparable<? super T>> {
 
     public BTree(int order) {
         if (order < 3) {
-            throw new RuntimeException("至少为3");
+            throw new RuntimeException("至少为4");
         }
         this.order = order;
         this.size = 0;
