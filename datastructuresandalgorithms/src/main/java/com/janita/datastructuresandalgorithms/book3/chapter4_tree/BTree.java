@@ -34,7 +34,7 @@ public class BTree<T extends Comparable<? super T>> {
      * @param e 被查询的数据
      * @return 查询到返回，否则返回null
      */
-    public T search(T e) {
+    private T search(T e) {
         if (e == null) {
             throw new NullPointerException();
         }
@@ -51,6 +51,38 @@ public class BTree<T extends Comparable<? super T>> {
             if (r >= 0 && e.equals(keys.get(r))) {
                 //成功:在当前节点命中目标关键码
                 return e;
+            }
+            hot = v;
+            //否则，转入对应子树(hot指向其父)——需做I/O，最费时间
+            v = v.children.get(r + 1);
+        }
+        return null;
+    }
+
+    /**
+     * 与二叉搜索树类似，B-树的每一次查找过程中，在每一高度上至多访问 一个节点。
+     * 这就意味着，对于高度为h的B-树，外存访问不超过O(h - 1)次。
+     *
+     * @param e 被查询的数据
+     * @return 查询到返回，否则返回null
+     */
+    private BTNode<T> findNode(T e) {
+        if (e == null) {
+            throw new NullPointerException();
+        }
+        if (isEmpty()) {
+            return null;
+        }
+        BTNode<T> v = root;
+        //用于保存查询失败前的节点引用
+        hot = null;
+        while (v != null) {
+            Vector<T> keys = v.keys;
+            //找到，或者返回不大于e的最大下标
+            int r = searchInKeys(keys, e);
+            if (r >= 0 && e.equals(keys.get(r))) {
+                //成功:在当前节点命中目标关键码
+                return v;
             }
             hot = v;
             //否则，转入对应子树(hot指向其父)——需做I/O，最费时间
@@ -115,27 +147,26 @@ public class BTree<T extends Comparable<? super T>> {
         return true;//插入成功
     }
 
-    private boolean insert2(T e) {
-        T v = search(e);
-        if (v != null) {
-            //不能插入重复元素
+    public boolean remove(T e) {
+        BTNode<T> v = findNode(e);
+        if (v == null) {//确认目标关键码存在
             return false;
         }
-        Vector<T> key = hot.keys;//search 方法必然终止与一个叶子节点
-        //接下来，在该节 点中再次查找目标关键码e。尽管这次查找注定失败，却可以确定e在其中的正确插入位置r。最 后，只需将e插至这一位置。
-        int r = searchInKeys(key, e);//在节点_hot的有序关键码向量中查找合适的插入位置
-        key.insertElementAt(e, r + 1);//将新关键码插至对应的位置
-        hot.children.add(null);//新关键码右边添加一个新分支，因为查找失败于叶子节点，所以该节点的孩子引用肯定都是null,该写法与 insert 写法效果一样，但是比较费解，所以编码还是要有一定的语意，不能往前想几步！！！！！
-        size++;//更新规模
-        //至此，_hot所指的节点中增加了一个关键码。若该节点内关键码的总数依然合法(即不超 过m - 1个)，则插入操作随即完成
-        //否则，称该节点发生了一次上溢(overflow)，此时需要 通过适当的处理，使该节点以及整树重新满足B-树的条件。
-        // 由代码8.9可见，这项任务将借助调 整算法solveOverflow(_hot)来完成。
-        solveOverflow(hot);//如有必要，需要分裂
-        return true;//插入成功
-    }
-
-    public boolean remove(T e) {
-        return false;
+        int r = searchInKeys(v.keys, e);//确定目标关键码在节点v中的下标（由shang，肯定合法）
+        if (v.children.get(0) != null) {//若v非叶子，则e的后继必属于某叶节点
+            BTNode<T> u = v.children.get(r + 1);//在e的右子树中一直向左，即可
+            while (u.children.get(0) != null) {//在右子树中一直向左，即可
+                u = u.children.get(0);//找出e的后继
+            }
+            v.keys.set(r, u.keys.get(0));//并与之交换位置
+            v = u;//并与之交换位置
+            r = 0;//并与之交换位置
+        }//至此，v必然位于最底层，且其中第r个关键码就是待删除者
+        v.keys.remove(r);//删除e，以及其下两个外部节点之一
+        v.children.remove(r + 1);//删除e，以及其下两个外部节点之一
+        size--;
+        solveUnderflow(v);
+        return true;
     }
 
     /**
