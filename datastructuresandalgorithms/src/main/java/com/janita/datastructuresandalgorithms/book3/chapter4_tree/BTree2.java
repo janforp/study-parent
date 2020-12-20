@@ -162,6 +162,8 @@ public class BTree2<E extends Comparable<? super E>> {
     /**
      * 解决下溢问题：删除后关键码数量不满足B树定义:不小于ceil(m/2)
      *
+     * 配置该视频看能够比较好的理解：https://www.bilibili.com/video/BV1X7411i7Vn?p=293
+     *
      * @param node
      */
     private void solveUnderflow(Node node) {
