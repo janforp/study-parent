@@ -46,15 +46,31 @@ public class BTree2<E extends Comparable<? super E>> {
         return size;
     }
 
+    /**
+     * B树查找
+     * 失败查找必终止于外部节点
+     *
+     * @param e
+     * @return 失败返回null，成功返回关键码所在的节点
+     */
     private Node search(E e) {
+        //从跟节点开始查询
         Node p = root;
+        //初始化
         lastReachedNode = null;
         while (p != null) {
+            //若向量的第一个元素就大于e，则返回-1,否则返回不大于e的最大下标
+            //顺序查找
             int rank = searchInKeys(p.keys, e);
             if (rank >= 0 && e.compareTo(p.keys.get(rank)) == 0) {
+                //成功
                 return p;
             }
+            //更新
             lastReachedNode = p;
+            //继续查询下一层，直到查询到，或者失败于某个叶子节点
+            //I/O操作
+            //失败查找必终止于外部节点，最坏情况下，查询到最后叶子节点，因为叶子节点的孩子分支都是null，所以查询会失败
             p = p.children.get(rank + 1);
         }
         return null;
