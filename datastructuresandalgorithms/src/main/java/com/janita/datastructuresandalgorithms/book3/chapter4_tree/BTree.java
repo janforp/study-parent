@@ -198,8 +198,7 @@ public class BTree<T extends Comparable<? super T>> {
             T removeKey = toSplitNode.keys.remove(s + 1);
             splitNode.keys.insertElementAt(removeKey, j);//此策略可以改进
         }
-        //移动v最靠右的孩子
-        //TODO ？
+        //移动v最靠右的孩子，因为孩子比节点多一个
         BTNode<T> lastRemoveNode = toSplitNode.children.remove(s + 1);
         splitNode.children.setElementAt(lastRemoveNode, order - s - 1);
         if (splitNode.children.get(0) != null) {//若u的孩子们非空，则
@@ -222,8 +221,84 @@ public class BTree<T extends Comparable<? super T>> {
         solveOverflow(p);//上升一局，如有必要则继续分裂——至多递归O(log n)层
     }
 
-    private void solveUnderflow(BTNode<T> node) {//因删除而下溢之后合并处理
+    /**
+     * //兲键码初除后若节点下溢，则做节点旋转戒合幵处理
+     */
+    private void solveUnderflow(BTNode<T> v) {//因删除而下溢之后合并处理
+        if (v.children.size() >= (order + 1) / 2) {
+            return;
+        }
+        BTNode<T> p = v.parent;
+        if (p == null) {
+            if (v.keys.isEmpty() && v.children.get(0) != null) {
+                root = v.children.get(0);
+                root.parent = null;
+                v.children.set(0, null);
+            }
+            return;
+        }
+        int r = 0;
+        while (p.children.get(r) != v) {
+            r++;
+        }
+        if (r > 0) {
+            BTNode<T> ls = p.children.get(r - 1);
+            if ((order + 1) / 2 < ls.children.size()) {
+                v.keys.insertElementAt(p.keys.remove(r - 1), 0);
+                p.keys.set(r - 1, ls.keys.remove(ls.keys.size() - 1));
+                v.children.insertElementAt(ls.children.remove(ls.children.size() - 1), 0);
+                if (v.children.get(0) != null) {
+                    v.children.get(0).parent = v;
+                }
+                return;
+            }
+        }
 
+        if (p.children.size() - 1 > r) {
+            BTNode<T> rs = p.children.get(r + 1);
+            if ((order + 1) / 2 < rs.children.size()) {
+                v.keys.insertElementAt(p.keys.get(r), v.keys.size());
+                p.keys.set(r, rs.keys.remove(0));
+                v.children.insertElementAt(rs.children.remove(0), v.children.size());
+                if (v.children.get(v.children.size() - 1) != null) {
+                    v.children.get(v.children.size() - 1).parent = v;
+                }
+                return;
+            }
+        }
+
+        if (0 < r) {
+            BTNode<T> ls = p.children.get(r - 1);
+            ls.keys.insertElementAt(p.keys.remove(r - 1), ls.keys.size());
+            p.children.remove(r);
+            ls.children.insertElementAt(v.children.remove(0), ls.children.size());
+            if (ls.children.get(ls.children.size() - 1) != null) {
+                ls.children.get(ls.children.size() - 1).parent = ls;
+            }
+            while (!v.keys.isEmpty()) {
+                ls.keys.insertElementAt(v.keys.remove(0), ls.keys.size());
+                ls.children.insertElementAt(v.children.remove(0), ls.children.size());
+                if (ls.children.get(ls.children.size() - 1) != null) {
+                    ls.children.get(ls.children.size() - 1).parent = ls;
+                }
+            }
+        } else {
+            BTNode<T> rs = p.children.get(r + 1);
+            rs.keys.insertElementAt(p.keys.remove(r), 0);
+            p.children.remove(r);
+            rs.children.insertElementAt(v.children.remove(v.children.size() - 1), 0);
+            if (rs.children.get(0) != null) {
+                rs.children.get(0).parent = rs;
+            }
+            while (!v.keys.isEmpty()) {
+                rs.keys.insertElementAt(v.keys.remove(v.keys.size() - 1), 0);
+                rs.children.insertElementAt(v.children.remove(v.children.size() - 1), 0);
+                if (rs.children.get(0) != null) {
+                    rs.children.get(0).parent = rs;
+                }
+            }
+        }
+        solveUnderflow(p);
     }
 
     public boolean isEmpty() {
