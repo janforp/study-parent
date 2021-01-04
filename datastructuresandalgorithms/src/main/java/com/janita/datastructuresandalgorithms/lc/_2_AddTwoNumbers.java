@@ -42,7 +42,37 @@ public class _2_AddTwoNumbers {
         if (l2 == null) {
             return l1;
         }
+        ListNode result = null;
+        int carry = 0;
 
+        ListNode next = null;
+        int value;
+        while (l1 != null || l2 != null) {
+            next = new ListNode();
+            if (l1 != null && l2 != null) {
+                value = l1.val + l2.val + carry;
+            } else if (l1 != null) {
+                value = l1.val + carry;
+            } else {
+                value = l2.val + carry;
+            }
+            if (value >= 10) {
+                carry = 1;
+                value = value % 10;
+            }
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+            if (result == null) {
+                result = new ListNode(value, next);
+            } else {
+                //TODO
+            }
+        }
+        return null;
     }
 
     @Test
