@@ -19,6 +19,13 @@ public class BinNode<T> {
 
     public BinNode<T> right;
 
+    @Override
+    public String toString() {
+        return "BinNode{" +
+                "data=" + data +
+                '}';
+    }
+
     public static BinNode<String> build() {
         BinNode<String> a = new BinNode<>("a", null, null);
         BinNode<String> b = new BinNode<>("b", null, null);
