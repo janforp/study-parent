@@ -31,6 +31,13 @@ public class TraversalIn {
         traversalInRec(node.right, list);
     }
 
+    /**
+     * 从当前节点出发，沿左侧分支不断深入，直至没有左分支的节点
+     *
+     * @param node 节点
+     * @param stack 辅助栈
+     * @param <T> 类型
+     */
     private static <T> void goAlongLeftBranch(BinNode<T> node, Stack<BinNode<T>> stack) {
         while (node != null) {
             stack.push(node);
@@ -47,15 +54,19 @@ public class TraversalIn {
         //返回的遍历序列
         List<T> list = new ArrayList<>();
         while (true) {
+            //从当前节点出发，逐批入栈
             goAlongLeftBranch(node, stack);
+            //直至所有节点都出去完毕
             if (stack.isEmpty()) {
                 break;
             }
-            BinNode<T> pop = stack.pop();
-            if (pop != null) {
-                list.add(pop.data);
+            //弹出栈顶节点并访问
+            node = stack.pop();
+            if (node != null) {
+                list.add(node.data);
             }
             if (node != null) {
+                //转向右子树
                 node = node.right;
             }
         }
