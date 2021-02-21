@@ -1,11 +1,8 @@
 package com.janita.java.base.proxy.aop2;
 
 import com.janita.java.base.proxy.aop1.Animal;
-import com.janita.java.base.proxy.Cat;
-import com.janita.java.base.proxy.JdkDynamicProxy;
-import com.janita.java.base.proxy.ProxyUtils;
-
-import java.lang.reflect.Proxy;
+import com.janita.java.base.proxy.aop1.Cat;
+import com.janita.java.base.proxy.aop1.JdkDynamicProxy;
 
 /**
  * TestMain

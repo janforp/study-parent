@@ -1,4 +1,4 @@
-package com.janita.java.base.proxy;
+package com.janita.java.base.proxy.aop3;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -17,8 +17,11 @@ public class JdkDynamicProxy implements InvocationHandler {
      */
     private Object target;
 
-    public JdkDynamicProxy(Object target) {
+    private AbstractHandler headHandler;
+
+    public JdkDynamicProxy(Object target, AbstractHandler headHandler) {
         this.target = target;
+        this.headHandler = headHandler;
     }
 
     /**
@@ -31,12 +34,8 @@ public class JdkDynamicProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        //需求：打印动物吃饭开始时间跟结束时间
-
-        System.out.println("开始" + System.currentTimeMillis());
-        Object invoke = method.invoke(target, args);
-        System.out.println("结束" + System.currentTimeMillis());
-        return invoke;
+        TargetMethod targetMethod = new TargetMethod(target, method, args);
+        return headHandler.proceed(targetMethod);
     }
 
     /**

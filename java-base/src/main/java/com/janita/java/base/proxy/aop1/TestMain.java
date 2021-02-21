@@ -1,6 +1,4 @@
-package com.janita.java.base.proxy;
-
-import com.janita.java.base.proxy.aop1.Animal;
+package com.janita.java.base.proxy.aop1;
 
 import java.lang.reflect.Proxy;
 
