@@ -1,7 +1,5 @@
 package com.janita.java.base.proxy.aop1;
 
-import com.janita.java.base.proxy.aop1.Animal;
-
 /**
  * Cat
  *

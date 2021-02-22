@@ -38,6 +38,9 @@ public class JdkDynamicProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (!method.getName().contains("eat")) {
+            return method.invoke(target, args);
+        }
         //封装被代理对象的方法
         TargetMethod targetMethod = new TargetMethod(target, method, args);
 
