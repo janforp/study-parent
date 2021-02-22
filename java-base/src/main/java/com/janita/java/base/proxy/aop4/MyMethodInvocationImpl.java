@@ -11,6 +11,7 @@ import java.util.List;
  * @author zhucj
  * @since 20210225
  */
+@SuppressWarnings("all")
 public class MyMethodInvocationImpl implements MyMethodInvocation {
 
     /**
@@ -35,6 +36,9 @@ public class MyMethodInvocationImpl implements MyMethodInvocation {
 
     @Override
     public Object proceed() throws InvocationTargetException, IllegalAccessException {
+        /**
+         * 先执行拦截器，然后再执行被代理对象的方法
+         */
         if (index == interceptorList.size()) {
             //所有拦截器都执行完毕，则执行代理对象自己
             return targetMethod.getMethod().invoke(
