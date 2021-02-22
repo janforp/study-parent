@@ -1,5 +1,7 @@
 package com.janita.java.base.proxy.aop4;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * TwoMethodInterceptor
  *
@@ -9,7 +11,7 @@ package com.janita.java.base.proxy.aop4;
 public class TwoMethodInterceptor implements MyMethodInterceptor{
 
     @Override
-    public Object invoke(MyMethodInvocation myMethodInvocation) {
+    public Object invoke(MyMethodInvocation myMethodInvocation) throws InvocationTargetException, IllegalAccessException {
         System.out.println("拦截器2开始");
         Object proceed = myMethodInvocation.proceed();
         System.out.println("拦截器2完成");

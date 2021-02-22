@@ -1,5 +1,7 @@
 package com.janita.java.base.proxy.aop4;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * MyMethodInvocation
  *
@@ -9,5 +11,5 @@ package com.janita.java.base.proxy.aop4;
 public interface MyMethodInvocation {
 
     //驱动拦截器练，执行增强了解，被代理方法调用
-    Object proceed();
+    Object proceed() throws InvocationTargetException, IllegalAccessException;
 }
