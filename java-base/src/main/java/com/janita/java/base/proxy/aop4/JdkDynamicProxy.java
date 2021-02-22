@@ -14,9 +14,8 @@ import java.util.List;
  * @since 20210225
  */
 public class JdkDynamicProxy implements InvocationHandler {
-
     /**
-     * 被代理对象
+     * 被代理对象,调用该对象的任何方法都会被重定向到方法{@link JdkDynamicProxy#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])}
      */
     private Object target;
 
@@ -36,6 +35,15 @@ public class JdkDynamicProxy implements InvocationHandler {
         this.interceptorList = interceptorList;
     }
 
+    /**
+     * 调用被代理对象的任何方法都会被重定向到该方法
+     *
+     * @param proxy 代理对象
+     * @param method 被代理对象的方法
+     * @param args 被代理对象的方法的参数
+     * @return 被代理对象的方法的返回值
+     * @throws Throwable 异常
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (!method.getName().contains("eat")) {
@@ -43,10 +51,8 @@ public class JdkDynamicProxy implements InvocationHandler {
         }
         //封装被代理对象的方法
         TargetMethod targetMethod = new TargetMethod(target, method, args);
-
         //拦截器驱动
         MyMethodInvocation invocation = new MyMethodInvocationImpl(targetMethod, interceptorList);
-
         //先这些拦截器，再调用被代理对象的方法
         return invocation.proceed();
     }
