@@ -37,7 +37,6 @@ public class JdkDynamicProxy implements InvocationHandler {
         return invocation.proceed();
     }
 
-
     /**
      * 返回代理之后的对象
      *
