@@ -18,10 +18,14 @@ public class Main {
         //创建JdkDynamicProxy,用来创建代理对象
         JdkDynamicProxy proxy = new JdkDynamicProxy(cat);
 
+        //添加拦截器
         proxy.addInterceptor(new OneMethodInterceptor());
         proxy.addInterceptor(new TwoMethodInterceptor());
 
+        //获取代理对象
         Animal animal = (Animal) proxy.getProxy();
+
+        //调用方法
         animal.eat();
     }
 }

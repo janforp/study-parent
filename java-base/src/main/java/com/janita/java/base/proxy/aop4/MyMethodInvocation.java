@@ -10,6 +10,6 @@ import java.lang.reflect.InvocationTargetException;
  */
 public interface MyMethodInvocation {
 
-    //驱动拦截器练，执行增强了解，被代理方法调用
+    //驱动拦截器练，执行增强拦截器，被代理方法调用
     Object proceed() throws InvocationTargetException, IllegalAccessException;
 }
