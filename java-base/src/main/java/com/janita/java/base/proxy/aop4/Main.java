@@ -1,5 +1,6 @@
 package com.janita.java.base.proxy.aop4;
 
+import com.google.common.collect.Lists;
 import com.janita.java.base.proxy.aop1.Animal;
 import com.janita.java.base.proxy.aop1.Cat;
 
@@ -15,12 +16,10 @@ public class Main {
         //创建被代理对象
         Cat cat = new Cat();
 
-        //创建JdkDynamicProxy,用来创建代理对象
-        JdkDynamicProxy proxy = new JdkDynamicProxy(cat);
-
-        //添加拦截器
-        proxy.addInterceptor(new OneMethodInterceptor());
-        proxy.addInterceptor(new TwoMethodInterceptor());
+        //创建JdkDynamicProxy,用来创建代理对象,以及添加拦截器
+        JdkDynamicProxy proxy = new JdkDynamicProxy(
+                cat,
+                Lists.newArrayList(new OneMethodInterceptor(), new TwoMethodInterceptor()));
 
         //获取代理对象
         Animal animal = (Animal) proxy.getProxy();

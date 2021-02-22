@@ -5,7 +5,6 @@ import com.janita.java.base.proxy.aop3.TargetMethod;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,24 +15,36 @@ import java.util.List;
  */
 public class JdkDynamicProxy implements InvocationHandler {
 
-    //被代理对象
+    /**
+     * 被代理对象
+     */
     private Object target;
 
-    //方法拦截器列表
-    private List<MyMethodInterceptor> interceptorList = new ArrayList<>();
+    /**
+     * 拦截器列表，这些拦截器就是为了增强 被代理对象的
+     */
+    private List<MyMethodInterceptor> interceptorList;
 
-    public JdkDynamicProxy(Object target) {
+    /**
+     * 创建JdkDynamicProxy,用来创建代理对象,以及添加拦截器
+     *
+     * @param target 被代理对象
+     * @param interceptorList 拦截器列表，这些拦截器就是为了增强 被代理对象的
+     */
+    public JdkDynamicProxy(Object target, List<MyMethodInterceptor> interceptorList) {
         this.target = target;
-    }
-
-    public void addInterceptor(MyMethodInterceptor interceptor) {
-        interceptorList.add(interceptor);
+        this.interceptorList = interceptorList;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //封装被代理对象的方法
         TargetMethod targetMethod = new TargetMethod(target, method, args);
+
+        //拦截器驱动
         MyMethodInvocation invocation = new MyMethodInvocationImpl(targetMethod, interceptorList);
+
+        //先这些拦截器，再调用被代理对象的方法
         return invocation.proceed();
     }
 

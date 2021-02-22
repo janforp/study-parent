@@ -46,8 +46,4 @@ public class MyMethodInvocationImpl implements MyMethodInvocation {
         MyMethodInterceptor interceptor = interceptorList.get(index++);
         return interceptor.invoke(this);
     }
-
-    public void setInterceptorList(List<MyMethodInterceptor> interceptorList) {
-        this.interceptorList = interceptorList;
-    }
 }
