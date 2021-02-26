@@ -10,8 +10,11 @@ package com.janita.design.mode.bridge.ljz;
 class Test {
 
     public static void main(String[] args) {
-        Messager perfect = new MobileMessagerPerfect();
-
+        Messager messager = new MobileMessagerPerfect();
+        messager.playSound();
+        messager.drawShape();
+        messager.writeText();
+        messager.connect();
     }
 }
 
