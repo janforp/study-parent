@@ -36,4 +36,7 @@ public abstract class AbstractHandler {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+    }
 }

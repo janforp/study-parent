@@ -15,16 +15,16 @@ public class Test2Main {
     public static void main(String[] args) {
         //1.创建被代理对象
         Cat cat = new Cat();
-        JdkDynamicProxy proxy1 = new JdkDynamicProxy(cat);
 
         //第一层代理
+        JdkDynamicProxy proxy1 = new JdkDynamicProxy(cat);
         Animal proxyAnimal1 = (Animal) proxy1.getProxy();
 
-        JdkDynamicProxy2 proxy2 = new JdkDynamicProxy2(proxyAnimal1);
-
         //第二层代理
+        JdkDynamicProxy2 proxy2 = new JdkDynamicProxy2(proxyAnimal1);
         Animal proxyAnimal2 = (Animal) proxy2.getProxy();
 
+        //被代理了2层的对象
         proxyAnimal2.eat();
     }
 }
