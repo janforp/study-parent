@@ -4,10 +4,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * 1、定义一个InheritableTask抽象类，这个类实现了Runaable接口，并定义了一个{@link TaskInExecutorPool#runTask()}runTask抽象方法，
- * 当开发者需要面对线程池获取InheritableThreadLocal值的场景时，提交的任务对象，只需要继承InheritableTask类，实现runTask方法即可。
+ * 1、定义一个TaskInExecutorPool抽象类，这个类实现了Runaable接口，并定义了一个{@link TaskInExecutorPool#runTask()}runTask抽象方法，
+ * 当开发者需要面对线程池获取InheritableThreadLocal值的场景时，提交的任务对象，只需要继承TaskInExecutorPool类，实现runTask方法即可。
  *
- * 2、在创建任务类时，也就是在InheritableTask构造函数中，通过反射获取到提交任务的业务线程的inheritableThreadLocals属性，然后复制一份，
+ * 2、在创建任务类时，也就是在TaskInExecutorPool构造函数中，通过反射获取到提交任务的业务线程的inheritableThreadLocals属性，然后复制一份，
  * 暂存到当前task的inheritableThreadLocalsObj属性中。
  *
  * 3、线程池线程在执行该任务时，其实就是去调用其run()方法，在执行run方法时，先将暂存的inheritableThreadLocalsObj属性赋值给当前执行任务的线程，
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 public abstract class TaskInExecutorPool implements Runnable {
 
     /**
-     * 在创建任务类时，也就是在InheritableTask构造函数中，
+     * 在创建任务类时，也就是在TaskInExecutorPool构造函数中，
      * 通过反射获取到提交任务的业务线程的inheritableThreadLocals属性，然后复制一份，
      * 暂存到当前task的inheritableThreadLocalsObj属性中。
      */
