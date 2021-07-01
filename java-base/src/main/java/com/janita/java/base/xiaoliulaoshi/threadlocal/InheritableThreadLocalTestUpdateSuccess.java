@@ -27,10 +27,9 @@ public class InheritableThreadLocalTestUpdateSuccess {
         @Override
         public void run() {
             inheritableThreadLocal.set(index);
-            pool.execute(new Runnable() {
-                // 这里的 run 方法是由线程池中的线程执行的
+            pool.execute(new InheritableTask() {
                 @Override
-                public void run() {
+                public void runTask() {
                     System.out.println("child inheritableThreadLocal: " + inheritableThreadLocal.get());
                 }
             });
@@ -39,7 +38,7 @@ public class InheritableThreadLocalTestUpdateSuccess {
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
-            Thread.sleep(10);
+            Thread.sleep(2);
             new InheritableThreadLocalTestUpdateFail.MainThread(i).start();
         }
     }
