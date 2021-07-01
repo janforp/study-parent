@@ -24,7 +24,7 @@ public class InheritableThreadLocalTestUpdateSuccess {
                 @Override
                 public void run() {
                     inheritableThreadLocal.set(index);
-                    pool.execute(new InheritableTask() {
+                    pool.execute(new TaskInExecutorPool() {
                         @Override
                         public void runTask() {
                             System.out.println("child inheritableThreadLocal: " + inheritableThreadLocal.get());

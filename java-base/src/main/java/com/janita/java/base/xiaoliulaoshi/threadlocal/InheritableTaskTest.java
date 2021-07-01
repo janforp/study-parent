@@ -25,7 +25,7 @@ public class InheritableTaskTest {
                     local.set("task____" + outIndex);
                     for (int i = 0; i < 3; i++) {
                         final int innerIndex = i;
-                        executor.execute(new InheritableTask() {
+                        executor.execute(new TaskInExecutorPool() {
                             @Override
                             public void runTask() {
                                 System.out.println(Thread.currentThread().getName() + " outIndex ==== " + outIndex + "get_innerIndex" + innerIndex + ":" + local.get());
