@@ -33,7 +33,7 @@ public abstract class InheritableTask implements Runnable {
             Thread currentThread = Thread.currentThread();
             Field inheritableThreadLocalsField = Thread.class.getDeclaredField("inheritableThreadLocals");
             inheritableThreadLocalsField.setAccessible(true);
-            // 得到当前线程中的inheritableThreadLocals属性值
+            // 得到当前线程中的inheritableThreadLocals属性值：ThreadLocal.ThreadLocalMap
             Object threadLocalMapObj = inheritableThreadLocalsField.get(currentThread);
             if (threadLocalMapObj != null) {
                 // 调用ThreadLocal中的createInheritedMap方法，重新复制一个新的inheritableThreadLocals值

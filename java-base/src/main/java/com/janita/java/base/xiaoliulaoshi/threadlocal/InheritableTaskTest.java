@@ -14,10 +14,10 @@ public class InheritableTaskTest {
 
     private static InheritableThreadLocal<String> local = new InheritableThreadLocal<>();
 
-    private static Executor executor = Executors.newFixedThreadPool(5);
+    private static Executor executor = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             final int ab = i;
             new Thread() {
                 public void run() {
