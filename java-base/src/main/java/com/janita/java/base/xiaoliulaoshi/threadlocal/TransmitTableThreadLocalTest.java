@@ -1,8 +1,5 @@
 package com.janita.java.base.xiaoliulaoshi.threadlocal;
 
-import com.alibaba.ttl.TransmittableThreadLocal;
-import com.alibaba.ttl.threadpool.TtlExecutors;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,10 +13,9 @@ public class TransmitTableThreadLocalTest {
 
     static TransmittableThreadLocal<String> threadLocal = new TransmittableThreadLocal<>();
 
-    static ExecutorService pool = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(5));
+    static ExecutorService pool = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) {
-
         for (int i = 0; i < 100; i++) {
             int index = i;
             pool.execute(new Thread(() -> {
@@ -33,13 +29,11 @@ public class TransmitTableThreadLocalTest {
                 ));
             }));
         }
-
         try {
             Thread.sleep(1000);
             pool.shutdown();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
