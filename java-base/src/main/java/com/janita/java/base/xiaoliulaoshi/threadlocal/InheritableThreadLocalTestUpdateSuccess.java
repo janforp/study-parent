@@ -16,30 +16,22 @@ public class InheritableThreadLocalTestUpdateSuccess {
 
     static ExecutorService pool = Executors.newFixedThreadPool(2);
 
-    static class MainThread extends Thread {
-
-        private int index;
-
-        public MainThread(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void run() {
-            inheritableThreadLocal.set(index);
-            pool.execute(new InheritableTask() {
-                @Override
-                public void runTask() {
-                    System.out.println("child inheritableThreadLocal: " + inheritableThreadLocal.get());
-                }
-            });
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
-            Thread.sleep(2);
-            new InheritableThreadLocalTestUpdateFail.MainThread(i).start();
+            final int index = i;
+            Thread.sleep(10);
+            new Thread() {
+                @Override
+                public void run() {
+                    inheritableThreadLocal.set(index);
+                    pool.execute(new InheritableTask() {
+                        @Override
+                        public void runTask() {
+                            System.out.println("child inheritableThreadLocal: " + inheritableThreadLocal.get());
+                        }
+                    });
+                }
+            }.start();
         }
     }
 }

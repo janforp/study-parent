@@ -16,31 +16,22 @@ public class InheritableThreadLocalTestUpdateFail {
 
     static ExecutorService pool = Executors.newFixedThreadPool(2);
 
-    static class MainThread extends Thread {
-
-        private int index;
-
-        public MainThread(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void run() {
-            inheritableThreadLocal.set(index);
-            pool.execute(new Runnable() {
-                // 这里的 run 方法是由线程池中的线程执行的
-                @Override
-                public void run() {
-                    System.out.println("child inheritableThreadLocal: " + inheritableThreadLocal.get());
-                }
-            });
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
+            final int index = i;
             Thread.sleep(10);
-            new MainThread(i).start();
+            new Thread() {
+                @Override
+                public void run() {
+                    inheritableThreadLocal.set(index);
+                    pool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("子线程获取到的值为: " + inheritableThreadLocal.get());
+                        }
+                    });
+                }
+            }.start();
         }
     }
 }
