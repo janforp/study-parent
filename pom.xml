@@ -20,6 +20,7 @@
         <module>ssy-java8</module>
         <module>deepinjava</module>
         <module>datastructuresandalgorithms</module>
+        <module>sentinel</module>
     </modules>
     <packaging>pom</packaging>
 
